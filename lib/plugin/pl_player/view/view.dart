@@ -1226,9 +1226,11 @@ class _PLVideoPlayerState extends State<PLVideoPlayer>
               : null,
         )
         ..onLongPressStart = ((_) {
-          // M8-25：全屏/最大化切换后的孤儿指针不计为长按（防自动 3x）。
-          if (plPlayerController.longPressSuppressed) {
-            plPlayerController.diagnose('LPS-SUPPRESSED');
+          // M8-26：桌面鼠标“按住=3x长按倍速”停用 —— 桌面全屏/最大化时系统会
+          // 产生“有按下无抬起”的孤儿指针被误判为长按导致自动 3x；
+          // 键盘方向键长按（PlayerFocus）不受影响。
+          if (PlatformUtils.isDesktop) {
+            plPlayerController.diagnose('LPS-MOUSE-SKIP desktop');
             return;
           }
           plPlayerController.setLongPressStatus(true);
