@@ -1,3 +1,4 @@
+import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/common/widgets/loading_widget/http_error.dart';
 import 'package:PiliPlus/common/widgets/scaffold/simple_scaffold.dart';
 import 'package:PiliPlus/common/widgets/view_safe_area.dart';
@@ -9,6 +10,7 @@ import 'package:PiliPlus/pages/member_season_series/controller.dart';
 import 'package:PiliPlus/pages/member_season_series/widget/season_series_card.dart';
 import 'package:PiliPlus/pages/member_video/view.dart';
 import 'package:PiliPlus/utils/grid.dart';
+import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:get/get.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -49,10 +51,14 @@ class _SeasonSeriesPageState extends State<SeasonSeriesPage>
       slivers: [
         SliverPadding(
           padding: EdgeInsets.only(
-            bottom: MediaQuery.viewPaddingOf(context).bottom + 100,
+            bottom: PlatformUtils.isDesktop
+                ? 24
+                : MediaQuery.viewPaddingOf(context).bottom + 100,
           ),
-          sliver: Obx(
-            () => _buildBody(_controller.loadingState.value),
+          // M8：桌面内容限宽居中（UP-合集系列）。
+          sliver: desktopLimitSliver(
+            Obx(() => _buildBody(_controller.loadingState.value)),
+            maxWidth: 1280,
           ),
         ),
       ],
