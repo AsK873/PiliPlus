@@ -1,5 +1,6 @@
 import 'package:PiliPlus/common/skeleton/msg_feed_top.dart';
 import 'package:PiliPlus/common/sliver_single_child_delegate.dart';
+import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/common/widgets/flutter/refresh_indicator.dart';
 import 'package:PiliPlus/common/widgets/loading_widget/http_error.dart';
 import 'package:PiliPlus/common/widgets/scaffold/simple_scaffold.dart';
@@ -30,8 +31,12 @@ abstract class FollowTypePageState<T extends StatefulWidget> extends State<T> {
           // controller: controller.scrollController,
           slivers: [
             ViewSliverSafeArea(
-              sliver: Obx(
-                () => _buildBody(theme, controller.loadingState.value),
+              // M8：桌面内容限宽居中（粉丝/关注列表）。
+              sliver: desktopLimitSliver(
+                Obx(
+                  () => _buildBody(theme, controller.loadingState.value),
+                ),
+                maxWidth: 1280,
               ),
             ),
           ],
