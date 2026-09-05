@@ -121,38 +121,6 @@ class ReplyItemGrpc extends StatelessWidget {
     );
   }
 
-  /// M8：桌面端评论正文支持“网页式”文本选择复制：
-  /// 左键拖选框选 → 右键弹出原生工具条（复制/全选），并追加“更多操作”。
-  /// 移动端原样返回，不改动长按行为。
-  Widget _wrapReplyText(
-    BuildContext context, {
-    required VoidCallback onMore,
-    required Widget child,
-  }) {
-    if (!PlatformUtils.isDesktop) {
-      return child;
-    }
-    return SelectionArea(
-      contextMenuBuilder: (menuContext, state) {
-        final items = state.contextMenuButtonItems;
-        items.add(
-          ContextMenuButtonItem(
-            label: '更多操作',
-            onPressed: () {
-              state.hideAndClear();
-              onMore();
-            },
-          ),
-        );
-        return AdaptiveTextSelectionToolbar.buttonItems(
-          buttonItems: items,
-          anchors: state.contextMenuAnchors,
-        );
-      },
-      child: child,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final colorScheme = ColorScheme.of(context);
@@ -199,8 +167,11 @@ class ReplyItemGrpc extends StatelessWidget {
       type: MaterialType.transparency,
       child: InkWell(
         onTap: () => replyReply?.call(replyItem, null),
-        onLongPress: showMore,
-        onSecondaryTap: PlatformUtils.isMobile ? null : showMore,
+        // M8-19：桌面取消“长按弹窗”；右键交给可选中正文（原生复制菜单）。
+        onLongPress: PlatformUtils.isDesktop ? null : showMore,
+        onSecondaryTap: PlatformUtils.isMobile || PlatformUtils.isDesktop
+            ? null
+            : showMore,
         child: child,
       ),
     );
@@ -398,49 +369,51 @@ class ReplyItemGrpc extends StatelessWidget {
             padding: padding,
             child: _buildVoteOption(colorScheme, replyControl.voteOption),
           ),
-        // M8：桌面可框选复制（网页一致：拖选→右键复制）。
-        _wrapReplyText(
-          context,
-          onMore: () => _showReplyMenu(
-            context,
-            item: replyItem,
-            onDelete: () => onDelete?.call(replyItem, null),
-            isSubReply: replyLevel != 0,
-          ),
-          child: Padding(
-            padding: padding,
-            child: TextMore.rich(
-              primary: colorScheme.primary,
-              style: const TextStyle(height: 1.75, fontSize: 14),
-              maxLines: replyLevel == 1 ? replyLengthLimit : null,
-              TextSpan(
-                children: [
-                  if (replyControl.isUpTop) ...[
-                    const WidgetSpan(
-                      alignment: .middle,
-                      child: PBadge(
-                        text: 'TOP',
-                        size: .small,
-                        isStack: false,
-                        type: .line_primary,
-                        fontSize: 9,
-                        textScaleFactor: 1,
-                      ),
+        // M8-19：桌面 → 原生可选中富文本（按住左键拖动框选任意连续文本，
+        // 松开右键出复制/全选，Ctrl+C 也可用；行内表情支持）。
+        Builder(
+          builder: (context) {
+            final replyTextSpan = TextSpan(
+              children: [
+                if (replyControl.isUpTop) ...[
+                  const WidgetSpan(
+                    alignment: .middle,
+                    child: PBadge(
+                      text: 'TOP',
+                      size: .small,
+                      isStack: false,
+                      type: .line_primary,
+                      fontSize: 9,
+                      textScaleFactor: 1,
                     ),
-                    const TextSpan(text: ' '),
-                  ],
-                  _buildMessage(
-                    context,
-                    colorScheme,
-                    replyControl.showTranslation
-                        ? replyItem.translatedContent
-                        : replyItem.content,
-                    replyControl,
                   ),
+                  const TextSpan(text: ' '),
                 ],
-              ),
-            ),
-          ),
+                _buildMessage(
+                  context,
+                  colorScheme,
+                  replyControl.showTranslation
+                      ? replyItem.translatedContent
+                      : replyItem.content,
+                  replyControl,
+                ),
+              ],
+            );
+            return Padding(
+              padding: padding,
+              child: PlatformUtils.isDesktop
+                  ? SelectableText.rich(
+                      replyTextSpan,
+                      style: const TextStyle(height: 1.75, fontSize: 14),
+                    )
+                  : TextMore.rich(
+                      primary: colorScheme.primary,
+                      style: const TextStyle(height: 1.75, fontSize: 14),
+                      maxLines: replyLevel == 1 ? replyLengthLimit : null,
+                      replyTextSpan,
+                    ),
+            );
+          },
         ),
         if (replyItem.content.pictures.isNotEmpty) ...[
           Padding(
@@ -674,23 +647,17 @@ class ReplyItemGrpc extends StatelessWidget {
                   borderRadius: borderRadius,
                   onTap: () =>
                       replyReply?.call(replyItem, childReply.id.toInt()),
-                  onLongPress: showMore,
-                  onSecondaryTap: PlatformUtils.isMobile ? null : showMore,
-                  // M8：桌面可框选复制（楼中楼回复）。
-                  child: _wrapReplyText(
-                    context,
-                    onMore: showMore,
-                    child: Padding(
-                      padding: padding,
-                      child: TextEllipsis.rich(
-                        style: TextStyle(
-                          height: 1.6,
-                          fontSize: 14,
-                          color: colorScheme.onSurface.withValues(alpha: 0.85),
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                        TextSpan(
+                  onLongPress: PlatformUtils.isDesktop ? null : showMore,
+                  onSecondaryTap: PlatformUtils.isMobile ||
+                          PlatformUtils.isDesktop
+                      ? null
+                      : showMore,
+                  // M8-19：桌面可框选复制（楼中楼回复，原生选中文本）。
+                  child: Padding(
+                    padding: padding,
+                    child: Builder(
+                      builder: (context) {
+                        final childTextSpan = TextSpan(
                           children: [
                             TextSpan(
                               text: childReply.member.name,
@@ -731,8 +698,32 @@ class ReplyItemGrpc extends StatelessWidget {
                               childReply.replyControl,
                             ),
                           ],
-                        ),
-                      ),
+                        );
+                        return PlatformUtils.isDesktop
+                            ? SelectableText.rich(
+                                childTextSpan,
+                                style: TextStyle(
+                                  height: 1.6,
+                                  fontSize: 14,
+                                  color: colorScheme.onSurface.withValues(
+                                    alpha: 0.85,
+                                  ),
+                                ),
+                                maxLines: 2,
+                              )
+                            : TextEllipsis.rich(
+                                style: TextStyle(
+                                  height: 1.6,
+                                  fontSize: 14,
+                                  color: colorScheme.onSurface.withValues(
+                                    alpha: 0.85,
+                                  ),
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 2,
+                                childTextSpan,
+                              );
+                      },
                     ),
                   ),
                 );
