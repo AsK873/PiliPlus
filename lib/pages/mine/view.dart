@@ -63,6 +63,13 @@ class _MediaPageState extends CommonPageState<MinePage>
     return super.onNotificationType2(notification);
   }
 
+  /// M5：桌面端内容限宽（>1080 时两侧留白，避免拉伸为超宽单列）。
+  double _sidePad(BuildContext context) {
+    if (!PlatformUtils.isDesktop) return 0;
+    final double w = MediaQuery.sizeOf(context).width;
+    return w > 1080 ? (w - 1080) / 2 : 0;
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -81,7 +88,11 @@ class _MediaPageState extends CommonPageState<MinePage>
               onRefresh: controller.onRefresh,
               child: onBuild(
                 ListView(
-                  padding: const .only(bottom: 100),
+                  padding: EdgeInsets.only(
+                    left: _sidePad(context),
+                    right: _sidePad(context),
+                    bottom: PlatformUtils.isDesktop ? 24 : 100,
+                  ),
                   physics: const AlwaysScrollableScrollPhysics(),
                   children: [
                     _buildUserInfo(theme, secondary),
