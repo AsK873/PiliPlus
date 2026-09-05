@@ -182,10 +182,16 @@ class ReplyItemGrpc extends StatelessWidget {
         ],
       );
     }
-    // M8-17：桌面悬停评论行 → 右上浮出复制按钮，单击复制全文。
+    // M8-17/18：桌面悬停评论行 → 右上浮出 复制全文 / 自由复制。
     if (PlatformUtils.isDesktop) {
+      final message = replyItem.content.message;
       child = _CommentHoverCopy(
-        message: replyItem.content.message,
+        message: message,
+        freeCopy: () => showReplyCopyDialog(
+          context,
+          message,
+          replyItem.content.emotes,
+        ),
         child: child,
       );
     }
@@ -1286,14 +1292,16 @@ class ReplyItemGrpc extends StatelessWidget {
   }
 }
 
-/// M8-17：桌面评论行的“复制”悬浮入口：悬停显示、单击复制全文。
+/// M8-17/18：桌面评论行悬浮工具：悬停显示 复制全文 / 自由复制 两个入口。
 class _CommentHoverCopy extends StatefulWidget {
   const _CommentHoverCopy({
     required this.message,
+    this.freeCopy,
     required this.child,
   });
 
   final String message;
+  final VoidCallback? freeCopy;
   final Widget child;
 
   @override
@@ -1325,20 +1333,49 @@ class _CommentHoverCopyState extends State<_CommentHoverCopy> {
               child: Material(
                 color: colorScheme.surfaceContainerHigh.withValues(alpha: 0.92),
                 borderRadius: const BorderRadius.all(Radius.circular(6)),
-                child: InkWell(
-                  borderRadius: const BorderRadius.all(Radius.circular(6)),
-                  onTap: _copy,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 7,
-                      vertical: 5,
+                clipBehavior: Clip.antiAlias,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Tooltip(
+                      message: '复制评论',
+                      child: InkWell(
+                        onTap: _copy,
+                        child: Padding(
+                          padding: const EdgeInsets.all(6),
+                          child: Icon(
+                            Icons.copy,
+                            size: 15,
+                            color: colorScheme.onSurfaceVariant,
+                          ),
+                        ),
+                      ),
                     ),
-                    child: Icon(
-                      Icons.copy,
-                      size: 15,
-                      color: colorScheme.onSurfaceVariant,
-                    ),
-                  ),
+                    if (widget.freeCopy != null) ...[
+                      Container(
+                        width: 1,
+                        height: 16,
+                        color: colorScheme.outline.withValues(alpha: 0.2),
+                      ),
+                      Tooltip(
+                        message: '自由复制（框选部分文本）',
+                        child: InkWell(
+                          onTap: () {
+                            setState(() => _hover = false);
+                            widget.freeCopy!();
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(6),
+                            child: Icon(
+                              Icons.content_cut,
+                              size: 15,
+                              color: colorScheme.onSurfaceVariant,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ],
                 ),
               ),
             ),
