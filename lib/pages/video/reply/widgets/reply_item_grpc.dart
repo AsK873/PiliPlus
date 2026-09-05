@@ -187,9 +187,7 @@ class ReplyItemGrpc extends StatelessWidget {
       child: InkWell(
         onTap: () => replyReply?.call(replyItem, null),
         onLongPress: showMore,
-        onSecondaryTap: PlatformUtils.isMobile || PlatformUtils.isDesktop
-    ? null
-    : showMore,
+        onSecondaryTap: PlatformUtils.isMobile ? null : showMore,
         child: child,
       ),
     );
@@ -664,9 +662,7 @@ class ReplyItemGrpc extends StatelessWidget {
                   onTap: () =>
                       replyReply?.call(replyItem, childReply.id.toInt()),
                   onLongPress: showMore,
-                  onSecondaryTap: PlatformUtils.isMobile || PlatformUtils.isDesktop
-    ? null
-    : showMore,
+                  onSecondaryTap: PlatformUtils.isMobile ? null : showMore,
                   // M8：桌面可框选复制（楼中楼回复）。
                   child: _wrapReplyText(
                     context,
