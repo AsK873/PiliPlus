@@ -116,11 +116,30 @@ class _DownloadPageState extends State<DownloadPage> with GridMixin {
               ],
             ),
           ),
-          body: Padding(
-            padding: EdgeInsets.only(left: padding.left, right: padding.right),
-            child: CustomScrollView(
-              slivers: [
-                Obx(() {
+          // M8：桌面内容限宽居中（离线缓存）。
+          body: PlatformUtils.isDesktop
+              ? Center(
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 1280),
+                    child: _pageBody(theme, padding, enableMultiSelect),
+                  ),
+                )
+              : _pageBody(theme, padding, enableMultiSelect),
+        ),
+      );
+    });
+  }
+
+  Widget _pageBody(
+    ThemeData theme,
+    EdgeInsets padding,
+    bool enableMultiSelect,
+  ) {
+    return Padding(
+      padding: EdgeInsets.only(left: padding.left, right: padding.right),
+      child: CustomScrollView(
+        slivers: [
+          Obx(() {
                   final entry =
                       _downloadService.waitDownloadQueue.firstWhereOrNull(
                         (e) => e.cid == _downloadService.curCid,
@@ -196,7 +215,11 @@ class _DownloadPageState extends State<DownloadPage> with GridMixin {
                                 controller: _controller,
                               );
                             }
-                            return _buildItem(theme, item, enableMultiSelect);
+                            return _buildItem(
+                              theme,
+                              item,
+                              enableMultiSelect,
+                            );
                           },
                           itemCount: _controller.pages.length,
                         ),
@@ -209,14 +232,13 @@ class _DownloadPageState extends State<DownloadPage> with GridMixin {
                   return const HttpError();
                 }),
                 SliverToBoxAdapter(
-                  child: SizedBox(height: padding.bottom + 100),
+                  child: SizedBox(
+                    height: PlatformUtils.isDesktop ? 24 : padding.bottom + 100,
+                  ),
                 ),
               ],
             ),
-          ),
-        ),
-      );
-    });
+          );
   }
 
   Widget _buildItem(
