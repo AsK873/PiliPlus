@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:PiliPlus/common/assets.dart';
 import 'package:PiliPlus/common/constants.dart';
 import 'package:PiliPlus/common/style.dart';
+import 'package:PiliPlus/common/widgets/desktop/desktop_shortcuts.dart';
 import 'package:PiliPlus/common/widgets/desktop/desktop_side_bar.dart';
 import 'package:PiliPlus/common/widgets/desktop/desktop_top_bar.dart';
 import 'package:PiliPlus/common/widgets/floating_navigation_bar.dart';
@@ -568,6 +569,12 @@ class _MainAppState extends PopScopeState<MainApp>
         ),
         child: child,
       );
+    }
+
+    // M2 桌面快捷键（Ctrl+1/2/3 切主入口、Ctrl+K 搜索）
+    if (PlatformUtils.isDesktop &&
+        MediaQuery.sizeOf(context).width >= 900) {
+      child = DesktopShortcuts(mainController: _mainController, child: child);
     }
 
     return child;
