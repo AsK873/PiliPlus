@@ -1,3 +1,4 @@
+import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/common/skeleton/media_bangumi.dart';
 import 'package:PiliPlus/common/sliver_single_child_delegate.dart';
 import 'package:PiliPlus/common/style.dart';
@@ -53,7 +54,8 @@ class _SearchPgcPanelState
 
   @override
   Widget buildList(ThemeData theme, List<SearchPgcItemModel> list) {
-    return SliverGrid.builder(
+    return desktopLimitSliver(
+      SliverGrid.builder(
       gridDelegate: gridDelegate,
       itemBuilder: (BuildContext context, int index) {
         if (index == list.length - 1) {
@@ -62,6 +64,8 @@ class _SearchPgcPanelState
         return SearchPgcItem(item: list[index]);
       },
       itemCount: list.length,
+      ),
+      maxWidth: 1280,
     );
   }
 

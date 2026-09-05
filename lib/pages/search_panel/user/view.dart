@@ -1,3 +1,4 @@
+import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/common/skeleton/msg_feed_top.dart';
 import 'package:PiliPlus/common/sliver_single_child_delegate.dart';
 import 'package:PiliPlus/common/widgets/sliver/sliver_floating_header.dart';
@@ -98,7 +99,8 @@ class _SearchUserPanelState
 
   @override
   Widget buildList(ThemeData theme, List<SearchUserItemModel> list) {
-    return SliverGrid.builder(
+    return desktopLimitSliver(
+      SliverGrid.builder(
       gridDelegate: gridDelegate,
       itemBuilder: (BuildContext context, int index) {
         if (index == list.length - 1) {
@@ -109,6 +111,8 @@ class _SearchUserPanelState
         );
       },
       itemCount: list.length,
+      ),
+      maxWidth: 1280,
     );
   }
 
