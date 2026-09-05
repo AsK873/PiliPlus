@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:PiliPlus/common/style.dart';
 import 'package:PiliPlus/common/widgets/button/more_btn.dart';
+import 'package:PiliPlus/common/widgets/sliver/sliver_constrained_cross_axis.dart';
 import 'package:PiliPlus/common/widgets/loading_widget/loading_widget.dart';
 import 'package:PiliPlus/http/loading_state.dart';
 import 'package:PiliPlus/models_new/space/space/data.dart';
@@ -18,6 +19,7 @@ import 'package:PiliPlus/pages/member_like_arc/view.dart';
 import 'package:PiliPlus/pages/member_pgc/widgets/pgc_card_v_member_pgc.dart';
 import 'package:PiliPlus/utils/extension/context_ext.dart';
 import 'package:PiliPlus/utils/grid.dart';
+import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
 import 'package:material_ui/material_ui.dart';
@@ -72,8 +74,11 @@ class _MemberHomeState extends State<MemberHome>
       Loading() => m3eLoading,
       Success(response: final res) =>
         res != null
-            ? CustomScrollView(
-                slivers: [
+            ? Builder(
+                builder: (context) {
+                  // M8-31：内容区块收集后按桌面/窄窗组织，桌面在滚动内部限宽居中
+                  // （避免整棵 CustomScrollView 外套 Center 导致的 UP 主页卡死）。
+                  final sections = <Widget>[
                   if (res.archive?.item?.isNotEmpty == true) ...[
                     _header(
                       color,
@@ -251,7 +256,18 @@ class _MemberHomeState extends State<MemberHome>
                       height: 100 + MediaQuery.viewPaddingOf(context).bottom,
                     ),
                   ),
-                ],
+                  ];
+                  return CustomScrollView(
+                    slivers: PlatformUtils.isDesktop
+                        ? [
+                            CenteredSliverConstrainedCrossAxis(
+                              maxExtent: 1280,
+                              sliver: SliverMainAxisGroup(slivers: sections),
+                            ),
+                          ]
+                        : sections,
+                  );
+                },
               )
             : scrollableError,
       Error(:final errMsg) => scrollErrorWidget(errMsg: errMsg),
