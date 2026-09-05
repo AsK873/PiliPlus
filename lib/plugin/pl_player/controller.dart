@@ -1,6 +1,7 @@
 import 'dart:async' show StreamSubscription, Timer;
 import 'dart:convert' show ascii, utf8;
 import 'dart:io' show Platform;
+import 'dart:io' show File, Directory, FileMode;
 import 'dart:math' show max, min;
 import 'dart:ui' as ui;
 
@@ -1070,6 +1071,17 @@ class PlPlayerController with BlockConfigMixin, AudioNormalizationMixin {
   /// 设置倍速
   Future<void> setPlaybackSpeed(double speed) async {
     lastPlaybackSpeed = playbackSpeed;
+    // M8-21 诊断：桌面端出现 >2 倍速（异常 3x）时记录调用来源。
+    if (PlatformUtils.isDesktop && speed > 2.0) {
+      try {
+        final trace = StackTrace.current.toString().split('\n').take(8).join('\n');
+        File('${Directory.systemTemp.path}/piliplus_speed.log')
+            .writeAsStringSync(
+              '${DateTime.now()} SPEED=$speed last=$lastPlaybackSpeed\n$trace\n----\n',
+              mode: FileMode.append,
+            );
+      } catch (_) {}
+    }
 
     if (speed == _videoPlayerController?.state.rate) {
       return;

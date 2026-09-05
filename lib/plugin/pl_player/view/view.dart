@@ -328,14 +328,20 @@ class _PLVideoPlayerState extends State<PLVideoPlayer>
     );
   }
 
-  // M8-21：窗口尺寸变化（如双击标题栏最大化/进全屏）后，若指针事件中断导致
-  // “长按倍速”状态残留，立即复位，避免视频自动停在长按倍速(默认 3x)。
-  @override
-  void didChangeMetrics() {
-    super.didChangeMetrics();
+  // M8-21/22：窗口尺寸变化（如双击标题栏最大化/进全屏）后，若指针事件中断导致
+  // “长按倍速”状态残留，立即 + 延迟兜底复位，避免视频自动停在长按倍速(默认 3x)。
+  void _resetLongPressResidue() {
     if (mounted && plPlayerController.longPressStatus.value) {
       plPlayerController.setLongPressStatus(false);
     }
+  }
+
+  @override
+  void didChangeMetrics() {
+    super.didChangeMetrics();
+    _resetLongPressResidue();
+    // 兜底：全屏/最大化过渡可能先于长按结束发生，稍后再复查一次。
+    Timer(const Duration(milliseconds: 800), _resetLongPressResidue);
   }
 
   @override
