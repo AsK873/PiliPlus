@@ -1068,7 +1068,7 @@ class PlPlayerController with BlockConfigMixin, AudioNormalizationMixin {
     }
   }
 
-  /// M8-22 诊断（临时）：写 %TEMP%\piliplus_speed.log。
+  /// M8-24 诊断（临时）：写 %TEMP%\piliplus_speed.log。
   void _diag(String message) {
     if (!PlatformUtils.isDesktop) return;
     try {
@@ -1077,8 +1077,18 @@ class PlPlayerController with BlockConfigMixin, AudioNormalizationMixin {
     } catch (_) {}
   }
 
-  /// 视图层诊断入口（M8-22 临时）。
+  /// 视图层诊断入口（M8-24 临时）。
   void diagnose(String message) => _diag(message);
+
+  // M8-25：全屏/最大化切换瞬间可能出现“只有按下没有抬起”的孤儿指针，
+  // 500ms 后被长按识别器误判为长按 → 自动 3x。切换后短窗口内抑制长按触发。
+  DateTime? _suppressLongPressUntil;
+  bool get longPressSuppressed =>
+      _suppressLongPressUntil != null &&
+      DateTime.now().isBefore(_suppressLongPressUntil!);
+  void suppressLongPress(Duration duration) {
+    _suppressLongPressUntil = DateTime.now().add(duration);
+  }
 
   /// 设置倍速
   Future<void> setPlaybackSpeed(double speed) async {
@@ -1439,6 +1449,8 @@ class PlPlayerController with BlockConfigMixin, AudioNormalizationMixin {
     } finally {
       _setFullScreen(status);
       _fsProcessing = false;
+      // M8-25：全屏切换后短窗口内抑制孤儿长按（防自动 3x）。
+      suppressLongPress(const Duration(milliseconds: 900));
     }
   }
 

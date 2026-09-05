@@ -341,6 +341,8 @@ class _PLVideoPlayerState extends State<PLVideoPlayer>
   @override
   void didChangeMetrics() {
     super.didChangeMetrics();
+    // M8-25：窗口尺寸变化(最大化/缩放)后短窗口抑制孤儿长按，并清理残留。
+    plPlayerController.suppressLongPress(const Duration(milliseconds: 900));
     _resetLongPressResidue();
     // 兜底：全屏/最大化过渡可能先于长按结束发生，稍后再复查一次。
     Timer(const Duration(milliseconds: 800), _resetLongPressResidue);
@@ -1223,8 +1225,14 @@ class _PLVideoPlayerState extends State<PLVideoPlayer>
               ? const Duration(milliseconds: 300)
               : null,
         )
-        ..onLongPressStart = ((_) =>
-            plPlayerController.setLongPressStatus(true))
+        ..onLongPressStart = ((_) {
+          // M8-25：全屏/最大化切换后的孤儿指针不计为长按（防自动 3x）。
+          if (plPlayerController.longPressSuppressed) {
+            plPlayerController.diagnose('LPS-SUPPRESSED');
+            return;
+          }
+          plPlayerController.setLongPressStatus(true);
+        })
         ..onLongPressEnd = ((_) => plPlayerController.setLongPressStatus(false))
         ..onLongPressCancel = (() =>
             plPlayerController.setLongPressStatus(false));
