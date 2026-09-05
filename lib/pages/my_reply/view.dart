@@ -1,3 +1,4 @@
+import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/common/widgets/dialog/dialog.dart';
 import 'package:PiliPlus/common/widgets/dialog/export_import.dart';
 import 'package:PiliPlus/common/widgets/loading_widget/http_error.dart';
@@ -79,19 +80,23 @@ class _MyReplyState extends State<MyReply> with DynMixin {
         slivers: [
           _replies.isNotEmpty
               ? ViewSliverSafeArea(
-                  sliver: SliverWaterfallFlow(
-                    gridDelegate: dynGridDelegate,
-                    delegate: SliverChildBuilderDelegate(
-                      childCount: _replies.length,
-                      (context, index) => ReplyItemGrpc(
-                        replyLevel: 0,
-                        needDivider: false,
-                        replyItem: _replies[index],
-                        replyReply: _replyReply,
-                        onDelete: (_, _) => _onDelete(index),
-                        onCheckReply: _onCheckReply,
+                  // M8：桌面内容限宽居中（我的评论）。
+                  sliver: desktopLimitSliver(
+                    SliverWaterfallFlow(
+                      gridDelegate: dynGridDelegate,
+                      delegate: SliverChildBuilderDelegate(
+                        childCount: _replies.length,
+                        (context, index) => ReplyItemGrpc(
+                          replyLevel: 0,
+                          needDivider: false,
+                          replyItem: _replies[index],
+                          replyReply: _replyReply,
+                          onDelete: (_, _) => _onDelete(index),
+                          onCheckReply: _onCheckReply,
+                        ),
                       ),
                     ),
+                    maxWidth: 1280,
                   ),
                 )
               : const HttpError(),
