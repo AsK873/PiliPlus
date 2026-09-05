@@ -56,6 +56,7 @@ import 'package:PiliPlus/utils/connectivity_utils.dart';
 import 'package:PiliPlus/utils/duration_utils.dart';
 import 'package:PiliPlus/utils/extension/num_ext.dart';
 import 'package:PiliPlus/utils/extension/theme_ext.dart';
+import 'package:PiliPlus/utils/feed_back.dart';
 import 'package:PiliPlus/utils/id_utils.dart';
 import 'package:PiliPlus/utils/image_utils.dart';
 import 'package:PiliPlus/utils/mobile_observer.dart';
@@ -1826,7 +1827,38 @@ class _PLVideoPlayerState extends State<PLVideoPlayer>
                           thumbColor: primary,
                           thumbGlowColor: thumbGlowColor,
                           barHeight: 3.5,
-                          thumbRadius: 2.5,
+                          // M4-5：桌面端控制栏收起时迷你进度条可直接 hover/拖拽 seek；
+                          // 缩略点放大便于抓取。移动端保持原样（不可拖）。
+                          thumbRadius: PlatformUtils.isDesktop ? 6.5 : 2.5,
+                          onDragStart: PlatformUtils.isDesktop
+                              ? (d) {
+                                  feedBack();
+                                  plPlayerController
+                                    ..position.value = d.seconds
+                                    ..isSeeking.value = true;
+                                }
+                              : null,
+                          onDragUpdate: PlatformUtils.isDesktop
+                              ? (d) {
+                                  if (!plPlayerController.isFileSource &&
+                                      plPlayerController.showSeekPreview) {
+                                    plPlayerController.updatePreviewIndex(
+                                      d.seconds,
+                                    );
+                                  }
+                                  plPlayerController.position.value = d.seconds;
+                                }
+                              : null,
+                          onSeek: PlatformUtils.isDesktop
+                              ? (ms) {
+                                  plPlayerController
+                                    ..onSeekEnd()
+                                    ..seekTo(
+                                      Duration(milliseconds: ms),
+                                      isSeek: false,
+                                    );
+                                }
+                              : null,
                         ),
                       ),
                       if (plPlayerController.enableBlock &&
