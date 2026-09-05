@@ -1,3 +1,4 @@
+import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/common/widgets/flutter/list_tile.dart';
 import 'package:PiliPlus/common/widgets/flutter/refresh_indicator.dart';
 import 'package:PiliPlus/common/widgets/image/network_img_layer.dart';
@@ -64,7 +65,11 @@ class _MemberGuardState extends State<MemberGuard> {
         child: CustomScrollView(
           slivers: [
             ViewSliverSafeArea(
-              sliver: Obx(() => _buildBody(_controller.loadingState.value)),
+              // M8：桌面内容限宽居中（UP-舰队）。
+              sliver: desktopLimitSliver(
+                Obx(() => _buildBody(_controller.loadingState.value)),
+                maxWidth: 1280,
+              ),
             ),
           ],
         ),

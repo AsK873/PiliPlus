@@ -1,3 +1,4 @@
+import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/common/widgets/flutter/list_tile.dart';
 import 'package:PiliPlus/common/widgets/flutter/refresh_indicator.dart';
 import 'package:PiliPlus/common/widgets/image/network_img_layer.dart';
@@ -11,6 +12,7 @@ import 'package:PiliPlus/models/common/image_type.dart';
 import 'package:PiliPlus/models_new/upower_rank/rank_info.dart';
 import 'package:PiliPlus/pages/member_upower_rank/controller.dart';
 import 'package:PiliPlus/utils/extension/widget_ext.dart';
+import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:get/get.dart';
 import 'package:material_ui/material_ui.dart' hide ListTile;
 
@@ -78,9 +80,13 @@ class _UpowerRankPageState extends State<UpowerRankPage>
         physics: const AlwaysScrollableScrollPhysics(),
         slivers: [
           SliverPadding(
-            padding: EdgeInsets.only(bottom: padding.bottom + 100),
-            sliver: Obx(
-              () => _buildBody(theme, _controller.loadingState.value),
+            padding: EdgeInsets.only(
+              bottom: PlatformUtils.isDesktop ? 24 : padding.bottom + 100,
+            ),
+            // M8：桌面内容限宽居中（充电排行）。
+            sliver: desktopLimitSliver(
+              Obx(() => _buildBody(theme, _controller.loadingState.value)),
+              maxWidth: 1280,
             ),
           ),
         ],

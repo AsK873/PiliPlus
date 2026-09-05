@@ -1,3 +1,4 @@
+import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/common/widgets/flutter/refresh_indicator.dart';
 import 'package:PiliPlus/common/widgets/loading_widget/http_error.dart';
 import 'package:PiliPlus/common/widgets/scaffold/simple_scaffold.dart';
@@ -6,6 +7,7 @@ import 'package:PiliPlus/models/dynamics/result.dart';
 import 'package:PiliPlus/pages/dynamics/widgets/dynamic_panel.dart';
 import 'package:PiliPlus/pages/member_dynamics/controller.dart';
 import 'package:PiliPlus/utils/global_data.dart';
+import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:PiliPlus/utils/utils.dart';
 import 'package:PiliPlus/utils/waterfall.dart';
 import 'package:get/get.dart';
@@ -65,11 +67,19 @@ class _MemberDynamicsPageState extends State<MemberDynamicsPage>
       physics: const AlwaysScrollableScrollPhysics(),
       slivers: [
         SliverPadding(
-          padding: EdgeInsets.only(bottom: padding.bottom + 100),
-          sliver: buildPage(
-            Obx(
-              () => _buildContent(_memberDynamicController.loadingState.value),
+          padding: EdgeInsets.only(
+            bottom: PlatformUtils.isDesktop ? 24 : padding.bottom + 100,
+          ),
+          // M8：桌面内容限宽居中（UP-动态）。
+          sliver: desktopLimitSliver(
+            buildPage(
+              Obx(
+                () => _buildContent(
+                  _memberDynamicController.loadingState.value,
+                ),
+              ),
             ),
+            maxWidth: 1280,
           ),
         ),
       ],
