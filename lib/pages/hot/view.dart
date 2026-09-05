@@ -1,0 +1,167 @@
+import 'package:PiliPlus/common/widgets/desktop/hover_card.dart';
+import 'package:PiliPlus/common/widgets/flutter/refresh_indicator.dart';
+import 'package:PiliPlus/common/widgets/image/network_img_layer.dart';
+import 'package:PiliPlus/common/widgets/loading_widget/http_error.dart';
+import 'package:PiliPlus/common/widgets/scaffold/simple_scaffold.dart';
+import 'package:PiliPlus/common/widgets/sliver/sliver_constrained_cross_axis.dart';
+import 'package:PiliPlus/common/widgets/video_card/video_card_h.dart';
+import 'package:PiliPlus/common/widgets/view_safe_area.dart';
+import 'package:PiliPlus/http/loading_state.dart';
+import 'package:PiliPlus/models/common/home_tab_type.dart';
+import 'package:PiliPlus/models/model_hot_video_item.dart';
+import 'package:PiliPlus/pages/home/controller.dart';
+import 'package:PiliPlus/pages/hot/controller.dart';
+import 'package:PiliPlus/pages/rank/view.dart';
+import 'package:PiliPlus/utils/grid.dart';
+import 'package:PiliPlus/utils/platform_utils.dart';
+import 'package:PiliPlus/utils/storage_pref.dart';
+import 'package:get/get.dart';
+import 'package:material_ui/material_ui.dart';
+
+class HotPage extends StatefulWidget {
+  const HotPage({super.key});
+
+  @override
+  State<HotPage> createState() => _HotPageState();
+}
+
+class _HotPageState extends State<HotPage>
+    with AutomaticKeepAliveClientMixin, GridMixin {
+  final HotController controller = Get.put(HotController());
+
+  @override
+  bool get wantKeepAlive => true;
+
+  Widget _buildEntranceItem({
+    required String iconUrl,
+    required String title,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      behavior: HitTestBehavior.opaque,
+      child: Column(
+        spacing: 4,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          NetworkImgLayer(
+            width: 35,
+            height: 35,
+            type: .emote,
+            src: iconUrl,
+          ),
+          Text(
+            title,
+            style: const TextStyle(fontSize: 12),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+    return refreshIndicator(
+      onRefresh: controller.onRefresh,
+      child: CustomScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        controller: controller.scrollController,
+        slivers: [
+          if (Pref.showHotRcmd)
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const .only(left: 12, top: 12, right: 12),
+                child: Row(
+                  mainAxisAlignment: .spaceEvenly,
+                  children: [
+                    _buildEntranceItem(
+                      iconUrl: 'https://i0.hdslb.com/bfs/archive/a3f11218aaf4521b4967db2ae164ecd3052586b9.png',
+                      title: '排行榜',
+                      onTap: () {
+                        try {
+                          final homeController = Get.find<HomeController>();
+                          final index = homeController.tabs.indexOf(
+                            HomeTabType.rank,
+                          );
+                          if (index != -1) {
+                            homeController.tabController.animateTo(index);
+                          } else {
+                            Get.to(
+                              SimpleScaffold(
+                                appBar: AppBar(title: const Text('排行榜')),
+                                body: const ViewSafeArea(child: RankPage()),
+                              ),
+                            );
+                          }
+                        } catch (_) {}
+                      },
+                    ),
+                    _buildEntranceItem(
+                      iconUrl: 'https://i0.hdslb.com/bfs/archive/552ebe8c4794aeef30ebd1568b59ad35f15e21ad.png',
+                      title: '每周必看',
+                      onTap: () => Get.toNamed('/popularSeries'),
+                    ),
+                    _buildEntranceItem(
+                      iconUrl: 'https://i0.hdslb.com/bfs/archive/3693ec9335b78ca57353ac0734f36a46f3d179a9.png',
+                      title: '入站必刷',
+                      onTap: () => Get.toNamed('/popularPrecious'),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          SliverPadding(
+            padding: EdgeInsets.only(
+              top: 7,
+              bottom: PlatformUtils.isDesktop ? 24 : 100,
+            ),
+            // M3：桌面内容限宽居中，避免横卡在超宽屏下被排成多列"巨列表"。
+            sliver: _contentWidth(
+              Obx(() => _buildBody(controller.loadingState.value)),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// M3 桌面辅助：内容限宽居中。
+  Widget _contentWidth(Widget sliver) => PlatformUtils.isDesktop
+      ? CenteredSliverConstrainedCrossAxis(maxExtent: 1200, sliver: sliver)
+      : sliver;
+
+  /// M3 桌面辅助：卡片 hover 反馈。
+  Widget _card(Widget card) =>
+      PlatformUtils.isDesktop ? HoverCard(child: card) : card;
+
+  Widget _buildBody(LoadingState<List<HotVideoItemModel>?> loadingState) {
+    return switch (loadingState) {
+      Loading() => gridSkeleton,
+      Success(:final response) =>
+        response != null && response.isNotEmpty
+            ? SliverGrid.builder(
+                gridDelegate: gridDelegate,
+                itemBuilder: (context, index) {
+                  if (index == response.length - 1) {
+                    controller.onLoadMore();
+                  }
+                  return _card(
+                    VideoCardH(
+                      videoItem: response[index],
+                      onRemove: () => controller.loadingState
+                        ..value.data!.removeAt(index)
+                        ..refresh(),
+                    ),
+                  );
+                },
+                itemCount: response.length,
+              )
+            : HttpError(onReload: controller.onReload),
+      Error(:final errMsg) => HttpError(
+        errMsg: errMsg,
+        onReload: controller.onReload,
+      ),
+    };
+  }
+}
