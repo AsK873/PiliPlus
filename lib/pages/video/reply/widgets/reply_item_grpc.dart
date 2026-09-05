@@ -182,6 +182,13 @@ class ReplyItemGrpc extends StatelessWidget {
         ],
       );
     }
+    // M8-17：桌面悬停评论行 → 右上浮出复制按钮，单击复制全文。
+    if (PlatformUtils.isDesktop) {
+      child = _CommentHoverCopy(
+        message: replyItem.content.message,
+        child: child,
+      );
+    }
     return Material(
       type: MaterialType.transparency,
       child: InkWell(
@@ -1272,6 +1279,68 @@ class ReplyItemGrpc extends StatelessWidget {
               minLeadingWidth: 0,
               leading: const Icon(CustomIcons.shield_reply, size: 19),
               title: Text('检查评论', style: style),
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+/// M8-17：桌面评论行的“复制”悬浮入口：悬停显示、单击复制全文。
+class _CommentHoverCopy extends StatefulWidget {
+  const _CommentHoverCopy({
+    required this.message,
+    required this.child,
+  });
+
+  final String message;
+  final Widget child;
+
+  @override
+  State<_CommentHoverCopy> createState() => _CommentHoverCopyState();
+}
+
+class _CommentHoverCopyState extends State<_CommentHoverCopy> {
+  bool _hover = false;
+
+  void _copy() {
+    Utils.copyText(widget.message);
+    setState(() => _hover = false);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = ColorScheme.of(context);
+    return MouseRegion(
+      onEnter: (_) => setState(() => _hover = true),
+      onExit: (_) => setState(() => _hover = false),
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          widget.child,
+          if (_hover)
+            Positioned(
+              top: 6,
+              right: 10,
+              child: Material(
+                color: colorScheme.surfaceContainerHigh.withValues(alpha: 0.92),
+                borderRadius: const BorderRadius.all(Radius.circular(6)),
+                child: InkWell(
+                  borderRadius: const BorderRadius.all(Radius.circular(6)),
+                  onTap: _copy,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 7,
+                      vertical: 5,
+                    ),
+                    child: Icon(
+                      Icons.copy,
+                      size: 15,
+                      color: colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                ),
+              ),
             ),
         ],
       ),
