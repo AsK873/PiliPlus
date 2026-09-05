@@ -18,7 +18,6 @@ import 'package:PiliPlus/pages/member_like_arc/view.dart';
 import 'package:PiliPlus/pages/member_pgc/widgets/pgc_card_v_member_pgc.dart';
 import 'package:PiliPlus/utils/extension/context_ext.dart';
 import 'package:PiliPlus/utils/grid.dart';
-import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
 import 'package:material_ui/material_ui.dart';
@@ -42,15 +41,8 @@ class _MemberHomeState extends State<MemberHome>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    // M8：桌面内容限宽居中（UP-主页概览，多区块整体约束）。
-    return PlatformUtils.isDesktop
-        ? Center(
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 1280),
-              child: _buildBody(_ctr.loadingState.value),
-            ),
-          )
-        : _buildBody(_ctr.loadingState.value);
+    // 二分实验（M8-30）：暂还原桌面整体居中包裹，定位 UP 主页卡死。
+    return _buildBody(_ctr.loadingState.value);
   }
 
   late final gridDelegateV = SliverGridDelegateWithExtentAndRatio(
