@@ -1,7 +1,6 @@
 import 'dart:async' show StreamSubscription, Timer;
 import 'dart:convert' show ascii, utf8;
 import 'dart:io' show Platform;
-import 'dart:io' show File, Directory, FileMode;
 import 'dart:math' show max, min;
 import 'dart:ui' as ui;
 
@@ -1068,42 +1067,9 @@ class PlPlayerController with BlockConfigMixin, AudioNormalizationMixin {
     }
   }
 
-  /// M8-24 诊断（临时）：写 %TEMP%\piliplus_speed.log。
-  void _diag(String message) {
-    if (!PlatformUtils.isDesktop) return;
-    try {
-      File('${Directory.systemTemp.path}/piliplus_speed.log')
-          .writeAsStringSync('${DateTime.now()} $message\n', mode: FileMode.append);
-    } catch (_) {}
-  }
-
-  /// 视图层诊断入口（M8-24 临时）。
-  void diagnose(String message) => _diag(message);
-
-  // M8-25：全屏/最大化切换瞬间可能出现“只有按下没有抬起”的孤儿指针，
-  // 500ms 后被长按识别器误判为长按 → 自动 3x。切换后短窗口内抑制长按触发。
-  DateTime? _suppressLongPressUntil;
-  bool get longPressSuppressed =>
-      _suppressLongPressUntil != null &&
-      DateTime.now().isBefore(_suppressLongPressUntil!);
-  void suppressLongPress(Duration duration) {
-    _suppressLongPressUntil = DateTime.now().add(duration);
-  }
-
   /// 设置倍速
   Future<void> setPlaybackSpeed(double speed) async {
     lastPlaybackSpeed = playbackSpeed;
-    // M8-21 诊断：桌面端出现 >2 倍速（异常 3x）时记录调用来源。
-    if (PlatformUtils.isDesktop && speed > 2.0) {
-      try {
-        final trace = StackTrace.current.toString().split('\n').take(8).join('\n');
-        File('${Directory.systemTemp.path}/piliplus_speed.log')
-            .writeAsStringSync(
-              '${DateTime.now()} SPEED=$speed last=$lastPlaybackSpeed\n$trace\n----\n',
-              mode: FileMode.append,
-            );
-      } catch (_) {}
-    }
 
     if (speed == _videoPlayerController?.state.rate) {
       return;
@@ -1260,12 +1226,6 @@ class PlPlayerController with BlockConfigMixin, AudioNormalizationMixin {
 
   /// 设置长按倍速状态 live模式下禁用
   Future<void> setLongPressStatus(bool val) async {
-    // M8-22 诊断：记录每次长按倍速状态变化的前后文（锁/全屏/速率/播放态）。
-    _diag(
-      'LPS val=$val locked=${controlsLock.value} '
-      'status=${longPressStatus.value} rate=${_videoPlayerController?.state.rate} '
-      'playing=${playerStatus.isPlaying} fs=${isFullScreen.value} pip=$isDesktopPip',
-    );
     if (isLive) {
       return;
     }
@@ -1287,7 +1247,6 @@ class PlPlayerController with BlockConfigMixin, AudioNormalizationMixin {
       // if (kDebugMode) debugPrint('$playbackSpeed');
       longPressStatus.value = val;
       await setPlaybackSpeed(lastPlaybackSpeed);
-      _diag('LPS-RESET done speed=${playbackSpeed}');
     }
   }
 
@@ -1449,8 +1408,6 @@ class PlPlayerController with BlockConfigMixin, AudioNormalizationMixin {
     } finally {
       _setFullScreen(status);
       _fsProcessing = false;
-      // M8-25：全屏切换后短窗口内抑制孤儿长按（防自动 3x）。
-      suppressLongPress(const Duration(milliseconds: 900));
     }
   }
 
