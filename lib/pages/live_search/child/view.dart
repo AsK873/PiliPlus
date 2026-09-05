@@ -2,6 +2,7 @@ import 'package:PiliPlus/common/skeleton/msg_feed_top.dart';
 import 'package:PiliPlus/common/skeleton/video_card_v.dart';
 import 'package:PiliPlus/common/sliver_single_child_delegate.dart';
 import 'package:PiliPlus/common/style.dart';
+import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/common/widgets/flutter/refresh_indicator.dart';
 import 'package:PiliPlus/common/widgets/loading_widget/http_error.dart';
 import 'package:PiliPlus/http/loading_state.dart';
@@ -10,6 +11,7 @@ import 'package:PiliPlus/pages/live_search/child/controller.dart';
 import 'package:PiliPlus/pages/live_search/widgets/live_search_room.dart';
 import 'package:PiliPlus/pages/live_search/widgets/live_search_user.dart';
 import 'package:PiliPlus/utils/grid.dart';
+import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:get/get.dart';
 import 'package:material_ui/material_ui.dart'
     hide SliverGridDelegateWithMaxCrossAxisExtent;
@@ -47,9 +49,15 @@ class _LiveSearchChildPageState extends State<LiveSearchChildPage>
               top: padding,
               left: padding,
               right: padding,
-              bottom: MediaQuery.viewPaddingOf(context).bottom + 100,
+              bottom: PlatformUtils.isDesktop
+                  ? 24
+                  : MediaQuery.viewPaddingOf(context).bottom + 100,
             ),
-            sliver: Obx(() => _buildBody(_controller.loadingState.value)),
+            // M8：桌面内容限宽居中（直播搜索）。
+            sliver: desktopLimitSliver(
+              Obx(() => _buildBody(_controller.loadingState.value)),
+              maxWidth: 1280,
+            ),
           ),
         ],
       ),
