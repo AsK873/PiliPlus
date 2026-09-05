@@ -799,6 +799,8 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
                   Expanded(
                     child: tabBarView(
                       controller: videoDetailController.tabCtr,
+                      // M8-20：桌面禁止鼠标左右拖动切 Tab（评论页等），仅点 Tab 切换。
+                      enableDrag: !PlatformUtils.isDesktop,
                       children: [
                         videoIntro(
                           width: introWidth,
@@ -860,8 +862,10 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
                       children: [
                         buildTabBar(showIntro: false),
                         Expanded(
+                          // M8-20：桌面禁止鼠标左右拖动切 Tab（评论页等），仅点 Tab 切换。
                           child: tabBarView(
                             controller: videoDetailController.tabCtr,
+                            enableDrag: !PlatformUtils.isDesktop,
                             children: [
                               if (videoDetailController.showReply)
                                 videoReplyPanel(),
@@ -952,6 +956,8 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
                   Expanded(
                     child: tabBarView(
                       controller: videoDetailController.tabCtr,
+                      // M8-20：桌面禁止鼠标左右拖动切 Tab（评论页等），仅点 Tab 切换。
+                      enableDrag: !PlatformUtils.isDesktop,
                       children: [
                         if (videoDetailController.isFileSource)
                           localIntroPanel()
