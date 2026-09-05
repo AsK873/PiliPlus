@@ -1068,6 +1068,18 @@ class PlPlayerController with BlockConfigMixin, AudioNormalizationMixin {
     }
   }
 
+  /// M8-22 诊断（临时）：写 %TEMP%\piliplus_speed.log。
+  void _diag(String message) {
+    if (!PlatformUtils.isDesktop) return;
+    try {
+      File('${Directory.systemTemp.path}/piliplus_speed.log')
+          .writeAsStringSync('${DateTime.now()} $message\n', mode: FileMode.append);
+    } catch (_) {}
+  }
+
+  /// 视图层诊断入口（M8-22 临时）。
+  void diagnose(String message) => _diag(message);
+
   /// 设置倍速
   Future<void> setPlaybackSpeed(double speed) async {
     lastPlaybackSpeed = playbackSpeed;
@@ -1086,7 +1098,6 @@ class PlPlayerController with BlockConfigMixin, AudioNormalizationMixin {
     if (speed == _videoPlayerController?.state.rate) {
       return;
     }
-
     await _videoPlayerController?.setRate(speed);
     _playbackSpeed.value = speed;
     if (danmakuController != null) {
@@ -1239,6 +1250,12 @@ class PlPlayerController with BlockConfigMixin, AudioNormalizationMixin {
 
   /// 设置长按倍速状态 live模式下禁用
   Future<void> setLongPressStatus(bool val) async {
+    // M8-22 诊断：记录每次长按倍速状态变化的前后文（锁/全屏/速率/播放态）。
+    _diag(
+      'LPS val=$val locked=${controlsLock.value} '
+      'status=${longPressStatus.value} rate=${_videoPlayerController?.state.rate} '
+      'playing=${playerStatus.isPlaying} fs=${isFullScreen.value} pip=$isDesktopPip',
+    );
     if (isLive) {
       return;
     }
@@ -1260,6 +1277,7 @@ class PlPlayerController with BlockConfigMixin, AudioNormalizationMixin {
       // if (kDebugMode) debugPrint('$playbackSpeed');
       longPressStatus.value = val;
       await setPlaybackSpeed(lastPlaybackSpeed);
+      _diag('LPS-RESET done speed=${playbackSpeed}');
     }
   }
 
