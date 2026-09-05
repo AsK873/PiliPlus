@@ -1,5 +1,6 @@
 import 'package:PiliPlus/common/skeleton/msg_feed_sys_msg_.dart';
 import 'package:PiliPlus/common/sliver_single_child_delegate.dart';
+import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/common/widgets/dialog/dialog.dart';
 import 'package:PiliPlus/common/widgets/flutter/list_tile.dart';
 import 'package:PiliPlus/common/widgets/flutter/refresh_indicator.dart';
@@ -43,10 +44,19 @@ class _SysMsgPageState extends State<SysMsgPage> {
           slivers: [
             SliverPadding(
               padding: EdgeInsets.only(
-                bottom: MediaQuery.viewPaddingOf(context).bottom + 100,
+                bottom: PlatformUtils.isDesktop
+                    ? 24
+                    : MediaQuery.viewPaddingOf(context).bottom + 100,
               ),
-              sliver: Obx(
-                () => _buildBody(theme, _sysMsgController.loadingState.value),
+              // M8：桌面内容限宽居中（系统通知）。
+              sliver: desktopLimitSliver(
+                Obx(
+                  () => _buildBody(
+                    theme,
+                    _sysMsgController.loadingState.value,
+                  ),
+                ),
+                maxWidth: 1280,
               ),
             ),
           ],
