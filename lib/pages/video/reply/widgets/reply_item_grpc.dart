@@ -96,25 +96,72 @@ class ReplyItemGrpc extends StatelessWidget {
   static bool enableWordRe = Pref.enableWordRe;
   static int? replyLengthLimit = Pref.replyLengthLimit;
 
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = ColorScheme.of(context);
-
-    void showMore() => showModalBottomSheet(
+  /// 打开评论“更多”底部弹层（长按/右键/文本选择工具条共用入口）。
+  void _showReplyMenu(
+    BuildContext context, {
+    required ReplyInfo item,
+    required VoidCallback onDelete,
+    required bool isSubReply,
+  }) {
+    showModalBottomSheet(
       context: context,
       useSafeArea: true,
       isScrollControlled: true,
       constraints: BoxConstraints(
         maxWidth: min(640, context.mediaQueryShortestSide),
       ),
-      builder: (context) {
+      builder: (sheetContext) {
         return morePanel(
-          context: context,
-          item: replyItem,
-          onDelete: () => onDelete?.call(replyItem, null),
-          isSubReply: false,
+          context: sheetContext,
+          item: item,
+          onDelete: onDelete,
+          isSubReply: isSubReply,
         );
       },
+    );
+  }
+
+  /// M8：桌面端评论正文支持“网页式”文本选择复制：
+  /// 左键拖选框选 → 右键弹出原生工具条（复制/全选），并追加“更多操作”。
+  /// 移动端原样返回，不改动长按行为。
+  Widget _wrapReplyText(
+    BuildContext context, {
+    required VoidCallback onMore,
+    required Widget child,
+  }) {
+    if (!PlatformUtils.isDesktop) {
+      return child;
+    }
+    return SelectionArea(
+      contextMenuBuilder: (menuContext, state) {
+        final items = state.contextMenuButtonItems;
+        items.add(
+          ContextMenuButtonItem(
+            label: '更多操作',
+            onPressed: () {
+              state.hideAndClear();
+              onMore();
+            },
+          ),
+        );
+        return AdaptiveTextSelectionToolbar.buttonItems(
+          buttonItems: items,
+          anchors: state.contextMenuAnchors,
+        );
+      },
+      child: child,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = ColorScheme.of(context);
+
+    void showMore() => _showReplyMenu(
+      context,
+      item: replyItem,
+      onDelete: () => onDelete?.call(replyItem, null),
+      isSubReply: false,
     );
 
     Widget child = Padding(
@@ -338,37 +385,47 @@ class ReplyItemGrpc extends StatelessWidget {
             padding: padding,
             child: _buildVoteOption(colorScheme, replyControl.voteOption),
           ),
-        Padding(
-          padding: padding,
-          child: TextMore.rich(
-            primary: colorScheme.primary,
-            style: const TextStyle(height: 1.75, fontSize: 14),
-            maxLines: replyLevel == 1 ? replyLengthLimit : null,
-            TextSpan(
-              children: [
-                if (replyControl.isUpTop) ...[
-                  const WidgetSpan(
-                    alignment: .middle,
-                    child: PBadge(
-                      text: 'TOP',
-                      size: .small,
-                      isStack: false,
-                      type: .line_primary,
-                      fontSize: 9,
-                      textScaleFactor: 1,
+        // M8：桌面可框选复制（网页一致：拖选→右键复制）。
+        _wrapReplyText(
+          context,
+          onMore: () => _showReplyMenu(
+            context,
+            item: replyItem,
+            onDelete: () => onDelete?.call(replyItem, null),
+            isSubReply: replyLevel != 0,
+          ),
+          child: Padding(
+            padding: padding,
+            child: TextMore.rich(
+              primary: colorScheme.primary,
+              style: const TextStyle(height: 1.75, fontSize: 14),
+              maxLines: replyLevel == 1 ? replyLengthLimit : null,
+              TextSpan(
+                children: [
+                  if (replyControl.isUpTop) ...[
+                    const WidgetSpan(
+                      alignment: .middle,
+                      child: PBadge(
+                        text: 'TOP',
+                        size: .small,
+                        isStack: false,
+                        type: .line_primary,
+                        fontSize: 9,
+                        textScaleFactor: 1,
+                      ),
                     ),
+                    const TextSpan(text: ' '),
+                  ],
+                  _buildMessage(
+                    context,
+                    colorScheme,
+                    replyControl.showTranslation
+                        ? replyItem.translatedContent
+                        : replyItem.content,
+                    replyControl,
                   ),
-                  const TextSpan(text: ' '),
                 ],
-                _buildMessage(
-                  context,
-                  colorScheme,
-                  replyControl.showTranslation
-                      ? replyItem.translatedContent
-                      : replyItem.content,
-                  replyControl,
-                ),
-              ],
+              ),
             ),
           ),
         ),
@@ -594,21 +651,11 @@ class ReplyItemGrpc extends StatelessWidget {
                     padding = const .fromLTRB(8, 4, 8, 4);
                   }
                 }
-                void showMore() => showModalBottomSheet(
-                  context: context,
-                  useSafeArea: true,
-                  isScrollControlled: true,
-                  constraints: BoxConstraints(
-                    maxWidth: min(640, context.mediaQueryShortestSide),
-                  ),
-                  builder: (context) {
-                    return morePanel(
-                      context: context,
-                      item: childReply,
-                      onDelete: () => onDelete?.call(replyItem, index),
-                      isSubReply: true,
-                    );
-                  },
+                void showMore() => _showReplyMenu(
+                  context,
+                  item: childReply,
+                  onDelete: () => onDelete?.call(replyItem, index),
+                  isSubReply: true,
                 );
                 return InkWell(
                   borderRadius: borderRadius,
@@ -616,57 +663,62 @@ class ReplyItemGrpc extends StatelessWidget {
                       replyReply?.call(replyItem, childReply.id.toInt()),
                   onLongPress: showMore,
                   onSecondaryTap: PlatformUtils.isMobile ? null : showMore,
-                  child: Padding(
-                    padding: padding,
-                    child: TextEllipsis.rich(
-                      style: TextStyle(
-                        height: 1.6,
-                        fontSize: 14,
-                        color: colorScheme.onSurface.withValues(alpha: 0.85),
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 2,
-                      TextSpan(
-                        children: [
-                          TextSpan(
-                            text: childReply.member.name,
-                            style: TextStyle(color: colorScheme.primary),
-                            recognizer: NoDeadlineTapGestureRecognizer()
-                              ..onTap = () {
-                                feedBack();
-                                Get.toNamed(
-                                  '/member?mid=${childReply.member.mid}',
-                                );
-                              },
-                          ),
-                          if (childReply.mid == upMid) ...[
-                            const TextSpan(text: ' '),
-                            const WidgetSpan(
-                              alignment: .middle,
-                              child: PBadge(
-                                text: 'UP',
-                                size: .small,
-                                isStack: false,
-                                fontSize: 9,
-                                textScaleFactor: 1,
-                              ),
+                  // M8：桌面可框选复制（楼中楼回复）。
+                  child: _wrapReplyText(
+                    context,
+                    onMore: showMore,
+                    child: Padding(
+                      padding: padding,
+                      child: TextEllipsis.rich(
+                        style: TextStyle(
+                          height: 1.6,
+                          fontSize: 14,
+                          color: colorScheme.onSurface.withValues(alpha: 0.85),
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                              text: childReply.member.name,
+                              style: TextStyle(color: colorScheme.primary),
+                              recognizer: NoDeadlineTapGestureRecognizer()
+                                ..onTap = () {
+                                  feedBack();
+                                  Get.toNamed(
+                                    '/member?mid=${childReply.member.mid}',
+                                  );
+                                },
                             ),
-                            const TextSpan(text: ' '),
+                            if (childReply.mid == upMid) ...[
+                              const TextSpan(text: ' '),
+                              const WidgetSpan(
+                                alignment: .middle,
+                                child: PBadge(
+                                  text: 'UP',
+                                  size: .small,
+                                  isStack: false,
+                                  fontSize: 9,
+                                  textScaleFactor: 1,
+                                ),
+                              ),
+                              const TextSpan(text: ' '),
+                            ],
+                            TextSpan(
+                              text: childReply.root == childReply.parent
+                                  ? ': '
+                                  : childReply.mid == upMid
+                                  ? ''
+                                  : ' ',
+                            ),
+                            _buildMessage(
+                              context,
+                              colorScheme,
+                              childReply.content,
+                              childReply.replyControl,
+                            ),
                           ],
-                          TextSpan(
-                            text: childReply.root == childReply.parent
-                                ? ': '
-                                : childReply.mid == upMid
-                                ? ''
-                                : ' ',
-                          ),
-                          _buildMessage(
-                            context,
-                            colorScheme,
-                            childReply.content,
-                            childReply.replyControl,
-                          ),
-                        ],
+                        ),
                       ),
                     ),
                   ),
