@@ -22,7 +22,7 @@ class FawkesReply extends $pb.GeneratedMessage {
     $core.String? ff,
     $core.String? dd,
   }) {
-    final result = FawkesReply._();
+    final result = create();
     if (config != null) result.config = config;
     if (ff != null) result.ff = ff;
     if (dd != null) result.dd = dd;
@@ -33,16 +33,16 @@ class FawkesReply extends $pb.GeneratedMessage {
 
   factory FawkesReply.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FawkesReply()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FawkesReply.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FawkesReply()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'FawkesReply',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.metadata.fawkes'),
-      createEmptyInstance: FawkesReply.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'config')
     ..aOS(2, _omitFieldNames ? '' : 'ff')
     ..aOS(3, _omitFieldNames ? '' : 'dd')
@@ -59,15 +59,12 @@ class FawkesReply extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use FawkesReply() / FawkesReply.new instead')
   static FawkesReply create() => FawkesReply._();
-  static $pb.GeneratedMessage $_createMessage() => FawkesReply._();
   @$core.override
-  FawkesReply createEmptyInstance() => FawkesReply._();
+  FawkesReply createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static FawkesReply getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FawkesReply>(
-          FawkesReply.$_createMessage);
+  static FawkesReply getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<FawkesReply>(create);
   static FawkesReply? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -104,7 +101,7 @@ class FawkesReq extends $pb.GeneratedMessage {
     $core.String? env,
     $core.String? sessionId,
   }) {
-    final result = FawkesReq._();
+    final result = create();
     if (appkey != null) result.appkey = appkey;
     if (env != null) result.env = env;
     if (sessionId != null) result.sessionId = sessionId;
@@ -115,16 +112,16 @@ class FawkesReq extends $pb.GeneratedMessage {
 
   factory FawkesReq.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FawkesReq()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FawkesReq.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FawkesReq()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'FawkesReq',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.metadata.fawkes'),
-      createEmptyInstance: FawkesReq.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'appkey')
     ..aOS(2, _omitFieldNames ? '' : 'env')
     ..aOS(3, _omitFieldNames ? '' : 'sessionId')
@@ -140,14 +137,12 @@ class FawkesReq extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use FawkesReq() / FawkesReq.new instead')
   static FawkesReq create() => FawkesReq._();
-  static $pb.GeneratedMessage $_createMessage() => FawkesReq._();
   @$core.override
-  FawkesReq createEmptyInstance() => FawkesReq._();
+  FawkesReq createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static FawkesReq getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<FawkesReq>(FawkesReq.$_createMessage);
+  static FawkesReq getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FawkesReq>(create);
   static FawkesReq? _defaultInstance;
 
   @$pb.TagNumber(1)

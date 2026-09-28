@@ -7,13 +7,25 @@ Widget tabBarView({
   required List<Widget> children,
   TabController? controller,
   HitTestBehavior hitTestBehavior = .opaque,
-}) => TabBarView(
-  controller: controller,
-  physics: tabBarScrollPhysics,
-  hitTestBehavior: hitTestBehavior,
-  horizontalDragGestureRecognizer: CustomHorizontalDragGestureRecognizer.new,
-  children: children,
-);
+  // M8-20：false 时禁止鼠标左右拖拽切 Tab（仅点击 TabBar 切换）。
+  bool enableDrag = true,
+}) {
+  if (!enableDrag) {
+    return TabBarView(
+      controller: controller,
+      physics: const NeverScrollableScrollPhysics(),
+      hitTestBehavior: hitTestBehavior,
+      children: children,
+    );
+  }
+  return TabBarView(
+    controller: controller,
+    physics: tabBarScrollPhysics,
+    hitTestBehavior: hitTestBehavior,
+    horizontalDragGestureRecognizer: CustomHorizontalDragGestureRecognizer.new,
+    children: children,
+  );
+}
 
 SpringDescription kSpringDescription = _customSpringDescription();
 

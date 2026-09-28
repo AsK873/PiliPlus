@@ -1,3 +1,4 @@
+import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/common/widgets/flutter/refresh_indicator.dart';
 import 'package:PiliPlus/common/widgets/loading_widget/http_error.dart';
 import 'package:PiliPlus/http/loading_state.dart';
@@ -10,6 +11,7 @@ import 'package:PiliPlus/pages/later/widgets/video_card_h_later.dart';
 import 'package:PiliPlus/utils/extension/get_ext.dart';
 import 'package:PiliPlus/utils/grid.dart';
 import 'package:PiliPlus/utils/page_utils.dart';
+import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:get/get.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -51,10 +53,14 @@ class _LaterViewChildPageState extends State<LaterViewChildPage>
           SliverPadding(
             padding: EdgeInsets.only(
               top: 7,
-              bottom: MediaQuery.viewPaddingOf(context).bottom + 85,
+              bottom: PlatformUtils.isDesktop
+                  ? 24
+                  : MediaQuery.viewPaddingOf(context).bottom + 85,
             ),
-            sliver: Obx(
-              () => _buildBody(_laterController.loadingState.value),
+            // M5：桌面内容限宽居中。
+            sliver: desktopLimitSliver(
+              Obx(() => _buildBody(_laterController.loadingState.value)),
+              maxWidth: 1280,
             ),
           ),
         ],
@@ -74,32 +80,34 @@ class _LaterViewChildPageState extends State<LaterViewChildPage>
                     _laterController.onLoadMore();
                   }
                   final videoItem = response[index];
-                  return VideoCardHLater(
-                    index: index,
-                    videoItem: videoItem,
-                    ctr: _laterController,
-                    onViewLater: (cid) {
-                      PageUtils.toVideoPage(
-                        bvid: videoItem.bvid,
-                        cid: cid,
-                        cover: videoItem.pic,
-                        title: videoItem.title,
-                        dimension: videoItem.dimension,
-                        extraArguments: _baseCtr.isPlayAll.value
-                            ? {
-                                'oid': videoItem.aid,
-                                'sourceType': SourceType.watchLater,
-                                'count': _laterController
-                                    .baseCtr
-                                    .counts[LaterViewType.all.index],
-                                'favTitle': '稍后再看',
-                                'mediaId': _laterController.mid,
-                                'desc': _laterController.asc.value,
-                                'isContinuePlaying': index != 0,
-                              }
-                            : const {'viewLater': true},
-                      );
-                    },
+                  return desktopCard(
+                    VideoCardHLater(
+                      index: index,
+                      videoItem: videoItem,
+                      ctr: _laterController,
+                      onViewLater: (cid) {
+                        PageUtils.toVideoPage(
+                          bvid: videoItem.bvid,
+                          cid: cid,
+                          cover: videoItem.pic,
+                          title: videoItem.title,
+                          dimension: videoItem.dimension,
+                          extraArguments: _baseCtr.isPlayAll.value
+                              ? {
+                                  'oid': videoItem.aid,
+                                  'sourceType': SourceType.watchLater,
+                                  'count': _laterController
+                                      .baseCtr
+                                      .counts[LaterViewType.all.index],
+                                  'favTitle': '稍后再看',
+                                  'mediaId': _laterController.mid,
+                                  'desc': _laterController.asc.value,
+                                  'isContinuePlaying': index != 0,
+                                }
+                              : const {'viewLater': true},
+                        );
+                      },
+                    ),
                   );
                 },
                 itemCount: response.length,

@@ -1,3 +1,4 @@
+import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/common/widgets/flutter/list_tile.dart';
 import 'package:PiliPlus/common/widgets/flutter/refresh_indicator.dart';
 import 'package:PiliPlus/common/widgets/keep_alive_wrapper.dart';
@@ -10,6 +11,7 @@ import 'package:PiliPlus/models_new/bubble/dyn_list.dart';
 import 'package:PiliPlus/pages/bubble/controller.dart';
 import 'package:PiliPlus/utils/extension/scroll_controller_ext.dart';
 import 'package:PiliPlus/utils/grid.dart';
+import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:collection/collection.dart';
 import 'package:get/get.dart';
 import 'package:material_ui/material_ui.dart'
@@ -60,9 +62,13 @@ class _BubblePageState extends State<BubblePage>
         controller: _controller.scrollController,
         slivers: [
           SliverPadding(
-            padding: EdgeInsets.only(bottom: padding.bottom + 100),
-            sliver: Obx(
-              () => _buildBody(_controller.loadingState.value),
+            padding: EdgeInsets.only(
+              bottom: PlatformUtils.isDesktop ? 24 : padding.bottom + 100,
+            ),
+            // M8：桌面内容限宽居中（小站动态列表）。
+            sliver: desktopLimitSliver(
+              Obx(() => _buildBody(_controller.loadingState.value)),
+              maxWidth: 1280,
             ),
           ),
         ],

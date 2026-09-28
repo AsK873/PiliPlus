@@ -26,7 +26,7 @@ class ItemWHRatio extends $pb.GeneratedMessage {
     $core.int? width,
     $core.int? height,
   }) {
-    final result = ItemWHRatio._();
+    final result = create();
     if (ratio != null) result.ratio = ratio;
     if (width != null) result.width = width;
     if (height != null) result.height = height;
@@ -37,16 +37,16 @@ class ItemWHRatio extends $pb.GeneratedMessage {
 
   factory ItemWHRatio.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ItemWHRatio()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory ItemWHRatio.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ItemWHRatio()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'ItemWHRatio',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.dynamic.common'),
-      createEmptyInstance: ItemWHRatio.$_createMessage)
+      createEmptyInstance: create)
     ..aE<WHRatio>(1, _omitFieldNames ? '' : 'ratio', enumValues: WHRatio.values)
     ..aI(2, _omitFieldNames ? '' : 'width')
     ..aI(3, _omitFieldNames ? '' : 'height')
@@ -63,15 +63,12 @@ class ItemWHRatio extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use ItemWHRatio() / ItemWHRatio.new instead')
   static ItemWHRatio create() => ItemWHRatio._();
-  static $pb.GeneratedMessage $_createMessage() => ItemWHRatio._();
   @$core.override
-  ItemWHRatio createEmptyInstance() => ItemWHRatio._();
+  ItemWHRatio createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static ItemWHRatio getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ItemWHRatio>(
-          ItemWHRatio.$_createMessage);
+  static ItemWHRatio getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ItemWHRatio>(create);
   static ItemWHRatio? _defaultInstance;
 
   @$pb.TagNumber(1)

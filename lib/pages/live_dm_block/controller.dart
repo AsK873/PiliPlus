@@ -46,7 +46,9 @@ class LiveDmBlockController extends GetxController
   void _updateLiveRoomRules() {
     if (_isLoaded && _controller != null) {
       _controller!.updateBlockRules(
-        keywordList.rawValue,
+        // M0 兼容垫片：作者的 getx fork 有未发布 rawValue；RxList 本身实现 List，
+        // 直接传 `keywordList` 即同一底层列表（读取语义等价）。
+        keywordList,
         shieldUserList.map((e) => e.uid).toSet(),
       );
     }

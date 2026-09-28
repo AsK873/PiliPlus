@@ -1,4 +1,5 @@
 import 'package:PiliPlus/common/widgets/flutter/refresh_indicator.dart';
+import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/common/widgets/loading_widget/http_error.dart';
 import 'package:PiliPlus/common/widgets/scaffold/simple_scaffold.dart';
 import 'package:PiliPlus/common/widgets/view_sliver_safe_area.dart';
@@ -30,8 +31,9 @@ class _SubPageState extends State<SubPage> with GridMixin {
           physics: const AlwaysScrollableScrollPhysics(),
           slivers: [
             ViewSliverSafeArea(
-              sliver: Obx(
-                () => _buildBody(_subController.loadingState.value),
+              sliver: desktopLimitSliver(
+                Obx(() => _buildBody(_subController.loadingState.value)),
+                maxWidth: 1280,
               ),
             ),
           ],
@@ -52,9 +54,11 @@ class _SubPageState extends State<SubPage> with GridMixin {
                     _subController.onLoadMore();
                   }
                   final item = response[index];
-                  return SubItem(
-                    item: item,
-                    cancelSub: () => _subController.cancelSub(item),
+                  return desktopCard(
+                    SubItem(
+                      item: item,
+                      cancelSub: () => _subController.cancelSub(item),
+                    ),
                   );
                 },
                 itemCount: response.length,

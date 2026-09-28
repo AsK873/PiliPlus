@@ -1,3 +1,4 @@
+import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/models/common/fav_order_type.dart';
 import 'package:PiliPlus/models_new/fav/fav_detail/data.dart';
 import 'package:PiliPlus/models_new/fav/fav_detail/media.dart';
@@ -87,20 +88,25 @@ class _FavSearchPageState
 
   @override
   Widget buildList(List<FavDetailItemModel> list) {
-    return SliverGrid.builder(
-      gridDelegate: gridDelegate,
-      itemBuilder: (context, index) {
-        if (index == list.length - 1) {
-          controller.onLoadMore();
-        }
-        final item = list[index];
-        return FavVideoCardH(
-          item: item,
-          index: index,
-          ctr: controller,
-        );
-      },
-      itemCount: list.length,
+    return desktopLimitSliver(
+      SliverGrid.builder(
+        gridDelegate: gridDelegate,
+        itemBuilder: (context, index) {
+          if (index == list.length - 1) {
+            controller.onLoadMore();
+          }
+          final item = list[index];
+          return desktopCard(
+            FavVideoCardH(
+              item: item,
+              index: index,
+              ctr: controller,
+            ),
+          );
+        },
+        itemCount: list.length,
+      ),
+      maxWidth: 1280,
     );
   }
 }

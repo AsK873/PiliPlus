@@ -32,7 +32,7 @@ class Author extends $pb.GeneratedMessage {
     $core.String? avatar,
     FollowRelation? relation,
   }) {
-    final result = Author._();
+    final result = create();
     if (mid != null) result.mid = mid;
     if (name != null) result.name = name;
     if (avatar != null) result.avatar = avatar;
@@ -44,21 +44,21 @@ class Author extends $pb.GeneratedMessage {
 
   factory Author.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Author()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory Author.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Author()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'Author',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: Author.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'mid')
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..aOS(3, _omitFieldNames ? '' : 'avatar')
     ..aOM<FollowRelation>(4, _omitFieldNames ? '' : 'relation',
-        subBuilder: FollowRelation.$_createMessage)
+        subBuilder: FollowRelation.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -71,14 +71,12 @@ class Author extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use Author() / Author.new instead')
   static Author create() => Author._();
-  static $pb.GeneratedMessage $_createMessage() => Author._();
   @$core.override
-  Author createEmptyInstance() => Author._();
+  Author createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static Author getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<Author>(Author.$_createMessage);
+  static Author getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Author>(create);
   static Author? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -125,7 +123,7 @@ class BKArcDetailsReq extends $pb.GeneratedMessage {
     $core.Iterable<PlayItem>? items,
     $2.PlayerArgs? playerArgs,
   }) {
-    final result = BKArcDetailsReq._();
+    final result = create();
     if (items != null) result.items.addAll(items);
     if (playerArgs != null) result.playerArgs = playerArgs;
     return result;
@@ -135,20 +133,20 @@ class BKArcDetailsReq extends $pb.GeneratedMessage {
 
   factory BKArcDetailsReq.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      BKArcDetailsReq()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory BKArcDetailsReq.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      BKArcDetailsReq()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'BKArcDetailsReq',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: BKArcDetailsReq.$_createMessage)
+      createEmptyInstance: create)
     ..pPM<PlayItem>(1, _omitFieldNames ? '' : 'items',
-        subBuilder: PlayItem.$_createMessage)
+        subBuilder: PlayItem.create)
     ..aOM<$2.PlayerArgs>(2, _omitFieldNames ? '' : 'playerArgs',
-        subBuilder: $2.PlayerArgs.$_createMessage)
+        subBuilder: $2.PlayerArgs.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -162,15 +160,12 @@ class BKArcDetailsReq extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use BKArcDetailsReq() / BKArcDetailsReq.new instead')
   static BKArcDetailsReq create() => BKArcDetailsReq._();
-  static $pb.GeneratedMessage $_createMessage() => BKArcDetailsReq._();
   @$core.override
-  BKArcDetailsReq createEmptyInstance() => BKArcDetailsReq._();
+  BKArcDetailsReq createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static BKArcDetailsReq getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BKArcDetailsReq>(
-          BKArcDetailsReq.$_createMessage);
+  static BKArcDetailsReq getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<BKArcDetailsReq>(create);
   static BKArcDetailsReq? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -192,7 +187,7 @@ class BKArcDetailsResp extends $pb.GeneratedMessage {
   factory BKArcDetailsResp({
     $core.Iterable<DetailItem>? list,
   }) {
-    final result = BKArcDetailsResp._();
+    final result = create();
     if (list != null) result.list.addAll(list);
     return result;
   }
@@ -201,18 +196,18 @@ class BKArcDetailsResp extends $pb.GeneratedMessage {
 
   factory BKArcDetailsResp.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      BKArcDetailsResp()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory BKArcDetailsResp.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      BKArcDetailsResp()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'BKArcDetailsResp',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: BKArcDetailsResp.$_createMessage)
+      createEmptyInstance: create)
     ..pPM<DetailItem>(1, _omitFieldNames ? '' : 'list',
-        subBuilder: DetailItem.$_createMessage)
+        subBuilder: DetailItem.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -226,15 +221,12 @@ class BKArcDetailsResp extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use BKArcDetailsResp() / BKArcDetailsResp.new instead')
   static BKArcDetailsResp create() => BKArcDetailsResp._();
-  static $pb.GeneratedMessage $_createMessage() => BKArcDetailsResp._();
   @$core.override
-  BKArcDetailsResp createEmptyInstance() => BKArcDetailsResp._();
+  BKArcDetailsResp createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static BKArcDetailsResp getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BKArcDetailsResp>(
-          BKArcDetailsResp.$_createMessage);
+  static BKArcDetailsResp getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<BKArcDetailsResp>(create);
   static BKArcDetailsResp? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -249,7 +241,7 @@ class BKArcPart extends $pb.GeneratedMessage {
     $fixnum.Int64? duration,
     $core.int? page,
   }) {
-    final result = BKArcPart._();
+    final result = create();
     if (oid != null) result.oid = oid;
     if (subId != null) result.subId = subId;
     if (title != null) result.title = title;
@@ -262,16 +254,16 @@ class BKArcPart extends $pb.GeneratedMessage {
 
   factory BKArcPart.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      BKArcPart()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory BKArcPart.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      BKArcPart()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'BKArcPart',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: BKArcPart.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'oid')
     ..aInt64(2, _omitFieldNames ? '' : 'subId')
     ..aOS(3, _omitFieldNames ? '' : 'title')
@@ -289,14 +281,12 @@ class BKArcPart extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use BKArcPart() / BKArcPart.new instead')
   static BKArcPart create() => BKArcPart._();
-  static $pb.GeneratedMessage $_createMessage() => BKArcPart._();
   @$core.override
-  BKArcPart createEmptyInstance() => BKArcPart._();
+  BKArcPart createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static BKArcPart getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<BKArcPart>(BKArcPart.$_createMessage);
+  static BKArcPart getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BKArcPart>(create);
   static BKArcPart? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -349,7 +339,7 @@ class BKArcRights extends $pb.GeneratedMessage {
   factory BKArcRights({
     $core.int? noReprint,
   }) {
-    final result = BKArcRights._();
+    final result = create();
     if (noReprint != null) result.noReprint = noReprint;
     return result;
   }
@@ -358,16 +348,16 @@ class BKArcRights extends $pb.GeneratedMessage {
 
   factory BKArcRights.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      BKArcRights()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory BKArcRights.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      BKArcRights()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'BKArcRights',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: BKArcRights.$_createMessage)
+      createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'noReprint')
     ..hasRequiredFields = false;
 
@@ -382,15 +372,12 @@ class BKArcRights extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use BKArcRights() / BKArcRights.new instead')
   static BKArcRights create() => BKArcRights._();
-  static $pb.GeneratedMessage $_createMessage() => BKArcRights._();
   @$core.override
-  BKArcRights createEmptyInstance() => BKArcRights._();
+  BKArcRights createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static BKArcRights getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BKArcRights>(
-          BKArcRights.$_createMessage);
+  static BKArcRights getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<BKArcRights>(create);
   static BKArcRights? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -417,7 +404,7 @@ class BKArchive extends $pb.GeneratedMessage {
     $core.int? copyright,
     BKArcRights? rights,
   }) {
-    final result = BKArchive._();
+    final result = create();
     if (oid != null) result.oid = oid;
     if (title != null) result.title = title;
     if (cover != null) result.cover = cover;
@@ -436,16 +423,16 @@ class BKArchive extends $pb.GeneratedMessage {
 
   factory BKArchive.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      BKArchive()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory BKArchive.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      BKArchive()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'BKArchive',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: BKArchive.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'oid')
     ..aOS(2, _omitFieldNames ? '' : 'title')
     ..aOS(3, _omitFieldNames ? '' : 'cover')
@@ -457,7 +444,7 @@ class BKArchive extends $pb.GeneratedMessage {
     ..aOS(9, _omitFieldNames ? '' : 'displayedOid')
     ..aI(10, _omitFieldNames ? '' : 'copyright')
     ..aOM<BKArcRights>(11, _omitFieldNames ? '' : 'rights',
-        subBuilder: BKArcRights.$_createMessage)
+        subBuilder: BKArcRights.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -470,14 +457,12 @@ class BKArchive extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use BKArchive() / BKArchive.new instead')
   static BKArchive create() => BKArchive._();
-  static $pb.GeneratedMessage $_createMessage() => BKArchive._();
   @$core.override
-  BKArchive createEmptyInstance() => BKArchive._();
+  BKArchive createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static BKArchive getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<BKArchive>(BKArchive.$_createMessage);
+  static BKArchive getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BKArchive>(create);
   static BKArchive? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -596,7 +581,7 @@ class BKStat extends $pb.GeneratedMessage {
     $core.bool? useViewVt,
     $core.String? viewVtText,
   }) {
-    final result = BKStat._();
+    final result = create();
     if (like != null) result.like = like;
     if (coin != null) result.coin = coin;
     if (favourite != null) result.favourite = favourite;
@@ -615,16 +600,16 @@ class BKStat extends $pb.GeneratedMessage {
 
   factory BKStat.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      BKStat()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory BKStat.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      BKStat()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'BKStat',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: BKStat.$_createMessage)
+      createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'like')
     ..aI(2, _omitFieldNames ? '' : 'coin')
     ..aI(3, _omitFieldNames ? '' : 'favourite')
@@ -648,14 +633,12 @@ class BKStat extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use BKStat() / BKStat.new instead')
   static BKStat create() => BKStat._();
-  static $pb.GeneratedMessage $_createMessage() => BKStat._();
   @$core.override
-  BKStat createEmptyInstance() => BKStat._();
+  BKStat createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static BKStat getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<BKStat>(BKStat.$_createMessage);
+  static BKStat getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BKStat>(create);
   static BKStat? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -767,7 +750,7 @@ class CardModule extends $pb.GeneratedMessage {
     PkcmArchive? moduleArchive,
     PkcmCenterButton? moduleCbtn,
   }) {
-    final result = CardModule._();
+    final result = create();
     if (moduleType != null) result.moduleType = moduleType;
     if (moduleHeader != null) result.moduleHeader = moduleHeader;
     if (moduleArchive != null) result.moduleArchive = moduleArchive;
@@ -779,10 +762,10 @@ class CardModule extends $pb.GeneratedMessage {
 
   factory CardModule.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      CardModule()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory CardModule.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      CardModule()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static const $core.Map<$core.int, CardModule_Module> _CardModule_ModuleByTag =
       {
@@ -795,16 +778,16 @@ class CardModule extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'CardModule',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: CardModule.$_createMessage)
+      createEmptyInstance: create)
     ..oo(0, [2, 3, 4])
     ..aE<CardModuleType>(1, _omitFieldNames ? '' : 'moduleType',
         enumValues: CardModuleType.values)
     ..aOM<PkcmHeader>(2, _omitFieldNames ? '' : 'moduleHeader',
-        subBuilder: PkcmHeader.$_createMessage)
+        subBuilder: PkcmHeader.create)
     ..aOM<PkcmArchive>(3, _omitFieldNames ? '' : 'moduleArchive',
-        subBuilder: PkcmArchive.$_createMessage)
+        subBuilder: PkcmArchive.create)
     ..aOM<PkcmCenterButton>(4, _omitFieldNames ? '' : 'moduleCbtn',
-        subBuilder: PkcmCenterButton.$_createMessage)
+        subBuilder: PkcmCenterButton.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -817,14 +800,12 @@ class CardModule extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use CardModule() / CardModule.new instead')
   static CardModule create() => CardModule._();
-  static $pb.GeneratedMessage $_createMessage() => CardModule._();
   @$core.override
-  CardModule createEmptyInstance() => CardModule._();
+  CardModule createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static CardModule getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<CardModule>(CardModule.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<CardModule>(create);
   static CardModule? _defaultInstance;
 
   @$pb.TagNumber(2)
@@ -884,7 +865,7 @@ class ClickReq extends $pb.GeneratedMessage {
     $fixnum.Int64? sid,
     ClickReq_ClickAction? action,
   }) {
-    final result = ClickReq._();
+    final result = create();
     if (sid != null) result.sid = sid;
     if (action != null) result.action = action;
     return result;
@@ -894,16 +875,16 @@ class ClickReq extends $pb.GeneratedMessage {
 
   factory ClickReq.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ClickReq()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory ClickReq.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ClickReq()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'ClickReq',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: ClickReq.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'sid')
     ..aE<ClickReq_ClickAction>(2, _omitFieldNames ? '' : 'action',
         enumValues: ClickReq_ClickAction.values)
@@ -919,14 +900,12 @@ class ClickReq extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use ClickReq() / ClickReq.new instead')
   static ClickReq create() => ClickReq._();
-  static $pb.GeneratedMessage $_createMessage() => ClickReq._();
   @$core.override
-  ClickReq createEmptyInstance() => ClickReq._();
+  ClickReq createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static ClickReq getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ClickReq>(ClickReq.$_createMessage);
+  static ClickReq getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ClickReq>(create);
   static ClickReq? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -949,22 +928,22 @@ class ClickReq extends $pb.GeneratedMessage {
 }
 
 class ClickResp extends $pb.GeneratedMessage {
-  factory ClickResp() => ClickResp._();
+  factory ClickResp() => create();
 
   ClickResp._();
 
   factory ClickResp.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ClickResp()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory ClickResp.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ClickResp()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'ClickResp',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: ClickResp.$_createMessage)
+      createEmptyInstance: create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -977,14 +956,12 @@ class ClickResp extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use ClickResp() / ClickResp.new instead')
   static ClickResp create() => ClickResp._();
-  static $pb.GeneratedMessage $_createMessage() => ClickResp._();
   @$core.override
-  ClickResp createEmptyInstance() => ClickResp._();
+  ClickResp createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static ClickResp getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ClickResp>(ClickResp.$_createMessage);
+  static ClickResp getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ClickResp>(create);
   static ClickResp? _defaultInstance;
 }
 
@@ -994,7 +971,7 @@ class CoinAddReq extends $pb.GeneratedMessage {
     $core.int? num,
     $core.bool? thumbUp,
   }) {
-    final result = CoinAddReq._();
+    final result = create();
     if (item != null) result.item = item;
     if (num != null) result.num = num;
     if (thumbUp != null) result.thumbUp = thumbUp;
@@ -1005,18 +982,18 @@ class CoinAddReq extends $pb.GeneratedMessage {
 
   factory CoinAddReq.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      CoinAddReq()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory CoinAddReq.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      CoinAddReq()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'CoinAddReq',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: CoinAddReq.$_createMessage)
+      createEmptyInstance: create)
     ..aOM<PlayItem>(1, _omitFieldNames ? '' : 'item',
-        subBuilder: PlayItem.$_createMessage)
+        subBuilder: PlayItem.create)
     ..aI(2, _omitFieldNames ? '' : 'num')
     ..aOB(3, _omitFieldNames ? '' : 'thumbUp')
     ..hasRequiredFields = false;
@@ -1031,14 +1008,12 @@ class CoinAddReq extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use CoinAddReq() / CoinAddReq.new instead')
   static CoinAddReq create() => CoinAddReq._();
-  static $pb.GeneratedMessage $_createMessage() => CoinAddReq._();
   @$core.override
-  CoinAddReq createEmptyInstance() => CoinAddReq._();
+  CoinAddReq createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static CoinAddReq getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<CoinAddReq>(CoinAddReq.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<CoinAddReq>(create);
   static CoinAddReq? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -1075,7 +1050,7 @@ class CoinAddResp extends $pb.GeneratedMessage {
   factory CoinAddResp({
     $core.String? message,
   }) {
-    final result = CoinAddResp._();
+    final result = create();
     if (message != null) result.message = message;
     return result;
   }
@@ -1084,16 +1059,16 @@ class CoinAddResp extends $pb.GeneratedMessage {
 
   factory CoinAddResp.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      CoinAddResp()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory CoinAddResp.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      CoinAddResp()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'CoinAddResp',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: CoinAddResp.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'message')
     ..hasRequiredFields = false;
 
@@ -1108,15 +1083,12 @@ class CoinAddResp extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use CoinAddResp() / CoinAddResp.new instead')
   static CoinAddResp create() => CoinAddResp._();
-  static $pb.GeneratedMessage $_createMessage() => CoinAddResp._();
   @$core.override
-  CoinAddResp createEmptyInstance() => CoinAddResp._();
+  CoinAddResp createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static CoinAddResp getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CoinAddResp>(
-          CoinAddResp.$_createMessage);
+  static CoinAddResp getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<CoinAddResp>(create);
   static CoinAddResp? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -1142,7 +1114,7 @@ class DashItem extends $pb.GeneratedMessage {
     $core.String? md5,
     $fixnum.Int64? size,
   }) {
-    final result = DashItem._();
+    final result = create();
     if (id != null) result.id = id;
     if (baseUrl != null) result.baseUrl = baseUrl;
     if (backupUrl != null) result.backupUrl.addAll(backupUrl);
@@ -1160,16 +1132,16 @@ class DashItem extends $pb.GeneratedMessage {
 
   factory DashItem.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      DashItem()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory DashItem.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      DashItem()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'DashItem',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: DashItem.$_createMessage)
+      createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'baseUrl')
     ..pPS(3, _omitFieldNames ? '' : 'backupUrl')
@@ -1177,7 +1149,7 @@ class DashItem extends $pb.GeneratedMessage {
     ..aOS(5, _omitFieldNames ? '' : 'mimeType')
     ..aOS(6, _omitFieldNames ? '' : 'codecs')
     ..aOM<DashSegmentBase>(12, _omitFieldNames ? '' : 'segmentBase',
-        subBuilder: DashSegmentBase.$_createMessage)
+        subBuilder: DashSegmentBase.create)
     ..aI(13, _omitFieldNames ? '' : 'codecid')
     ..aOS(14, _omitFieldNames ? '' : 'md5')
     ..aInt64(15, _omitFieldNames ? '' : 'size')
@@ -1193,14 +1165,12 @@ class DashItem extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use DashItem() / DashItem.new instead')
   static DashItem create() => DashItem._();
-  static $pb.GeneratedMessage $_createMessage() => DashItem._();
   @$core.override
-  DashItem createEmptyInstance() => DashItem._();
+  DashItem createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static DashItem getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<DashItem>(DashItem.$_createMessage);
+  static DashItem getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DashItem>(create);
   static DashItem? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -1295,7 +1265,7 @@ class DashSegmentBase extends $pb.GeneratedMessage {
     $core.String? initialization,
     $core.String? indexRange,
   }) {
-    final result = DashSegmentBase._();
+    final result = create();
     if (initialization != null) result.initialization = initialization;
     if (indexRange != null) result.indexRange = indexRange;
     return result;
@@ -1305,16 +1275,16 @@ class DashSegmentBase extends $pb.GeneratedMessage {
 
   factory DashSegmentBase.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      DashSegmentBase()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory DashSegmentBase.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      DashSegmentBase()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'DashSegmentBase',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: DashSegmentBase.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'initialization')
     ..aOS(2, _omitFieldNames ? '' : 'indexRange')
     ..hasRequiredFields = false;
@@ -1330,15 +1300,12 @@ class DashSegmentBase extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use DashSegmentBase() / DashSegmentBase.new instead')
   static DashSegmentBase create() => DashSegmentBase._();
-  static $pb.GeneratedMessage $_createMessage() => DashSegmentBase._();
   @$core.override
-  DashSegmentBase createEmptyInstance() => DashSegmentBase._();
+  DashSegmentBase createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static DashSegmentBase getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DashSegmentBase>(
-          DashSegmentBase.$_createMessage);
+  static DashSegmentBase getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<DashSegmentBase>(create);
   static DashSegmentBase? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -1378,7 +1345,7 @@ class DetailItem extends $pb.GeneratedMessage {
     $3.DeviceType? deviceType,
     FavFolder? ugcSeasonInfo,
   }) {
-    final result = DetailItem._();
+    final result = create();
     if (item != null) result.item = item;
     if (arc != null) result.arc = arc;
     if (parts != null) result.parts.addAll(parts);
@@ -1401,26 +1368,24 @@ class DetailItem extends $pb.GeneratedMessage {
 
   factory DetailItem.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      DetailItem()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory DetailItem.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      DetailItem()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'DetailItem',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: DetailItem.$_createMessage)
+      createEmptyInstance: create)
     ..aOM<PlayItem>(1, _omitFieldNames ? '' : 'item',
-        subBuilder: PlayItem.$_createMessage)
+        subBuilder: PlayItem.create)
     ..aOM<BKArchive>(2, _omitFieldNames ? '' : 'arc',
-        subBuilder: BKArchive.$_createMessage)
+        subBuilder: BKArchive.create)
     ..pPM<BKArcPart>(3, _omitFieldNames ? '' : 'parts',
-        subBuilder: BKArcPart.$_createMessage)
-    ..aOM<Author>(4, _omitFieldNames ? '' : 'owner',
-        subBuilder: Author.$_createMessage)
-    ..aOM<BKStat>(5, _omitFieldNames ? '' : 'stat',
-        subBuilder: BKStat.$_createMessage)
+        subBuilder: BKArcPart.create)
+    ..aOM<Author>(4, _omitFieldNames ? '' : 'owner', subBuilder: Author.create)
+    ..aOM<BKStat>(5, _omitFieldNames ? '' : 'stat', subBuilder: BKStat.create)
     ..aInt64(6, _omitFieldNames ? '' : 'lastPart')
     ..aInt64(7, _omitFieldNames ? '' : 'progress')
     ..aI(8, _omitFieldNames ? '' : 'playable')
@@ -1429,17 +1394,17 @@ class DetailItem extends $pb.GeneratedMessage {
         entryClassName: 'DetailItem.PlayerInfoEntry',
         keyFieldType: $pb.PbFieldType.O6,
         valueFieldType: $pb.PbFieldType.OM,
-        valueCreator: PlayInfo.$_createMessage,
+        valueCreator: PlayInfo.create,
         valueDefaultOrMaker: PlayInfo.getDefault,
         packageName: const $pb.PackageName('bilibili.app.listener.v1'))
     ..aOM<PlayItem>(11, _omitFieldNames ? '' : 'associatedItem',
-        subBuilder: PlayItem.$_createMessage)
+        subBuilder: PlayItem.create)
     ..aInt64(12, _omitFieldNames ? '' : 'lastPlayTime')
     ..aOS(13, _omitFieldNames ? '' : 'historyTag')
     ..aOM<$3.DeviceType>(14, _omitFieldNames ? '' : 'deviceType',
-        subBuilder: $3.DeviceType.$_createMessage)
+        subBuilder: $3.DeviceType.create)
     ..aOM<FavFolder>(15, _omitFieldNames ? '' : 'ugcSeasonInfo',
-        subBuilder: FavFolder.$_createMessage)
+        subBuilder: FavFolder.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1452,14 +1417,12 @@ class DetailItem extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use DetailItem() / DetailItem.new instead')
   static DetailItem create() => DetailItem._();
-  static $pb.GeneratedMessage $_createMessage() => DetailItem._();
   @$core.override
-  DetailItem createEmptyInstance() => DetailItem._();
+  DetailItem createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static DetailItem getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<DetailItem>(DetailItem.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<DetailItem>(create);
   static DetailItem? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -1605,7 +1568,7 @@ class EventReq extends $pb.GeneratedMessage {
     EventReq_EventType? eventType,
     PlayItem? item,
   }) {
-    final result = EventReq._();
+    final result = create();
     if (eventType != null) result.eventType = eventType;
     if (item != null) result.item = item;
     return result;
@@ -1615,20 +1578,20 @@ class EventReq extends $pb.GeneratedMessage {
 
   factory EventReq.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      EventReq()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory EventReq.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      EventReq()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'EventReq',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: EventReq.$_createMessage)
+      createEmptyInstance: create)
     ..aE<EventReq_EventType>(1, _omitFieldNames ? '' : 'eventType',
         enumValues: EventReq_EventType.values)
     ..aOM<PlayItem>(2, _omitFieldNames ? '' : 'item',
-        subBuilder: PlayItem.$_createMessage)
+        subBuilder: PlayItem.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1641,14 +1604,12 @@ class EventReq extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use EventReq() / EventReq.new instead')
   static EventReq create() => EventReq._();
-  static $pb.GeneratedMessage $_createMessage() => EventReq._();
   @$core.override
-  EventReq createEmptyInstance() => EventReq._();
+  EventReq createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static EventReq getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<EventReq>(EventReq.$_createMessage);
+  static EventReq getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EventReq>(create);
   static EventReq? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -1673,22 +1634,22 @@ class EventReq extends $pb.GeneratedMessage {
 }
 
 class EventResp extends $pb.GeneratedMessage {
-  factory EventResp() => EventResp._();
+  factory EventResp() => create();
 
   EventResp._();
 
   factory EventResp.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      EventResp()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory EventResp.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      EventResp()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'EventResp',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: EventResp.$_createMessage)
+      createEmptyInstance: create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1701,14 +1662,12 @@ class EventResp extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use EventResp() / EventResp.new instead')
   static EventResp create() => EventResp._();
-  static $pb.GeneratedMessage $_createMessage() => EventResp._();
   @$core.override
-  EventResp createEmptyInstance() => EventResp._();
+  EventResp createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static EventResp getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<EventResp>(EventResp.$_createMessage);
+  static EventResp getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EventResp>(create);
   static EventResp? _defaultInstance;
 }
 
@@ -1721,7 +1680,7 @@ class EventTracking extends $pb.GeneratedMessage {
     $core.String? entityId,
     $core.String? trackJson,
   }) {
-    final result = EventTracking._();
+    final result = create();
     if (operator != null) result.operator = operator;
     if (batch != null) result.batch = batch;
     if (trackId != null) result.trackId = trackId;
@@ -1735,16 +1694,16 @@ class EventTracking extends $pb.GeneratedMessage {
 
   factory EventTracking.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      EventTracking()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory EventTracking.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      EventTracking()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'EventTracking',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: EventTracking.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'operator')
     ..aOS(2, _omitFieldNames ? '' : 'batch')
     ..aOS(3, _omitFieldNames ? '' : 'trackId')
@@ -1764,15 +1723,12 @@ class EventTracking extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use EventTracking() / EventTracking.new instead')
   static EventTracking create() => EventTracking._();
-  static $pb.GeneratedMessage $_createMessage() => EventTracking._();
   @$core.override
-  EventTracking createEmptyInstance() => EventTracking._();
+  EventTracking createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static EventTracking getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EventTracking>(
-          EventTracking.$_createMessage);
+  static EventTracking getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<EventTracking>(create);
   static EventTracking? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -1853,7 +1809,7 @@ class FavFolder extends $pb.GeneratedMessage {
     $core.bool? useViewVt,
     $core.String? viewVtText,
   }) {
-    final result = FavFolder._();
+    final result = create();
     if (fid != null) result.fid = fid;
     if (folderType != null) result.folderType = folderType;
     if (owner != null) result.owner = owner;
@@ -1881,20 +1837,20 @@ class FavFolder extends $pb.GeneratedMessage {
 
   factory FavFolder.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavFolder()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FavFolder.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavFolder()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'FavFolder',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: FavFolder.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'fid')
     ..aI(2, _omitFieldNames ? '' : 'folderType')
     ..aOM<FavFolderAuthor>(3, _omitFieldNames ? '' : 'owner',
-        subBuilder: FavFolderAuthor.$_createMessage)
+        subBuilder: FavFolderAuthor.create)
     ..aOS(4, _omitFieldNames ? '' : 'name')
     ..aOS(5, _omitFieldNames ? '' : 'cover')
     ..aOS(6, _omitFieldNames ? '' : 'desc')
@@ -1924,14 +1880,12 @@ class FavFolder extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use FavFolder() / FavFolder.new instead')
   static FavFolder create() => FavFolder._();
-  static $pb.GeneratedMessage $_createMessage() => FavFolder._();
   @$core.override
-  FavFolder createEmptyInstance() => FavFolder._();
+  FavFolder createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static FavFolder getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<FavFolder>(FavFolder.$_createMessage);
+  static FavFolder getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FavFolder>(create);
   static FavFolder? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -2123,7 +2077,7 @@ class FavFolderAction extends $pb.GeneratedMessage {
     $core.int? folderType,
     FavFolderAction_Action? action,
   }) {
-    final result = FavFolderAction._();
+    final result = create();
     if (fid != null) result.fid = fid;
     if (folderType != null) result.folderType = folderType;
     if (action != null) result.action = action;
@@ -2134,16 +2088,16 @@ class FavFolderAction extends $pb.GeneratedMessage {
 
   factory FavFolderAction.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavFolderAction()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FavFolderAction.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavFolderAction()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'FavFolderAction',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: FavFolderAction.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'fid')
     ..aI(2, _omitFieldNames ? '' : 'folderType')
     ..aE<FavFolderAction_Action>(3, _omitFieldNames ? '' : 'action',
@@ -2161,15 +2115,12 @@ class FavFolderAction extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use FavFolderAction() / FavFolderAction.new instead')
   static FavFolderAction create() => FavFolderAction._();
-  static $pb.GeneratedMessage $_createMessage() => FavFolderAction._();
   @$core.override
-  FavFolderAction createEmptyInstance() => FavFolderAction._();
+  FavFolderAction createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static FavFolderAction getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FavFolderAction>(
-          FavFolderAction.$_createMessage);
+  static FavFolderAction getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<FavFolderAction>(create);
   static FavFolderAction? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -2205,7 +2156,7 @@ class FavFolderAuthor extends $pb.GeneratedMessage {
     $fixnum.Int64? mid,
     $core.String? name,
   }) {
-    final result = FavFolderAuthor._();
+    final result = create();
     if (mid != null) result.mid = mid;
     if (name != null) result.name = name;
     return result;
@@ -2215,16 +2166,16 @@ class FavFolderAuthor extends $pb.GeneratedMessage {
 
   factory FavFolderAuthor.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavFolderAuthor()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FavFolderAuthor.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavFolderAuthor()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'FavFolderAuthor',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: FavFolderAuthor.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'mid')
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..hasRequiredFields = false;
@@ -2240,15 +2191,12 @@ class FavFolderAuthor extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use FavFolderAuthor() / FavFolderAuthor.new instead')
   static FavFolderAuthor create() => FavFolderAuthor._();
-  static $pb.GeneratedMessage $_createMessage() => FavFolderAuthor._();
   @$core.override
-  FavFolderAuthor createEmptyInstance() => FavFolderAuthor._();
+  FavFolderAuthor createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static FavFolderAuthor getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FavFolderAuthor>(
-          FavFolderAuthor.$_createMessage);
+  static FavFolderAuthor getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<FavFolderAuthor>(create);
   static FavFolderAuthor? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -2277,7 +2225,7 @@ class FavFolderCreateReq extends $pb.GeneratedMessage {
     $core.int? public,
     $core.int? folderType,
   }) {
-    final result = FavFolderCreateReq._();
+    final result = create();
     if (name != null) result.name = name;
     if (desc != null) result.desc = desc;
     if (public != null) result.public = public;
@@ -2289,16 +2237,16 @@ class FavFolderCreateReq extends $pb.GeneratedMessage {
 
   factory FavFolderCreateReq.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavFolderCreateReq()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FavFolderCreateReq.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavFolderCreateReq()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'FavFolderCreateReq',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: FavFolderCreateReq.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'name')
     ..aOS(2, _omitFieldNames ? '' : 'desc')
     ..aI(3, _omitFieldNames ? '' : 'public')
@@ -2316,15 +2264,12 @@ class FavFolderCreateReq extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use FavFolderCreateReq() / FavFolderCreateReq.new instead')
   static FavFolderCreateReq create() => FavFolderCreateReq._();
-  static $pb.GeneratedMessage $_createMessage() => FavFolderCreateReq._();
   @$core.override
-  FavFolderCreateReq createEmptyInstance() => FavFolderCreateReq._();
+  FavFolderCreateReq createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static FavFolderCreateReq getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<FavFolderCreateReq>(
-          FavFolderCreateReq.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<FavFolderCreateReq>(create);
   static FavFolderCreateReq? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -2370,7 +2315,7 @@ class FavFolderCreateResp extends $pb.GeneratedMessage {
     $core.int? folderType,
     $core.String? message,
   }) {
-    final result = FavFolderCreateResp._();
+    final result = create();
     if (fid != null) result.fid = fid;
     if (folderType != null) result.folderType = folderType;
     if (message != null) result.message = message;
@@ -2381,16 +2326,16 @@ class FavFolderCreateResp extends $pb.GeneratedMessage {
 
   factory FavFolderCreateResp.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavFolderCreateResp()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FavFolderCreateResp.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavFolderCreateResp()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'FavFolderCreateResp',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: FavFolderCreateResp.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'fid')
     ..aI(2, _omitFieldNames ? '' : 'folderType')
     ..aOS(3, _omitFieldNames ? '' : 'message')
@@ -2407,16 +2352,12 @@ class FavFolderCreateResp extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core
-      .Deprecated('Use FavFolderCreateResp() / FavFolderCreateResp.new instead')
   static FavFolderCreateResp create() => FavFolderCreateResp._();
-  static $pb.GeneratedMessage $_createMessage() => FavFolderCreateResp._();
   @$core.override
-  FavFolderCreateResp createEmptyInstance() => FavFolderCreateResp._();
+  FavFolderCreateResp createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static FavFolderCreateResp getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<FavFolderCreateResp>(
-          FavFolderCreateResp.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<FavFolderCreateResp>(create);
   static FavFolderCreateResp? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -2452,7 +2393,7 @@ class FavFolderDeleteReq extends $pb.GeneratedMessage {
     $fixnum.Int64? fid,
     $core.int? folderType,
   }) {
-    final result = FavFolderDeleteReq._();
+    final result = create();
     if (fid != null) result.fid = fid;
     if (folderType != null) result.folderType = folderType;
     return result;
@@ -2462,16 +2403,16 @@ class FavFolderDeleteReq extends $pb.GeneratedMessage {
 
   factory FavFolderDeleteReq.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavFolderDeleteReq()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FavFolderDeleteReq.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavFolderDeleteReq()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'FavFolderDeleteReq',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: FavFolderDeleteReq.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'fid')
     ..aI(2, _omitFieldNames ? '' : 'folderType')
     ..hasRequiredFields = false;
@@ -2487,15 +2428,12 @@ class FavFolderDeleteReq extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use FavFolderDeleteReq() / FavFolderDeleteReq.new instead')
   static FavFolderDeleteReq create() => FavFolderDeleteReq._();
-  static $pb.GeneratedMessage $_createMessage() => FavFolderDeleteReq._();
   @$core.override
-  FavFolderDeleteReq createEmptyInstance() => FavFolderDeleteReq._();
+  FavFolderDeleteReq createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static FavFolderDeleteReq getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<FavFolderDeleteReq>(
-          FavFolderDeleteReq.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<FavFolderDeleteReq>(create);
   static FavFolderDeleteReq? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -2521,7 +2459,7 @@ class FavFolderDeleteResp extends $pb.GeneratedMessage {
   factory FavFolderDeleteResp({
     $core.String? message,
   }) {
-    final result = FavFolderDeleteResp._();
+    final result = create();
     if (message != null) result.message = message;
     return result;
   }
@@ -2530,16 +2468,16 @@ class FavFolderDeleteResp extends $pb.GeneratedMessage {
 
   factory FavFolderDeleteResp.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavFolderDeleteResp()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FavFolderDeleteResp.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavFolderDeleteResp()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'FavFolderDeleteResp',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: FavFolderDeleteResp.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'message')
     ..hasRequiredFields = false;
 
@@ -2554,16 +2492,12 @@ class FavFolderDeleteResp extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core
-      .Deprecated('Use FavFolderDeleteResp() / FavFolderDeleteResp.new instead')
   static FavFolderDeleteResp create() => FavFolderDeleteResp._();
-  static $pb.GeneratedMessage $_createMessage() => FavFolderDeleteResp._();
   @$core.override
-  FavFolderDeleteResp createEmptyInstance() => FavFolderDeleteResp._();
+  FavFolderDeleteResp createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static FavFolderDeleteResp getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<FavFolderDeleteResp>(
-          FavFolderDeleteResp.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<FavFolderDeleteResp>(create);
   static FavFolderDeleteResp? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -2585,7 +2519,7 @@ class FavFolderDetailReq extends $pb.GeneratedMessage {
     $core.int? pageSize,
     $core.bool? needFolderInfo,
   }) {
-    final result = FavFolderDetailReq._();
+    final result = create();
     if (fid != null) result.fid = fid;
     if (folderType != null) result.folderType = folderType;
     if (favMid != null) result.favMid = favMid;
@@ -2599,21 +2533,21 @@ class FavFolderDetailReq extends $pb.GeneratedMessage {
 
   factory FavFolderDetailReq.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavFolderDetailReq()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FavFolderDetailReq.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavFolderDetailReq()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'FavFolderDetailReq',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: FavFolderDetailReq.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'fid')
     ..aI(2, _omitFieldNames ? '' : 'folderType')
     ..aInt64(3, _omitFieldNames ? '' : 'favMid')
     ..aOM<FavItem>(4, _omitFieldNames ? '' : 'lastItem',
-        subBuilder: FavItem.$_createMessage)
+        subBuilder: FavItem.create)
     ..aI(5, _omitFieldNames ? '' : 'pageSize')
     ..aOB(6, _omitFieldNames ? '' : 'needFolderInfo')
     ..hasRequiredFields = false;
@@ -2629,15 +2563,12 @@ class FavFolderDetailReq extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use FavFolderDetailReq() / FavFolderDetailReq.new instead')
   static FavFolderDetailReq create() => FavFolderDetailReq._();
-  static $pb.GeneratedMessage $_createMessage() => FavFolderDetailReq._();
   @$core.override
-  FavFolderDetailReq createEmptyInstance() => FavFolderDetailReq._();
+  FavFolderDetailReq createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static FavFolderDetailReq getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<FavFolderDetailReq>(
-          FavFolderDetailReq.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<FavFolderDetailReq>(create);
   static FavFolderDetailReq? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -2704,7 +2635,7 @@ class FavFolderDetailResp extends $pb.GeneratedMessage {
     $core.Iterable<FavItemDetail>? list,
     FavFolder? folderInfo,
   }) {
-    final result = FavFolderDetailResp._();
+    final result = create();
     if (total != null) result.total = total;
     if (reachEnd != null) result.reachEnd = reachEnd;
     if (list != null) result.list.addAll(list);
@@ -2716,22 +2647,22 @@ class FavFolderDetailResp extends $pb.GeneratedMessage {
 
   factory FavFolderDetailResp.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavFolderDetailResp()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FavFolderDetailResp.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavFolderDetailResp()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'FavFolderDetailResp',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: FavFolderDetailResp.$_createMessage)
+      createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'total')
     ..aOB(2, _omitFieldNames ? '' : 'reachEnd')
     ..pPM<FavItemDetail>(3, _omitFieldNames ? '' : 'list',
-        subBuilder: FavItemDetail.$_createMessage)
+        subBuilder: FavItemDetail.create)
     ..aOM<FavFolder>(4, _omitFieldNames ? '' : 'folderInfo',
-        subBuilder: FavFolder.$_createMessage)
+        subBuilder: FavFolder.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2745,16 +2676,12 @@ class FavFolderDetailResp extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core
-      .Deprecated('Use FavFolderDetailResp() / FavFolderDetailResp.new instead')
   static FavFolderDetailResp create() => FavFolderDetailResp._();
-  static $pb.GeneratedMessage $_createMessage() => FavFolderDetailResp._();
   @$core.override
-  FavFolderDetailResp createEmptyInstance() => FavFolderDetailResp._();
+  FavFolderDetailResp createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static FavFolderDetailResp getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<FavFolderDetailResp>(
-          FavFolderDetailResp.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<FavFolderDetailResp>(create);
   static FavFolderDetailResp? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -2795,7 +2722,7 @@ class FavFolderListReq extends $pb.GeneratedMessage {
     $core.Iterable<$core.int>? folderTypes,
     PlayItem? item,
   }) {
-    final result = FavFolderListReq._();
+    final result = create();
     if (folderTypes != null) result.folderTypes.addAll(folderTypes);
     if (item != null) result.item = item;
     return result;
@@ -2805,19 +2732,19 @@ class FavFolderListReq extends $pb.GeneratedMessage {
 
   factory FavFolderListReq.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavFolderListReq()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FavFolderListReq.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavFolderListReq()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'FavFolderListReq',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: FavFolderListReq.$_createMessage)
+      createEmptyInstance: create)
     ..p<$core.int>(1, _omitFieldNames ? '' : 'folderTypes', $pb.PbFieldType.K3)
     ..aOM<PlayItem>(2, _omitFieldNames ? '' : 'item',
-        subBuilder: PlayItem.$_createMessage)
+        subBuilder: PlayItem.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2831,15 +2758,12 @@ class FavFolderListReq extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use FavFolderListReq() / FavFolderListReq.new instead')
   static FavFolderListReq create() => FavFolderListReq._();
-  static $pb.GeneratedMessage $_createMessage() => FavFolderListReq._();
   @$core.override
-  FavFolderListReq createEmptyInstance() => FavFolderListReq._();
+  FavFolderListReq createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static FavFolderListReq getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FavFolderListReq>(
-          FavFolderListReq.$_createMessage);
+  static FavFolderListReq getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<FavFolderListReq>(create);
   static FavFolderListReq? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -2861,7 +2785,7 @@ class FavFolderListResp extends $pb.GeneratedMessage {
   factory FavFolderListResp({
     $core.Iterable<FavFolder>? list,
   }) {
-    final result = FavFolderListResp._();
+    final result = create();
     if (list != null) result.list.addAll(list);
     return result;
   }
@@ -2870,18 +2794,18 @@ class FavFolderListResp extends $pb.GeneratedMessage {
 
   factory FavFolderListResp.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavFolderListResp()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FavFolderListResp.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavFolderListResp()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'FavFolderListResp',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: FavFolderListResp.$_createMessage)
+      createEmptyInstance: create)
     ..pPM<FavFolder>(1, _omitFieldNames ? '' : 'list',
-        subBuilder: FavFolder.$_createMessage)
+        subBuilder: FavFolder.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2895,15 +2819,12 @@ class FavFolderListResp extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use FavFolderListResp() / FavFolderListResp.new instead')
   static FavFolderListResp create() => FavFolderListResp._();
-  static $pb.GeneratedMessage $_createMessage() => FavFolderListResp._();
   @$core.override
-  FavFolderListResp createEmptyInstance() => FavFolderListResp._();
+  FavFolderListResp createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static FavFolderListResp getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FavFolderListResp>(
-          FavFolderListResp.$_createMessage);
+  static FavFolderListResp getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<FavFolderListResp>(create);
   static FavFolderListResp? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -2915,7 +2836,7 @@ class FavFolderMeta extends $pb.GeneratedMessage {
     $fixnum.Int64? fid,
     $core.int? folderType,
   }) {
-    final result = FavFolderMeta._();
+    final result = create();
     if (fid != null) result.fid = fid;
     if (folderType != null) result.folderType = folderType;
     return result;
@@ -2925,16 +2846,16 @@ class FavFolderMeta extends $pb.GeneratedMessage {
 
   factory FavFolderMeta.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavFolderMeta()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FavFolderMeta.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavFolderMeta()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'FavFolderMeta',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: FavFolderMeta.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'fid')
     ..aI(2, _omitFieldNames ? '' : 'folderType')
     ..hasRequiredFields = false;
@@ -2950,15 +2871,12 @@ class FavFolderMeta extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use FavFolderMeta() / FavFolderMeta.new instead')
   static FavFolderMeta create() => FavFolderMeta._();
-  static $pb.GeneratedMessage $_createMessage() => FavFolderMeta._();
   @$core.override
-  FavFolderMeta createEmptyInstance() => FavFolderMeta._();
+  FavFolderMeta createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static FavFolderMeta getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FavFolderMeta>(
-          FavFolderMeta.$_createMessage);
+  static FavFolderMeta getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<FavFolderMeta>(create);
   static FavFolderMeta? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -2990,7 +2908,7 @@ class FavItem extends $pb.GeneratedMessage {
     $fixnum.Int64? ctime,
     EventTracking? et,
   }) {
-    final result = FavItem._();
+    final result = create();
     if (itemType != null) result.itemType = itemType;
     if (oid != null) result.oid = oid;
     if (fid != null) result.fid = fid;
@@ -3005,16 +2923,16 @@ class FavItem extends $pb.GeneratedMessage {
 
   factory FavItem.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavItem()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FavItem.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavItem()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'FavItem',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: FavItem.$_createMessage)
+      createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'itemType')
     ..aInt64(2, _omitFieldNames ? '' : 'oid')
     ..aInt64(3, _omitFieldNames ? '' : 'fid')
@@ -3022,7 +2940,7 @@ class FavItem extends $pb.GeneratedMessage {
     ..aInt64(5, _omitFieldNames ? '' : 'mtime')
     ..aInt64(6, _omitFieldNames ? '' : 'ctime')
     ..aOM<EventTracking>(7, _omitFieldNames ? '' : 'et',
-        subBuilder: EventTracking.$_createMessage)
+        subBuilder: EventTracking.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -3035,14 +2953,12 @@ class FavItem extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use FavItem() / FavItem.new instead')
   static FavItem create() => FavItem._();
-  static $pb.GeneratedMessage $_createMessage() => FavItem._();
   @$core.override
-  FavItem createEmptyInstance() => FavItem._();
+  FavItem createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static FavItem getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<FavItem>(FavItem.$_createMessage);
+  static FavItem getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FavItem>(create);
   static FavItem? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -3121,7 +3037,7 @@ class FavItemAddReq extends $pb.GeneratedMessage {
     FavItem? fav,
     $core.bool? isFastAddFav,
   }) {
-    final result = FavItemAddReq._();
+    final result = create();
     if (fid != null) result.fid = fid;
     if (folderType != null) result.folderType = folderType;
     if (play != null) result.play = play;
@@ -3134,10 +3050,10 @@ class FavItemAddReq extends $pb.GeneratedMessage {
 
   factory FavItemAddReq.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavItemAddReq()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FavItemAddReq.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavItemAddReq()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static const $core.Map<$core.int, FavItemAddReq_Item>
       _FavItemAddReq_ItemByTag = {
@@ -3149,14 +3065,13 @@ class FavItemAddReq extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'FavItemAddReq',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: FavItemAddReq.$_createMessage)
+      createEmptyInstance: create)
     ..oo(0, [3, 4])
     ..aInt64(1, _omitFieldNames ? '' : 'fid')
     ..aI(2, _omitFieldNames ? '' : 'folderType')
     ..aOM<PlayItem>(3, _omitFieldNames ? '' : 'play',
-        subBuilder: PlayItem.$_createMessage)
-    ..aOM<FavItem>(4, _omitFieldNames ? '' : 'fav',
-        subBuilder: FavItem.$_createMessage)
+        subBuilder: PlayItem.create)
+    ..aOM<FavItem>(4, _omitFieldNames ? '' : 'fav', subBuilder: FavItem.create)
     ..aOB(5, _omitFieldNames ? '' : 'isFastAddFav')
     ..hasRequiredFields = false;
 
@@ -3171,15 +3086,12 @@ class FavItemAddReq extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use FavItemAddReq() / FavItemAddReq.new instead')
   static FavItemAddReq create() => FavItemAddReq._();
-  static $pb.GeneratedMessage $_createMessage() => FavItemAddReq._();
   @$core.override
-  FavItemAddReq createEmptyInstance() => FavItemAddReq._();
+  FavItemAddReq createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static FavItemAddReq getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FavItemAddReq>(
-          FavItemAddReq.$_createMessage);
+  static FavItemAddReq getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<FavItemAddReq>(create);
   static FavItemAddReq? _defaultInstance;
 
   @$pb.TagNumber(3)
@@ -3243,7 +3155,7 @@ class FavItemAddResp extends $pb.GeneratedMessage {
   factory FavItemAddResp({
     $core.String? message,
   }) {
-    final result = FavItemAddResp._();
+    final result = create();
     if (message != null) result.message = message;
     return result;
   }
@@ -3252,16 +3164,16 @@ class FavItemAddResp extends $pb.GeneratedMessage {
 
   factory FavItemAddResp.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavItemAddResp()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FavItemAddResp.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavItemAddResp()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'FavItemAddResp',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: FavItemAddResp.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'message')
     ..hasRequiredFields = false;
 
@@ -3276,15 +3188,12 @@ class FavItemAddResp extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use FavItemAddResp() / FavItemAddResp.new instead')
   static FavItemAddResp create() => FavItemAddResp._();
-  static $pb.GeneratedMessage $_createMessage() => FavItemAddResp._();
   @$core.override
-  FavItemAddResp createEmptyInstance() => FavItemAddResp._();
+  FavItemAddResp createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static FavItemAddResp getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FavItemAddResp>(
-          FavItemAddResp.$_createMessage);
+  static FavItemAddResp getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<FavItemAddResp>(create);
   static FavItemAddResp? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -3302,7 +3211,7 @@ class FavItemAuthor extends $pb.GeneratedMessage {
     $fixnum.Int64? mid,
     $core.String? name,
   }) {
-    final result = FavItemAuthor._();
+    final result = create();
     if (mid != null) result.mid = mid;
     if (name != null) result.name = name;
     return result;
@@ -3312,16 +3221,16 @@ class FavItemAuthor extends $pb.GeneratedMessage {
 
   factory FavItemAuthor.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavItemAuthor()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FavItemAuthor.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavItemAuthor()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'FavItemAuthor',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: FavItemAuthor.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'mid')
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..hasRequiredFields = false;
@@ -3337,15 +3246,12 @@ class FavItemAuthor extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use FavItemAuthor() / FavItemAuthor.new instead')
   static FavItemAuthor create() => FavItemAuthor._();
-  static $pb.GeneratedMessage $_createMessage() => FavItemAuthor._();
   @$core.override
-  FavItemAuthor createEmptyInstance() => FavItemAuthor._();
+  FavItemAuthor createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static FavItemAuthor getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FavItemAuthor>(
-          FavItemAuthor.$_createMessage);
+  static FavItemAuthor getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<FavItemAuthor>(create);
   static FavItemAuthor? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -3375,7 +3281,7 @@ class FavItemBatchReq extends $pb.GeneratedMessage {
     PlayItem? play,
     FavItem? fav,
   }) {
-    final result = FavItemBatchReq._();
+    final result = create();
     if (actions != null) result.actions.addAll(actions);
     if (play != null) result.play = play;
     if (fav != null) result.fav = fav;
@@ -3386,10 +3292,10 @@ class FavItemBatchReq extends $pb.GeneratedMessage {
 
   factory FavItemBatchReq.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavItemBatchReq()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FavItemBatchReq.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavItemBatchReq()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static const $core.Map<$core.int, FavItemBatchReq_Item>
       _FavItemBatchReq_ItemByTag = {
@@ -3401,14 +3307,13 @@ class FavItemBatchReq extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'FavItemBatchReq',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: FavItemBatchReq.$_createMessage)
+      createEmptyInstance: create)
     ..oo(0, [2, 3])
     ..pPM<FavFolderAction>(1, _omitFieldNames ? '' : 'actions',
-        subBuilder: FavFolderAction.$_createMessage)
+        subBuilder: FavFolderAction.create)
     ..aOM<PlayItem>(2, _omitFieldNames ? '' : 'play',
-        subBuilder: PlayItem.$_createMessage)
-    ..aOM<FavItem>(3, _omitFieldNames ? '' : 'fav',
-        subBuilder: FavItem.$_createMessage)
+        subBuilder: PlayItem.create)
+    ..aOM<FavItem>(3, _omitFieldNames ? '' : 'fav', subBuilder: FavItem.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -3422,15 +3327,12 @@ class FavItemBatchReq extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use FavItemBatchReq() / FavItemBatchReq.new instead')
   static FavItemBatchReq create() => FavItemBatchReq._();
-  static $pb.GeneratedMessage $_createMessage() => FavItemBatchReq._();
   @$core.override
-  FavItemBatchReq createEmptyInstance() => FavItemBatchReq._();
+  FavItemBatchReq createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static FavItemBatchReq getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FavItemBatchReq>(
-          FavItemBatchReq.$_createMessage);
+  static FavItemBatchReq getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<FavItemBatchReq>(create);
   static FavItemBatchReq? _defaultInstance;
 
   @$pb.TagNumber(2)
@@ -3471,7 +3373,7 @@ class FavItemBatchResp extends $pb.GeneratedMessage {
   factory FavItemBatchResp({
     $core.String? message,
   }) {
-    final result = FavItemBatchResp._();
+    final result = create();
     if (message != null) result.message = message;
     return result;
   }
@@ -3480,16 +3382,16 @@ class FavItemBatchResp extends $pb.GeneratedMessage {
 
   factory FavItemBatchResp.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavItemBatchResp()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FavItemBatchResp.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavItemBatchResp()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'FavItemBatchResp',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: FavItemBatchResp.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'message')
     ..hasRequiredFields = false;
 
@@ -3504,15 +3406,12 @@ class FavItemBatchResp extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use FavItemBatchResp() / FavItemBatchResp.new instead')
   static FavItemBatchResp create() => FavItemBatchResp._();
-  static $pb.GeneratedMessage $_createMessage() => FavItemBatchResp._();
   @$core.override
-  FavItemBatchResp createEmptyInstance() => FavItemBatchResp._();
+  FavItemBatchResp createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static FavItemBatchResp getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FavItemBatchResp>(
-          FavItemBatchResp.$_createMessage);
+  static FavItemBatchResp getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<FavItemBatchResp>(create);
   static FavItemBatchResp? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -3535,7 +3434,7 @@ class FavItemDelReq extends $pb.GeneratedMessage {
     FavItem? fav,
     $core.bool? isFastDelFav,
   }) {
-    final result = FavItemDelReq._();
+    final result = create();
     if (fid != null) result.fid = fid;
     if (folderType != null) result.folderType = folderType;
     if (play != null) result.play = play;
@@ -3548,10 +3447,10 @@ class FavItemDelReq extends $pb.GeneratedMessage {
 
   factory FavItemDelReq.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavItemDelReq()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FavItemDelReq.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavItemDelReq()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static const $core.Map<$core.int, FavItemDelReq_Item>
       _FavItemDelReq_ItemByTag = {
@@ -3563,14 +3462,13 @@ class FavItemDelReq extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'FavItemDelReq',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: FavItemDelReq.$_createMessage)
+      createEmptyInstance: create)
     ..oo(0, [3, 4])
     ..aInt64(1, _omitFieldNames ? '' : 'fid')
     ..aI(2, _omitFieldNames ? '' : 'folderType')
     ..aOM<PlayItem>(3, _omitFieldNames ? '' : 'play',
-        subBuilder: PlayItem.$_createMessage)
-    ..aOM<FavItem>(4, _omitFieldNames ? '' : 'fav',
-        subBuilder: FavItem.$_createMessage)
+        subBuilder: PlayItem.create)
+    ..aOM<FavItem>(4, _omitFieldNames ? '' : 'fav', subBuilder: FavItem.create)
     ..aOB(5, _omitFieldNames ? '' : 'isFastDelFav')
     ..hasRequiredFields = false;
 
@@ -3585,15 +3483,12 @@ class FavItemDelReq extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use FavItemDelReq() / FavItemDelReq.new instead')
   static FavItemDelReq create() => FavItemDelReq._();
-  static $pb.GeneratedMessage $_createMessage() => FavItemDelReq._();
   @$core.override
-  FavItemDelReq createEmptyInstance() => FavItemDelReq._();
+  FavItemDelReq createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static FavItemDelReq getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FavItemDelReq>(
-          FavItemDelReq.$_createMessage);
+  static FavItemDelReq getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<FavItemDelReq>(create);
   static FavItemDelReq? _defaultInstance;
 
   @$pb.TagNumber(3)
@@ -3657,7 +3552,7 @@ class FavItemDelResp extends $pb.GeneratedMessage {
   factory FavItemDelResp({
     $core.String? message,
   }) {
-    final result = FavItemDelResp._();
+    final result = create();
     if (message != null) result.message = message;
     return result;
   }
@@ -3666,16 +3561,16 @@ class FavItemDelResp extends $pb.GeneratedMessage {
 
   factory FavItemDelResp.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavItemDelResp()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FavItemDelResp.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavItemDelResp()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'FavItemDelResp',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: FavItemDelResp.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'message')
     ..hasRequiredFields = false;
 
@@ -3690,15 +3585,12 @@ class FavItemDelResp extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use FavItemDelResp() / FavItemDelResp.new instead')
   static FavItemDelResp create() => FavItemDelResp._();
-  static $pb.GeneratedMessage $_createMessage() => FavItemDelResp._();
   @$core.override
-  FavItemDelResp createEmptyInstance() => FavItemDelResp._();
+  FavItemDelResp createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static FavItemDelResp getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FavItemDelResp>(
-          FavItemDelResp.$_createMessage);
+  static FavItemDelResp getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<FavItemDelResp>(create);
   static FavItemDelResp? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -3723,7 +3615,7 @@ class FavItemDetail extends $pb.GeneratedMessage {
     $core.String? message,
     $core.int? parts,
   }) {
-    final result = FavItemDetail._();
+    final result = create();
     if (item != null) result.item = item;
     if (owner != null) result.owner = owner;
     if (stat != null) result.stat = stat;
@@ -3740,22 +3632,21 @@ class FavItemDetail extends $pb.GeneratedMessage {
 
   factory FavItemDetail.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavItemDetail()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FavItemDetail.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavItemDetail()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'FavItemDetail',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: FavItemDetail.$_createMessage)
-    ..aOM<FavItem>(1, _omitFieldNames ? '' : 'item',
-        subBuilder: FavItem.$_createMessage)
+      createEmptyInstance: create)
+    ..aOM<FavItem>(1, _omitFieldNames ? '' : 'item', subBuilder: FavItem.create)
     ..aOM<FavItemAuthor>(2, _omitFieldNames ? '' : 'owner',
-        subBuilder: FavItemAuthor.$_createMessage)
+        subBuilder: FavItemAuthor.create)
     ..aOM<FavItemStat>(3, _omitFieldNames ? '' : 'stat',
-        subBuilder: FavItemStat.$_createMessage)
+        subBuilder: FavItemStat.create)
     ..aOS(4, _omitFieldNames ? '' : 'cover')
     ..aOS(5, _omitFieldNames ? '' : 'name')
     ..aInt64(6, _omitFieldNames ? '' : 'duration')
@@ -3775,15 +3666,12 @@ class FavItemDetail extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use FavItemDetail() / FavItemDetail.new instead')
   static FavItemDetail create() => FavItemDetail._();
-  static $pb.GeneratedMessage $_createMessage() => FavItemDetail._();
   @$core.override
-  FavItemDetail createEmptyInstance() => FavItemDetail._();
+  FavItemDetail createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static FavItemDetail getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FavItemDetail>(
-          FavItemDetail.$_createMessage);
+  static FavItemDetail getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<FavItemDetail>(create);
   static FavItemDetail? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -3881,7 +3769,7 @@ class FavItemStat extends $pb.GeneratedMessage {
     $core.bool? useViewVt,
     $core.String? viewVtText,
   }) {
-    final result = FavItemStat._();
+    final result = create();
     if (view != null) result.view = view;
     if (reply != null) result.reply = reply;
     if (useViewVt != null) result.useViewVt = useViewVt;
@@ -3893,16 +3781,16 @@ class FavItemStat extends $pb.GeneratedMessage {
 
   factory FavItemStat.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavItemStat()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FavItemStat.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavItemStat()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'FavItemStat',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: FavItemStat.$_createMessage)
+      createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'view')
     ..aI(2, _omitFieldNames ? '' : 'reply')
     ..aOB(3, _omitFieldNames ? '' : 'useViewVt')
@@ -3920,15 +3808,12 @@ class FavItemStat extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use FavItemStat() / FavItemStat.new instead')
   static FavItemStat create() => FavItemStat._();
-  static $pb.GeneratedMessage $_createMessage() => FavItemStat._();
   @$core.override
-  FavItemStat createEmptyInstance() => FavItemStat._();
+  FavItemStat createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static FavItemStat getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FavItemStat>(
-          FavItemStat.$_createMessage);
+  static FavItemStat getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<FavItemStat>(create);
   static FavItemStat? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -3972,7 +3857,7 @@ class FavTabShowReq extends $pb.GeneratedMessage {
   factory FavTabShowReq({
     $fixnum.Int64? mid,
   }) {
-    final result = FavTabShowReq._();
+    final result = create();
     if (mid != null) result.mid = mid;
     return result;
   }
@@ -3981,16 +3866,16 @@ class FavTabShowReq extends $pb.GeneratedMessage {
 
   factory FavTabShowReq.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavTabShowReq()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FavTabShowReq.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavTabShowReq()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'FavTabShowReq',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: FavTabShowReq.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'mid')
     ..hasRequiredFields = false;
 
@@ -4005,15 +3890,12 @@ class FavTabShowReq extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use FavTabShowReq() / FavTabShowReq.new instead')
   static FavTabShowReq create() => FavTabShowReq._();
-  static $pb.GeneratedMessage $_createMessage() => FavTabShowReq._();
   @$core.override
-  FavTabShowReq createEmptyInstance() => FavTabShowReq._();
+  FavTabShowReq createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static FavTabShowReq getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FavTabShowReq>(
-          FavTabShowReq.$_createMessage);
+  static FavTabShowReq getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<FavTabShowReq>(create);
   static FavTabShowReq? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -4030,7 +3912,7 @@ class FavTabShowResp extends $pb.GeneratedMessage {
   factory FavTabShowResp({
     $core.bool? showMenu,
   }) {
-    final result = FavTabShowResp._();
+    final result = create();
     if (showMenu != null) result.showMenu = showMenu;
     return result;
   }
@@ -4039,16 +3921,16 @@ class FavTabShowResp extends $pb.GeneratedMessage {
 
   factory FavTabShowResp.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavTabShowResp()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FavTabShowResp.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavTabShowResp()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'FavTabShowResp',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: FavTabShowResp.$_createMessage)
+      createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'showMenu')
     ..hasRequiredFields = false;
 
@@ -4063,15 +3945,12 @@ class FavTabShowResp extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use FavTabShowResp() / FavTabShowResp.new instead')
   static FavTabShowResp create() => FavTabShowResp._();
-  static $pb.GeneratedMessage $_createMessage() => FavTabShowResp._();
   @$core.override
-  FavTabShowResp createEmptyInstance() => FavTabShowResp._();
+  FavTabShowResp createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static FavTabShowResp getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FavTabShowResp>(
-          FavTabShowResp.$_createMessage);
+  static FavTabShowResp getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<FavTabShowResp>(create);
   static FavTabShowResp? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -4089,7 +3968,7 @@ class FavoredInAnyFoldersReq extends $pb.GeneratedMessage {
     $core.Iterable<$core.int>? folderTypes,
     PlayItem? item,
   }) {
-    final result = FavoredInAnyFoldersReq._();
+    final result = create();
     if (folderTypes != null) result.folderTypes.addAll(folderTypes);
     if (item != null) result.item = item;
     return result;
@@ -4099,19 +3978,19 @@ class FavoredInAnyFoldersReq extends $pb.GeneratedMessage {
 
   factory FavoredInAnyFoldersReq.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavoredInAnyFoldersReq()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FavoredInAnyFoldersReq.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavoredInAnyFoldersReq()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'FavoredInAnyFoldersReq',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: FavoredInAnyFoldersReq.$_createMessage)
+      createEmptyInstance: create)
     ..p<$core.int>(1, _omitFieldNames ? '' : 'folderTypes', $pb.PbFieldType.K3)
     ..aOM<PlayItem>(2, _omitFieldNames ? '' : 'item',
-        subBuilder: PlayItem.$_createMessage)
+        subBuilder: PlayItem.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -4126,16 +4005,12 @@ class FavoredInAnyFoldersReq extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated(
-      'Use FavoredInAnyFoldersReq() / FavoredInAnyFoldersReq.new instead')
   static FavoredInAnyFoldersReq create() => FavoredInAnyFoldersReq._();
-  static $pb.GeneratedMessage $_createMessage() => FavoredInAnyFoldersReq._();
   @$core.override
-  FavoredInAnyFoldersReq createEmptyInstance() => FavoredInAnyFoldersReq._();
+  FavoredInAnyFoldersReq createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static FavoredInAnyFoldersReq getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<FavoredInAnyFoldersReq>(
-          FavoredInAnyFoldersReq.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<FavoredInAnyFoldersReq>(create);
   static FavoredInAnyFoldersReq? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -4158,7 +4033,7 @@ class FavoredInAnyFoldersResp extends $pb.GeneratedMessage {
     $core.Iterable<FavFolderMeta>? folders,
     PlayItem? item,
   }) {
-    final result = FavoredInAnyFoldersResp._();
+    final result = create();
     if (folders != null) result.folders.addAll(folders);
     if (item != null) result.item = item;
     return result;
@@ -4168,20 +4043,20 @@ class FavoredInAnyFoldersResp extends $pb.GeneratedMessage {
 
   factory FavoredInAnyFoldersResp.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavoredInAnyFoldersResp()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FavoredInAnyFoldersResp.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FavoredInAnyFoldersResp()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'FavoredInAnyFoldersResp',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: FavoredInAnyFoldersResp.$_createMessage)
+      createEmptyInstance: create)
     ..pPM<FavFolderMeta>(1, _omitFieldNames ? '' : 'folders',
-        subBuilder: FavFolderMeta.$_createMessage)
+        subBuilder: FavFolderMeta.create)
     ..aOM<PlayItem>(2, _omitFieldNames ? '' : 'item',
-        subBuilder: PlayItem.$_createMessage)
+        subBuilder: PlayItem.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -4196,16 +4071,12 @@ class FavoredInAnyFoldersResp extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated(
-      'Use FavoredInAnyFoldersResp() / FavoredInAnyFoldersResp.new instead')
   static FavoredInAnyFoldersResp create() => FavoredInAnyFoldersResp._();
-  static $pb.GeneratedMessage $_createMessage() => FavoredInAnyFoldersResp._();
   @$core.override
-  FavoredInAnyFoldersResp createEmptyInstance() => FavoredInAnyFoldersResp._();
+  FavoredInAnyFoldersResp createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static FavoredInAnyFoldersResp getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<FavoredInAnyFoldersResp>(
-          FavoredInAnyFoldersResp.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<FavoredInAnyFoldersResp>(create);
   static FavoredInAnyFoldersResp? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -4227,7 +4098,7 @@ class FollowRelation extends $pb.GeneratedMessage {
   factory FollowRelation({
     FollowRelation_RelationStatus? status,
   }) {
-    final result = FollowRelation._();
+    final result = create();
     if (status != null) result.status = status;
     return result;
   }
@@ -4236,16 +4107,16 @@ class FollowRelation extends $pb.GeneratedMessage {
 
   factory FollowRelation.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FollowRelation()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FollowRelation.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FollowRelation()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'FollowRelation',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: FollowRelation.$_createMessage)
+      createEmptyInstance: create)
     ..aE<FollowRelation_RelationStatus>(1, _omitFieldNames ? '' : 'status',
         enumValues: FollowRelation_RelationStatus.values)
     ..hasRequiredFields = false;
@@ -4261,15 +4132,12 @@ class FollowRelation extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use FollowRelation() / FollowRelation.new instead')
   static FollowRelation create() => FollowRelation._();
-  static $pb.GeneratedMessage $_createMessage() => FollowRelation._();
   @$core.override
-  FollowRelation createEmptyInstance() => FollowRelation._();
+  FollowRelation createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static FollowRelation getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FollowRelation>(
-          FollowRelation.$_createMessage);
+  static FollowRelation getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<FollowRelation>(create);
   static FollowRelation? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -4290,7 +4158,7 @@ class FormatDescription extends $pb.GeneratedMessage {
     $core.String? displayDesc,
     $core.String? superscript,
   }) {
-    final result = FormatDescription._();
+    final result = create();
     if (quality != null) result.quality = quality;
     if (format != null) result.format = format;
     if (description != null) result.description = description;
@@ -4303,16 +4171,16 @@ class FormatDescription extends $pb.GeneratedMessage {
 
   factory FormatDescription.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FormatDescription()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FormatDescription.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FormatDescription()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'FormatDescription',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: FormatDescription.$_createMessage)
+      createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'quality')
     ..aOS(2, _omitFieldNames ? '' : 'format')
     ..aOS(3, _omitFieldNames ? '' : 'description')
@@ -4331,15 +4199,12 @@ class FormatDescription extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use FormatDescription() / FormatDescription.new instead')
   static FormatDescription create() => FormatDescription._();
-  static $pb.GeneratedMessage $_createMessage() => FormatDescription._();
   @$core.override
-  FormatDescription createEmptyInstance() => FormatDescription._();
+  FormatDescription createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static FormatDescription getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FormatDescription>(
-          FormatDescription.$_createMessage);
+  static FormatDescription getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<FormatDescription>(create);
   static FormatDescription? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -4393,7 +4258,7 @@ class MainFavMusicMenuListReq extends $pb.GeneratedMessage {
     $core.int? tabType,
     $core.String? offset,
   }) {
-    final result = MainFavMusicMenuListReq._();
+    final result = create();
     if (tabType != null) result.tabType = tabType;
     if (offset != null) result.offset = offset;
     return result;
@@ -4403,16 +4268,16 @@ class MainFavMusicMenuListReq extends $pb.GeneratedMessage {
 
   factory MainFavMusicMenuListReq.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MainFavMusicMenuListReq()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory MainFavMusicMenuListReq.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MainFavMusicMenuListReq()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'MainFavMusicMenuListReq',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: MainFavMusicMenuListReq.$_createMessage)
+      createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'tabType')
     ..aOS(2, _omitFieldNames ? '' : 'offset')
     ..hasRequiredFields = false;
@@ -4429,16 +4294,12 @@ class MainFavMusicMenuListReq extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated(
-      'Use MainFavMusicMenuListReq() / MainFavMusicMenuListReq.new instead')
   static MainFavMusicMenuListReq create() => MainFavMusicMenuListReq._();
-  static $pb.GeneratedMessage $_createMessage() => MainFavMusicMenuListReq._();
   @$core.override
-  MainFavMusicMenuListReq createEmptyInstance() => MainFavMusicMenuListReq._();
+  MainFavMusicMenuListReq createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static MainFavMusicMenuListReq getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<MainFavMusicMenuListReq>(
-          MainFavMusicMenuListReq.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<MainFavMusicMenuListReq>(create);
   static MainFavMusicMenuListReq? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -4467,7 +4328,7 @@ class MainFavMusicMenuListResp extends $pb.GeneratedMessage {
     $core.bool? hasMore,
     $core.String? offset,
   }) {
-    final result = MainFavMusicMenuListResp._();
+    final result = create();
     if (tabType != null) result.tabType = tabType;
     if (menuList != null) result.menuList.addAll(menuList);
     if (hasMore != null) result.hasMore = hasMore;
@@ -4479,19 +4340,19 @@ class MainFavMusicMenuListResp extends $pb.GeneratedMessage {
 
   factory MainFavMusicMenuListResp.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MainFavMusicMenuListResp()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory MainFavMusicMenuListResp.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MainFavMusicMenuListResp()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'MainFavMusicMenuListResp',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: MainFavMusicMenuListResp.$_createMessage)
+      createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'tabType')
     ..pPM<MusicMenu>(2, _omitFieldNames ? '' : 'menuList',
-        subBuilder: MusicMenu.$_createMessage)
+        subBuilder: MusicMenu.create)
     ..aOB(3, _omitFieldNames ? '' : 'hasMore')
     ..aOS(4, _omitFieldNames ? '' : 'offset')
     ..hasRequiredFields = false;
@@ -4508,17 +4369,12 @@ class MainFavMusicMenuListResp extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated(
-      'Use MainFavMusicMenuListResp() / MainFavMusicMenuListResp.new instead')
   static MainFavMusicMenuListResp create() => MainFavMusicMenuListResp._();
-  static $pb.GeneratedMessage $_createMessage() => MainFavMusicMenuListResp._();
   @$core.override
-  MainFavMusicMenuListResp createEmptyInstance() =>
-      MainFavMusicMenuListResp._();
+  MainFavMusicMenuListResp createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static MainFavMusicMenuListResp getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<MainFavMusicMenuListResp>(
-          MainFavMusicMenuListResp.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<MainFavMusicMenuListResp>(create);
   static MainFavMusicMenuListResp? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -4553,22 +4409,22 @@ class MainFavMusicMenuListResp extends $pb.GeneratedMessage {
 }
 
 class MainFavMusicSubTabListReq extends $pb.GeneratedMessage {
-  factory MainFavMusicSubTabListReq() => MainFavMusicSubTabListReq._();
+  factory MainFavMusicSubTabListReq() => create();
 
   MainFavMusicSubTabListReq._();
 
   factory MainFavMusicSubTabListReq.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MainFavMusicSubTabListReq()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory MainFavMusicSubTabListReq.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MainFavMusicSubTabListReq()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'MainFavMusicSubTabListReq',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: MainFavMusicSubTabListReq.$_createMessage)
+      createEmptyInstance: create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -4583,18 +4439,12 @@ class MainFavMusicSubTabListReq extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated(
-      'Use MainFavMusicSubTabListReq() / MainFavMusicSubTabListReq.new instead')
   static MainFavMusicSubTabListReq create() => MainFavMusicSubTabListReq._();
-  static $pb.GeneratedMessage $_createMessage() =>
-      MainFavMusicSubTabListReq._();
   @$core.override
-  MainFavMusicSubTabListReq createEmptyInstance() =>
-      MainFavMusicSubTabListReq._();
+  MainFavMusicSubTabListReq createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static MainFavMusicSubTabListReq getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<MainFavMusicSubTabListReq>(
-          MainFavMusicSubTabListReq.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<MainFavMusicSubTabListReq>(create);
   static MainFavMusicSubTabListReq? _defaultInstance;
 }
 
@@ -4605,7 +4455,7 @@ class MainFavMusicSubTabListResp extends $pb.GeneratedMessage {
     $core.Iterable<$core.MapEntry<$core.int, MainFavMusicMenuListResp>>?
         firstPageRes,
   }) {
-    final result = MainFavMusicSubTabListResp._();
+    final result = create();
     if (tabs != null) result.tabs.addAll(tabs);
     if (defaultTabRes != null) result.defaultTabRes = defaultTabRes;
     if (firstPageRes != null) result.firstPageRes.addEntries(firstPageRes);
@@ -4616,26 +4466,26 @@ class MainFavMusicSubTabListResp extends $pb.GeneratedMessage {
 
   factory MainFavMusicSubTabListResp.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MainFavMusicSubTabListResp()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory MainFavMusicSubTabListResp.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MainFavMusicSubTabListResp()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'MainFavMusicSubTabListResp',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: MainFavMusicSubTabListResp.$_createMessage)
+      createEmptyInstance: create)
     ..pPM<MusicSubTab>(1, _omitFieldNames ? '' : 'tabs',
-        subBuilder: MusicSubTab.$_createMessage)
+        subBuilder: MusicSubTab.create)
     ..aOM<MainFavMusicMenuListResp>(2, _omitFieldNames ? '' : 'defaultTabRes',
-        subBuilder: MainFavMusicMenuListResp.$_createMessage)
+        subBuilder: MainFavMusicMenuListResp.create)
     ..m<$core.int, MainFavMusicMenuListResp>(
         3, _omitFieldNames ? '' : 'firstPageRes',
         entryClassName: 'MainFavMusicSubTabListResp.FirstPageResEntry',
         keyFieldType: $pb.PbFieldType.O3,
         valueFieldType: $pb.PbFieldType.OM,
-        valueCreator: MainFavMusicMenuListResp.$_createMessage,
+        valueCreator: MainFavMusicMenuListResp.create,
         valueDefaultOrMaker: MainFavMusicMenuListResp.getDefault,
         packageName: const $pb.PackageName('bilibili.app.listener.v1'))
     ..hasRequiredFields = false;
@@ -4653,18 +4503,12 @@ class MainFavMusicSubTabListResp extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated(
-      'Use MainFavMusicSubTabListResp() / MainFavMusicSubTabListResp.new instead')
   static MainFavMusicSubTabListResp create() => MainFavMusicSubTabListResp._();
-  static $pb.GeneratedMessage $_createMessage() =>
-      MainFavMusicSubTabListResp._();
   @$core.override
-  MainFavMusicSubTabListResp createEmptyInstance() =>
-      MainFavMusicSubTabListResp._();
+  MainFavMusicSubTabListResp createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static MainFavMusicSubTabListResp getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<MainFavMusicSubTabListResp>(
-          MainFavMusicSubTabListResp.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<MainFavMusicSubTabListResp>(create);
   static MainFavMusicSubTabListResp? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -4702,7 +4546,7 @@ class MedialistItem extends $pb.GeneratedMessage {
     $core.bool? useStatViewVt,
     $core.String? statViewVtText,
   }) {
-    final result = MedialistItem._();
+    final result = create();
     if (item != null) result.item = item;
     if (title != null) result.title = title;
     if (cover != null) result.cover = cover;
@@ -4723,18 +4567,18 @@ class MedialistItem extends $pb.GeneratedMessage {
 
   factory MedialistItem.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MedialistItem()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory MedialistItem.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MedialistItem()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'MedialistItem',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: MedialistItem.$_createMessage)
+      createEmptyInstance: create)
     ..aOM<PlayItem>(1, _omitFieldNames ? '' : 'item',
-        subBuilder: PlayItem.$_createMessage)
+        subBuilder: PlayItem.create)
     ..aOS(2, _omitFieldNames ? '' : 'title')
     ..aOS(3, _omitFieldNames ? '' : 'cover')
     ..aInt64(4, _omitFieldNames ? '' : 'duration')
@@ -4760,15 +4604,12 @@ class MedialistItem extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use MedialistItem() / MedialistItem.new instead')
   static MedialistItem create() => MedialistItem._();
-  static $pb.GeneratedMessage $_createMessage() => MedialistItem._();
   @$core.override
-  MedialistItem createEmptyInstance() => MedialistItem._();
+  MedialistItem createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static MedialistItem getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MedialistItem>(
-          MedialistItem.$_createMessage);
+  static MedialistItem getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<MedialistItem>(create);
   static MedialistItem? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -4897,7 +4738,7 @@ class MedialistReq extends $pb.GeneratedMessage {
     $fixnum.Int64? bizId,
     $core.String? offset,
   }) {
-    final result = MedialistReq._();
+    final result = create();
     if (listType != null) result.listType = listType;
     if (bizId != null) result.bizId = bizId;
     if (offset != null) result.offset = offset;
@@ -4908,16 +4749,16 @@ class MedialistReq extends $pb.GeneratedMessage {
 
   factory MedialistReq.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MedialistReq()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory MedialistReq.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MedialistReq()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'MedialistReq',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: MedialistReq.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'listType')
     ..aInt64(2, _omitFieldNames ? '' : 'bizId')
     ..aOS(3, _omitFieldNames ? '' : 'offset')
@@ -4934,15 +4775,12 @@ class MedialistReq extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use MedialistReq() / MedialistReq.new instead')
   static MedialistReq create() => MedialistReq._();
-  static $pb.GeneratedMessage $_createMessage() => MedialistReq._();
   @$core.override
-  MedialistReq createEmptyInstance() => MedialistReq._();
+  MedialistReq createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static MedialistReq getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MedialistReq>(
-          MedialistReq.$_createMessage);
+  static MedialistReq getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<MedialistReq>(create);
   static MedialistReq? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -4981,7 +4819,7 @@ class MedialistResp extends $pb.GeneratedMessage {
     $core.Iterable<MedialistItem>? items,
     MedialistUpInfo? upInfo,
   }) {
-    final result = MedialistResp._();
+    final result = create();
     if (total != null) result.total = total;
     if (hasMore != null) result.hasMore = hasMore;
     if (offset != null) result.offset = offset;
@@ -4994,23 +4832,23 @@ class MedialistResp extends $pb.GeneratedMessage {
 
   factory MedialistResp.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MedialistResp()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory MedialistResp.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MedialistResp()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'MedialistResp',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: MedialistResp.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'total')
     ..aOB(2, _omitFieldNames ? '' : 'hasMore')
     ..aOS(3, _omitFieldNames ? '' : 'offset')
     ..pPM<MedialistItem>(4, _omitFieldNames ? '' : 'items',
-        subBuilder: MedialistItem.$_createMessage)
+        subBuilder: MedialistItem.create)
     ..aOM<MedialistUpInfo>(5, _omitFieldNames ? '' : 'upInfo',
-        subBuilder: MedialistUpInfo.$_createMessage)
+        subBuilder: MedialistUpInfo.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -5024,15 +4862,12 @@ class MedialistResp extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use MedialistResp() / MedialistResp.new instead')
   static MedialistResp create() => MedialistResp._();
-  static $pb.GeneratedMessage $_createMessage() => MedialistResp._();
   @$core.override
-  MedialistResp createEmptyInstance() => MedialistResp._();
+  MedialistResp createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static MedialistResp getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MedialistResp>(
-          MedialistResp.$_createMessage);
+  static MedialistResp getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<MedialistResp>(create);
   static MedialistResp? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -5084,7 +4919,7 @@ class MedialistUpInfo extends $pb.GeneratedMessage {
     $fixnum.Int64? fans,
     $core.String? name,
   }) {
-    final result = MedialistUpInfo._();
+    final result = create();
     if (mid != null) result.mid = mid;
     if (avatar != null) result.avatar = avatar;
     if (fans != null) result.fans = fans;
@@ -5096,16 +4931,16 @@ class MedialistUpInfo extends $pb.GeneratedMessage {
 
   factory MedialistUpInfo.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MedialistUpInfo()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory MedialistUpInfo.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MedialistUpInfo()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'MedialistUpInfo',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: MedialistUpInfo.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'mid')
     ..aOS(2, _omitFieldNames ? '' : 'avatar')
     ..aInt64(3, _omitFieldNames ? '' : 'fans')
@@ -5123,15 +4958,12 @@ class MedialistUpInfo extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use MedialistUpInfo() / MedialistUpInfo.new instead')
   static MedialistUpInfo create() => MedialistUpInfo._();
-  static $pb.GeneratedMessage $_createMessage() => MedialistUpInfo._();
   @$core.override
-  MedialistUpInfo createEmptyInstance() => MedialistUpInfo._();
+  MedialistUpInfo createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static MedialistUpInfo getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MedialistUpInfo>(
-          MedialistUpInfo.$_createMessage);
+  static MedialistUpInfo getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<MedialistUpInfo>(create);
   static MedialistUpInfo? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -5175,7 +5007,7 @@ class MenuDeleteReq extends $pb.GeneratedMessage {
   factory MenuDeleteReq({
     $fixnum.Int64? id,
   }) {
-    final result = MenuDeleteReq._();
+    final result = create();
     if (id != null) result.id = id;
     return result;
   }
@@ -5184,16 +5016,16 @@ class MenuDeleteReq extends $pb.GeneratedMessage {
 
   factory MenuDeleteReq.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MenuDeleteReq()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory MenuDeleteReq.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MenuDeleteReq()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'MenuDeleteReq',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: MenuDeleteReq.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'id')
     ..hasRequiredFields = false;
 
@@ -5208,15 +5040,12 @@ class MenuDeleteReq extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use MenuDeleteReq() / MenuDeleteReq.new instead')
   static MenuDeleteReq create() => MenuDeleteReq._();
-  static $pb.GeneratedMessage $_createMessage() => MenuDeleteReq._();
   @$core.override
-  MenuDeleteReq createEmptyInstance() => MenuDeleteReq._();
+  MenuDeleteReq createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static MenuDeleteReq getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MenuDeleteReq>(
-          MenuDeleteReq.$_createMessage);
+  static MenuDeleteReq getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<MenuDeleteReq>(create);
   static MenuDeleteReq? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -5233,7 +5062,7 @@ class MenuDeleteResp extends $pb.GeneratedMessage {
   factory MenuDeleteResp({
     $core.String? message,
   }) {
-    final result = MenuDeleteResp._();
+    final result = create();
     if (message != null) result.message = message;
     return result;
   }
@@ -5242,16 +5071,16 @@ class MenuDeleteResp extends $pb.GeneratedMessage {
 
   factory MenuDeleteResp.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MenuDeleteResp()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory MenuDeleteResp.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MenuDeleteResp()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'MenuDeleteResp',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: MenuDeleteResp.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'message')
     ..hasRequiredFields = false;
 
@@ -5266,15 +5095,12 @@ class MenuDeleteResp extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use MenuDeleteResp() / MenuDeleteResp.new instead')
   static MenuDeleteResp create() => MenuDeleteResp._();
-  static $pb.GeneratedMessage $_createMessage() => MenuDeleteResp._();
   @$core.override
-  MenuDeleteResp createEmptyInstance() => MenuDeleteResp._();
+  MenuDeleteResp createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static MenuDeleteResp getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MenuDeleteResp>(
-          MenuDeleteResp.$_createMessage);
+  static MenuDeleteResp getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<MenuDeleteResp>(create);
   static MenuDeleteResp? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -5294,7 +5120,7 @@ class MenuEditReq extends $pb.GeneratedMessage {
     $core.String? desc,
     $core.int? isPublic,
   }) {
-    final result = MenuEditReq._();
+    final result = create();
     if (id != null) result.id = id;
     if (title != null) result.title = title;
     if (desc != null) result.desc = desc;
@@ -5306,16 +5132,16 @@ class MenuEditReq extends $pb.GeneratedMessage {
 
   factory MenuEditReq.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MenuEditReq()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory MenuEditReq.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MenuEditReq()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'MenuEditReq',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: MenuEditReq.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'title')
     ..aOS(3, _omitFieldNames ? '' : 'desc')
@@ -5333,15 +5159,12 @@ class MenuEditReq extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use MenuEditReq() / MenuEditReq.new instead')
   static MenuEditReq create() => MenuEditReq._();
-  static $pb.GeneratedMessage $_createMessage() => MenuEditReq._();
   @$core.override
-  MenuEditReq createEmptyInstance() => MenuEditReq._();
+  MenuEditReq createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static MenuEditReq getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MenuEditReq>(
-          MenuEditReq.$_createMessage);
+  static MenuEditReq getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<MenuEditReq>(create);
   static MenuEditReq? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -5385,7 +5208,7 @@ class MenuEditResp extends $pb.GeneratedMessage {
   factory MenuEditResp({
     $core.String? message,
   }) {
-    final result = MenuEditResp._();
+    final result = create();
     if (message != null) result.message = message;
     return result;
   }
@@ -5394,16 +5217,16 @@ class MenuEditResp extends $pb.GeneratedMessage {
 
   factory MenuEditResp.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MenuEditResp()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory MenuEditResp.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MenuEditResp()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'MenuEditResp',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: MenuEditResp.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'message')
     ..hasRequiredFields = false;
 
@@ -5418,15 +5241,12 @@ class MenuEditResp extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use MenuEditResp() / MenuEditResp.new instead')
   static MenuEditResp create() => MenuEditResp._();
-  static $pb.GeneratedMessage $_createMessage() => MenuEditResp._();
   @$core.override
-  MenuEditResp createEmptyInstance() => MenuEditResp._();
+  MenuEditResp createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static MenuEditResp getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MenuEditResp>(
-          MenuEditResp.$_createMessage);
+  static MenuEditResp getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<MenuEditResp>(create);
   static MenuEditResp? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -5444,7 +5264,7 @@ class MenuSubscribeReq extends $pb.GeneratedMessage {
     MenuSubscribeReq_SubscribeAction? action,
     $fixnum.Int64? targetId,
   }) {
-    final result = MenuSubscribeReq._();
+    final result = create();
     if (action != null) result.action = action;
     if (targetId != null) result.targetId = targetId;
     return result;
@@ -5454,16 +5274,16 @@ class MenuSubscribeReq extends $pb.GeneratedMessage {
 
   factory MenuSubscribeReq.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MenuSubscribeReq()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory MenuSubscribeReq.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MenuSubscribeReq()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'MenuSubscribeReq',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: MenuSubscribeReq.$_createMessage)
+      createEmptyInstance: create)
     ..aE<MenuSubscribeReq_SubscribeAction>(1, _omitFieldNames ? '' : 'action',
         enumValues: MenuSubscribeReq_SubscribeAction.values)
     ..aInt64(2, _omitFieldNames ? '' : 'targetId')
@@ -5480,15 +5300,12 @@ class MenuSubscribeReq extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use MenuSubscribeReq() / MenuSubscribeReq.new instead')
   static MenuSubscribeReq create() => MenuSubscribeReq._();
-  static $pb.GeneratedMessage $_createMessage() => MenuSubscribeReq._();
   @$core.override
-  MenuSubscribeReq createEmptyInstance() => MenuSubscribeReq._();
+  MenuSubscribeReq createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static MenuSubscribeReq getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MenuSubscribeReq>(
-          MenuSubscribeReq.$_createMessage);
+  static MenuSubscribeReq getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<MenuSubscribeReq>(create);
   static MenuSubscribeReq? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -5514,7 +5331,7 @@ class MenuSubscribeResp extends $pb.GeneratedMessage {
   factory MenuSubscribeResp({
     $core.String? message,
   }) {
-    final result = MenuSubscribeResp._();
+    final result = create();
     if (message != null) result.message = message;
     return result;
   }
@@ -5523,16 +5340,16 @@ class MenuSubscribeResp extends $pb.GeneratedMessage {
 
   factory MenuSubscribeResp.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MenuSubscribeResp()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory MenuSubscribeResp.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MenuSubscribeResp()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'MenuSubscribeResp',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: MenuSubscribeResp.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'message')
     ..hasRequiredFields = false;
 
@@ -5547,15 +5364,12 @@ class MenuSubscribeResp extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use MenuSubscribeResp() / MenuSubscribeResp.new instead')
   static MenuSubscribeResp create() => MenuSubscribeResp._();
-  static $pb.GeneratedMessage $_createMessage() => MenuSubscribeResp._();
   @$core.override
-  MenuSubscribeResp createEmptyInstance() => MenuSubscribeResp._();
+  MenuSubscribeResp createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static MenuSubscribeResp getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MenuSubscribeResp>(
-          MenuSubscribeResp.$_createMessage);
+  static MenuSubscribeResp getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<MenuSubscribeResp>(create);
   static MenuSubscribeResp? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -5583,7 +5397,7 @@ class MusicMenu extends $pb.GeneratedMessage {
     $fixnum.Int64? ctime,
     $core.String? uri,
   }) {
-    final result = MusicMenu._();
+    final result = create();
     if (id != null) result.id = id;
     if (menuType != null) result.menuType = menuType;
     if (title != null) result.title = title;
@@ -5603,27 +5417,27 @@ class MusicMenu extends $pb.GeneratedMessage {
 
   factory MusicMenu.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MusicMenu()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory MusicMenu.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MusicMenu()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'MusicMenu',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: MusicMenu.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'id')
     ..aI(2, _omitFieldNames ? '' : 'menuType')
     ..aOS(3, _omitFieldNames ? '' : 'title')
     ..aOS(4, _omitFieldNames ? '' : 'desc')
     ..aOS(5, _omitFieldNames ? '' : 'cover')
     ..aOM<MusicMenuAuthor>(6, _omitFieldNames ? '' : 'owner',
-        subBuilder: MusicMenuAuthor.$_createMessage)
+        subBuilder: MusicMenuAuthor.create)
     ..aI(7, _omitFieldNames ? '' : 'state')
     ..aInt64(8, _omitFieldNames ? '' : 'attr')
     ..aOM<MusicMenuStat>(9, _omitFieldNames ? '' : 'stat',
-        subBuilder: MusicMenuStat.$_createMessage)
+        subBuilder: MusicMenuStat.create)
     ..aInt64(10, _omitFieldNames ? '' : 'total')
     ..aInt64(11, _omitFieldNames ? '' : 'ctime')
     ..aOS(12, _omitFieldNames ? '' : 'uri')
@@ -5639,14 +5453,12 @@ class MusicMenu extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use MusicMenu() / MusicMenu.new instead')
   static MusicMenu create() => MusicMenu._();
-  static $pb.GeneratedMessage $_createMessage() => MusicMenu._();
   @$core.override
-  MusicMenu createEmptyInstance() => MusicMenu._();
+  MusicMenu createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static MusicMenu getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<MusicMenu>(MusicMenu.$_createMessage);
+  static MusicMenu getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MusicMenu>(create);
   static MusicMenu? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -5768,7 +5580,7 @@ class MusicMenuAuthor extends $pb.GeneratedMessage {
     $core.String? name,
     $core.String? avatar,
   }) {
-    final result = MusicMenuAuthor._();
+    final result = create();
     if (mid != null) result.mid = mid;
     if (name != null) result.name = name;
     if (avatar != null) result.avatar = avatar;
@@ -5779,16 +5591,16 @@ class MusicMenuAuthor extends $pb.GeneratedMessage {
 
   factory MusicMenuAuthor.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MusicMenuAuthor()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory MusicMenuAuthor.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MusicMenuAuthor()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'MusicMenuAuthor',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: MusicMenuAuthor.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'mid')
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..aOS(3, _omitFieldNames ? '' : 'avatar')
@@ -5805,15 +5617,12 @@ class MusicMenuAuthor extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use MusicMenuAuthor() / MusicMenuAuthor.new instead')
   static MusicMenuAuthor create() => MusicMenuAuthor._();
-  static $pb.GeneratedMessage $_createMessage() => MusicMenuAuthor._();
   @$core.override
-  MusicMenuAuthor createEmptyInstance() => MusicMenuAuthor._();
+  MusicMenuAuthor createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static MusicMenuAuthor getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MusicMenuAuthor>(
-          MusicMenuAuthor.$_createMessage);
+  static MusicMenuAuthor getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<MusicMenuAuthor>(create);
   static MusicMenuAuthor? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -5849,7 +5658,7 @@ class MusicMenuStat extends $pb.GeneratedMessage {
     $fixnum.Int64? play,
     $fixnum.Int64? reply,
   }) {
-    final result = MusicMenuStat._();
+    final result = create();
     if (play != null) result.play = play;
     if (reply != null) result.reply = reply;
     return result;
@@ -5859,16 +5668,16 @@ class MusicMenuStat extends $pb.GeneratedMessage {
 
   factory MusicMenuStat.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MusicMenuStat()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory MusicMenuStat.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MusicMenuStat()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'MusicMenuStat',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: MusicMenuStat.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'play')
     ..aInt64(2, _omitFieldNames ? '' : 'reply')
     ..hasRequiredFields = false;
@@ -5884,15 +5693,12 @@ class MusicMenuStat extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use MusicMenuStat() / MusicMenuStat.new instead')
   static MusicMenuStat create() => MusicMenuStat._();
-  static $pb.GeneratedMessage $_createMessage() => MusicMenuStat._();
   @$core.override
-  MusicMenuStat createEmptyInstance() => MusicMenuStat._();
+  MusicMenuStat createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static MusicMenuStat getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MusicMenuStat>(
-          MusicMenuStat.$_createMessage);
+  static MusicMenuStat getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<MusicMenuStat>(create);
   static MusicMenuStat? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -5920,7 +5726,7 @@ class MusicSubTab extends $pb.GeneratedMessage {
     $core.int? tabType,
     $fixnum.Int64? total,
   }) {
-    final result = MusicSubTab._();
+    final result = create();
     if (name != null) result.name = name;
     if (tabType != null) result.tabType = tabType;
     if (total != null) result.total = total;
@@ -5931,16 +5737,16 @@ class MusicSubTab extends $pb.GeneratedMessage {
 
   factory MusicSubTab.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MusicSubTab()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory MusicSubTab.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MusicSubTab()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'MusicSubTab',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: MusicSubTab.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'name')
     ..aI(2, _omitFieldNames ? '' : 'tabType')
     ..aInt64(3, _omitFieldNames ? '' : 'total')
@@ -5957,15 +5763,12 @@ class MusicSubTab extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use MusicSubTab() / MusicSubTab.new instead')
   static MusicSubTab create() => MusicSubTab._();
-  static $pb.GeneratedMessage $_createMessage() => MusicSubTab._();
   @$core.override
-  MusicSubTab createEmptyInstance() => MusicSubTab._();
+  MusicSubTab createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static MusicSubTab getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MusicSubTab>(
-          MusicSubTab.$_createMessage);
+  static MusicSubTab getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<MusicSubTab>(create);
   static MusicSubTab? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -6002,7 +5805,7 @@ class PageOption extends $pb.GeneratedMessage {
     PageOption_Direction? direction,
     PlayItem? lastItem,
   }) {
-    final result = PageOption._();
+    final result = create();
     if (pageSize != null) result.pageSize = pageSize;
     if (direction != null) result.direction = direction;
     if (lastItem != null) result.lastItem = lastItem;
@@ -6013,21 +5816,21 @@ class PageOption extends $pb.GeneratedMessage {
 
   factory PageOption.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PageOption()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PageOption.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PageOption()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'PageOption',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: PageOption.$_createMessage)
+      createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'pageSize')
     ..aE<PageOption_Direction>(2, _omitFieldNames ? '' : 'direction',
         enumValues: PageOption_Direction.values)
     ..aOM<PlayItem>(3, _omitFieldNames ? '' : 'lastItem',
-        subBuilder: PlayItem.$_createMessage)
+        subBuilder: PlayItem.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -6040,14 +5843,12 @@ class PageOption extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use PageOption() / PageOption.new instead')
   static PageOption create() => PageOption._();
-  static $pb.GeneratedMessage $_createMessage() => PageOption._();
   @$core.override
-  PageOption createEmptyInstance() => PageOption._();
+  PageOption createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static PageOption getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<PageOption>(PageOption.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<PageOption>(create);
   static PageOption? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -6095,7 +5896,7 @@ class PickArchive extends $pb.GeneratedMessage {
     $core.bool? useStatViewVt,
     $core.String? statViewVtText,
   }) {
-    final result = PickArchive._();
+    final result = create();
     if (item != null) result.item = item;
     if (title != null) result.title = title;
     if (owner != null) result.owner = owner;
@@ -6115,21 +5916,21 @@ class PickArchive extends $pb.GeneratedMessage {
 
   factory PickArchive.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PickArchive()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PickArchive.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PickArchive()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'PickArchive',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: PickArchive.$_createMessage)
+      createEmptyInstance: create)
     ..aOM<PlayItem>(1, _omitFieldNames ? '' : 'item',
-        subBuilder: PlayItem.$_createMessage)
+        subBuilder: PlayItem.create)
     ..aOS(2, _omitFieldNames ? '' : 'title')
     ..aOM<PickArchiveAuthor>(3, _omitFieldNames ? '' : 'owner',
-        subBuilder: PickArchiveAuthor.$_createMessage)
+        subBuilder: PickArchiveAuthor.create)
     ..aOS(4, _omitFieldNames ? '' : 'cover')
     ..aInt64(5, _omitFieldNames ? '' : 'duration')
     ..aI(6, _omitFieldNames ? '' : 'parts')
@@ -6152,15 +5953,12 @@ class PickArchive extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use PickArchive() / PickArchive.new instead')
   static PickArchive create() => PickArchive._();
-  static $pb.GeneratedMessage $_createMessage() => PickArchive._();
   @$core.override
-  PickArchive createEmptyInstance() => PickArchive._();
+  PickArchive createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static PickArchive getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PickArchive>(
-          PickArchive.$_createMessage);
+  static PickArchive getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PickArchive>(create);
   static PickArchive? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -6281,7 +6079,7 @@ class PickArchiveAuthor extends $pb.GeneratedMessage {
     $fixnum.Int64? mid,
     $core.String? name,
   }) {
-    final result = PickArchiveAuthor._();
+    final result = create();
     if (mid != null) result.mid = mid;
     if (name != null) result.name = name;
     return result;
@@ -6291,16 +6089,16 @@ class PickArchiveAuthor extends $pb.GeneratedMessage {
 
   factory PickArchiveAuthor.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PickArchiveAuthor()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PickArchiveAuthor.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PickArchiveAuthor()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'PickArchiveAuthor',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: PickArchiveAuthor.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'mid')
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..hasRequiredFields = false;
@@ -6316,15 +6114,12 @@ class PickArchiveAuthor extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use PickArchiveAuthor() / PickArchiveAuthor.new instead')
   static PickArchiveAuthor create() => PickArchiveAuthor._();
-  static $pb.GeneratedMessage $_createMessage() => PickArchiveAuthor._();
   @$core.override
-  PickArchiveAuthor createEmptyInstance() => PickArchiveAuthor._();
+  PickArchiveAuthor createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static PickArchiveAuthor getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PickArchiveAuthor>(
-          PickArchiveAuthor.$_createMessage);
+  static PickArchiveAuthor getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PickArchiveAuthor>(create);
   static PickArchiveAuthor? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -6353,7 +6148,7 @@ class PickCard extends $pb.GeneratedMessage {
     $core.String? cardName,
     $core.Iterable<CardModule>? modules,
   }) {
-    final result = PickCard._();
+    final result = create();
     if (pickId != null) result.pickId = pickId;
     if (cardId != null) result.cardId = cardId;
     if (cardName != null) result.cardName = cardName;
@@ -6365,21 +6160,21 @@ class PickCard extends $pb.GeneratedMessage {
 
   factory PickCard.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PickCard()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PickCard.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PickCard()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'PickCard',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: PickCard.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'pickId')
     ..aInt64(2, _omitFieldNames ? '' : 'cardId')
     ..aOS(3, _omitFieldNames ? '' : 'cardName')
     ..pPM<CardModule>(4, _omitFieldNames ? '' : 'modules',
-        subBuilder: CardModule.$_createMessage)
+        subBuilder: CardModule.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -6392,14 +6187,12 @@ class PickCard extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use PickCard() / PickCard.new instead')
   static PickCard create() => PickCard._();
-  static $pb.GeneratedMessage $_createMessage() => PickCard._();
   @$core.override
-  PickCard createEmptyInstance() => PickCard._();
+  PickCard createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static PickCard getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<PickCard>(PickCard.$_createMessage);
+  static PickCard getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PickCard>(create);
   static PickCard? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -6438,7 +6231,7 @@ class PickCardDetailReq extends $pb.GeneratedMessage {
     $fixnum.Int64? cardId,
     $fixnum.Int64? pickId,
   }) {
-    final result = PickCardDetailReq._();
+    final result = create();
     if (cardId != null) result.cardId = cardId;
     if (pickId != null) result.pickId = pickId;
     return result;
@@ -6448,16 +6241,16 @@ class PickCardDetailReq extends $pb.GeneratedMessage {
 
   factory PickCardDetailReq.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PickCardDetailReq()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PickCardDetailReq.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PickCardDetailReq()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'PickCardDetailReq',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: PickCardDetailReq.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'cardId')
     ..aInt64(2, _omitFieldNames ? '' : 'pickId')
     ..hasRequiredFields = false;
@@ -6473,15 +6266,12 @@ class PickCardDetailReq extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use PickCardDetailReq() / PickCardDetailReq.new instead')
   static PickCardDetailReq create() => PickCardDetailReq._();
-  static $pb.GeneratedMessage $_createMessage() => PickCardDetailReq._();
   @$core.override
-  PickCardDetailReq createEmptyInstance() => PickCardDetailReq._();
+  PickCardDetailReq createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static PickCardDetailReq getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PickCardDetailReq>(
-          PickCardDetailReq.$_createMessage);
+  static PickCardDetailReq getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PickCardDetailReq>(create);
   static PickCardDetailReq? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -6509,7 +6299,7 @@ class PickCardDetailResp extends $pb.GeneratedMessage {
     $fixnum.Int64? pickId,
     $core.Iterable<CardModule>? modules,
   }) {
-    final result = PickCardDetailResp._();
+    final result = create();
     if (cardId != null) result.cardId = cardId;
     if (pickId != null) result.pickId = pickId;
     if (modules != null) result.modules.addAll(modules);
@@ -6520,20 +6310,20 @@ class PickCardDetailResp extends $pb.GeneratedMessage {
 
   factory PickCardDetailResp.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PickCardDetailResp()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PickCardDetailResp.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PickCardDetailResp()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'PickCardDetailResp',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: PickCardDetailResp.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'cardId')
     ..aInt64(2, _omitFieldNames ? '' : 'pickId')
     ..pPM<CardModule>(3, _omitFieldNames ? '' : 'modules',
-        subBuilder: CardModule.$_createMessage)
+        subBuilder: CardModule.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -6547,15 +6337,12 @@ class PickCardDetailResp extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use PickCardDetailResp() / PickCardDetailResp.new instead')
   static PickCardDetailResp create() => PickCardDetailResp._();
-  static $pb.GeneratedMessage $_createMessage() => PickCardDetailResp._();
   @$core.override
-  PickCardDetailResp createEmptyInstance() => PickCardDetailResp._();
+  PickCardDetailResp createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static PickCardDetailResp getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<PickCardDetailResp>(
-          PickCardDetailResp.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<PickCardDetailResp>(create);
   static PickCardDetailResp? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -6584,7 +6371,7 @@ class PickFeedReq extends $pb.GeneratedMessage {
   factory PickFeedReq({
     $fixnum.Int64? offset,
   }) {
-    final result = PickFeedReq._();
+    final result = create();
     if (offset != null) result.offset = offset;
     return result;
   }
@@ -6593,16 +6380,16 @@ class PickFeedReq extends $pb.GeneratedMessage {
 
   factory PickFeedReq.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PickFeedReq()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PickFeedReq.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PickFeedReq()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'PickFeedReq',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: PickFeedReq.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'offset')
     ..hasRequiredFields = false;
 
@@ -6617,15 +6404,12 @@ class PickFeedReq extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use PickFeedReq() / PickFeedReq.new instead')
   static PickFeedReq create() => PickFeedReq._();
-  static $pb.GeneratedMessage $_createMessage() => PickFeedReq._();
   @$core.override
-  PickFeedReq createEmptyInstance() => PickFeedReq._();
+  PickFeedReq createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static PickFeedReq getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PickFeedReq>(
-          PickFeedReq.$_createMessage);
+  static PickFeedReq getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PickFeedReq>(create);
   static PickFeedReq? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -6643,7 +6427,7 @@ class PickFeedResp extends $pb.GeneratedMessage {
     $fixnum.Int64? offset,
     $core.Iterable<PickCard>? cards,
   }) {
-    final result = PickFeedResp._();
+    final result = create();
     if (offset != null) result.offset = offset;
     if (cards != null) result.cards.addAll(cards);
     return result;
@@ -6653,19 +6437,19 @@ class PickFeedResp extends $pb.GeneratedMessage {
 
   factory PickFeedResp.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PickFeedResp()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PickFeedResp.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PickFeedResp()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'PickFeedResp',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: PickFeedResp.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'offset')
     ..pPM<PickCard>(2, _omitFieldNames ? '' : 'cards',
-        subBuilder: PickCard.$_createMessage)
+        subBuilder: PickCard.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -6679,15 +6463,12 @@ class PickFeedResp extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use PickFeedResp() / PickFeedResp.new instead')
   static PickFeedResp create() => PickFeedResp._();
-  static $pb.GeneratedMessage $_createMessage() => PickFeedResp._();
   @$core.override
-  PickFeedResp createEmptyInstance() => PickFeedResp._();
+  PickFeedResp createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static PickFeedResp getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PickFeedResp>(
-          PickFeedResp.$_createMessage);
+  static PickFeedResp getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PickFeedResp>(create);
   static PickFeedResp? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -6708,7 +6489,7 @@ class PkcmArchive extends $pb.GeneratedMessage {
     PickArchive? arc,
     $core.String? pickReason,
   }) {
-    final result = PkcmArchive._();
+    final result = create();
     if (arc != null) result.arc = arc;
     if (pickReason != null) result.pickReason = pickReason;
     return result;
@@ -6718,18 +6499,18 @@ class PkcmArchive extends $pb.GeneratedMessage {
 
   factory PkcmArchive.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PkcmArchive()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PkcmArchive.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PkcmArchive()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'PkcmArchive',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: PkcmArchive.$_createMessage)
+      createEmptyInstance: create)
     ..aOM<PickArchive>(1, _omitFieldNames ? '' : 'arc',
-        subBuilder: PickArchive.$_createMessage)
+        subBuilder: PickArchive.create)
     ..aOS(2, _omitFieldNames ? '' : 'pickReason')
     ..hasRequiredFields = false;
 
@@ -6744,15 +6525,12 @@ class PkcmArchive extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use PkcmArchive() / PkcmArchive.new instead')
   static PkcmArchive create() => PkcmArchive._();
-  static $pb.GeneratedMessage $_createMessage() => PkcmArchive._();
   @$core.override
-  PkcmArchive createEmptyInstance() => PkcmArchive._();
+  PkcmArchive createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static PkcmArchive getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PkcmArchive>(
-          PkcmArchive.$_createMessage);
+  static PkcmArchive getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PkcmArchive>(create);
   static PkcmArchive? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -6783,7 +6561,7 @@ class PkcmCenterButton extends $pb.GeneratedMessage {
     $core.String? title,
     $core.String? uri,
   }) {
-    final result = PkcmCenterButton._();
+    final result = create();
     if (iconHead != null) result.iconHead = iconHead;
     if (iconTail != null) result.iconTail = iconTail;
     if (title != null) result.title = title;
@@ -6795,16 +6573,16 @@ class PkcmCenterButton extends $pb.GeneratedMessage {
 
   factory PkcmCenterButton.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PkcmCenterButton()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PkcmCenterButton.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PkcmCenterButton()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'PkcmCenterButton',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: PkcmCenterButton.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'iconHead')
     ..aOS(2, _omitFieldNames ? '' : 'iconTail')
     ..aOS(3, _omitFieldNames ? '' : 'title')
@@ -6822,15 +6600,12 @@ class PkcmCenterButton extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use PkcmCenterButton() / PkcmCenterButton.new instead')
   static PkcmCenterButton create() => PkcmCenterButton._();
-  static $pb.GeneratedMessage $_createMessage() => PkcmCenterButton._();
   @$core.override
-  PkcmCenterButton createEmptyInstance() => PkcmCenterButton._();
+  PkcmCenterButton createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static PkcmCenterButton getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PkcmCenterButton>(
-          PkcmCenterButton.$_createMessage);
+  static PkcmCenterButton getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PkcmCenterButton>(create);
   static PkcmCenterButton? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -6878,7 +6653,7 @@ class PkcmHeader extends $pb.GeneratedMessage {
     $core.String? btnText,
     $core.String? btnUri,
   }) {
-    final result = PkcmHeader._();
+    final result = create();
     if (title != null) result.title = title;
     if (desc != null) result.desc = desc;
     if (btnIcon != null) result.btnIcon = btnIcon;
@@ -6891,16 +6666,16 @@ class PkcmHeader extends $pb.GeneratedMessage {
 
   factory PkcmHeader.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PkcmHeader()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PkcmHeader.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PkcmHeader()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'PkcmHeader',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: PkcmHeader.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'title')
     ..aOS(2, _omitFieldNames ? '' : 'desc')
     ..aOS(3, _omitFieldNames ? '' : 'btnIcon')
@@ -6918,14 +6693,12 @@ class PkcmHeader extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use PkcmHeader() / PkcmHeader.new instead')
   static PkcmHeader create() => PkcmHeader._();
-  static $pb.GeneratedMessage $_createMessage() => PkcmHeader._();
   @$core.override
-  PkcmHeader createEmptyInstance() => PkcmHeader._();
+  PkcmHeader createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static PkcmHeader getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<PkcmHeader>(PkcmHeader.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<PkcmHeader>(create);
   static PkcmHeader? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -6979,7 +6752,7 @@ class PlayActionReportReq extends $pb.GeneratedMessage {
     PlayItem? item,
     $core.String? fromSpmid,
   }) {
-    final result = PlayActionReportReq._();
+    final result = create();
     if (item != null) result.item = item;
     if (fromSpmid != null) result.fromSpmid = fromSpmid;
     return result;
@@ -6989,18 +6762,18 @@ class PlayActionReportReq extends $pb.GeneratedMessage {
 
   factory PlayActionReportReq.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlayActionReportReq()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PlayActionReportReq.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlayActionReportReq()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'PlayActionReportReq',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: PlayActionReportReq.$_createMessage)
+      createEmptyInstance: create)
     ..aOM<PlayItem>(1, _omitFieldNames ? '' : 'item',
-        subBuilder: PlayItem.$_createMessage)
+        subBuilder: PlayItem.create)
     ..aOS(2, _omitFieldNames ? '' : 'fromSpmid')
     ..hasRequiredFields = false;
 
@@ -7015,16 +6788,12 @@ class PlayActionReportReq extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core
-      .Deprecated('Use PlayActionReportReq() / PlayActionReportReq.new instead')
   static PlayActionReportReq create() => PlayActionReportReq._();
-  static $pb.GeneratedMessage $_createMessage() => PlayActionReportReq._();
   @$core.override
-  PlayActionReportReq createEmptyInstance() => PlayActionReportReq._();
+  PlayActionReportReq createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static PlayActionReportReq getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<PlayActionReportReq>(
-          PlayActionReportReq.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<PlayActionReportReq>(create);
   static PlayActionReportReq? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -7054,7 +6823,7 @@ class PlayDASH extends $pb.GeneratedMessage {
     $core.double? minBufferTime,
     $core.Iterable<DashItem>? audio,
   }) {
-    final result = PlayDASH._();
+    final result = create();
     if (duration != null) result.duration = duration;
     if (minBufferTime != null) result.minBufferTime = minBufferTime;
     if (audio != null) result.audio.addAll(audio);
@@ -7065,21 +6834,21 @@ class PlayDASH extends $pb.GeneratedMessage {
 
   factory PlayDASH.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlayDASH()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PlayDASH.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlayDASH()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'PlayDASH',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: PlayDASH.$_createMessage)
+      createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'duration')
     ..aD(2, _omitFieldNames ? '' : 'minBufferTime',
         fieldType: $pb.PbFieldType.OF)
     ..pPM<DashItem>(3, _omitFieldNames ? '' : 'audio',
-        subBuilder: DashItem.$_createMessage)
+        subBuilder: DashItem.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -7092,14 +6861,12 @@ class PlayDASH extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use PlayDASH() / PlayDASH.new instead')
   static PlayDASH create() => PlayDASH._();
-  static $pb.GeneratedMessage $_createMessage() => PlayDASH._();
   @$core.override
-  PlayDASH createEmptyInstance() => PlayDASH._();
+  PlayDASH createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static PlayDASH getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<PlayDASH>(PlayDASH.$_createMessage);
+  static PlayDASH getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PlayDASH>(create);
   static PlayDASH? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -7131,7 +6898,7 @@ class PlayHistoryAddReq extends $pb.GeneratedMessage {
     $fixnum.Int64? duration,
     $core.int? playStyle,
   }) {
-    final result = PlayHistoryAddReq._();
+    final result = create();
     if (item != null) result.item = item;
     if (progress != null) result.progress = progress;
     if (duration != null) result.duration = duration;
@@ -7143,18 +6910,18 @@ class PlayHistoryAddReq extends $pb.GeneratedMessage {
 
   factory PlayHistoryAddReq.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlayHistoryAddReq()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PlayHistoryAddReq.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlayHistoryAddReq()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'PlayHistoryAddReq',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: PlayHistoryAddReq.$_createMessage)
+      createEmptyInstance: create)
     ..aOM<PlayItem>(1, _omitFieldNames ? '' : 'item',
-        subBuilder: PlayItem.$_createMessage)
+        subBuilder: PlayItem.create)
     ..aInt64(2, _omitFieldNames ? '' : 'progress')
     ..aInt64(3, _omitFieldNames ? '' : 'duration')
     ..aI(4, _omitFieldNames ? '' : 'playStyle')
@@ -7171,15 +6938,12 @@ class PlayHistoryAddReq extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use PlayHistoryAddReq() / PlayHistoryAddReq.new instead')
   static PlayHistoryAddReq create() => PlayHistoryAddReq._();
-  static $pb.GeneratedMessage $_createMessage() => PlayHistoryAddReq._();
   @$core.override
-  PlayHistoryAddReq createEmptyInstance() => PlayHistoryAddReq._();
+  PlayHistoryAddReq createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static PlayHistoryAddReq getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PlayHistoryAddReq>(
-          PlayHistoryAddReq.$_createMessage);
+  static PlayHistoryAddReq getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PlayHistoryAddReq>(create);
   static PlayHistoryAddReq? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -7226,7 +6990,7 @@ class PlayHistoryDelReq extends $pb.GeneratedMessage {
     $core.Iterable<PlayItem>? items,
     $core.bool? truncate,
   }) {
-    final result = PlayHistoryDelReq._();
+    final result = create();
     if (items != null) result.items.addAll(items);
     if (truncate != null) result.truncate = truncate;
     return result;
@@ -7236,18 +7000,18 @@ class PlayHistoryDelReq extends $pb.GeneratedMessage {
 
   factory PlayHistoryDelReq.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlayHistoryDelReq()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PlayHistoryDelReq.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlayHistoryDelReq()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'PlayHistoryDelReq',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: PlayHistoryDelReq.$_createMessage)
+      createEmptyInstance: create)
     ..pPM<PlayItem>(1, _omitFieldNames ? '' : 'items',
-        subBuilder: PlayItem.$_createMessage)
+        subBuilder: PlayItem.create)
     ..aOB(2, _omitFieldNames ? '' : 'truncate')
     ..hasRequiredFields = false;
 
@@ -7262,15 +7026,12 @@ class PlayHistoryDelReq extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use PlayHistoryDelReq() / PlayHistoryDelReq.new instead')
   static PlayHistoryDelReq create() => PlayHistoryDelReq._();
-  static $pb.GeneratedMessage $_createMessage() => PlayHistoryDelReq._();
   @$core.override
-  PlayHistoryDelReq createEmptyInstance() => PlayHistoryDelReq._();
+  PlayHistoryDelReq createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static PlayHistoryDelReq getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PlayHistoryDelReq>(
-          PlayHistoryDelReq.$_createMessage);
+  static PlayHistoryDelReq getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PlayHistoryDelReq>(create);
   static PlayHistoryDelReq? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -7292,7 +7053,7 @@ class PlayHistoryReq extends $pb.GeneratedMessage {
     $fixnum.Int64? localTodayZero,
     $4.Pagination? pagination,
   }) {
-    final result = PlayHistoryReq._();
+    final result = create();
     if (pageOpt != null) result.pageOpt = pageOpt;
     if (localTodayZero != null) result.localTodayZero = localTodayZero;
     if (pagination != null) result.pagination = pagination;
@@ -7303,21 +7064,21 @@ class PlayHistoryReq extends $pb.GeneratedMessage {
 
   factory PlayHistoryReq.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlayHistoryReq()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PlayHistoryReq.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlayHistoryReq()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'PlayHistoryReq',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: PlayHistoryReq.$_createMessage)
+      createEmptyInstance: create)
     ..aOM<PageOption>(1, _omitFieldNames ? '' : 'pageOpt',
-        subBuilder: PageOption.$_createMessage)
+        subBuilder: PageOption.create)
     ..aInt64(2, _omitFieldNames ? '' : 'localTodayZero')
     ..aOM<$4.Pagination>(3, _omitFieldNames ? '' : 'pagination',
-        subBuilder: $4.Pagination.$_createMessage)
+        subBuilder: $4.Pagination.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -7331,15 +7092,12 @@ class PlayHistoryReq extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use PlayHistoryReq() / PlayHistoryReq.new instead')
   static PlayHistoryReq create() => PlayHistoryReq._();
-  static $pb.GeneratedMessage $_createMessage() => PlayHistoryReq._();
   @$core.override
-  PlayHistoryReq createEmptyInstance() => PlayHistoryReq._();
+  PlayHistoryReq createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static PlayHistoryReq getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PlayHistoryReq>(
-          PlayHistoryReq.$_createMessage);
+  static PlayHistoryReq getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PlayHistoryReq>(create);
   static PlayHistoryReq? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -7381,7 +7139,7 @@ class PlayHistoryResp extends $pb.GeneratedMessage {
     $core.Iterable<DetailItem>? list,
     $4.PaginationReply? paginationReply,
   }) {
-    final result = PlayHistoryResp._();
+    final result = create();
     if (total != null) result.total = total;
     if (reachEnd != null) result.reachEnd = reachEnd;
     if (list != null) result.list.addAll(list);
@@ -7393,22 +7151,22 @@ class PlayHistoryResp extends $pb.GeneratedMessage {
 
   factory PlayHistoryResp.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlayHistoryResp()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PlayHistoryResp.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlayHistoryResp()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'PlayHistoryResp',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: PlayHistoryResp.$_createMessage)
+      createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'total')
     ..aOB(2, _omitFieldNames ? '' : 'reachEnd')
     ..pPM<DetailItem>(3, _omitFieldNames ? '' : 'list',
-        subBuilder: DetailItem.$_createMessage)
+        subBuilder: DetailItem.create)
     ..aOM<$4.PaginationReply>(4, _omitFieldNames ? '' : 'paginationReply',
-        subBuilder: $4.PaginationReply.$_createMessage)
+        subBuilder: $4.PaginationReply.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -7422,15 +7180,12 @@ class PlayHistoryResp extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use PlayHistoryResp() / PlayHistoryResp.new instead')
   static PlayHistoryResp create() => PlayHistoryResp._();
-  static $pb.GeneratedMessage $_createMessage() => PlayHistoryResp._();
   @$core.override
-  PlayHistoryResp createEmptyInstance() => PlayHistoryResp._();
+  PlayHistoryResp createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static PlayHistoryResp getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PlayHistoryResp>(
-          PlayHistoryResp.$_createMessage);
+  static PlayHistoryResp getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PlayHistoryResp>(create);
   static PlayHistoryResp? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -7485,7 +7240,7 @@ class PlayInfo extends $pb.GeneratedMessage {
     $fixnum.Int64? expireTime,
     $5.VolumeInfo? volume,
   }) {
-    final result = PlayInfo._();
+    final result = create();
     if (qn != null) result.qn = qn;
     if (format != null) result.format = format;
     if (qnType != null) result.qnType = qnType;
@@ -7507,10 +7262,10 @@ class PlayInfo extends $pb.GeneratedMessage {
 
   factory PlayInfo.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlayInfo()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PlayInfo.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlayInfo()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static const $core.Map<$core.int, PlayInfo_Info> _PlayInfo_InfoByTag = {
     4: PlayInfo_Info.playUrl,
@@ -7521,26 +7276,26 @@ class PlayInfo extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'PlayInfo',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: PlayInfo.$_createMessage)
+      createEmptyInstance: create)
     ..oo(0, [4, 5])
     ..aI(1, _omitFieldNames ? '' : 'qn')
     ..aOS(2, _omitFieldNames ? '' : 'format')
     ..aI(3, _omitFieldNames ? '' : 'qnType')
     ..aOM<PlayURL>(4, _omitFieldNames ? '' : 'playUrl',
-        subBuilder: PlayURL.$_createMessage)
+        subBuilder: PlayURL.create)
     ..aOM<PlayDASH>(5, _omitFieldNames ? '' : 'playDash',
-        subBuilder: PlayDASH.$_createMessage)
+        subBuilder: PlayDASH.create)
     ..aI(6, _omitFieldNames ? '' : 'fnver')
     ..aI(7, _omitFieldNames ? '' : 'fnval')
     ..pPM<FormatDescription>(8, _omitFieldNames ? '' : 'formats',
-        subBuilder: FormatDescription.$_createMessage)
+        subBuilder: FormatDescription.create)
     ..aI(9, _omitFieldNames ? '' : 'videoCodecid')
     ..aInt64(10, _omitFieldNames ? '' : 'length')
     ..aI(11, _omitFieldNames ? '' : 'code')
     ..aOS(12, _omitFieldNames ? '' : 'message')
     ..aInt64(13, _omitFieldNames ? '' : 'expireTime')
     ..aOM<$5.VolumeInfo>(14, _omitFieldNames ? '' : 'volume',
-        subBuilder: $5.VolumeInfo.$_createMessage)
+        subBuilder: $5.VolumeInfo.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -7553,14 +7308,12 @@ class PlayInfo extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use PlayInfo() / PlayInfo.new instead')
   static PlayInfo create() => PlayInfo._();
-  static $pb.GeneratedMessage $_createMessage() => PlayInfo._();
   @$core.override
-  PlayInfo createEmptyInstance() => PlayInfo._();
+  PlayInfo createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static PlayInfo getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<PlayInfo>(PlayInfo.$_createMessage);
+  static PlayInfo getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PlayInfo>(create);
   static PlayInfo? _defaultInstance;
 
   @$pb.TagNumber(4)
@@ -7705,7 +7458,7 @@ class PlayItem extends $pb.GeneratedMessage {
     EventTracking? et,
     $fixnum.Int64? pos,
   }) {
-    final result = PlayItem._();
+    final result = create();
     if (itemType != null) result.itemType = itemType;
     if (oid != null) result.oid = oid;
     if (subId != null) result.subId.addAll(subId);
@@ -7718,21 +7471,21 @@ class PlayItem extends $pb.GeneratedMessage {
 
   factory PlayItem.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlayItem()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PlayItem.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlayItem()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'PlayItem',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: PlayItem.$_createMessage)
+      createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'itemType')
     ..aInt64(3, _omitFieldNames ? '' : 'oid')
     ..p<$fixnum.Int64>(4, _omitFieldNames ? '' : 'subId', $pb.PbFieldType.K6)
     ..aOM<EventTracking>(5, _omitFieldNames ? '' : 'et',
-        subBuilder: EventTracking.$_createMessage)
+        subBuilder: EventTracking.create)
     ..aInt64(6, _omitFieldNames ? '' : 'pos')
     ..hasRequiredFields = false;
 
@@ -7746,14 +7499,12 @@ class PlayItem extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use PlayItem() / PlayItem.new instead')
   static PlayItem create() => PlayItem._();
-  static $pb.GeneratedMessage $_createMessage() => PlayItem._();
   @$core.override
-  PlayItem createEmptyInstance() => PlayItem._();
+  PlayItem createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static PlayItem getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<PlayItem>(PlayItem.$_createMessage);
+  static PlayItem getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PlayItem>(create);
   static PlayItem? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -7802,7 +7553,7 @@ class PlayURL extends $pb.GeneratedMessage {
   factory PlayURL({
     $core.Iterable<ResponseUrl>? durl,
   }) {
-    final result = PlayURL._();
+    final result = create();
     if (durl != null) result.durl.addAll(durl);
     return result;
   }
@@ -7811,18 +7562,18 @@ class PlayURL extends $pb.GeneratedMessage {
 
   factory PlayURL.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlayURL()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PlayURL.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlayURL()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'PlayURL',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: PlayURL.$_createMessage)
+      createEmptyInstance: create)
     ..pPM<ResponseUrl>(1, _omitFieldNames ? '' : 'durl',
-        subBuilder: ResponseUrl.$_createMessage)
+        subBuilder: ResponseUrl.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -7835,14 +7586,12 @@ class PlayURL extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use PlayURL() / PlayURL.new instead')
   static PlayURL create() => PlayURL._();
-  static $pb.GeneratedMessage $_createMessage() => PlayURL._();
   @$core.override
-  PlayURL createEmptyInstance() => PlayURL._();
+  PlayURL createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static PlayURL getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<PlayURL>(PlayURL.$_createMessage);
+  static PlayURL getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PlayURL>(create);
   static PlayURL? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -7854,7 +7603,7 @@ class PlayURLReq extends $pb.GeneratedMessage {
     PlayItem? item,
     $2.PlayerArgs? playerArgs,
   }) {
-    final result = PlayURLReq._();
+    final result = create();
     if (item != null) result.item = item;
     if (playerArgs != null) result.playerArgs = playerArgs;
     return result;
@@ -7864,20 +7613,20 @@ class PlayURLReq extends $pb.GeneratedMessage {
 
   factory PlayURLReq.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlayURLReq()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PlayURLReq.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlayURLReq()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'PlayURLReq',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: PlayURLReq.$_createMessage)
+      createEmptyInstance: create)
     ..aOM<PlayItem>(1, _omitFieldNames ? '' : 'item',
-        subBuilder: PlayItem.$_createMessage)
+        subBuilder: PlayItem.create)
     ..aOM<$2.PlayerArgs>(2, _omitFieldNames ? '' : 'playerArgs',
-        subBuilder: $2.PlayerArgs.$_createMessage)
+        subBuilder: $2.PlayerArgs.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -7890,14 +7639,12 @@ class PlayURLReq extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use PlayURLReq() / PlayURLReq.new instead')
   static PlayURLReq create() => PlayURLReq._();
-  static $pb.GeneratedMessage $_createMessage() => PlayURLReq._();
   @$core.override
-  PlayURLReq createEmptyInstance() => PlayURLReq._();
+  PlayURLReq createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static PlayURLReq getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<PlayURLReq>(PlayURLReq.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<PlayURLReq>(create);
   static PlayURLReq? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -7930,7 +7677,7 @@ class PlayURLResp extends $pb.GeneratedMessage {
     $core.String? message,
     $core.Iterable<$core.MapEntry<$fixnum.Int64, PlayInfo>>? playerInfo,
   }) {
-    final result = PlayURLResp._();
+    final result = create();
     if (item != null) result.item = item;
     if (playable != null) result.playable = playable;
     if (message != null) result.message = message;
@@ -7942,25 +7689,25 @@ class PlayURLResp extends $pb.GeneratedMessage {
 
   factory PlayURLResp.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlayURLResp()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PlayURLResp.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlayURLResp()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'PlayURLResp',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: PlayURLResp.$_createMessage)
+      createEmptyInstance: create)
     ..aOM<PlayItem>(1, _omitFieldNames ? '' : 'item',
-        subBuilder: PlayItem.$_createMessage)
+        subBuilder: PlayItem.create)
     ..aI(2, _omitFieldNames ? '' : 'playable')
     ..aOS(3, _omitFieldNames ? '' : 'message')
     ..m<$fixnum.Int64, PlayInfo>(4, _omitFieldNames ? '' : 'playerInfo',
         entryClassName: 'PlayURLResp.PlayerInfoEntry',
         keyFieldType: $pb.PbFieldType.O6,
         valueFieldType: $pb.PbFieldType.OM,
-        valueCreator: PlayInfo.$_createMessage,
+        valueCreator: PlayInfo.create,
         valueDefaultOrMaker: PlayInfo.getDefault,
         packageName: const $pb.PackageName('bilibili.app.listener.v1'))
     ..hasRequiredFields = false;
@@ -7976,15 +7723,12 @@ class PlayURLResp extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use PlayURLResp() / PlayURLResp.new instead')
   static PlayURLResp create() => PlayURLResp._();
-  static $pb.GeneratedMessage $_createMessage() => PlayURLResp._();
   @$core.override
-  PlayURLResp createEmptyInstance() => PlayURLResp._();
+  PlayURLResp createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static PlayURLResp getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PlayURLResp>(
-          PlayURLResp.$_createMessage);
+  static PlayURLResp getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PlayURLResp>(create);
   static PlayURLResp? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -8029,7 +7773,7 @@ class PlaylistAddReq extends $pb.GeneratedMessage {
     $core.bool? head,
     $core.bool? tail,
   }) {
-    final result = PlaylistAddReq._();
+    final result = create();
     if (items != null) result.items.addAll(items);
     if (after != null) result.after = after;
     if (head != null) result.head = head;
@@ -8041,10 +7785,10 @@ class PlaylistAddReq extends $pb.GeneratedMessage {
 
   factory PlaylistAddReq.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlaylistAddReq()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PlaylistAddReq.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlaylistAddReq()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static const $core.Map<$core.int, PlaylistAddReq_Pos>
       _PlaylistAddReq_PosByTag = {
@@ -8057,12 +7801,12 @@ class PlaylistAddReq extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'PlaylistAddReq',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: PlaylistAddReq.$_createMessage)
+      createEmptyInstance: create)
     ..oo(0, [2, 3, 4])
     ..pPM<PlayItem>(1, _omitFieldNames ? '' : 'items',
-        subBuilder: PlayItem.$_createMessage)
+        subBuilder: PlayItem.create)
     ..aOM<PlayItem>(2, _omitFieldNames ? '' : 'after',
-        subBuilder: PlayItem.$_createMessage)
+        subBuilder: PlayItem.create)
     ..aOB(3, _omitFieldNames ? '' : 'head')
     ..aOB(4, _omitFieldNames ? '' : 'tail')
     ..hasRequiredFields = false;
@@ -8078,15 +7822,12 @@ class PlaylistAddReq extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use PlaylistAddReq() / PlaylistAddReq.new instead')
   static PlaylistAddReq create() => PlaylistAddReq._();
-  static $pb.GeneratedMessage $_createMessage() => PlaylistAddReq._();
   @$core.override
-  PlaylistAddReq createEmptyInstance() => PlaylistAddReq._();
+  PlaylistAddReq createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static PlaylistAddReq getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PlaylistAddReq>(
-          PlaylistAddReq.$_createMessage);
+  static PlaylistAddReq getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PlaylistAddReq>(create);
   static PlaylistAddReq? _defaultInstance;
 
   @$pb.TagNumber(2)
@@ -8136,7 +7877,7 @@ class PlaylistDelReq extends $pb.GeneratedMessage {
     $core.Iterable<PlayItem>? items,
     $core.bool? truncate,
   }) {
-    final result = PlaylistDelReq._();
+    final result = create();
     if (items != null) result.items.addAll(items);
     if (truncate != null) result.truncate = truncate;
     return result;
@@ -8146,18 +7887,18 @@ class PlaylistDelReq extends $pb.GeneratedMessage {
 
   factory PlaylistDelReq.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlaylistDelReq()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PlaylistDelReq.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlaylistDelReq()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'PlaylistDelReq',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: PlaylistDelReq.$_createMessage)
+      createEmptyInstance: create)
     ..pPM<PlayItem>(1, _omitFieldNames ? '' : 'items',
-        subBuilder: PlayItem.$_createMessage)
+        subBuilder: PlayItem.create)
     ..aOB(2, _omitFieldNames ? '' : 'truncate')
     ..hasRequiredFields = false;
 
@@ -8172,15 +7913,12 @@ class PlaylistDelReq extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use PlaylistDelReq() / PlaylistDelReq.new instead')
   static PlaylistDelReq create() => PlaylistDelReq._();
-  static $pb.GeneratedMessage $_createMessage() => PlaylistDelReq._();
   @$core.override
-  PlaylistDelReq createEmptyInstance() => PlaylistDelReq._();
+  PlaylistDelReq createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static PlaylistDelReq getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PlaylistDelReq>(
-          PlaylistDelReq.$_createMessage);
+  static PlaylistDelReq getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PlaylistDelReq>(create);
   static PlaylistDelReq? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -8203,7 +7941,7 @@ class PlaylistOffset extends $pb.GeneratedMessage {
     RandomOrderStatus? randomState,
     SortOption? sortOpt,
   }) {
-    final result = PlaylistOffset._();
+    final result = create();
     if (direction != null) result.direction = direction;
     if (lastItem != null) result.lastItem = lastItem;
     if (randomState != null) result.randomState = randomState;
@@ -8215,25 +7953,25 @@ class PlaylistOffset extends $pb.GeneratedMessage {
 
   factory PlaylistOffset.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlaylistOffset()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PlaylistOffset.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlaylistOffset()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'PlaylistOffset',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: PlaylistOffset.$_createMessage)
+      createEmptyInstance: create)
     ..aE<PlaylistOffset_PlaylistScrollDirection>(
         1, _omitFieldNames ? '' : 'direction',
         enumValues: PlaylistOffset_PlaylistScrollDirection.values)
     ..aOM<PlayItem>(2, _omitFieldNames ? '' : 'lastItem',
-        subBuilder: PlayItem.$_createMessage)
+        subBuilder: PlayItem.create)
     ..aOM<RandomOrderStatus>(3, _omitFieldNames ? '' : 'randomState',
-        subBuilder: RandomOrderStatus.$_createMessage)
+        subBuilder: RandomOrderStatus.create)
     ..aOM<SortOption>(4, _omitFieldNames ? '' : 'sortOpt',
-        subBuilder: SortOption.$_createMessage)
+        subBuilder: SortOption.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -8247,15 +7985,12 @@ class PlaylistOffset extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use PlaylistOffset() / PlaylistOffset.new instead')
   static PlaylistOffset create() => PlaylistOffset._();
-  static $pb.GeneratedMessage $_createMessage() => PlaylistOffset._();
   @$core.override
-  PlaylistOffset createEmptyInstance() => PlaylistOffset._();
+  PlaylistOffset createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static PlaylistOffset getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PlaylistOffset>(
-          PlaylistOffset.$_createMessage);
+  static PlaylistOffset getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PlaylistOffset>(create);
   static PlaylistOffset? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -8313,7 +8048,7 @@ class PlaylistReq extends $pb.GeneratedMessage {
     SortOption? sortOpt,
     $4.Pagination? pagination,
   }) {
-    final result = PlaylistReq._();
+    final result = create();
     if (from != null) result.from = from;
     if (id != null) result.id = id;
     if (anchor != null) result.anchor = anchor;
@@ -8329,30 +8064,30 @@ class PlaylistReq extends $pb.GeneratedMessage {
 
   factory PlaylistReq.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlaylistReq()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PlaylistReq.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlaylistReq()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'PlaylistReq',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: PlaylistReq.$_createMessage)
+      createEmptyInstance: create)
     ..aE<PlaylistSource>(1, _omitFieldNames ? '' : 'from',
         enumValues: PlaylistSource.values)
     ..aInt64(2, _omitFieldNames ? '' : 'id')
     ..aOM<PlayItem>(3, _omitFieldNames ? '' : 'anchor',
-        subBuilder: PlayItem.$_createMessage)
+        subBuilder: PlayItem.create)
     ..aOM<PageOption>(4, _omitFieldNames ? '' : 'pageOpt',
-        subBuilder: PageOption.$_createMessage)
+        subBuilder: PageOption.create)
     ..aOM<$2.PlayerArgs>(5, _omitFieldNames ? '' : 'playerArgs',
-        subBuilder: $2.PlayerArgs.$_createMessage)
+        subBuilder: $2.PlayerArgs.create)
     ..aInt64(6, _omitFieldNames ? '' : 'extraId')
     ..aOM<SortOption>(7, _omitFieldNames ? '' : 'sortOpt',
-        subBuilder: SortOption.$_createMessage)
+        subBuilder: SortOption.create)
     ..aOM<$4.Pagination>(8, _omitFieldNames ? '' : 'pagination',
-        subBuilder: $4.Pagination.$_createMessage)
+        subBuilder: $4.Pagination.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -8366,15 +8101,12 @@ class PlaylistReq extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use PlaylistReq() / PlaylistReq.new instead')
   static PlaylistReq create() => PlaylistReq._();
-  static $pb.GeneratedMessage $_createMessage() => PlaylistReq._();
   @$core.override
-  PlaylistReq createEmptyInstance() => PlaylistReq._();
+  PlaylistReq createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static PlaylistReq getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PlaylistReq>(
-          PlaylistReq.$_createMessage);
+  static PlaylistReq getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PlaylistReq>(create);
   static PlaylistReq? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -8470,7 +8202,7 @@ class PlaylistResp extends $pb.GeneratedMessage {
     $fixnum.Int64? lastProgress,
     $4.PaginationReply? paginationReply,
   }) {
-    final result = PlaylistResp._();
+    final result = create();
     if (total != null) result.total = total;
     if (reachStart != null) result.reachStart = reachStart;
     if (reachEnd != null) result.reachEnd = reachEnd;
@@ -8485,26 +8217,26 @@ class PlaylistResp extends $pb.GeneratedMessage {
 
   factory PlaylistResp.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlaylistResp()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PlaylistResp.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlaylistResp()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'PlaylistResp',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: PlaylistResp.$_createMessage)
+      createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'total')
     ..aOB(2, _omitFieldNames ? '' : 'reachStart')
     ..aOB(3, _omitFieldNames ? '' : 'reachEnd')
     ..pPM<DetailItem>(4, _omitFieldNames ? '' : 'list',
-        subBuilder: DetailItem.$_createMessage)
+        subBuilder: DetailItem.create)
     ..aOM<PlayItem>(5, _omitFieldNames ? '' : 'lastPlay',
-        subBuilder: PlayItem.$_createMessage)
+        subBuilder: PlayItem.create)
     ..aInt64(6, _omitFieldNames ? '' : 'lastProgress')
     ..aOM<$4.PaginationReply>(7, _omitFieldNames ? '' : 'paginationReply',
-        subBuilder: $4.PaginationReply.$_createMessage)
+        subBuilder: $4.PaginationReply.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -8518,15 +8250,12 @@ class PlaylistResp extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use PlaylistResp() / PlaylistResp.new instead')
   static PlaylistResp create() => PlaylistResp._();
-  static $pb.GeneratedMessage $_createMessage() => PlaylistResp._();
   @$core.override
-  PlaylistResp createEmptyInstance() => PlaylistResp._();
+  PlaylistResp createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static PlaylistResp getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PlaylistResp>(
-          PlaylistResp.$_createMessage);
+  static PlaylistResp getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PlaylistResp>(create);
   static PlaylistResp? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -8595,7 +8324,7 @@ class RandomOrderStatus extends $pb.GeneratedMessage {
   factory RandomOrderStatus({
     $core.Iterable<$fixnum.Int64>? exposedPos,
   }) {
-    final result = RandomOrderStatus._();
+    final result = create();
     if (exposedPos != null) result.exposedPos.addAll(exposedPos);
     return result;
   }
@@ -8604,16 +8333,16 @@ class RandomOrderStatus extends $pb.GeneratedMessage {
 
   factory RandomOrderStatus.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      RandomOrderStatus()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory RandomOrderStatus.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      RandomOrderStatus()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'RandomOrderStatus',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: RandomOrderStatus.$_createMessage)
+      createEmptyInstance: create)
     ..p<$fixnum.Int64>(
         1, _omitFieldNames ? '' : 'exposedPos', $pb.PbFieldType.K6)
     ..hasRequiredFields = false;
@@ -8629,15 +8358,12 @@ class RandomOrderStatus extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use RandomOrderStatus() / RandomOrderStatus.new instead')
   static RandomOrderStatus create() => RandomOrderStatus._();
-  static $pb.GeneratedMessage $_createMessage() => RandomOrderStatus._();
   @$core.override
-  RandomOrderStatus createEmptyInstance() => RandomOrderStatus._();
+  RandomOrderStatus createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static RandomOrderStatus getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RandomOrderStatus>(
-          RandomOrderStatus.$_createMessage);
+  static RandomOrderStatus getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<RandomOrderStatus>(create);
   static RandomOrderStatus? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -8652,7 +8378,7 @@ class RcmdOffset extends $pb.GeneratedMessage {
     $core.String? sessionId,
     $core.String? fromTrackid,
   }) {
-    final result = RcmdOffset._();
+    final result = create();
     if (rcmdFrom != null) result.rcmdFrom = rcmdFrom;
     if (id != null) result.id = id;
     if (page != null) result.page = page;
@@ -8665,16 +8391,16 @@ class RcmdOffset extends $pb.GeneratedMessage {
 
   factory RcmdOffset.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      RcmdOffset()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory RcmdOffset.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      RcmdOffset()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'RcmdOffset',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: RcmdOffset.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'rcmdFrom')
     ..aInt64(2, _omitFieldNames ? '' : 'id')
     ..aI(3, _omitFieldNames ? '' : 'page')
@@ -8692,14 +8418,12 @@ class RcmdOffset extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use RcmdOffset() / RcmdOffset.new instead')
   static RcmdOffset create() => RcmdOffset._();
-  static $pb.GeneratedMessage $_createMessage() => RcmdOffset._();
   @$core.override
-  RcmdOffset createEmptyInstance() => RcmdOffset._();
+  RcmdOffset createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static RcmdOffset getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<RcmdOffset>(RcmdOffset.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<RcmdOffset>(create);
   static RcmdOffset? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -8758,7 +8482,7 @@ class RcmdPlaylistReq extends $pb.GeneratedMessage {
     $4.Pagination? page,
     $core.Iterable<$core.MapEntry<$core.String, $core.String>>? annotations,
   }) {
-    final result = RcmdPlaylistReq._();
+    final result = create();
     if (from != null) result.from = from;
     if (id != null) result.id = id;
     if (needHistory != null) result.needHistory = needHistory;
@@ -8773,25 +8497,25 @@ class RcmdPlaylistReq extends $pb.GeneratedMessage {
 
   factory RcmdPlaylistReq.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      RcmdPlaylistReq()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory RcmdPlaylistReq.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      RcmdPlaylistReq()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'RcmdPlaylistReq',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: RcmdPlaylistReq.$_createMessage)
+      createEmptyInstance: create)
     ..aE<RcmdPlaylistReq_RcmdFrom>(1, _omitFieldNames ? '' : 'from',
         enumValues: RcmdPlaylistReq_RcmdFrom.values)
     ..aInt64(2, _omitFieldNames ? '' : 'id')
     ..aOB(3, _omitFieldNames ? '' : 'needHistory')
     ..aOB(4, _omitFieldNames ? '' : 'needTopCards')
     ..aOM<$2.PlayerArgs>(5, _omitFieldNames ? '' : 'playerArgs',
-        subBuilder: $2.PlayerArgs.$_createMessage)
+        subBuilder: $2.PlayerArgs.create)
     ..aOM<$4.Pagination>(6, _omitFieldNames ? '' : 'page',
-        subBuilder: $4.Pagination.$_createMessage)
+        subBuilder: $4.Pagination.create)
     ..m<$core.String, $core.String>(7, _omitFieldNames ? '' : 'annotations',
         entryClassName: 'RcmdPlaylistReq.AnnotationsEntry',
         keyFieldType: $pb.PbFieldType.OS,
@@ -8810,15 +8534,12 @@ class RcmdPlaylistReq extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use RcmdPlaylistReq() / RcmdPlaylistReq.new instead')
   static RcmdPlaylistReq create() => RcmdPlaylistReq._();
-  static $pb.GeneratedMessage $_createMessage() => RcmdPlaylistReq._();
   @$core.override
-  RcmdPlaylistReq createEmptyInstance() => RcmdPlaylistReq._();
+  RcmdPlaylistReq createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static RcmdPlaylistReq getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RcmdPlaylistReq>(
-          RcmdPlaylistReq.$_createMessage);
+  static RcmdPlaylistReq getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<RcmdPlaylistReq>(create);
   static RcmdPlaylistReq? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -8890,7 +8611,7 @@ class RcmdPlaylistResp extends $pb.GeneratedMessage {
     $core.Iterable<TopCard>? topCards,
     $4.PaginationReply? nextPage,
   }) {
-    final result = RcmdPlaylistResp._();
+    final result = create();
     if (list != null) result.list.addAll(list);
     if (historyLen != null) result.historyLen = historyLen;
     if (topCards != null) result.topCards.addAll(topCards);
@@ -8902,23 +8623,23 @@ class RcmdPlaylistResp extends $pb.GeneratedMessage {
 
   factory RcmdPlaylistResp.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      RcmdPlaylistResp()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory RcmdPlaylistResp.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      RcmdPlaylistResp()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'RcmdPlaylistResp',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: RcmdPlaylistResp.$_createMessage)
+      createEmptyInstance: create)
     ..pPM<DetailItem>(1, _omitFieldNames ? '' : 'list',
-        subBuilder: DetailItem.$_createMessage)
+        subBuilder: DetailItem.create)
     ..aInt64(2, _omitFieldNames ? '' : 'historyLen')
     ..pPM<TopCard>(3, _omitFieldNames ? '' : 'topCards',
-        subBuilder: TopCard.$_createMessage)
+        subBuilder: TopCard.create)
     ..aOM<$4.PaginationReply>(4, _omitFieldNames ? '' : 'nextPage',
-        subBuilder: $4.PaginationReply.$_createMessage)
+        subBuilder: $4.PaginationReply.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -8932,15 +8653,12 @@ class RcmdPlaylistResp extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use RcmdPlaylistResp() / RcmdPlaylistResp.new instead')
   static RcmdPlaylistResp create() => RcmdPlaylistResp._();
-  static $pb.GeneratedMessage $_createMessage() => RcmdPlaylistResp._();
   @$core.override
-  RcmdPlaylistResp createEmptyInstance() => RcmdPlaylistResp._();
+  RcmdPlaylistResp createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static RcmdPlaylistResp getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RcmdPlaylistResp>(
-          RcmdPlaylistResp.$_createMessage);
+  static RcmdPlaylistResp getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<RcmdPlaylistResp>(create);
   static RcmdPlaylistResp? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -8981,7 +8699,7 @@ class ResponseUrl extends $pb.GeneratedMessage {
     $core.Iterable<$core.String>? backupUrl,
     $core.String? md5,
   }) {
-    final result = ResponseUrl._();
+    final result = create();
     if (order != null) result.order = order;
     if (length != null) result.length = length;
     if (size != null) result.size = size;
@@ -8997,16 +8715,16 @@ class ResponseUrl extends $pb.GeneratedMessage {
 
   factory ResponseUrl.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ResponseUrl()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory ResponseUrl.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ResponseUrl()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'ResponseUrl',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: ResponseUrl.$_createMessage)
+      createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'order')
     ..aInt64(2, _omitFieldNames ? '' : 'length')
     ..aInt64(3, _omitFieldNames ? '' : 'size')
@@ -9028,15 +8746,12 @@ class ResponseUrl extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use ResponseUrl() / ResponseUrl.new instead')
   static ResponseUrl create() => ResponseUrl._();
-  static $pb.GeneratedMessage $_createMessage() => ResponseUrl._();
   @$core.override
-  ResponseUrl createEmptyInstance() => ResponseUrl._();
+  ResponseUrl createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static ResponseUrl getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ResponseUrl>(
-          ResponseUrl.$_createMessage);
+  static ResponseUrl getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ResponseUrl>(create);
   static ResponseUrl? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -9112,7 +8827,7 @@ class SortOption extends $pb.GeneratedMessage {
     ListSortField? sortField,
     $core.bool? isSwitching,
   }) {
-    final result = SortOption._();
+    final result = create();
     if (order != null) result.order = order;
     if (sortField != null) result.sortField = sortField;
     if (isSwitching != null) result.isSwitching = isSwitching;
@@ -9123,16 +8838,16 @@ class SortOption extends $pb.GeneratedMessage {
 
   factory SortOption.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      SortOption()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory SortOption.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      SortOption()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'SortOption',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: SortOption.$_createMessage)
+      createEmptyInstance: create)
     ..aE<ListOrder>(1, _omitFieldNames ? '' : 'order',
         enumValues: ListOrder.values)
     ..aE<ListSortField>(2, _omitFieldNames ? '' : 'sortField',
@@ -9150,14 +8865,12 @@ class SortOption extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use SortOption() / SortOption.new instead')
   static SortOption create() => SortOption._();
-  static $pb.GeneratedMessage $_createMessage() => SortOption._();
   @$core.override
-  SortOption createEmptyInstance() => SortOption._();
+  SortOption createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static SortOption getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<SortOption>(SortOption.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<SortOption>(create);
   static SortOption? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -9193,7 +8906,7 @@ class ThumbUpReq extends $pb.GeneratedMessage {
     PlayItem? item,
     ThumbUpReq_ThumbType? action,
   }) {
-    final result = ThumbUpReq._();
+    final result = create();
     if (item != null) result.item = item;
     if (action != null) result.action = action;
     return result;
@@ -9203,18 +8916,18 @@ class ThumbUpReq extends $pb.GeneratedMessage {
 
   factory ThumbUpReq.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ThumbUpReq()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory ThumbUpReq.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ThumbUpReq()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'ThumbUpReq',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: ThumbUpReq.$_createMessage)
+      createEmptyInstance: create)
     ..aOM<PlayItem>(1, _omitFieldNames ? '' : 'item',
-        subBuilder: PlayItem.$_createMessage)
+        subBuilder: PlayItem.create)
     ..aE<ThumbUpReq_ThumbType>(2, _omitFieldNames ? '' : 'action',
         enumValues: ThumbUpReq_ThumbType.values)
     ..hasRequiredFields = false;
@@ -9229,14 +8942,12 @@ class ThumbUpReq extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use ThumbUpReq() / ThumbUpReq.new instead')
   static ThumbUpReq create() => ThumbUpReq._();
-  static $pb.GeneratedMessage $_createMessage() => ThumbUpReq._();
   @$core.override
-  ThumbUpReq createEmptyInstance() => ThumbUpReq._();
+  ThumbUpReq createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static ThumbUpReq getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ThumbUpReq>(ThumbUpReq.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<ThumbUpReq>(create);
   static ThumbUpReq? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -9264,7 +8975,7 @@ class ThumbUpResp extends $pb.GeneratedMessage {
   factory ThumbUpResp({
     $core.String? message,
   }) {
-    final result = ThumbUpResp._();
+    final result = create();
     if (message != null) result.message = message;
     return result;
   }
@@ -9273,16 +8984,16 @@ class ThumbUpResp extends $pb.GeneratedMessage {
 
   factory ThumbUpResp.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ThumbUpResp()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory ThumbUpResp.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ThumbUpResp()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'ThumbUpResp',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: ThumbUpResp.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'message')
     ..hasRequiredFields = false;
 
@@ -9297,15 +9008,12 @@ class ThumbUpResp extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use ThumbUpResp() / ThumbUpResp.new instead')
   static ThumbUpResp create() => ThumbUpResp._();
-  static $pb.GeneratedMessage $_createMessage() => ThumbUpResp._();
   @$core.override
-  ThumbUpResp createEmptyInstance() => ThumbUpResp._();
+  ThumbUpResp createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static ThumbUpResp getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ThumbUpResp>(
-          ThumbUpResp.$_createMessage);
+  static ThumbUpResp getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ThumbUpResp>(create);
   static ThumbUpResp? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -9332,7 +9040,7 @@ class TopCard extends $pb.GeneratedMessage {
     $fixnum.Int64? pos,
     $core.String? titleIcon,
   }) {
-    final result = TopCard._();
+    final result = create();
     if (title != null) result.title = title;
     if (playStyle != null) result.playStyle = playStyle;
     if (cardType != null) result.cardType = cardType;
@@ -9349,10 +9057,10 @@ class TopCard extends $pb.GeneratedMessage {
 
   factory TopCard.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      TopCard()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory TopCard.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      TopCard()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static const $core.Map<$core.int, TopCard_Card> _TopCard_CardByTag = {
     4: TopCard_Card.listenHistory,
@@ -9365,7 +9073,7 @@ class TopCard extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'TopCard',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: TopCard.$_createMessage)
+      createEmptyInstance: create)
     ..oo(0, [4, 5, 6, 7])
     ..aOS(1, _omitFieldNames ? '' : 'title')
     ..aE<TopCard_PlayStrategy>(2, _omitFieldNames ? '' : 'playStyle',
@@ -9373,13 +9081,13 @@ class TopCard extends $pb.GeneratedMessage {
     ..aE<TopCardType>(3, _omitFieldNames ? '' : 'cardType',
         enumValues: TopCardType.values)
     ..aOM<TpcdHistory>(4, _omitFieldNames ? '' : 'listenHistory',
-        subBuilder: TpcdHistory.$_createMessage)
+        subBuilder: TpcdHistory.create)
     ..aOM<TpcdFavFolder>(5, _omitFieldNames ? '' : 'favFolder',
-        subBuilder: TpcdFavFolder.$_createMessage)
+        subBuilder: TpcdFavFolder.create)
     ..aOM<TpcdUpRecall>(6, _omitFieldNames ? '' : 'upRecall',
-        subBuilder: TpcdUpRecall.$_createMessage)
+        subBuilder: TpcdUpRecall.create)
     ..aOM<TpcdPickToday>(7, _omitFieldNames ? '' : 'pickToday',
-        subBuilder: TpcdPickToday.$_createMessage)
+        subBuilder: TpcdPickToday.create)
     ..aInt64(8, _omitFieldNames ? '' : 'pos')
     ..aOS(9, _omitFieldNames ? '' : 'titleIcon')
     ..hasRequiredFields = false;
@@ -9394,14 +9102,12 @@ class TopCard extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use TopCard() / TopCard.new instead')
   static TopCard create() => TopCard._();
-  static $pb.GeneratedMessage $_createMessage() => TopCard._();
   @$core.override
-  TopCard createEmptyInstance() => TopCard._();
+  TopCard createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static TopCard getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<TopCard>(TopCard.$_createMessage);
+  static TopCard getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TopCard>(create);
   static TopCard? _defaultInstance;
 
   @$pb.TagNumber(4)
@@ -9513,7 +9219,7 @@ class TpcdFavFolder extends $pb.GeneratedMessage {
     $fixnum.Int64? fid,
     $core.int? folderType,
   }) {
-    final result = TpcdFavFolder._();
+    final result = create();
     if (item != null) result.item = item;
     if (text != null) result.text = text;
     if (pic != null) result.pic = pic;
@@ -9526,18 +9232,18 @@ class TpcdFavFolder extends $pb.GeneratedMessage {
 
   factory TpcdFavFolder.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      TpcdFavFolder()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory TpcdFavFolder.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      TpcdFavFolder()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'TpcdFavFolder',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: TpcdFavFolder.$_createMessage)
+      createEmptyInstance: create)
     ..aOM<DetailItem>(1, _omitFieldNames ? '' : 'item',
-        subBuilder: DetailItem.$_createMessage)
+        subBuilder: DetailItem.create)
     ..aOS(2, _omitFieldNames ? '' : 'text')
     ..aOS(3, _omitFieldNames ? '' : 'pic')
     ..aInt64(4, _omitFieldNames ? '' : 'fid')
@@ -9555,15 +9261,12 @@ class TpcdFavFolder extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use TpcdFavFolder() / TpcdFavFolder.new instead')
   static TpcdFavFolder create() => TpcdFavFolder._();
-  static $pb.GeneratedMessage $_createMessage() => TpcdFavFolder._();
   @$core.override
-  TpcdFavFolder createEmptyInstance() => TpcdFavFolder._();
+  TpcdFavFolder createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static TpcdFavFolder getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TpcdFavFolder>(
-          TpcdFavFolder.$_createMessage);
+  static TpcdFavFolder getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<TpcdFavFolder>(create);
   static TpcdFavFolder? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -9620,7 +9323,7 @@ class TpcdHistory extends $pb.GeneratedMessage {
     $core.String? text,
     $core.String? pic,
   }) {
-    final result = TpcdHistory._();
+    final result = create();
     if (item != null) result.item = item;
     if (text != null) result.text = text;
     if (pic != null) result.pic = pic;
@@ -9631,18 +9334,18 @@ class TpcdHistory extends $pb.GeneratedMessage {
 
   factory TpcdHistory.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      TpcdHistory()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory TpcdHistory.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      TpcdHistory()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'TpcdHistory',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: TpcdHistory.$_createMessage)
+      createEmptyInstance: create)
     ..aOM<DetailItem>(1, _omitFieldNames ? '' : 'item',
-        subBuilder: DetailItem.$_createMessage)
+        subBuilder: DetailItem.create)
     ..aOS(2, _omitFieldNames ? '' : 'text')
     ..aOS(3, _omitFieldNames ? '' : 'pic')
     ..hasRequiredFields = false;
@@ -9658,15 +9361,12 @@ class TpcdHistory extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use TpcdHistory() / TpcdHistory.new instead')
   static TpcdHistory create() => TpcdHistory._();
-  static $pb.GeneratedMessage $_createMessage() => TpcdHistory._();
   @$core.override
-  TpcdHistory createEmptyInstance() => TpcdHistory._();
+  TpcdHistory createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static TpcdHistory getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TpcdHistory>(
-          TpcdHistory.$_createMessage);
+  static TpcdHistory getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<TpcdHistory>(create);
   static TpcdHistory? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -9707,7 +9407,7 @@ class TpcdPickToday extends $pb.GeneratedMessage {
     $fixnum.Int64? pickId,
     $fixnum.Int64? pickCardId,
   }) {
-    final result = TpcdPickToday._();
+    final result = create();
     if (item != null) result.item = item;
     if (text != null) result.text = text;
     if (pic != null) result.pic = pic;
@@ -9720,18 +9420,18 @@ class TpcdPickToday extends $pb.GeneratedMessage {
 
   factory TpcdPickToday.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      TpcdPickToday()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory TpcdPickToday.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      TpcdPickToday()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'TpcdPickToday',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: TpcdPickToday.$_createMessage)
+      createEmptyInstance: create)
     ..aOM<DetailItem>(1, _omitFieldNames ? '' : 'item',
-        subBuilder: DetailItem.$_createMessage)
+        subBuilder: DetailItem.create)
     ..aOS(2, _omitFieldNames ? '' : 'text')
     ..aOS(3, _omitFieldNames ? '' : 'pic')
     ..aInt64(4, _omitFieldNames ? '' : 'pickId')
@@ -9749,15 +9449,12 @@ class TpcdPickToday extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use TpcdPickToday() / TpcdPickToday.new instead')
   static TpcdPickToday create() => TpcdPickToday._();
-  static $pb.GeneratedMessage $_createMessage() => TpcdPickToday._();
   @$core.override
-  TpcdPickToday createEmptyInstance() => TpcdPickToday._();
+  TpcdPickToday createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static TpcdPickToday getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TpcdPickToday>(
-          TpcdPickToday.$_createMessage);
+  static TpcdPickToday getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<TpcdPickToday>(create);
   static TpcdPickToday? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -9817,7 +9514,7 @@ class TpcdUpRecall extends $pb.GeneratedMessage {
     $fixnum.Int64? medialistBizId,
     DetailItem? item,
   }) {
-    final result = TpcdUpRecall._();
+    final result = create();
     if (upMid != null) result.upMid = upMid;
     if (text != null) result.text = text;
     if (avatar != null) result.avatar = avatar;
@@ -9831,23 +9528,23 @@ class TpcdUpRecall extends $pb.GeneratedMessage {
 
   factory TpcdUpRecall.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      TpcdUpRecall()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory TpcdUpRecall.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      TpcdUpRecall()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'TpcdUpRecall',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: TpcdUpRecall.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'upMid')
     ..aOS(2, _omitFieldNames ? '' : 'text')
     ..aOS(3, _omitFieldNames ? '' : 'avatar')
     ..aInt64(4, _omitFieldNames ? '' : 'medialistType')
     ..aInt64(5, _omitFieldNames ? '' : 'medialistBizId')
     ..aOM<DetailItem>(6, _omitFieldNames ? '' : 'item',
-        subBuilder: DetailItem.$_createMessage)
+        subBuilder: DetailItem.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -9861,15 +9558,12 @@ class TpcdUpRecall extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use TpcdUpRecall() / TpcdUpRecall.new instead')
   static TpcdUpRecall create() => TpcdUpRecall._();
-  static $pb.GeneratedMessage $_createMessage() => TpcdUpRecall._();
   @$core.override
-  TpcdUpRecall createEmptyInstance() => TpcdUpRecall._();
+  TpcdUpRecall createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static TpcdUpRecall getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TpcdUpRecall>(
-          TpcdUpRecall.$_createMessage);
+  static TpcdUpRecall getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<TpcdUpRecall>(create);
   static TpcdUpRecall? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -9933,7 +9627,7 @@ class TripleLikeReq extends $pb.GeneratedMessage {
   factory TripleLikeReq({
     PlayItem? item,
   }) {
-    final result = TripleLikeReq._();
+    final result = create();
     if (item != null) result.item = item;
     return result;
   }
@@ -9942,18 +9636,18 @@ class TripleLikeReq extends $pb.GeneratedMessage {
 
   factory TripleLikeReq.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      TripleLikeReq()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory TripleLikeReq.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      TripleLikeReq()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'TripleLikeReq',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: TripleLikeReq.$_createMessage)
+      createEmptyInstance: create)
     ..aOM<PlayItem>(1, _omitFieldNames ? '' : 'item',
-        subBuilder: PlayItem.$_createMessage)
+        subBuilder: PlayItem.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -9967,15 +9661,12 @@ class TripleLikeReq extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use TripleLikeReq() / TripleLikeReq.new instead')
   static TripleLikeReq create() => TripleLikeReq._();
-  static $pb.GeneratedMessage $_createMessage() => TripleLikeReq._();
   @$core.override
-  TripleLikeReq createEmptyInstance() => TripleLikeReq._();
+  TripleLikeReq createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static TripleLikeReq getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TripleLikeReq>(
-          TripleLikeReq.$_createMessage);
+  static TripleLikeReq getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<TripleLikeReq>(create);
   static TripleLikeReq? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -9997,7 +9688,7 @@ class TripleLikeResp extends $pb.GeneratedMessage {
     $core.bool? coinOk,
     $core.bool? favOk,
   }) {
-    final result = TripleLikeResp._();
+    final result = create();
     if (message != null) result.message = message;
     if (thumbOk != null) result.thumbOk = thumbOk;
     if (coinOk != null) result.coinOk = coinOk;
@@ -10009,16 +9700,16 @@ class TripleLikeResp extends $pb.GeneratedMessage {
 
   factory TripleLikeResp.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      TripleLikeResp()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory TripleLikeResp.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      TripleLikeResp()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'TripleLikeResp',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.app.listener.v1'),
-      createEmptyInstance: TripleLikeResp.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'message')
     ..aOB(2, _omitFieldNames ? '' : 'thumbOk')
     ..aOB(3, _omitFieldNames ? '' : 'coinOk')
@@ -10036,15 +9727,12 @@ class TripleLikeResp extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use TripleLikeResp() / TripleLikeResp.new instead')
   static TripleLikeResp create() => TripleLikeResp._();
-  static $pb.GeneratedMessage $_createMessage() => TripleLikeResp._();
   @$core.override
-  TripleLikeResp createEmptyInstance() => TripleLikeResp._();
+  TripleLikeResp createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static TripleLikeResp getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TripleLikeResp>(
-          TripleLikeResp.$_createMessage);
+  static TripleLikeResp getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<TripleLikeResp>(create);
   static TripleLikeResp? _defaultInstance;
 
   @$pb.TagNumber(1)

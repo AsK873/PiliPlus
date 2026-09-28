@@ -21,7 +21,7 @@ version: 2.1.5+1
 
 environment:
   sdk: ">=3.13.0"
-  flutter: 3.47.5
+  flutter: 3.47.2
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -185,6 +185,10 @@ dependency_overrides:
       url: https://github.com/bggRGjQaUbCoE/flutter_inappwebview.git
       path: flutter_inappwebview_windows
       ref: v6.1.5
+  # 环境适配(2026-09-05, 经用户批准)：material_ui 内置到 third_party/material_ui 并本地维护补丁。
+  # 说明见 third_party/material_ui/README.patch.md
+  material_ui:
+    path: third_party/material_ui
   media_kit:
     git:
       url: https://github.com/My-Responsitories/media-kit.git

@@ -30,7 +30,7 @@ class Restriction extends $pb.GeneratedMessage {
     $core.bool? basicMode,
     $core.int? teenagersAge,
   }) {
-    final result = Restriction._();
+    final result = create();
     if (teenagersMode != null) result.teenagersMode = teenagersMode;
     if (lessonsMode != null) result.lessonsMode = lessonsMode;
     if (mode != null) result.mode = mode;
@@ -45,16 +45,16 @@ class Restriction extends $pb.GeneratedMessage {
 
   factory Restriction.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Restriction()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory Restriction.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Restriction()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'Restriction',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.metadata.restriction'),
-      createEmptyInstance: Restriction.$_createMessage)
+      createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'teenagersMode')
     ..aOB(2, _omitFieldNames ? '' : 'lessonsMode')
     ..aE<ModeType>(3, _omitFieldNames ? '' : 'mode',
@@ -76,15 +76,12 @@ class Restriction extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use Restriction() / Restriction.new instead')
   static Restriction create() => Restriction._();
-  static $pb.GeneratedMessage $_createMessage() => Restriction._();
   @$core.override
-  Restriction createEmptyInstance() => Restriction._();
+  Restriction createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static Restriction getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Restriction>(
-          Restriction.$_createMessage);
+  static Restriction getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<Restriction>(create);
   static Restriction? _defaultInstance;
 
   @$pb.TagNumber(1)

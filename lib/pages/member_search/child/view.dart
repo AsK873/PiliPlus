@@ -1,3 +1,4 @@
+import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/common/widgets/flutter/refresh_indicator.dart';
 import 'package:PiliPlus/common/widgets/loading_widget/http_error.dart';
 import 'package:PiliPlus/http/loading_state.dart';
@@ -7,6 +8,7 @@ import 'package:PiliPlus/pages/member_search/child/controller.dart';
 import 'package:PiliPlus/pages/member_search/child/widgets/search_archive_grpc.dart';
 import 'package:PiliPlus/utils/global_data.dart';
 import 'package:PiliPlus/utils/grid.dart';
+import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:PiliPlus/utils/waterfall.dart';
 import 'package:get/get.dart';
 import 'package:material_ui/material_ui.dart';
@@ -43,16 +45,22 @@ class _MemberSearchChildPageState extends State<MemberSearchChildPage>
           SliverPadding(
             padding: EdgeInsets.only(
               top: widget.searchType == MemberSearchType.archive ? 7 : 0,
-              bottom: MediaQuery.viewPaddingOf(context).bottom + 100,
+              bottom: PlatformUtils.isDesktop
+                  ? 24
+                  : MediaQuery.viewPaddingOf(context).bottom + 100,
             ),
-            sliver: switch (widget.searchType) {
-              MemberSearchType.archive => Obx(
-                () => _buildBody(_controller.loadingState.value),
-              ),
-              MemberSearchType.dynamic => buildPage(
-                Obx(() => _buildBody(_controller.loadingState.value)),
-              ),
-            },
+            // M8：桌面内容限宽居中（UP-内搜索）。
+            sliver: desktopLimitSliver(
+              switch (widget.searchType) {
+                MemberSearchType.archive => Obx(
+                  () => _buildBody(_controller.loadingState.value),
+                ),
+                MemberSearchType.dynamic => buildPage(
+                  Obx(() => _buildBody(_controller.loadingState.value)),
+                ),
+              },
+              maxWidth: 1280,
+            ),
           ),
         ],
       ),

@@ -10,6 +10,7 @@ import 'package:PiliPlus/pages/setting/slide_color_picker.dart';
 import 'package:PiliPlus/utils/accounts/account_manager/account_mgr.dart';
 import 'package:PiliPlus/utils/filtering_text.dart';
 import 'package:PiliPlus/utils/page_utils.dart';
+import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:PiliPlus/utils/storage.dart';
 import 'package:PiliPlus/utils/storage_key.dart';
 import 'package:PiliPlus/utils/storage_pref.dart';
@@ -480,9 +481,7 @@ class _SponsorBlockPageState extends State<SponsorBlockPage> {
       ),
     );
 
-    return SimpleScaffold(
-      appBar: AppBar(title: const Text('空降助手')),
-      body: CustomScrollView(
+    final bodyScroll = CustomScrollView(
         slivers: [
           dividerL,
           SliverToBoxAdapter(child: _serverStatusItem(theme, titleStyle)),
@@ -522,7 +521,18 @@ class _SponsorBlockPageState extends State<SponsorBlockPage> {
             ),
           ),
         ],
-      ),
+    );
+    return SimpleScaffold(
+      appBar: AppBar(title: const Text('空降助手')),
+      // M8：桌面内容限宽居中（空降助手）。
+      body: PlatformUtils.isDesktop
+          ? Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 1280),
+                child: bodyScroll,
+              ),
+            )
+          : bodyScroll,
     );
   }
 

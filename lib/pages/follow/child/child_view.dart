@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:PiliPlus/common/skeleton/msg_feed_top.dart';
 import 'package:PiliPlus/common/sliver_single_child_delegate.dart';
 import 'package:PiliPlus/common/widgets/button/more_btn.dart';
+import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/common/widgets/flutter/refresh_indicator.dart';
 import 'package:PiliPlus/common/widgets/loading_widget/http_error.dart';
 import 'package:PiliPlus/http/loading_state.dart';
@@ -12,6 +13,7 @@ import 'package:PiliPlus/pages/follow/controller.dart';
 import 'package:PiliPlus/pages/follow/widgets/follow_item.dart';
 import 'package:PiliPlus/pages/follow_type/follow_same/view.dart';
 import 'package:PiliPlus/pages/share/view.dart' show UserModel;
+import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:PiliPlus/utils/utils.dart';
 import 'package:get/get.dart';
 import 'package:material_ui/material_ui.dart';
@@ -85,18 +87,30 @@ class _FollowChildPageState extends State<FollowChildPage>
           controller: _followController.scrollController,
           physics: const AlwaysScrollableScrollPhysics(),
           slivers: [
-            if (_followController.loadSameFollow)
-              Obx(
-                () => _buildSameFollowing(
-                  colorScheme,
-                  _followController.sameState.value,
-                ),
+            // M8：桌面内容限宽居中（关注列表）。
+            desktopLimitSliver(
+              SliverMainAxisGroup(
+                slivers: [
+                  if (_followController.loadSameFollow)
+                    Obx(
+                      () => _buildSameFollowing(
+                        colorScheme,
+                        _followController.sameState.value,
+                      ),
+                    ),
+                  SliverPadding(
+                    padding: EdgeInsets.only(
+                      bottom: PlatformUtils.isDesktop
+                          ? 24
+                          : padding.bottom + 100,
+                    ),
+                    sliver: Obx(
+                      () => _buildBody(_followController.loadingState.value),
+                    ),
+                  ),
+                ],
               ),
-            SliverPadding(
-              padding: EdgeInsets.only(bottom: padding.bottom + 100),
-              sliver: Obx(
-                () => _buildBody(_followController.loadingState.value),
-              ),
+              maxWidth: 1280,
             ),
           ],
         ),

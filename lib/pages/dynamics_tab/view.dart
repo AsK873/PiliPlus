@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/common/widgets/flutter/refresh_indicator.dart';
 import 'package:PiliPlus/common/widgets/loading_widget/http_error.dart';
 import 'package:PiliPlus/http/loading_state.dart';
@@ -10,6 +11,7 @@ import 'package:PiliPlus/pages/dynamics/widgets/dynamic_panel.dart';
 import 'package:PiliPlus/pages/dynamics_tab/controller.dart';
 import 'package:PiliPlus/utils/extension/get_ext.dart';
 import 'package:PiliPlus/utils/global_data.dart';
+import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:PiliPlus/utils/waterfall.dart';
 import 'package:get/get.dart';
 import 'package:material_ui/material_ui.dart';
@@ -57,9 +59,15 @@ class _DynamicsTabPageState extends State<DynamicsTabPage>
         controller: controller.scrollController,
         slivers: [
           SliverPadding(
-            padding: const EdgeInsets.only(bottom: 100),
-            sliver: buildPage(
-              Obx(() => _buildBody(controller.loadingState.value)),
+            padding: EdgeInsets.only(
+              bottom: PlatformUtils.isDesktop ? 24 : 100,
+            ),
+            // M8：桌面内容限宽居中（动态分区 Tab）。
+            sliver: desktopLimitSliver(
+              buildPage(
+                Obx(() => _buildBody(controller.loadingState.value)),
+              ),
+              maxWidth: 1280,
             ),
           ),
         ],

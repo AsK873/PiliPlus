@@ -1,3 +1,4 @@
+import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/models/common/video/source_type.dart';
 import 'package:PiliPlus/models_new/later/data.dart';
 import 'package:PiliPlus/models_new/later/list.dart';
@@ -64,40 +65,45 @@ class _LaterSearchPageState
 
   @override
   Widget buildList(List<LaterItemModel> list) {
-    return SliverGrid.builder(
-      gridDelegate: gridDelegate,
-      itemBuilder: (context, index) {
-        if (index == list.length - 1) {
-          controller.onLoadMore();
-        }
-        final item = list[index];
-        return VideoCardHLater(
-          index: index,
-          videoItem: item,
-          ctr: controller,
-          onViewLater: (cid) {
-            PageUtils.toVideoPage(
-              bvid: item.bvid,
-              cid: cid,
-              cover: item.pic,
-              title: item.title,
-              dimension: item.dimension,
-              extraArguments: enablePlayAll
-                  ? {
-                      'oid': item.aid,
-                      'sourceType': SourceType.watchLater,
-                      'count': controller.count,
-                      'favTitle': '稍后再看',
-                      'mediaId': controller.mid,
-                      'desc': false,
-                      'isContinuePlaying': index != 0,
-                    }
-                  : const {'viewLater': true},
-            );
-          },
-        );
-      },
-      itemCount: list.length,
+    return desktopLimitSliver(
+      SliverGrid.builder(
+        gridDelegate: gridDelegate,
+        itemBuilder: (context, index) {
+          if (index == list.length - 1) {
+            controller.onLoadMore();
+          }
+          final item = list[index];
+          return desktopCard(
+            VideoCardHLater(
+              index: index,
+              videoItem: item,
+              ctr: controller,
+              onViewLater: (cid) {
+                PageUtils.toVideoPage(
+                  bvid: item.bvid,
+                  cid: cid,
+                  cover: item.pic,
+                  title: item.title,
+                  dimension: item.dimension,
+                  extraArguments: enablePlayAll
+                      ? {
+                          'oid': item.aid,
+                          'sourceType': SourceType.watchLater,
+                          'count': controller.count,
+                          'favTitle': '稍后再看',
+                          'mediaId': controller.mid,
+                          'desc': false,
+                          'isContinuePlaying': index != 0,
+                        }
+                      : const {'viewLater': true},
+                );
+              },
+            ),
+          );
+        },
+        itemCount: list.length,
+      ),
+      maxWidth: 1280,
     );
   }
 }

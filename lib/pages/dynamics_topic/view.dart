@@ -1,5 +1,6 @@
 import 'package:PiliPlus/common/assets.dart';
 import 'package:PiliPlus/common/widgets/custom_icon.dart';
+import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/common/widgets/dynamic_sliver_app_bar/dynamic_sliver_app_bar.dart';
 import 'package:PiliPlus/common/widgets/flutter/refresh_indicator.dart';
 import 'package:PiliPlus/common/widgets/image/network_img_layer.dart';
@@ -23,6 +24,7 @@ import 'package:PiliPlus/utils/extension/theme_ext.dart';
 import 'package:PiliPlus/utils/global_data.dart';
 import 'package:PiliPlus/utils/num_utils.dart';
 import 'package:PiliPlus/utils/page_utils.dart';
+import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:PiliPlus/utils/share_utils.dart';
 import 'package:PiliPlus/utils/theme_utils.dart';
 import 'package:PiliPlus/utils/utils.dart';
@@ -131,10 +133,16 @@ class _DynTopicPageState extends State<DynTopicPage>
                 padding: EdgeInsets.only(
                   left: padding.left,
                   right: padding.right,
-                  bottom: padding.bottom + 100,
+                  bottom: PlatformUtils.isDesktop
+                      ? 24
+                      : padding.bottom + 100,
                 ),
-                sliver: buildPage(
-                  Obx(() => _buildBody(_controller.loadingState.value)),
+                // M8：桌面内容限宽居中（话题动态流）。
+                sliver: desktopLimitSliver(
+                  buildPage(
+                    Obx(() => _buildBody(_controller.loadingState.value)),
+                  ),
+                  maxWidth: 1280,
                 ),
               ),
             ],

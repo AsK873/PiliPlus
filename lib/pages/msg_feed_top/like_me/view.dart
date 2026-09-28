@@ -1,5 +1,6 @@
 import 'package:PiliPlus/common/skeleton/msg_feed_top.dart';
 import 'package:PiliPlus/common/sliver_single_child_delegate.dart';
+import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/common/widgets/dialog/dialog.dart';
 import 'package:PiliPlus/common/widgets/dialog/simple_dialog_option.dart';
 import 'package:PiliPlus/common/widgets/flutter/list_tile.dart';
@@ -60,10 +61,19 @@ class _LikeMePageState extends State<LikeMePage> {
           slivers: [
             SliverPadding(
               padding: EdgeInsets.only(
-                bottom: MediaQuery.viewPaddingOf(context).bottom + 100,
+                bottom: PlatformUtils.isDesktop
+                    ? 24
+                    : MediaQuery.viewPaddingOf(context).bottom + 100,
               ),
-              sliver: Obx(
-                () => _buildBody(theme, _likeMeController.loadingState.value),
+              // M8：桌面内容限宽居中（收到的赞）。
+              sliver: desktopLimitSliver(
+                Obx(
+                  () => _buildBody(
+                    theme,
+                    _likeMeController.loadingState.value,
+                  ),
+                ),
+                maxWidth: 1280,
               ),
             ),
           ],

@@ -25,7 +25,7 @@ class BorderConfig extends $pb.GeneratedMessage {
     $core.double? borderWidth,
     $core.double? ratio,
   }) {
-    final result = BorderConfig._();
+    final result = create();
     if (color != null) result.color = color;
     if (borderWidth != null) result.borderWidth = borderWidth;
     if (ratio != null) result.ratio = ratio;
@@ -36,18 +36,18 @@ class BorderConfig extends $pb.GeneratedMessage {
 
   factory BorderConfig.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      BorderConfig()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory BorderConfig.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      BorderConfig()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'BorderConfig',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.dagw.component.avatar.v1.plugin'),
-      createEmptyInstance: BorderConfig.$_createMessage)
+      createEmptyInstance: create)
     ..aOM<$0.ColorConfig>(1, _omitFieldNames ? '' : 'color',
-        subBuilder: $0.ColorConfig.$_createMessage)
+        subBuilder: $0.ColorConfig.create)
     ..aD(2, _omitFieldNames ? '' : 'borderWidth')
     ..aD(3, _omitFieldNames ? '' : 'ratio')
     ..hasRequiredFields = false;
@@ -63,15 +63,12 @@ class BorderConfig extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use BorderConfig() / BorderConfig.new instead')
   static BorderConfig create() => BorderConfig._();
-  static $pb.GeneratedMessage $_createMessage() => BorderConfig._();
   @$core.override
-  BorderConfig createEmptyInstance() => BorderConfig._();
+  BorderConfig createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static BorderConfig getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BorderConfig>(
-          BorderConfig.$_createMessage);
+  static BorderConfig getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<BorderConfig>(create);
   static BorderConfig? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -109,7 +106,7 @@ class CommentDoubleClickConfig extends $pb.GeneratedMessage {
     Interaction? interaction,
     $core.double? animationScale,
   }) {
-    final result = CommentDoubleClickConfig._();
+    final result = create();
     if (interaction != null) result.interaction = interaction;
     if (animationScale != null) result.animationScale = animationScale;
     return result;
@@ -119,18 +116,18 @@ class CommentDoubleClickConfig extends $pb.GeneratedMessage {
 
   factory CommentDoubleClickConfig.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      CommentDoubleClickConfig()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory CommentDoubleClickConfig.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      CommentDoubleClickConfig()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'CommentDoubleClickConfig',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.dagw.component.avatar.v1.plugin'),
-      createEmptyInstance: CommentDoubleClickConfig.$_createMessage)
+      createEmptyInstance: create)
     ..aOM<Interaction>(1, _omitFieldNames ? '' : 'interaction',
-        subBuilder: Interaction.$_createMessage)
+        subBuilder: Interaction.create)
     ..aD(2, _omitFieldNames ? '' : 'animationScale')
     ..hasRequiredFields = false;
 
@@ -146,17 +143,12 @@ class CommentDoubleClickConfig extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated(
-      'Use CommentDoubleClickConfig() / CommentDoubleClickConfig.new instead')
   static CommentDoubleClickConfig create() => CommentDoubleClickConfig._();
-  static $pb.GeneratedMessage $_createMessage() => CommentDoubleClickConfig._();
   @$core.override
-  CommentDoubleClickConfig createEmptyInstance() =>
-      CommentDoubleClickConfig._();
+  CommentDoubleClickConfig createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static CommentDoubleClickConfig getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<CommentDoubleClickConfig>(
-          CommentDoubleClickConfig.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<CommentDoubleClickConfig>(create);
   static CommentDoubleClickConfig? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -190,7 +182,7 @@ class FollowActionConfig extends $pb.GeneratedMessage {
     $core.double? iconWidthRatio,
     $core.double? iconSizeOffset,
   }) {
-    final result = FollowActionConfig._();
+    final result = create();
     if (hasFollow != null) result.hasFollow = hasFollow;
     if (iconRes != null) result.iconRes = iconRes;
     if (borderWidth != null) result.borderWidth = borderWidth;
@@ -205,22 +197,22 @@ class FollowActionConfig extends $pb.GeneratedMessage {
 
   factory FollowActionConfig.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FollowActionConfig()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FollowActionConfig.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FollowActionConfig()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'FollowActionConfig',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.dagw.component.avatar.v1.plugin'),
-      createEmptyInstance: FollowActionConfig.$_createMessage)
+      createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'hasFollow')
     ..aOM<$0.ResourceSource>(2, _omitFieldNames ? '' : 'iconRes',
-        subBuilder: $0.ResourceSource.$_createMessage)
+        subBuilder: $0.ResourceSource.create)
     ..aD(3, _omitFieldNames ? '' : 'borderWidth')
     ..aOM<$0.ColorConfig>(4, _omitFieldNames ? '' : 'borderColor',
-        subBuilder: $0.ColorConfig.$_createMessage)
+        subBuilder: $0.ColorConfig.create)
     ..aInt64(5, _omitFieldNames ? '' : 'mid')
     ..aD(6, _omitFieldNames ? '' : 'iconWidthRatio')
     ..aD(7, _omitFieldNames ? '' : 'iconSizeOffset')
@@ -237,15 +229,12 @@ class FollowActionConfig extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use FollowActionConfig() / FollowActionConfig.new instead')
   static FollowActionConfig create() => FollowActionConfig._();
-  static $pb.GeneratedMessage $_createMessage() => FollowActionConfig._();
   @$core.override
-  FollowActionConfig createEmptyInstance() => FollowActionConfig._();
+  FollowActionConfig createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static FollowActionConfig getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<FollowActionConfig>(
-          FollowActionConfig.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<FollowActionConfig>(create);
   static FollowActionConfig? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -324,7 +313,7 @@ class FollowIconConfig extends $pb.GeneratedMessage {
     $0.ColorConfig? borderColor,
     $fixnum.Int64? mid,
   }) {
-    final result = FollowIconConfig._();
+    final result = create();
     if (hasFollow != null) result.hasFollow = hasFollow;
     if (iconRes != null) result.iconRes = iconRes;
     if (borderWidth != null) result.borderWidth = borderWidth;
@@ -337,22 +326,22 @@ class FollowIconConfig extends $pb.GeneratedMessage {
 
   factory FollowIconConfig.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FollowIconConfig()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FollowIconConfig.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FollowIconConfig()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'FollowIconConfig',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.dagw.component.avatar.v1.plugin'),
-      createEmptyInstance: FollowIconConfig.$_createMessage)
+      createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'hasFollow')
     ..aOM<$0.ResourceSource>(2, _omitFieldNames ? '' : 'iconRes',
-        subBuilder: $0.ResourceSource.$_createMessage)
+        subBuilder: $0.ResourceSource.create)
     ..aD(3, _omitFieldNames ? '' : 'borderWidth')
     ..aOM<$0.ColorConfig>(4, _omitFieldNames ? '' : 'borderColor',
-        subBuilder: $0.ColorConfig.$_createMessage)
+        subBuilder: $0.ColorConfig.create)
     ..aInt64(5, _omitFieldNames ? '' : 'mid')
     ..hasRequiredFields = false;
 
@@ -367,15 +356,12 @@ class FollowIconConfig extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use FollowIconConfig() / FollowIconConfig.new instead')
   static FollowIconConfig create() => FollowIconConfig._();
-  static $pb.GeneratedMessage $_createMessage() => FollowIconConfig._();
   @$core.override
-  FollowIconConfig createEmptyInstance() => FollowIconConfig._();
+  FollowIconConfig createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static FollowIconConfig getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FollowIconConfig>(
-          FollowIconConfig.$_createMessage);
+  static FollowIconConfig getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<FollowIconConfig>(create);
   static FollowIconConfig? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -432,7 +418,7 @@ class GyroConfig extends $pb.GeneratedMessage {
   factory GyroConfig({
     NFTImageV2? gyroscope,
   }) {
-    final result = GyroConfig._();
+    final result = create();
     if (gyroscope != null) result.gyroscope = gyroscope;
     return result;
   }
@@ -441,18 +427,18 @@ class GyroConfig extends $pb.GeneratedMessage {
 
   factory GyroConfig.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      GyroConfig()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory GyroConfig.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      GyroConfig()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'GyroConfig',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.dagw.component.avatar.v1.plugin'),
-      createEmptyInstance: GyroConfig.$_createMessage)
+      createEmptyInstance: create)
     ..aOM<NFTImageV2>(1, _omitFieldNames ? '' : 'gyroscope',
-        subBuilder: NFTImageV2.$_createMessage)
+        subBuilder: NFTImageV2.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -465,14 +451,12 @@ class GyroConfig extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use GyroConfig() / GyroConfig.new instead')
   static GyroConfig create() => GyroConfig._();
-  static $pb.GeneratedMessage $_createMessage() => GyroConfig._();
   @$core.override
-  GyroConfig createEmptyInstance() => GyroConfig._();
+  GyroConfig createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static GyroConfig getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<GyroConfig>(GyroConfig.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<GyroConfig>(create);
   static GyroConfig? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -493,7 +477,7 @@ class GyroscopeContentV2 extends $pb.GeneratedMessage {
     $core.double? scale,
     $core.Iterable<PhysicalOrientationV2>? physicalOrientation,
   }) {
-    final result = GyroscopeContentV2._();
+    final result = create();
     if (fileUrl != null) result.fileUrl = fileUrl;
     if (scale != null) result.scale = scale;
     if (physicalOrientation != null)
@@ -505,21 +489,21 @@ class GyroscopeContentV2 extends $pb.GeneratedMessage {
 
   factory GyroscopeContentV2.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      GyroscopeContentV2()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory GyroscopeContentV2.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      GyroscopeContentV2()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'GyroscopeContentV2',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.dagw.component.avatar.v1.plugin'),
-      createEmptyInstance: GyroscopeContentV2.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'fileUrl')
     ..aD(2, _omitFieldNames ? '' : 'scale', fieldType: $pb.PbFieldType.OF)
     ..pPM<PhysicalOrientationV2>(
         3, _omitFieldNames ? '' : 'physicalOrientation',
-        subBuilder: PhysicalOrientationV2.$_createMessage)
+        subBuilder: PhysicalOrientationV2.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -533,15 +517,12 @@ class GyroscopeContentV2 extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use GyroscopeContentV2() / GyroscopeContentV2.new instead')
   static GyroscopeContentV2 create() => GyroscopeContentV2._();
-  static $pb.GeneratedMessage $_createMessage() => GyroscopeContentV2._();
   @$core.override
-  GyroscopeContentV2 createEmptyInstance() => GyroscopeContentV2._();
+  GyroscopeContentV2 createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static GyroscopeContentV2 getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<GyroscopeContentV2>(
-          GyroscopeContentV2.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<GyroscopeContentV2>(create);
   static GyroscopeContentV2? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -571,7 +552,7 @@ class GyroscopeEntityV2 extends $pb.GeneratedMessage {
     $core.String? displayType,
     $core.Iterable<GyroscopeContentV2>? contents,
   }) {
-    final result = GyroscopeEntityV2._();
+    final result = create();
     if (displayType != null) result.displayType = displayType;
     if (contents != null) result.contents.addAll(contents);
     return result;
@@ -581,19 +562,19 @@ class GyroscopeEntityV2 extends $pb.GeneratedMessage {
 
   factory GyroscopeEntityV2.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      GyroscopeEntityV2()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory GyroscopeEntityV2.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      GyroscopeEntityV2()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'GyroscopeEntityV2',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.dagw.component.avatar.v1.plugin'),
-      createEmptyInstance: GyroscopeEntityV2.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'displayType')
     ..pPM<GyroscopeContentV2>(2, _omitFieldNames ? '' : 'contents',
-        subBuilder: GyroscopeContentV2.$_createMessage)
+        subBuilder: GyroscopeContentV2.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -607,15 +588,12 @@ class GyroscopeEntityV2 extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use GyroscopeEntityV2() / GyroscopeEntityV2.new instead')
   static GyroscopeEntityV2 create() => GyroscopeEntityV2._();
-  static $pb.GeneratedMessage $_createMessage() => GyroscopeEntityV2._();
   @$core.override
-  GyroscopeEntityV2 createEmptyInstance() => GyroscopeEntityV2._();
+  GyroscopeEntityV2 createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static GyroscopeEntityV2 getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GyroscopeEntityV2>(
-          GyroscopeEntityV2.$_createMessage);
+  static GyroscopeEntityV2 getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GyroscopeEntityV2>(create);
   static GyroscopeEntityV2? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -638,7 +616,7 @@ class Interaction extends $pb.GeneratedMessage {
     $core.String? itype,
     $core.String? metadataUrl,
   }) {
-    final result = Interaction._();
+    final result = create();
     if (nftId != null) result.nftId = nftId;
     if (enabled != null) result.enabled = enabled;
     if (itype != null) result.itype = itype;
@@ -650,16 +628,16 @@ class Interaction extends $pb.GeneratedMessage {
 
   factory Interaction.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Interaction()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory Interaction.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Interaction()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'Interaction',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.dagw.component.avatar.v1.plugin'),
-      createEmptyInstance: Interaction.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'nftId')
     ..aOB(2, _omitFieldNames ? '' : 'enabled')
     ..aOS(3, _omitFieldNames ? '' : 'itype')
@@ -677,15 +655,12 @@ class Interaction extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use Interaction() / Interaction.new instead')
   static Interaction create() => Interaction._();
-  static $pb.GeneratedMessage $_createMessage() => Interaction._();
   @$core.override
-  Interaction createEmptyInstance() => Interaction._();
+  Interaction createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static Interaction getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Interaction>(
-          Interaction.$_createMessage);
+  static Interaction getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<Interaction>(create);
   static Interaction? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -732,7 +707,7 @@ class LiveAnimeConfig extends $pb.GeneratedMessage {
     $core.Iterable<LiveAnimeItem>? items,
     $core.Iterable<BorderConfig>? borderConfig,
   }) {
-    final result = LiveAnimeConfig._();
+    final result = create();
     if (isLive != null) result.isLive = isLive;
     if (config != null) result.config = config;
     if (items != null) result.items.addAll(items);
@@ -744,23 +719,23 @@ class LiveAnimeConfig extends $pb.GeneratedMessage {
 
   factory LiveAnimeConfig.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      LiveAnimeConfig()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory LiveAnimeConfig.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      LiveAnimeConfig()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'LiveAnimeConfig',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.dagw.component.avatar.v1.plugin'),
-      createEmptyInstance: LiveAnimeConfig.$_createMessage)
+      createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'isLive')
     ..aOM<LiveTextConfig>(2, _omitFieldNames ? '' : 'config',
-        subBuilder: LiveTextConfig.$_createMessage)
+        subBuilder: LiveTextConfig.create)
     ..pPM<LiveAnimeItem>(3, _omitFieldNames ? '' : 'items',
-        subBuilder: LiveAnimeItem.$_createMessage)
+        subBuilder: LiveAnimeItem.create)
     ..pPM<BorderConfig>(4, _omitFieldNames ? '' : 'borderConfig',
-        subBuilder: BorderConfig.$_createMessage)
+        subBuilder: BorderConfig.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -774,15 +749,12 @@ class LiveAnimeConfig extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use LiveAnimeConfig() / LiveAnimeConfig.new instead')
   static LiveAnimeConfig create() => LiveAnimeConfig._();
-  static $pb.GeneratedMessage $_createMessage() => LiveAnimeConfig._();
   @$core.override
-  LiveAnimeConfig createEmptyInstance() => LiveAnimeConfig._();
+  LiveAnimeConfig createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static LiveAnimeConfig getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LiveAnimeConfig>(
-          LiveAnimeConfig.$_createMessage);
+  static LiveAnimeConfig getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<LiveAnimeConfig>(create);
   static LiveAnimeConfig? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -821,7 +793,7 @@ class LiveAnimeItem extends $pb.GeneratedMessage {
     $core.double? startOpacity,
     $fixnum.Int64? phase,
   }) {
-    final result = LiveAnimeItem._();
+    final result = create();
     if (color != null) result.color = color;
     if (startRatio != null) result.startRatio = startRatio;
     if (endRatio != null) result.endRatio = endRatio;
@@ -835,18 +807,18 @@ class LiveAnimeItem extends $pb.GeneratedMessage {
 
   factory LiveAnimeItem.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      LiveAnimeItem()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory LiveAnimeItem.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      LiveAnimeItem()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'LiveAnimeItem',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.dagw.component.avatar.v1.plugin'),
-      createEmptyInstance: LiveAnimeItem.$_createMessage)
+      createEmptyInstance: create)
     ..aOM<$0.ColorConfig>(1, _omitFieldNames ? '' : 'color',
-        subBuilder: $0.ColorConfig.$_createMessage)
+        subBuilder: $0.ColorConfig.create)
     ..aD(2, _omitFieldNames ? '' : 'startRatio')
     ..aD(3, _omitFieldNames ? '' : 'endRatio')
     ..aD(4, _omitFieldNames ? '' : 'startStroke')
@@ -865,15 +837,12 @@ class LiveAnimeItem extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use LiveAnimeItem() / LiveAnimeItem.new instead')
   static LiveAnimeItem create() => LiveAnimeItem._();
-  static $pb.GeneratedMessage $_createMessage() => LiveAnimeItem._();
   @$core.override
-  LiveAnimeItem createEmptyInstance() => LiveAnimeItem._();
+  LiveAnimeItem createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static LiveAnimeItem getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LiveAnimeItem>(
-          LiveAnimeItem.$_createMessage);
+  static LiveAnimeItem getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<LiveAnimeItem>(create);
   static LiveAnimeItem? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -943,7 +912,7 @@ class LiveTextConfig extends $pb.GeneratedMessage {
     $0.ColorConfig? borderColor,
     $0.ColorConfig? background,
   }) {
-    final result = LiveTextConfig._();
+    final result = create();
     if (width != null) result.width = width;
     if (height != null) result.height = height;
     if (offsetY != null) result.offsetY = offsetY;
@@ -958,25 +927,25 @@ class LiveTextConfig extends $pb.GeneratedMessage {
 
   factory LiveTextConfig.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      LiveTextConfig()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory LiveTextConfig.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      LiveTextConfig()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'LiveTextConfig',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.dagw.component.avatar.v1.plugin'),
-      createEmptyInstance: LiveTextConfig.$_createMessage)
+      createEmptyInstance: create)
     ..aD(1, _omitFieldNames ? '' : 'width')
     ..aD(2, _omitFieldNames ? '' : 'height')
     ..aD(3, _omitFieldNames ? '' : 'offsetY')
     ..aD(4, _omitFieldNames ? '' : 'borderWidth')
     ..aD(5, _omitFieldNames ? '' : 'textSize')
     ..aOM<$0.ColorConfig>(7, _omitFieldNames ? '' : 'borderColor',
-        subBuilder: $0.ColorConfig.$_createMessage)
+        subBuilder: $0.ColorConfig.create)
     ..aOM<$0.ColorConfig>(8, _omitFieldNames ? '' : 'background',
-        subBuilder: $0.ColorConfig.$_createMessage)
+        subBuilder: $0.ColorConfig.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -990,15 +959,12 @@ class LiveTextConfig extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use LiveTextConfig() / LiveTextConfig.new instead')
   static LiveTextConfig create() => LiveTextConfig._();
-  static $pb.GeneratedMessage $_createMessage() => LiveTextConfig._();
   @$core.override
-  LiveTextConfig createEmptyInstance() => LiveTextConfig._();
+  LiveTextConfig createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static LiveTextConfig getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LiveTextConfig>(
-          LiveTextConfig.$_createMessage);
+  static LiveTextConfig getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<LiveTextConfig>(create);
   static LiveTextConfig? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -1073,7 +1039,7 @@ class NFTImageV2 extends $pb.GeneratedMessage {
   factory NFTImageV2({
     $core.Iterable<GyroscopeEntityV2>? gyroscope,
   }) {
-    final result = NFTImageV2._();
+    final result = create();
     if (gyroscope != null) result.gyroscope.addAll(gyroscope);
     return result;
   }
@@ -1082,18 +1048,18 @@ class NFTImageV2 extends $pb.GeneratedMessage {
 
   factory NFTImageV2.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      NFTImageV2()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory NFTImageV2.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      NFTImageV2()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'NFTImageV2',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.dagw.component.avatar.v1.plugin'),
-      createEmptyInstance: NFTImageV2.$_createMessage)
+      createEmptyInstance: create)
     ..pPM<GyroscopeEntityV2>(1, _omitFieldNames ? '' : 'gyroscope',
-        subBuilder: GyroscopeEntityV2.$_createMessage)
+        subBuilder: GyroscopeEntityV2.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1106,14 +1072,12 @@ class NFTImageV2 extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use NFTImageV2() / NFTImageV2.new instead')
   static NFTImageV2 create() => NFTImageV2._();
-  static $pb.GeneratedMessage $_createMessage() => NFTImageV2._();
   @$core.override
-  NFTImageV2 createEmptyInstance() => NFTImageV2._();
+  NFTImageV2 createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static NFTImageV2 getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<NFTImageV2>(NFTImageV2.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<NFTImageV2>(create);
   static NFTImageV2? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -1126,7 +1090,7 @@ class PhysicalOrientationAnimation extends $pb.GeneratedMessage {
     $core.Iterable<$core.double>? value,
     $core.String? bezier,
   }) {
-    final result = PhysicalOrientationAnimation._();
+    final result = create();
     if (type != null) result.type = type;
     if (value != null) result.value.addAll(value);
     if (bezier != null) result.bezier = bezier;
@@ -1137,16 +1101,16 @@ class PhysicalOrientationAnimation extends $pb.GeneratedMessage {
 
   factory PhysicalOrientationAnimation.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PhysicalOrientationAnimation()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PhysicalOrientationAnimation.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PhysicalOrientationAnimation()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'PhysicalOrientationAnimation',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.dagw.component.avatar.v1.plugin'),
-      createEmptyInstance: PhysicalOrientationAnimation.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'type')
     ..p<$core.double>(2, _omitFieldNames ? '' : 'value', $pb.PbFieldType.KF)
     ..aOS(3, _omitFieldNames ? '' : 'bezier')
@@ -1165,19 +1129,13 @@ class PhysicalOrientationAnimation extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated(
-      'Use PhysicalOrientationAnimation() / PhysicalOrientationAnimation.new instead')
   static PhysicalOrientationAnimation create() =>
       PhysicalOrientationAnimation._();
-  static $pb.GeneratedMessage $_createMessage() =>
-      PhysicalOrientationAnimation._();
   @$core.override
-  PhysicalOrientationAnimation createEmptyInstance() =>
-      PhysicalOrientationAnimation._();
+  PhysicalOrientationAnimation createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static PhysicalOrientationAnimation getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<PhysicalOrientationAnimation>(
-          PhysicalOrientationAnimation.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<PhysicalOrientationAnimation>(create);
   static PhysicalOrientationAnimation? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -1208,7 +1166,7 @@ class PhysicalOrientationV2 extends $pb.GeneratedMessage {
     $core.Iterable<$core.double>? angle,
     $core.Iterable<PhysicalOrientationAnimation>? animations,
   }) {
-    final result = PhysicalOrientationV2._();
+    final result = create();
     if (type != null) result.type = type;
     if (angle != null) result.angle.addAll(angle);
     if (animations != null) result.animations.addAll(animations);
@@ -1219,20 +1177,20 @@ class PhysicalOrientationV2 extends $pb.GeneratedMessage {
 
   factory PhysicalOrientationV2.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PhysicalOrientationV2()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PhysicalOrientationV2.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PhysicalOrientationV2()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'PhysicalOrientationV2',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.dagw.component.avatar.v1.plugin'),
-      createEmptyInstance: PhysicalOrientationV2.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'type')
     ..p<$core.double>(2, _omitFieldNames ? '' : 'angle', $pb.PbFieldType.KF)
     ..pPM<PhysicalOrientationAnimation>(3, _omitFieldNames ? '' : 'animations',
-        subBuilder: PhysicalOrientationAnimation.$_createMessage)
+        subBuilder: PhysicalOrientationAnimation.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1247,16 +1205,12 @@ class PhysicalOrientationV2 extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated(
-      'Use PhysicalOrientationV2() / PhysicalOrientationV2.new instead')
   static PhysicalOrientationV2 create() => PhysicalOrientationV2._();
-  static $pb.GeneratedMessage $_createMessage() => PhysicalOrientationV2._();
   @$core.override
-  PhysicalOrientationV2 createEmptyInstance() => PhysicalOrientationV2._();
+  PhysicalOrientationV2 createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static PhysicalOrientationV2 getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<PhysicalOrientationV2>(
-          PhysicalOrientationV2.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<PhysicalOrientationV2>(create);
   static PhysicalOrientationV2? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -1284,7 +1238,7 @@ class WebLiveAnimeConfig extends $pb.GeneratedMessage {
     $core.double? liveLabelOffsetY,
     $core.double? liveLabelBorderWidth,
   }) {
-    final result = WebLiveAnimeConfig._();
+    final result = create();
     if (circleGapWidth != null) result.circleGapWidth = circleGapWidth;
     if (pinkCircleWidth != null) result.pinkCircleWidth = pinkCircleWidth;
     if (liveLabelWidth != null) result.liveLabelWidth = liveLabelWidth;
@@ -1299,16 +1253,16 @@ class WebLiveAnimeConfig extends $pb.GeneratedMessage {
 
   factory WebLiveAnimeConfig.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      WebLiveAnimeConfig()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory WebLiveAnimeConfig.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      WebLiveAnimeConfig()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'WebLiveAnimeConfig',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.dagw.component.avatar.v1.plugin'),
-      createEmptyInstance: WebLiveAnimeConfig.$_createMessage)
+      createEmptyInstance: create)
     ..aD(1, _omitFieldNames ? '' : 'circleGapWidth')
     ..aD(2, _omitFieldNames ? '' : 'pinkCircleWidth')
     ..aD(3, _omitFieldNames ? '' : 'liveLabelWidth')
@@ -1328,15 +1282,12 @@ class WebLiveAnimeConfig extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use WebLiveAnimeConfig() / WebLiveAnimeConfig.new instead')
   static WebLiveAnimeConfig create() => WebLiveAnimeConfig._();
-  static $pb.GeneratedMessage $_createMessage() => WebLiveAnimeConfig._();
   @$core.override
-  WebLiveAnimeConfig createEmptyInstance() => WebLiveAnimeConfig._();
+  WebLiveAnimeConfig createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static WebLiveAnimeConfig getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<WebLiveAnimeConfig>(
-          WebLiveAnimeConfig.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<WebLiveAnimeConfig>(create);
   static WebLiveAnimeConfig? _defaultInstance;
 
   @$pb.TagNumber(1)

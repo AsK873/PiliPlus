@@ -1,6 +1,7 @@
 import 'package:PiliPlus/common/skeleton/video_card_v.dart';
 import 'package:PiliPlus/common/sliver_single_child_delegate.dart';
 import 'package:PiliPlus/common/style.dart';
+import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/common/widgets/flutter/refresh_indicator.dart';
 import 'package:PiliPlus/common/widgets/loading_widget/http_error.dart';
 import 'package:PiliPlus/common/widgets/scaffold/simple_scaffold.dart';
@@ -10,6 +11,7 @@ import 'package:PiliPlus/pages/member_coin_arc/widgets/item.dart';
 import 'package:PiliPlus/pages/member_like_arc/controller.dart';
 import 'package:PiliPlus/utils/accounts.dart';
 import 'package:PiliPlus/utils/grid.dart';
+import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:PiliPlus/utils/utils.dart';
 import 'package:get/get.dart';
 import 'package:material_ui/material_ui.dart';
@@ -60,9 +62,15 @@ class _MemberLikeArcPageState extends State<MemberLikeArcPage> {
                 top: 7,
                 left: Style.safeSpace + padding.left,
                 right: Style.safeSpace + padding.right,
-                bottom: padding.bottom + 100,
+                bottom: PlatformUtils.isDesktop
+                    ? 24
+                    : padding.bottom + 100,
               ),
-              sliver: Obx(() => _buildBody(_ctr.loadingState.value)),
+              // M8：桌面内容限宽居中（UP-赞过的视频）。
+              sliver: desktopLimitSliver(
+                Obx(() => _buildBody(_ctr.loadingState.value)),
+                maxWidth: 1280,
+              ),
             ),
           ],
         ),

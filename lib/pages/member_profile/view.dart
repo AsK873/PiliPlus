@@ -63,9 +63,18 @@ class _EditProfilePageState extends State<EditProfilePage> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    // M8：桌面内容限宽居中（账号资料表单）。
+    final body = _buildBody(theme, _loadingState);
     return SimpleScaffold(
       appBar: AppBar(title: const Text('账号资料')),
-      body: _buildBody(theme, _loadingState),
+      body: PlatformUtils.isDesktop
+          ? Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 1280),
+                child: body,
+              ),
+            )
+          : body,
     );
   }
 

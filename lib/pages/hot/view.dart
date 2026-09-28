@@ -1,7 +1,9 @@
+import 'package:PiliPlus/common/widgets/desktop/hover_card.dart';
 import 'package:PiliPlus/common/widgets/flutter/refresh_indicator.dart';
 import 'package:PiliPlus/common/widgets/image/network_img_layer.dart';
 import 'package:PiliPlus/common/widgets/loading_widget/http_error.dart';
 import 'package:PiliPlus/common/widgets/scaffold/simple_scaffold.dart';
+import 'package:PiliPlus/common/widgets/sliver/sliver_constrained_cross_axis.dart';
 import 'package:PiliPlus/common/widgets/video_card/video_card_h.dart';
 import 'package:PiliPlus/common/widgets/view_safe_area.dart';
 import 'package:PiliPlus/http/loading_state.dart';
@@ -11,6 +13,7 @@ import 'package:PiliPlus/pages/home/controller.dart';
 import 'package:PiliPlus/pages/hot/controller.dart';
 import 'package:PiliPlus/pages/rank/view.dart';
 import 'package:PiliPlus/utils/grid.dart';
+import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:PiliPlus/utils/storage_pref.dart';
 import 'package:get/get.dart';
 import 'package:material_ui/material_ui.dart';
@@ -109,15 +112,28 @@ class _HotPageState extends State<HotPage>
               ),
             ),
           SliverPadding(
-            padding: const EdgeInsets.only(top: 7, bottom: 100),
-            sliver: Obx(
-              () => _buildBody(controller.loadingState.value),
+            padding: EdgeInsets.only(
+              top: 7,
+              bottom: PlatformUtils.isDesktop ? 24 : 100,
+            ),
+            // M3：桌面内容限宽居中，避免横卡在超宽屏下被排成多列"巨列表"。
+            sliver: _contentWidth(
+              Obx(() => _buildBody(controller.loadingState.value)),
             ),
           ),
         ],
       ),
     );
   }
+
+  /// M3 桌面辅助：内容限宽居中。
+  Widget _contentWidth(Widget sliver) => PlatformUtils.isDesktop
+      ? CenteredSliverConstrainedCrossAxis(maxExtent: 1200, sliver: sliver)
+      : sliver;
+
+  /// M3 桌面辅助：卡片 hover 反馈。
+  Widget _card(Widget card) =>
+      PlatformUtils.isDesktop ? HoverCard(child: card) : card;
 
   Widget _buildBody(LoadingState<List<HotVideoItemModel>?> loadingState) {
     return switch (loadingState) {
@@ -130,11 +146,13 @@ class _HotPageState extends State<HotPage>
                   if (index == response.length - 1) {
                     controller.onLoadMore();
                   }
-                  return VideoCardH(
-                    videoItem: response[index],
-                    onRemove: () => controller.loadingState
-                      ..value.data!.removeAt(index)
-                      ..refresh(),
+                  return _card(
+                    VideoCardH(
+                      videoItem: response[index],
+                      onRemove: () => controller.loadingState
+                        ..value.data!.removeAt(index)
+                        ..refresh(),
+                    ),
                   );
                 },
                 itemCount: response.length,

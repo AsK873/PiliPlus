@@ -1,3 +1,4 @@
+import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/common/widgets/flutter/refresh_indicator.dart';
 import 'package:PiliPlus/common/widgets/loading_widget/http_error.dart';
 import 'package:PiliPlus/http/loading_state.dart';
@@ -5,6 +6,7 @@ import 'package:PiliPlus/models_new/space/space_archive/item.dart';
 import 'package:PiliPlus/pages/member_comic/controller.dart';
 import 'package:PiliPlus/pages/member_comic/widgets/item.dart';
 import 'package:PiliPlus/utils/grid.dart';
+import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:get/get.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -46,9 +48,15 @@ class _MemberComicState extends State<MemberComic>
         slivers: [
           SliverPadding(
             padding: EdgeInsets.only(
-              bottom: MediaQuery.viewPaddingOf(context).bottom + 100,
+              bottom: PlatformUtils.isDesktop
+                  ? 24
+                  : MediaQuery.viewPaddingOf(context).bottom + 100,
             ),
-            sliver: Obx(() => _buildBody(_controller.loadingState.value)),
+            // M8：桌面内容限宽居中（UP-漫画）。
+            sliver: desktopLimitSliver(
+              Obx(() => _buildBody(_controller.loadingState.value)),
+              maxWidth: 1280,
+            ),
           ),
         ],
       ),

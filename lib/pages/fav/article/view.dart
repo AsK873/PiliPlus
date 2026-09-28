@@ -1,3 +1,4 @@
+import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/common/widgets/dialog/dialog.dart';
 import 'package:PiliPlus/common/widgets/flutter/refresh_indicator.dart';
 import 'package:PiliPlus/common/widgets/loading_widget/http_error.dart';
@@ -6,6 +7,7 @@ import 'package:PiliPlus/models_new/fav/fav_article/item.dart';
 import 'package:PiliPlus/pages/fav/article/controller.dart';
 import 'package:PiliPlus/pages/fav/article/widget/item.dart';
 import 'package:PiliPlus/utils/grid.dart';
+import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:get/get.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -37,10 +39,14 @@ class _FavArticlePageState extends State<FavArticlePage>
           SliverPadding(
             padding: EdgeInsets.only(
               top: 7,
-              bottom: MediaQuery.viewPaddingOf(context).bottom + 100,
+              bottom: PlatformUtils.isDesktop
+                  ? 24
+                  : MediaQuery.viewPaddingOf(context).bottom + 100,
             ),
-            sliver: Obx(
-              () => _buildBody(_favArticleController.loadingState.value),
+            // M7：桌面内容限宽居中（收藏-文章）。
+            sliver: desktopLimitSliver(
+              Obx(() => _buildBody(_favArticleController.loadingState.value)),
+              maxWidth: 1280,
             ),
           ),
         ],

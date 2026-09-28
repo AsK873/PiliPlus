@@ -1,5 +1,6 @@
 import 'package:PiliPlus/common/skeleton/msg_feed_top.dart';
 import 'package:PiliPlus/common/sliver_single_child_delegate.dart';
+import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/common/widgets/sliver/sliver_floating_header.dart';
 import 'package:PiliPlus/models/search/result.dart';
 import 'package:PiliPlus/pages/search_panel/user/controller.dart';
@@ -98,17 +99,20 @@ class _SearchUserPanelState
 
   @override
   Widget buildList(List<SearchUserItemModel> list) {
-    return SliverGrid.builder(
-      gridDelegate: gridDelegate,
-      itemBuilder: (BuildContext context, int index) {
-        if (index == list.length - 1) {
-          controller.onLoadMore();
-        }
-        return SearchUserItem(
-          item: list[index],
-        );
-      },
-      itemCount: list.length,
+    return desktopLimitSliver(
+      SliverGrid.builder(
+        gridDelegate: gridDelegate,
+        itemBuilder: (BuildContext context, int index) {
+          if (index == list.length - 1) {
+            controller.onLoadMore();
+          }
+          return SearchUserItem(
+            item: list[index],
+          );
+        },
+        itemCount: list.length,
+      ),
+      maxWidth: 1280,
     );
   }
 

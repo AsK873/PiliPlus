@@ -1,5 +1,6 @@
 import 'package:PiliPlus/common/skeleton/whisper_item.dart';
 import 'package:PiliPlus/common/sliver_single_child_delegate.dart';
+import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/common/widgets/flutter/refresh_indicator.dart';
 import 'package:PiliPlus/common/widgets/loading_widget/http_error.dart';
 import 'package:PiliPlus/common/widgets/scaffold/simple_scaffold.dart';
@@ -9,6 +10,7 @@ import 'package:PiliPlus/pages/whisper/controller.dart';
 import 'package:PiliPlus/pages/whisper/widgets/item.dart';
 import 'package:PiliPlus/utils/extension/theme_ext.dart';
 import 'package:PiliPlus/utils/extension/three_dot_ext.dart';
+import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:PiliPlus/utils/theme_utils.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
@@ -98,10 +100,24 @@ class _WhisperPageState extends State<WhisperPage> {
         child: CustomScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
           slivers: [
-            _buildTopItems(theme, padding),
-            SliverPadding(
-              padding: EdgeInsets.only(bottom: padding.bottom + 100),
-              sliver: Obx(() => _buildBody(_controller.loadingState.value)),
+            // M8：桌面内容限宽居中（私信列表）。
+            desktopLimitSliver(
+              SliverMainAxisGroup(
+                slivers: [
+                  _buildTopItems(theme, padding),
+                  SliverPadding(
+                    padding: EdgeInsets.only(
+                      bottom: PlatformUtils.isDesktop
+                          ? 24
+                          : padding.bottom + 100,
+                    ),
+                    sliver: Obx(
+                      () => _buildBody(_controller.loadingState.value),
+                    ),
+                  ),
+                ],
+              ),
+              maxWidth: 1280,
             ),
           ],
         ),
@@ -160,7 +176,10 @@ class _WhisperPageState extends State<WhisperPage> {
       padding: EdgeInsets.only(left: padding.left, right: padding.right),
       sliver: SliverToBoxAdapter(
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          // M8：桌面端图标组居中，不拉满限宽列。
+          mainAxisAlignment: PlatformUtils.isDesktop
+              ? MainAxisAlignment.center
+              : MainAxisAlignment.spaceEvenly,
           children: List.generate(_controller.msgFeedTopItems.length, (index) {
             final item = _controller.msgFeedTopItems[index];
             return GestureDetector(

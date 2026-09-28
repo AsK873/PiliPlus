@@ -36,7 +36,7 @@ class Device extends $pb.GeneratedMessage {
     $fixnum.Int64? fts,
     $core.String? guestId,
   }) {
-    final result = Device._();
+    final result = create();
     if (appId != null) result.appId = appId;
     if (build != null) result.build = build;
     if (buvid != null) result.buvid = buvid;
@@ -60,16 +60,16 @@ class Device extends $pb.GeneratedMessage {
 
   factory Device.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Device()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory Device.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Device()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'Device',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.metadata.device'),
-      createEmptyInstance: Device.$_createMessage)
+      createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'appId')
     ..aI(2, _omitFieldNames ? '' : 'build')
     ..aOS(3, _omitFieldNames ? '' : 'buvid')
@@ -98,14 +98,12 @@ class Device extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use Device() / Device.new instead')
   static Device create() => Device._();
-  static $pb.GeneratedMessage $_createMessage() => Device._();
   @$core.override
-  Device createEmptyInstance() => Device._();
+  Device createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static Device getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<Device>(Device.$_createMessage);
+  static Device getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Device>(create);
   static Device? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -254,22 +252,22 @@ class Device extends $pb.GeneratedMessage {
 }
 
 class DeviceType extends $pb.GeneratedMessage {
-  factory DeviceType() => DeviceType._();
+  factory DeviceType() => create();
 
   DeviceType._();
 
   factory DeviceType.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      DeviceType()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory DeviceType.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      DeviceType()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'DeviceType',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.metadata.device'),
-      createEmptyInstance: DeviceType.$_createMessage)
+      createEmptyInstance: create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -282,34 +280,32 @@ class DeviceType extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use DeviceType() / DeviceType.new instead')
   static DeviceType create() => DeviceType._();
-  static $pb.GeneratedMessage $_createMessage() => DeviceType._();
   @$core.override
-  DeviceType createEmptyInstance() => DeviceType._();
+  DeviceType createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static DeviceType getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<DeviceType>(DeviceType.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<DeviceType>(create);
   static DeviceType? _defaultInstance;
 }
 
 class MobiApp extends $pb.GeneratedMessage {
-  factory MobiApp() => MobiApp._();
+  factory MobiApp() => create();
 
   MobiApp._();
 
   factory MobiApp.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MobiApp()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory MobiApp.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MobiApp()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'MobiApp',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.metadata.device'),
-      createEmptyInstance: MobiApp.$_createMessage)
+      createEmptyInstance: create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -322,34 +318,32 @@ class MobiApp extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use MobiApp() / MobiApp.new instead')
   static MobiApp create() => MobiApp._();
-  static $pb.GeneratedMessage $_createMessage() => MobiApp._();
   @$core.override
-  MobiApp createEmptyInstance() => MobiApp._();
+  MobiApp createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static MobiApp getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<MobiApp>(MobiApp.$_createMessage);
+  static MobiApp getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MobiApp>(create);
   static MobiApp? _defaultInstance;
 }
 
 class Platform extends $pb.GeneratedMessage {
-  factory Platform() => Platform._();
+  factory Platform() => create();
 
   Platform._();
 
   factory Platform.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Platform()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory Platform.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Platform()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'Platform',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.metadata.device'),
-      createEmptyInstance: Platform.$_createMessage)
+      createEmptyInstance: create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -362,14 +356,12 @@ class Platform extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use Platform() / Platform.new instead')
   static Platform create() => Platform._();
-  static $pb.GeneratedMessage $_createMessage() => Platform._();
   @$core.override
-  Platform createEmptyInstance() => Platform._();
+  Platform createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static Platform getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<Platform>(Platform.$_createMessage);
+  static Platform getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Platform>(create);
   static Platform? _defaultInstance;
 }
 
