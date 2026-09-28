@@ -170,9 +170,8 @@ class _UgcIntroPanelState extends State<UgcIntroPanel> {
                             ),
                           ),
                   ),
-                  // 点赞收藏转发 布局样式2：
-                  // 竖屏卷动始终显示；桌面宽窗（播放器下方 UP主/简介区）也常驻显示为工具行。
-                  if (!isHorizontal || PlatformUtils.isDesktop) ...[
+                  // 点赞收藏转发 布局样式2
+                  if (!isHorizontal) ...[
                     const SizedBox(height: 8),
                     actionGrid(
                       context,
