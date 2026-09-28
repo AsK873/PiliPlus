@@ -62,6 +62,7 @@ class _MemberDynamicsPageState extends State<MemberDynamicsPage>
   }
 
   Widget _buildBody(EdgeInsets padding) => refreshIndicator(
+    isClampingScrollPhysics: widget.mid != null,
     onRefresh: _memberDynamicController.onRefresh,
     child: CustomScrollView(
       physics: const AlwaysScrollableScrollPhysics(),

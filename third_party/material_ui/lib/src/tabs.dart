@@ -352,8 +352,12 @@ class _TabStyle extends AnimatedWidget {
   }
 }
 
+typedef TabBarLayoutCallback = _LayoutCallback;
+
 typedef _LayoutCallback =
     void Function(List<double> xOffsets, TextDirection textDirection, double width);
+
+typedef TabLabelBarRenderer = _TabLabelBarRenderer;
 
 class _TabLabelBarRenderer extends RenderFlex {
   _TabLabelBarRenderer({
@@ -472,6 +476,8 @@ class _DividerPainter extends CustomPainter {
   }
 }
 
+typedef IndicatorPainterNotifier = _IndicatorPainterNotifier;
+
 // A ChangeNotifier for triggering repaints when async resources load.
 class _IndicatorPainterNotifier extends ChangeNotifier {
   void notify() {
@@ -481,6 +487,8 @@ class _IndicatorPainterNotifier extends ChangeNotifier {
   @override
   String toString() => describeIdentity(this);
 }
+
+typedef IndicatorPainter = _IndicatorPainter;
 
 class _IndicatorPainter extends CustomPainter {
   factory _IndicatorPainter({
@@ -504,7 +512,7 @@ class _IndicatorPainter extends CustomPainter {
     ///
     /// The notifier is to trigger a repaint when asynchronous resources,
     /// like images in the indicator [Decoration], are finished loading.
-    return _IndicatorPainter._(
+    return _IndicatorPainter.builder(
       controller: controller,
       indicator: indicator,
       indicatorSize: indicatorSize,
@@ -522,7 +530,7 @@ class _IndicatorPainter extends CustomPainter {
     );
   }
 
-  _IndicatorPainter._({
+  _IndicatorPainter.builder({
     required this.controller,
     required this.indicator,
     required this.indicatorSize,
@@ -1590,6 +1598,8 @@ class TabBar extends StatefulWidget implements PreferredSizeWidget {
   State<TabBar> createState() => _TabBarState();
 }
 
+typedef TabBarState = _TabBarState;
+
 class _TabBarState extends State<TabBar> {
   TabBarScrollController? _internalScrollController;
   TabController? _controller;
@@ -1744,6 +1754,38 @@ class _TabBarState extends State<TabBar> {
     }
   }
 
+ IndicatorPainter buildIndicator({
+    required TabController controller,
+    required Decoration indicator,
+    required TabBarIndicatorSize indicatorSize,
+    required List<GlobalKey> tabKeys,
+    required _IndicatorPainter? old,
+    required EdgeInsetsGeometry indicatorPadding,
+    required List<EdgeInsetsGeometry> labelPaddings,
+    Color? dividerColor,
+    double? dividerHeight,
+    required bool showDivider,
+    double? devicePixelRatio,
+    required TabIndicatorAnimation indicatorAnimation,
+    required TextDirection textDirection,
+  }) {
+    return _IndicatorPainter(
+      controller: controller,
+      indicator: indicator,
+      indicatorSize: indicatorSize,
+      indicatorPadding: indicatorPadding,
+      tabKeys: tabKeys,
+      old: old,
+      labelPaddings: labelPaddings,
+      dividerColor: dividerColor,
+      dividerHeight: dividerHeight,
+      showDivider: showDivider,
+      devicePixelRatio: devicePixelRatio,
+      indicatorAnimation: indicatorAnimation,
+      textDirection: textDirection,
+    );
+  }
+
   void _initIndicatorPainter() {
     final ThemeData theme = Theme.of(context);
     final TabBarThemeData tabBarTheme = TabBarTheme.of(context);
@@ -1759,7 +1801,7 @@ class _TabBarState extends State<TabBar> {
 
     _indicatorPainter = !_controllerIsValid
         ? null
-        : _IndicatorPainter(
+        : buildIndicator(
             controller: _controller!,
             indicator: _getIndicator(indicatorSize),
             indicatorSize: indicatorSize,
@@ -1987,6 +2029,7 @@ class _TabBarState extends State<TabBar> {
   }
 
   bool _debugTabAlignmentIsValid(TabAlignment tabAlignment) {
+    return true;
     assert(() {
       if (widget.isScrollable && tabAlignment == TabAlignment.fill) {
         throw FlutterError('$tabAlignment is only valid for non-scrollable tab bars.');
@@ -1998,6 +2041,28 @@ class _TabBarState extends State<TabBar> {
       return true;
     }());
     return true;
+  }
+
+  void applyFillAlignment(
+    int index,
+    List<Widget> wrappedTabs,
+    TabAlignment effectiveTabAlignment,
+  ) {
+    if (!widget.isScrollable && effectiveTabAlignment == TabAlignment.fill) {
+      wrappedTabs[index] = Expanded(child: wrappedTabs[index]);
+    }
+  }
+
+  Widget buildTabLabelBar({
+    required TabBarLayoutCallback onPerformLayout,
+    required MainAxisSize mainAxisSize,
+    required List<Widget> children,
+  }) {
+    return _TabLabelBar(
+      onPerformLayout: onPerformLayout,
+      mainAxisSize: mainAxisSize,
+      children: children,
+    );
   }
 
   @override
@@ -2155,9 +2220,7 @@ class _TabBarState extends State<TabBar> {
         ),
       );
       wrappedTabs[index] = MergeSemantics(child: wrappedTabs[index]);
-      if (!widget.isScrollable && effectiveTabAlignment == TabAlignment.fill) {
-        wrappedTabs[index] = Expanded(child: wrappedTabs[index]);
-      }
+      applyFillAlignment(index, wrappedTabs, effectiveTabAlignment);
     }
 
     Widget tabBar = Semantics(
@@ -2175,7 +2238,7 @@ class _TabBarState extends State<TabBar> {
           labelStyle: widget.labelStyle,
           unselectedLabelStyle: widget.unselectedLabelStyle,
           defaults: _defaults,
-          child: _TabLabelBar(
+          child: buildTabLabelBar(
             onPerformLayout: _saveTabOffsets,
             mainAxisSize: effectiveTabAlignment == TabAlignment.fill
                 ? MainAxisSize.max

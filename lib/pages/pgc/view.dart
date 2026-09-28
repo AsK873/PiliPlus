@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:PiliPlus/common/style.dart';
 import 'package:PiliPlus/common/widgets/button/more_btn.dart';
-import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/common/widgets/flutter/refresh_indicator.dart';
 import 'package:PiliPlus/common/widgets/loading_widget/http_error.dart';
 import 'package:PiliPlus/common/widgets/loading_widget/loading_widget.dart';
@@ -21,9 +20,7 @@ import 'package:PiliPlus/pages/pgc/widgets/pgc_card_v_timeline.dart';
 import 'package:PiliPlus/pages/pgc_index/controller.dart';
 import 'package:PiliPlus/pages/pgc_index/view.dart';
 import 'package:PiliPlus/pages/pgc_index/widgets/pgc_card_v_pgc_index.dart';
-import 'package:PiliPlus/utils/extension/iterable_ext.dart';
 import 'package:PiliPlus/utils/grid.dart';
-import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:get/get.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -161,25 +158,26 @@ class _PgcPageState extends State<PgcPage> with AutomaticKeepAliveClientMixin {
                         child: TabBarView(
                           physics: const NeverScrollableScrollPhysics(),
                           children: response.map((item) {
-                            if (item.episodes.isNullOrEmpty) {
+                            final episodes = item.episodes;
+                            if (episodes == null || episodes.isEmpty) {
                               return const SizedBox.shrink();
                             }
                             return ListView.builder(
                               physics: const AlwaysScrollableScrollPhysics(),
                               scrollDirection: Axis.horizontal,
-                              itemCount: item.episodes!.length,
+                              itemCount: episodes.length,
                               padding: EdgeInsets.zero,
                               itemBuilder: (context, index) {
                                 return Container(
                                   width: Grid.smallCardWidth / 2,
                                   margin: EdgeInsets.only(
                                     left: Style.safeSpace,
-                                    right: index == item.episodes!.length - 1
+                                    right: index == episodes.length - 1
                                         ? Style.safeSpace
                                         : 0,
                                   ),
                                   child: PgcCardVTimeline(
-                                    item: item.episodes![index],
+                                    item: episodes[index],
                                   ),
                                 );
                               },
@@ -210,16 +208,13 @@ class _PgcPageState extends State<PgcPage> with AutomaticKeepAliveClientMixin {
   List<Widget> _buildRcmd(ThemeData theme) => [
     _buildRcmdTitle(theme),
     SliverPadding(
-      padding: EdgeInsets.only(
+      padding: const EdgeInsets.only(
         left: Style.safeSpace,
         right: Style.safeSpace,
-        // M3：桌面不再为悬浮底栏预留底部留白。
-        bottom: PlatformUtils.isDesktop ? 24 : 100,
+        bottom: 100,
       ),
-      // M3：桌面内容限宽居中（番剧/影视推荐竖卡网格）。
-      sliver: desktopLimitSliver(
-        Obx(() => _buildRcmdBody(controller.loadingState.value)),
-        maxWidth: 1560,
+      sliver: Obx(
+        () => _buildRcmdBody(controller.loadingState.value),
       ),
     ),
   ];
@@ -324,7 +319,7 @@ class _PgcPageState extends State<PgcPage> with AutomaticKeepAliveClientMixin {
                   if (index == response.length - 1) {
                     controller.onLoadMore();
                   }
-                  return desktopCard(PgcCardVPgcIndex(item: response[index]));
+                  return PgcCardVPgcIndex(item: response[index]);
                 },
                 itemCount: response.length,
               )

@@ -6,6 +6,7 @@
 #endif
 
 #include "flutter/generated_plugin_registrant.h"
+#include "plugins/linux_webview_plugin.h"
 
 struct _MyApplication {
   GtkApplication parent_instance;
@@ -22,6 +23,16 @@ static void first_frame_cb(MyApplication *self, FlView *view) {
 // Implements GApplication::activate.
 static void my_application_activate(GApplication *application) {
   MyApplication *self = MY_APPLICATION(application);
+
+  // A repeated launch is forwarded to this unique application instance.
+  GList *windows = gtk_application_get_windows(GTK_APPLICATION(application));
+  if (windows != nullptr) {
+    GtkWindow *window = GTK_WINDOW(windows->data);
+    gtk_widget_show(GTK_WIDGET(window));
+    gtk_window_present(window);
+    return;
+  }
+
   GtkWindow *window =
       GTK_WINDOW(gtk_application_window_new(GTK_APPLICATION(application)));
 
@@ -76,7 +87,11 @@ static void my_application_activate(GApplication *application) {
   gdk_rgba_parse(&background_color, "#000000");
   fl_view_set_background_color(view, &background_color);
   gtk_widget_show(GTK_WIDGET(view));
-  gtk_container_add(GTK_CONTAINER(window), GTK_WIDGET(view));
+
+  GtkWidget* overlay = gtk_overlay_new();
+  gtk_widget_show(overlay);
+  gtk_container_add(GTK_CONTAINER(window), overlay);
+  gtk_container_add(GTK_CONTAINER(overlay), GTK_WIDGET(view));
 
   // Show the window when Flutter renders.
   // Requires the view to be realized so we can start rendering.
@@ -85,6 +100,7 @@ static void my_application_activate(GApplication *application) {
   gtk_widget_realize(GTK_WIDGET(view));
 
   fl_register_plugins(FL_PLUGIN_REGISTRY(view));
+  LinuxWebviewPluginRegister(view, GTK_OVERLAY(overlay));
 
   gtk_widget_grab_focus(GTK_WIDGET(view));
 }
@@ -107,7 +123,7 @@ static gboolean my_application_local_command_line(GApplication *application,
   g_application_activate(application);
   *exit_status = 0;
 
-  return TRUE;
+  return FALSE;
 }
 
 // Implements GApplication::startup.
@@ -154,5 +170,8 @@ MyApplication *my_application_new() {
   g_set_prgname(APPLICATION_ID);
 
   return MY_APPLICATION(g_object_new(
-      my_application_get_type(), "application-id", APPLICATION_ID, nullptr));
+      my_application_get_type(), "application-id", APPLICATION_ID, "flags",
+      static_cast<GApplicationFlags>(G_APPLICATION_HANDLES_COMMAND_LINE |
+                                     G_APPLICATION_HANDLES_OPEN),
+      nullptr));
 }
