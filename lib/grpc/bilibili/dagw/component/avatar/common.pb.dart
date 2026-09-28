@@ -24,7 +24,7 @@ class BasicRenderSpec extends $pb.GeneratedMessage {
   factory BasicRenderSpec({
     $core.double? opacity,
   }) {
-    final result = BasicRenderSpec._();
+    final result = create();
     if (opacity != null) result.opacity = opacity;
     return result;
   }
@@ -33,16 +33,16 @@ class BasicRenderSpec extends $pb.GeneratedMessage {
 
   factory BasicRenderSpec.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      BasicRenderSpec()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory BasicRenderSpec.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      BasicRenderSpec()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'BasicRenderSpec',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.dagw.component.avatar.common'),
-      createEmptyInstance: BasicRenderSpec.$_createMessage)
+      createEmptyInstance: create)
     ..aD(1, _omitFieldNames ? '' : 'opacity')
     ..hasRequiredFields = false;
 
@@ -57,15 +57,12 @@ class BasicRenderSpec extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use BasicRenderSpec() / BasicRenderSpec.new instead')
   static BasicRenderSpec create() => BasicRenderSpec._();
-  static $pb.GeneratedMessage $_createMessage() => BasicRenderSpec._();
   @$core.override
-  BasicRenderSpec createEmptyInstance() => BasicRenderSpec._();
+  BasicRenderSpec createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static BasicRenderSpec getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BasicRenderSpec>(
-          BasicRenderSpec.$_createMessage);
+  static BasicRenderSpec getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<BasicRenderSpec>(create);
   static BasicRenderSpec? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -84,7 +81,7 @@ class ColorConfig extends $pb.GeneratedMessage {
     ColorSpec? day,
     ColorSpec? night,
   }) {
-    final result = ColorConfig._();
+    final result = create();
     if (isDarkModeAware != null) result.isDarkModeAware = isDarkModeAware;
     if (day != null) result.day = day;
     if (night != null) result.night = night;
@@ -95,21 +92,21 @@ class ColorConfig extends $pb.GeneratedMessage {
 
   factory ColorConfig.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ColorConfig()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory ColorConfig.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ColorConfig()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'ColorConfig',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.dagw.component.avatar.common'),
-      createEmptyInstance: ColorConfig.$_createMessage)
+      createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'isDarkModeAware')
     ..aOM<ColorSpec>(2, _omitFieldNames ? '' : 'day',
-        subBuilder: ColorSpec.$_createMessage)
+        subBuilder: ColorSpec.create)
     ..aOM<ColorSpec>(3, _omitFieldNames ? '' : 'night',
-        subBuilder: ColorSpec.$_createMessage)
+        subBuilder: ColorSpec.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -123,15 +120,12 @@ class ColorConfig extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use ColorConfig() / ColorConfig.new instead')
   static ColorConfig create() => ColorConfig._();
-  static $pb.GeneratedMessage $_createMessage() => ColorConfig._();
   @$core.override
-  ColorConfig createEmptyInstance() => ColorConfig._();
+  ColorConfig createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static ColorConfig getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ColorConfig>(
-          ColorConfig.$_createMessage);
+  static ColorConfig getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ColorConfig>(create);
   static ColorConfig? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -170,7 +164,7 @@ class ColorSpec extends $pb.GeneratedMessage {
   factory ColorSpec({
     $core.String? argb,
   }) {
-    final result = ColorSpec._();
+    final result = create();
     if (argb != null) result.argb = argb;
     return result;
   }
@@ -179,16 +173,16 @@ class ColorSpec extends $pb.GeneratedMessage {
 
   factory ColorSpec.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ColorSpec()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory ColorSpec.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ColorSpec()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'ColorSpec',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.dagw.component.avatar.common'),
-      createEmptyInstance: ColorSpec.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'argb')
     ..hasRequiredFields = false;
 
@@ -202,14 +196,12 @@ class ColorSpec extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use ColorSpec() / ColorSpec.new instead')
   static ColorSpec create() => ColorSpec._();
-  static $pb.GeneratedMessage $_createMessage() => ColorSpec._();
   @$core.override
-  ColorSpec createEmptyInstance() => ColorSpec._();
+  ColorSpec createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static ColorSpec getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ColorSpec>(ColorSpec.$_createMessage);
+  static ColorSpec getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ColorSpec>(create);
   static ColorSpec? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -228,7 +220,7 @@ class LayerGeneralSpec extends $pb.GeneratedMessage {
     SizeSpec? sizeSpec,
     BasicRenderSpec? renderSpec,
   }) {
-    final result = LayerGeneralSpec._();
+    final result = create();
     if (posSpec != null) result.posSpec = posSpec;
     if (sizeSpec != null) result.sizeSpec = sizeSpec;
     if (renderSpec != null) result.renderSpec = renderSpec;
@@ -239,22 +231,22 @@ class LayerGeneralSpec extends $pb.GeneratedMessage {
 
   factory LayerGeneralSpec.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      LayerGeneralSpec()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory LayerGeneralSpec.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      LayerGeneralSpec()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'LayerGeneralSpec',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.dagw.component.avatar.common'),
-      createEmptyInstance: LayerGeneralSpec.$_createMessage)
+      createEmptyInstance: create)
     ..aOM<PositionSpec>(1, _omitFieldNames ? '' : 'posSpec',
-        subBuilder: PositionSpec.$_createMessage)
+        subBuilder: PositionSpec.create)
     ..aOM<SizeSpec>(2, _omitFieldNames ? '' : 'sizeSpec',
-        subBuilder: SizeSpec.$_createMessage)
+        subBuilder: SizeSpec.create)
     ..aOM<BasicRenderSpec>(3, _omitFieldNames ? '' : 'renderSpec',
-        subBuilder: BasicRenderSpec.$_createMessage)
+        subBuilder: BasicRenderSpec.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -268,15 +260,12 @@ class LayerGeneralSpec extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use LayerGeneralSpec() / LayerGeneralSpec.new instead')
   static LayerGeneralSpec create() => LayerGeneralSpec._();
-  static $pb.GeneratedMessage $_createMessage() => LayerGeneralSpec._();
   @$core.override
-  LayerGeneralSpec createEmptyInstance() => LayerGeneralSpec._();
+  LayerGeneralSpec createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static LayerGeneralSpec getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LayerGeneralSpec>(
-          LayerGeneralSpec.$_createMessage);
+  static LayerGeneralSpec getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<LayerGeneralSpec>(create);
   static LayerGeneralSpec? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -318,7 +307,7 @@ class MaskProperty extends $pb.GeneratedMessage {
     LayerGeneralSpec? generalSpec,
     ResourceSource? maskSrc,
   }) {
-    final result = MaskProperty._();
+    final result = create();
     if (generalSpec != null) result.generalSpec = generalSpec;
     if (maskSrc != null) result.maskSrc = maskSrc;
     return result;
@@ -328,20 +317,20 @@ class MaskProperty extends $pb.GeneratedMessage {
 
   factory MaskProperty.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MaskProperty()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory MaskProperty.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MaskProperty()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'MaskProperty',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.dagw.component.avatar.common'),
-      createEmptyInstance: MaskProperty.$_createMessage)
+      createEmptyInstance: create)
     ..aOM<LayerGeneralSpec>(1, _omitFieldNames ? '' : 'generalSpec',
-        subBuilder: LayerGeneralSpec.$_createMessage)
+        subBuilder: LayerGeneralSpec.create)
     ..aOM<ResourceSource>(2, _omitFieldNames ? '' : 'maskSrc',
-        subBuilder: ResourceSource.$_createMessage)
+        subBuilder: ResourceSource.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -355,15 +344,12 @@ class MaskProperty extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use MaskProperty() / MaskProperty.new instead')
   static MaskProperty create() => MaskProperty._();
-  static $pb.GeneratedMessage $_createMessage() => MaskProperty._();
   @$core.override
-  MaskProperty createEmptyInstance() => MaskProperty._();
+  MaskProperty createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static MaskProperty getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MaskProperty>(
-          MaskProperty.$_createMessage);
+  static MaskProperty getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<MaskProperty>(create);
   static MaskProperty? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -396,7 +382,7 @@ class NativeDrawRes extends $pb.GeneratedMessage {
     ColorConfig? colorConfig,
     $core.double? edgeWeight,
   }) {
-    final result = NativeDrawRes._();
+    final result = create();
     if (drawType != null) result.drawType = drawType;
     if (fillMode != null) result.fillMode = fillMode;
     if (colorConfig != null) result.colorConfig = colorConfig;
@@ -408,22 +394,22 @@ class NativeDrawRes extends $pb.GeneratedMessage {
 
   factory NativeDrawRes.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      NativeDrawRes()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory NativeDrawRes.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      NativeDrawRes()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'NativeDrawRes',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.dagw.component.avatar.common'),
-      createEmptyInstance: NativeDrawRes.$_createMessage)
+      createEmptyInstance: create)
     ..aE<NativeDrawRes_NativeDraw>(1, _omitFieldNames ? '' : 'drawType',
         enumValues: NativeDrawRes_NativeDraw.values)
     ..aE<NativeDrawRes_FillMode>(2, _omitFieldNames ? '' : 'fillMode',
         enumValues: NativeDrawRes_FillMode.values)
     ..aOM<ColorConfig>(3, _omitFieldNames ? '' : 'colorConfig',
-        subBuilder: ColorConfig.$_createMessage)
+        subBuilder: ColorConfig.create)
     ..aD(4, _omitFieldNames ? '' : 'edgeWeight')
     ..hasRequiredFields = false;
 
@@ -438,15 +424,12 @@ class NativeDrawRes extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use NativeDrawRes() / NativeDrawRes.new instead')
   static NativeDrawRes create() => NativeDrawRes._();
-  static $pb.GeneratedMessage $_createMessage() => NativeDrawRes._();
   @$core.override
-  NativeDrawRes createEmptyInstance() => NativeDrawRes._();
+  NativeDrawRes createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static NativeDrawRes getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<NativeDrawRes>(
-          NativeDrawRes.$_createMessage);
+  static NativeDrawRes getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<NativeDrawRes>(create);
   static NativeDrawRes? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -494,7 +477,7 @@ class PositionSpec extends $pb.GeneratedMessage {
     $core.double? axisX,
     $core.double? axisY,
   }) {
-    final result = PositionSpec._();
+    final result = create();
     if (coordinatePos != null) result.coordinatePos = coordinatePos;
     if (axisX != null) result.axisX = axisX;
     if (axisY != null) result.axisY = axisY;
@@ -505,16 +488,16 @@ class PositionSpec extends $pb.GeneratedMessage {
 
   factory PositionSpec.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PositionSpec()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PositionSpec.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PositionSpec()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'PositionSpec',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.dagw.component.avatar.common'),
-      createEmptyInstance: PositionSpec.$_createMessage)
+      createEmptyInstance: create)
     ..aE<PositionSpec_CoordinatePos>(1, _omitFieldNames ? '' : 'coordinatePos',
         enumValues: PositionSpec_CoordinatePos.values)
     ..aD(2, _omitFieldNames ? '' : 'axisX')
@@ -532,15 +515,12 @@ class PositionSpec extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use PositionSpec() / PositionSpec.new instead')
   static PositionSpec create() => PositionSpec._();
-  static $pb.GeneratedMessage $_createMessage() => PositionSpec._();
   @$core.override
-  PositionSpec createEmptyInstance() => PositionSpec._();
+  PositionSpec createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static PositionSpec getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PositionSpec>(
-          PositionSpec.$_createMessage);
+  static PositionSpec getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PositionSpec>(create);
   static PositionSpec? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -576,7 +556,7 @@ class RemoteRes extends $pb.GeneratedMessage {
     $core.String? url,
     $core.String? bfsStyle,
   }) {
-    final result = RemoteRes._();
+    final result = create();
     if (url != null) result.url = url;
     if (bfsStyle != null) result.bfsStyle = bfsStyle;
     return result;
@@ -586,16 +566,16 @@ class RemoteRes extends $pb.GeneratedMessage {
 
   factory RemoteRes.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      RemoteRes()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory RemoteRes.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      RemoteRes()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'RemoteRes',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.dagw.component.avatar.common'),
-      createEmptyInstance: RemoteRes.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'url')
     ..aOS(2, _omitFieldNames ? '' : 'bfsStyle')
     ..hasRequiredFields = false;
@@ -610,14 +590,12 @@ class RemoteRes extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use RemoteRes() / RemoteRes.new instead')
   static RemoteRes create() => RemoteRes._();
-  static $pb.GeneratedMessage $_createMessage() => RemoteRes._();
   @$core.override
-  RemoteRes createEmptyInstance() => RemoteRes._();
+  RemoteRes createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static RemoteRes getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<RemoteRes>(RemoteRes.$_createMessage);
+  static RemoteRes getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RemoteRes>(create);
   static RemoteRes? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -649,7 +627,7 @@ class ResourceSource extends $pb.GeneratedMessage {
     $core.int? localValue,
     NativeDrawRes? draw,
   }) {
-    final result = ResourceSource._();
+    final result = create();
     if (srcType != null) result.srcType = srcType;
     if (placeholder != null) result.placeholder = placeholder;
     if (remote != null) result.remote = remote;
@@ -662,10 +640,10 @@ class ResourceSource extends $pb.GeneratedMessage {
 
   factory ResourceSource.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ResourceSource()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory ResourceSource.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ResourceSource()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static const $core.Map<$core.int, ResourceSource_Res>
       _ResourceSource_ResByTag = {
@@ -678,17 +656,17 @@ class ResourceSource extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'ResourceSource',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.dagw.component.avatar.common'),
-      createEmptyInstance: ResourceSource.$_createMessage)
+      createEmptyInstance: create)
     ..oo(0, [3, 4, 5])
     ..aE<ResourceSource_SourceType>(1, _omitFieldNames ? '' : 'srcType',
         enumValues: ResourceSource_SourceType.values)
     ..aE<ResourceSource_LocalRes>(2, _omitFieldNames ? '' : 'placeholder',
         enumValues: ResourceSource_LocalRes.values)
     ..aOM<RemoteRes>(3, _omitFieldNames ? '' : 'remote',
-        subBuilder: RemoteRes.$_createMessage)
+        subBuilder: RemoteRes.create)
     ..aI(4, _omitFieldNames ? '' : 'localValue')
     ..aOM<NativeDrawRes>(5, _omitFieldNames ? '' : 'draw',
-        subBuilder: NativeDrawRes.$_createMessage)
+        subBuilder: NativeDrawRes.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -702,15 +680,12 @@ class ResourceSource extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use ResourceSource() / ResourceSource.new instead')
   static ResourceSource create() => ResourceSource._();
-  static $pb.GeneratedMessage $_createMessage() => ResourceSource._();
   @$core.override
-  ResourceSource createEmptyInstance() => ResourceSource._();
+  ResourceSource createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static ResourceSource getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ResourceSource>(
-          ResourceSource.$_createMessage);
+  static ResourceSource getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ResourceSource>(create);
   static ResourceSource? _defaultInstance;
 
   @$pb.TagNumber(3)
@@ -777,7 +752,7 @@ class SizeSpec extends $pb.GeneratedMessage {
     $core.double? width,
     $core.double? height,
   }) {
-    final result = SizeSpec._();
+    final result = create();
     if (width != null) result.width = width;
     if (height != null) result.height = height;
     return result;
@@ -787,16 +762,16 @@ class SizeSpec extends $pb.GeneratedMessage {
 
   factory SizeSpec.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      SizeSpec()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory SizeSpec.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      SizeSpec()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'SizeSpec',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.dagw.component.avatar.common'),
-      createEmptyInstance: SizeSpec.$_createMessage)
+      createEmptyInstance: create)
     ..aD(1, _omitFieldNames ? '' : 'width')
     ..aD(2, _omitFieldNames ? '' : 'height')
     ..hasRequiredFields = false;
@@ -811,14 +786,12 @@ class SizeSpec extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use SizeSpec() / SizeSpec.new instead')
   static SizeSpec create() => SizeSpec._();
-  static $pb.GeneratedMessage $_createMessage() => SizeSpec._();
   @$core.override
-  SizeSpec createEmptyInstance() => SizeSpec._();
+  SizeSpec createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static SizeSpec getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<SizeSpec>(SizeSpec.$_createMessage);
+  static SizeSpec getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SizeSpec>(create);
   static SizeSpec? _defaultInstance;
 
   @$pb.TagNumber(1)

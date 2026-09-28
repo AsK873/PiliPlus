@@ -1,4 +1,5 @@
 import 'package:PiliPlus/common/widgets/flutter/refresh_indicator.dart';
+import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/common/widgets/loading_widget/http_error.dart';
 import 'package:PiliPlus/common/widgets/video_card/video_card_h.dart';
 import 'package:PiliPlus/http/loading_state.dart';
@@ -6,6 +7,7 @@ import 'package:PiliPlus/models/model_hot_video_item.dart';
 import 'package:PiliPlus/pages/rank/zone/controller.dart';
 import 'package:PiliPlus/pages/rank/zone/widget/pgc_rank_item.dart';
 import 'package:PiliPlus/utils/grid.dart';
+import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:get/get.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -45,8 +47,15 @@ class _ZonePageState extends State<ZonePage>
         physics: const AlwaysScrollableScrollPhysics(),
         slivers: [
           SliverPadding(
-            padding: const EdgeInsets.only(top: 7, bottom: 100),
-            sliver: Obx(() => _buildBody(controller.loadingState.value)),
+            padding: EdgeInsets.only(
+              top: 7,
+              bottom: PlatformUtils.isDesktop ? 24 : 100,
+            ),
+            // M3：桌面内容限宽居中，避免榜单在宽屏下多列"巨列表"。
+            sliver: desktopLimitSliver(
+              Obx(() => _buildBody(controller.loadingState.value)),
+              maxWidth: 1200,
+            ),
           ),
         ],
       ),
@@ -63,14 +72,16 @@ class _ZonePageState extends State<ZonePage>
                 itemBuilder: (context, index) {
                   final item = response[index];
                   if (item is HotVideoItemModel) {
-                    return VideoCardH(
-                      videoItem: item,
-                      onRemove: () => controller.loadingState
-                        ..value.data!.removeAt(index)
-                        ..refresh(),
+                    return desktopCard(
+                      VideoCardH(
+                        videoItem: item,
+                        onRemove: () => controller.loadingState
+                          ..value.data!.removeAt(index)
+                          ..refresh(),
+                      ),
                     );
                   }
-                  return PgcRankItem(item: item);
+                  return desktopCard(PgcRankItem(item: item));
                 },
                 itemCount: response.length,
               )

@@ -24,7 +24,7 @@ class SailingEquipMultiReply extends $pb.GeneratedMessage {
   factory SailingEquipMultiReply({
     $core.Iterable<$core.MapEntry<$fixnum.Int64, $0.UserSailing>>? data,
   }) {
-    final result = SailingEquipMultiReply._();
+    final result = create();
     if (data != null) result.data.addEntries(data);
     return result;
   }
@@ -33,21 +33,21 @@ class SailingEquipMultiReply extends $pb.GeneratedMessage {
 
   factory SailingEquipMultiReply.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      SailingEquipMultiReply()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory SailingEquipMultiReply.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      SailingEquipMultiReply()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'SailingEquipMultiReply',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.vas.garb.service'),
-      createEmptyInstance: SailingEquipMultiReply.$_createMessage)
+      createEmptyInstance: create)
     ..m<$fixnum.Int64, $0.UserSailing>(1, _omitFieldNames ? '' : 'data',
         entryClassName: 'SailingEquipMultiReply.DataEntry',
         keyFieldType: $pb.PbFieldType.O6,
         valueFieldType: $pb.PbFieldType.OM,
-        valueCreator: $0.UserSailing.$_createMessage,
+        valueCreator: $0.UserSailing.create,
         valueDefaultOrMaker: $0.UserSailing.getDefault,
         packageName: const $pb.PackageName('bilibili.vas.garb.service'))
     ..hasRequiredFields = false;
@@ -64,16 +64,12 @@ class SailingEquipMultiReply extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated(
-      'Use SailingEquipMultiReply() / SailingEquipMultiReply.new instead')
   static SailingEquipMultiReply create() => SailingEquipMultiReply._();
-  static $pb.GeneratedMessage $_createMessage() => SailingEquipMultiReply._();
   @$core.override
-  SailingEquipMultiReply createEmptyInstance() => SailingEquipMultiReply._();
+  SailingEquipMultiReply createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static SailingEquipMultiReply getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<SailingEquipMultiReply>(
-          SailingEquipMultiReply.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<SailingEquipMultiReply>(create);
   static SailingEquipMultiReply? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -89,7 +85,7 @@ class SailingEquipMultiReq extends $pb.GeneratedMessage {
     $fixnum.Int64? mid,
     $1.Device? device,
   }) {
-    final result = SailingEquipMultiReq._();
+    final result = create();
     if (mids != null) result.mids.addAll(mids);
     if (upMid != null) result.upMid = upMid;
     if (otype != null) result.otype = otype;
@@ -103,23 +99,23 @@ class SailingEquipMultiReq extends $pb.GeneratedMessage {
 
   factory SailingEquipMultiReq.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      SailingEquipMultiReq()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory SailingEquipMultiReq.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      SailingEquipMultiReq()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'SailingEquipMultiReq',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.vas.garb.service'),
-      createEmptyInstance: SailingEquipMultiReq.$_createMessage)
+      createEmptyInstance: create)
     ..p<$fixnum.Int64>(1, _omitFieldNames ? '' : 'mids', $pb.PbFieldType.K6)
     ..aInt64(2, _omitFieldNames ? '' : 'upMid')
     ..aInt64(3, _omitFieldNames ? '' : 'otype')
     ..aInt64(4, _omitFieldNames ? '' : 'oid')
     ..aInt64(5, _omitFieldNames ? '' : 'mid')
     ..aOM<$1.Device>(6, _omitFieldNames ? '' : 'device',
-        subBuilder: $1.Device.$_createMessage)
+        subBuilder: $1.Device.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -133,16 +129,12 @@ class SailingEquipMultiReq extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated(
-      'Use SailingEquipMultiReq() / SailingEquipMultiReq.new instead')
   static SailingEquipMultiReq create() => SailingEquipMultiReq._();
-  static $pb.GeneratedMessage $_createMessage() => SailingEquipMultiReq._();
   @$core.override
-  SailingEquipMultiReq createEmptyInstance() => SailingEquipMultiReq._();
+  SailingEquipMultiReq createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static SailingEquipMultiReq getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<SailingEquipMultiReq>(
-          SailingEquipMultiReq.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<SailingEquipMultiReq>(create);
   static SailingEquipMultiReq? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -211,7 +203,7 @@ class UserCard extends $pb.GeneratedMessage {
     $core.String? imageEnhance,
     $0.ImageGroup? imageGroup,
   }) {
-    final result = UserCard._();
+    final result = create();
     if (id != null) result.id = id;
     if (itemId != null) result.itemId = itemId;
     if (name != null) result.name = name;
@@ -231,16 +223,16 @@ class UserCard extends $pb.GeneratedMessage {
 
   factory UserCard.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      UserCard()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory UserCard.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      UserCard()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'UserCard',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.vas.garb.service'),
-      createEmptyInstance: UserCard.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'id')
     ..aInt64(2, _omitFieldNames ? '' : 'itemId')
     ..aOS(3, _omitFieldNames ? '' : 'name')
@@ -251,10 +243,10 @@ class UserCard extends $pb.GeneratedMessage {
     ..aOS(8, _omitFieldNames ? '' : 'cardTypeName')
     ..aOS(9, _omitFieldNames ? '' : 'jumpUrl')
     ..aOM<$0.UserFanShow>(10, _omitFieldNames ? '' : 'fan',
-        subBuilder: $0.UserFanShow.$_createMessage)
+        subBuilder: $0.UserFanShow.create)
     ..aOS(12, _omitFieldNames ? '' : 'imageEnhance')
     ..aOM<$0.ImageGroup>(13, _omitFieldNames ? '' : 'imageGroup',
-        subBuilder: $0.ImageGroup.$_createMessage)
+        subBuilder: $0.ImageGroup.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -267,14 +259,12 @@ class UserCard extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use UserCard() / UserCard.new instead')
   static UserCard create() => UserCard._();
-  static $pb.GeneratedMessage $_createMessage() => UserCard._();
   @$core.override
-  UserCard createEmptyInstance() => UserCard._();
+  UserCard createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static UserCard getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<UserCard>(UserCard.$_createMessage);
+  static UserCard getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UserCard>(create);
   static UserCard? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -394,7 +384,7 @@ class UserCardMultiReply extends $pb.GeneratedMessage {
   factory UserCardMultiReply({
     $core.Iterable<$core.MapEntry<$fixnum.Int64, UserCard>>? cards,
   }) {
-    final result = UserCardMultiReply._();
+    final result = create();
     if (cards != null) result.cards.addEntries(cards);
     return result;
   }
@@ -403,21 +393,21 @@ class UserCardMultiReply extends $pb.GeneratedMessage {
 
   factory UserCardMultiReply.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      UserCardMultiReply()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory UserCardMultiReply.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      UserCardMultiReply()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'UserCardMultiReply',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.vas.garb.service'),
-      createEmptyInstance: UserCardMultiReply.$_createMessage)
+      createEmptyInstance: create)
     ..m<$fixnum.Int64, UserCard>(1, _omitFieldNames ? '' : 'cards',
         entryClassName: 'UserCardMultiReply.CardsEntry',
         keyFieldType: $pb.PbFieldType.O6,
         valueFieldType: $pb.PbFieldType.OM,
-        valueCreator: UserCard.$_createMessage,
+        valueCreator: UserCard.create,
         valueDefaultOrMaker: UserCard.getDefault,
         packageName: const $pb.PackageName('bilibili.vas.garb.service'))
     ..hasRequiredFields = false;
@@ -433,15 +423,12 @@ class UserCardMultiReply extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use UserCardMultiReply() / UserCardMultiReply.new instead')
   static UserCardMultiReply create() => UserCardMultiReply._();
-  static $pb.GeneratedMessage $_createMessage() => UserCardMultiReply._();
   @$core.override
-  UserCardMultiReply createEmptyInstance() => UserCardMultiReply._();
+  UserCardMultiReply createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static UserCardMultiReply getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<UserCardMultiReply>(
-          UserCardMultiReply.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<UserCardMultiReply>(create);
   static UserCardMultiReply? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -453,7 +440,7 @@ class UserCardMultiReq extends $pb.GeneratedMessage {
     $core.Iterable<$fixnum.Int64>? mids,
     $1.Device? device,
   }) {
-    final result = UserCardMultiReq._();
+    final result = create();
     if (mids != null) result.mids.addAll(mids);
     if (device != null) result.device = device;
     return result;
@@ -463,19 +450,19 @@ class UserCardMultiReq extends $pb.GeneratedMessage {
 
   factory UserCardMultiReq.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      UserCardMultiReq()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory UserCardMultiReq.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      UserCardMultiReq()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'UserCardMultiReq',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.vas.garb.service'),
-      createEmptyInstance: UserCardMultiReq.$_createMessage)
+      createEmptyInstance: create)
     ..p<$fixnum.Int64>(1, _omitFieldNames ? '' : 'mids', $pb.PbFieldType.K6)
     ..aOM<$1.Device>(2, _omitFieldNames ? '' : 'device',
-        subBuilder: $1.Device.$_createMessage)
+        subBuilder: $1.Device.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -489,15 +476,12 @@ class UserCardMultiReq extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use UserCardMultiReq() / UserCardMultiReq.new instead')
   static UserCardMultiReq create() => UserCardMultiReq._();
-  static $pb.GeneratedMessage $_createMessage() => UserCardMultiReq._();
   @$core.override
-  UserCardMultiReq createEmptyInstance() => UserCardMultiReq._();
+  UserCardMultiReq createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static UserCardMultiReq getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UserCardMultiReq>(
-          UserCardMultiReq.$_createMessage);
+  static UserCardMultiReq getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<UserCardMultiReq>(create);
   static UserCardMultiReq? _defaultInstance;
 
   @$pb.TagNumber(1)

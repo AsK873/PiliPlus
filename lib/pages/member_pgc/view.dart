@@ -1,4 +1,5 @@
 import 'package:PiliPlus/common/style.dart';
+import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/common/widgets/flutter/refresh_indicator.dart';
 import 'package:PiliPlus/common/widgets/loading_widget/http_error.dart';
 import 'package:PiliPlus/http/loading_state.dart';
@@ -6,6 +7,7 @@ import 'package:PiliPlus/models_new/space/space_archive/item.dart';
 import 'package:PiliPlus/pages/member_pgc/controller.dart';
 import 'package:PiliPlus/pages/member_pgc/widgets/pgc_card_v_member_pgc.dart';
 import 'package:PiliPlus/utils/grid.dart';
+import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:get/get.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -56,10 +58,14 @@ class _MemberBangumiState extends State<MemberBangumi>
               left: Style.safeSpace,
               right: Style.safeSpace,
               top: Style.safeSpace,
-              bottom: MediaQuery.viewPaddingOf(context).bottom + 100,
+              bottom: PlatformUtils.isDesktop
+                  ? 24
+                  : MediaQuery.viewPaddingOf(context).bottom + 100,
             ),
-            sliver: Obx(
-              () => _buildBody(_controller.loadingState.value),
+            // M8：桌面内容限宽居中（UP-追番）。
+            sliver: desktopLimitSliver(
+              Obx(() => _buildBody(_controller.loadingState.value)),
+              maxWidth: 1280,
             ),
           ),
         ],

@@ -22,7 +22,7 @@ class FeedPagination extends $pb.GeneratedMessage {
     $core.String? offset,
     $core.bool? isRefresh,
   }) {
-    final result = FeedPagination._();
+    final result = create();
     if (pageSize != null) result.pageSize = pageSize;
     if (offset != null) result.offset = offset;
     if (isRefresh != null) result.isRefresh = isRefresh;
@@ -33,16 +33,16 @@ class FeedPagination extends $pb.GeneratedMessage {
 
   factory FeedPagination.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FeedPagination()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FeedPagination.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FeedPagination()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'FeedPagination',
       package:
           const $pb.PackageName(_omitMessageNames ? '' : 'bilibili.pagination'),
-      createEmptyInstance: FeedPagination.$_createMessage)
+      createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'pageSize')
     ..aOS(2, _omitFieldNames ? '' : 'offset')
     ..aOB(3, _omitFieldNames ? '' : 'isRefresh')
@@ -59,15 +59,12 @@ class FeedPagination extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use FeedPagination() / FeedPagination.new instead')
   static FeedPagination create() => FeedPagination._();
-  static $pb.GeneratedMessage $_createMessage() => FeedPagination._();
   @$core.override
-  FeedPagination createEmptyInstance() => FeedPagination._();
+  FeedPagination createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static FeedPagination getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FeedPagination>(
-          FeedPagination.$_createMessage);
+  static FeedPagination getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<FeedPagination>(create);
   static FeedPagination? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -104,7 +101,7 @@ class FeedPaginationReply extends $pb.GeneratedMessage {
     $core.String? prevOffset,
     $core.String? lastReadOffset,
   }) {
-    final result = FeedPaginationReply._();
+    final result = create();
     if (nextOffset != null) result.nextOffset = nextOffset;
     if (prevOffset != null) result.prevOffset = prevOffset;
     if (lastReadOffset != null) result.lastReadOffset = lastReadOffset;
@@ -115,16 +112,16 @@ class FeedPaginationReply extends $pb.GeneratedMessage {
 
   factory FeedPaginationReply.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FeedPaginationReply()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FeedPaginationReply.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FeedPaginationReply()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'FeedPaginationReply',
       package:
           const $pb.PackageName(_omitMessageNames ? '' : 'bilibili.pagination'),
-      createEmptyInstance: FeedPaginationReply.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'nextOffset')
     ..aOS(2, _omitFieldNames ? '' : 'prevOffset')
     ..aOS(3, _omitFieldNames ? '' : 'lastReadOffset')
@@ -141,16 +138,12 @@ class FeedPaginationReply extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core
-      .Deprecated('Use FeedPaginationReply() / FeedPaginationReply.new instead')
   static FeedPaginationReply create() => FeedPaginationReply._();
-  static $pb.GeneratedMessage $_createMessage() => FeedPaginationReply._();
   @$core.override
-  FeedPaginationReply createEmptyInstance() => FeedPaginationReply._();
+  FeedPaginationReply createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static FeedPaginationReply getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<FeedPaginationReply>(
-          FeedPaginationReply.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<FeedPaginationReply>(create);
   static FeedPaginationReply? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -186,7 +179,7 @@ class Pagination extends $pb.GeneratedMessage {
     $core.int? pageSize,
     $core.String? next,
   }) {
-    final result = Pagination._();
+    final result = create();
     if (pageSize != null) result.pageSize = pageSize;
     if (next != null) result.next = next;
     return result;
@@ -196,16 +189,16 @@ class Pagination extends $pb.GeneratedMessage {
 
   factory Pagination.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Pagination()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory Pagination.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Pagination()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'Pagination',
       package:
           const $pb.PackageName(_omitMessageNames ? '' : 'bilibili.pagination'),
-      createEmptyInstance: Pagination.$_createMessage)
+      createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'pageSize')
     ..aOS(2, _omitFieldNames ? '' : 'next')
     ..hasRequiredFields = false;
@@ -220,14 +213,12 @@ class Pagination extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use Pagination() / Pagination.new instead')
   static Pagination create() => Pagination._();
-  static $pb.GeneratedMessage $_createMessage() => Pagination._();
   @$core.override
-  Pagination createEmptyInstance() => Pagination._();
+  Pagination createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static Pagination getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<Pagination>(Pagination.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<Pagination>(create);
   static Pagination? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -254,7 +245,7 @@ class PaginationReply extends $pb.GeneratedMessage {
     $core.String? next,
     $core.String? prev,
   }) {
-    final result = PaginationReply._();
+    final result = create();
     if (next != null) result.next = next;
     if (prev != null) result.prev = prev;
     return result;
@@ -264,16 +255,16 @@ class PaginationReply extends $pb.GeneratedMessage {
 
   factory PaginationReply.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PaginationReply()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PaginationReply.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PaginationReply()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'PaginationReply',
       package:
           const $pb.PackageName(_omitMessageNames ? '' : 'bilibili.pagination'),
-      createEmptyInstance: PaginationReply.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'next')
     ..aOS(2, _omitFieldNames ? '' : 'prev')
     ..hasRequiredFields = false;
@@ -289,15 +280,12 @@ class PaginationReply extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use PaginationReply() / PaginationReply.new instead')
   static PaginationReply create() => PaginationReply._();
-  static $pb.GeneratedMessage $_createMessage() => PaginationReply._();
   @$core.override
-  PaginationReply createEmptyInstance() => PaginationReply._();
+  PaginationReply createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static PaginationReply getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PaginationReply>(
-          PaginationReply.$_createMessage);
+  static PaginationReply getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PaginationReply>(create);
   static PaginationReply? _defaultInstance;
 
   @$pb.TagNumber(1)

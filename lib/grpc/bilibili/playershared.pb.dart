@@ -33,7 +33,7 @@ class AIAudio extends $pb.GeneratedMessage {
     $core.String? listTitle,
     $core.String? listDesc,
   }) {
-    final result = AIAudio._();
+    final result = create();
     if (supportAiAudio != null) result.supportAiAudio = supportAiAudio;
     if (aiAudioItems != null) result.aiAudioItems.addAll(aiAudioItems);
     if (aiOpenToast != null) result.aiOpenToast = aiOpenToast;
@@ -49,23 +49,22 @@ class AIAudio extends $pb.GeneratedMessage {
 
   factory AIAudio.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      AIAudio()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory AIAudio.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      AIAudio()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'AIAudio',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: AIAudio.$_createMessage)
+      createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'supportAiAudio')
     ..pPM<AIAudioItem>(2, _omitFieldNames ? '' : 'aiAudioItems',
-        subBuilder: AIAudioItem.$_createMessage)
+        subBuilder: AIAudioItem.create)
     ..aOS(3, _omitFieldNames ? '' : 'aiOpenToast')
     ..aOS(4, _omitFieldNames ? '' : 'aiCloseToast')
-    ..aOM<Badge>(5, _omitFieldNames ? '' : 'badge',
-        subBuilder: Badge.$_createMessage)
+    ..aOM<Badge>(5, _omitFieldNames ? '' : 'badge', subBuilder: Badge.create)
     ..aOS(6, _omitFieldNames ? '' : 'defaultTitle')
     ..aOS(7, _omitFieldNames ? '' : 'listTitle')
     ..aOS(8, _omitFieldNames ? '' : 'listDesc')
@@ -81,14 +80,12 @@ class AIAudio extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use AIAudio() / AIAudio.new instead')
   static AIAudio create() => AIAudio._();
-  static $pb.GeneratedMessage $_createMessage() => AIAudio._();
   @$core.override
-  AIAudio createEmptyInstance() => AIAudio._();
+  AIAudio createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static AIAudio getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<AIAudio>(AIAudio.$_createMessage);
+  static AIAudio getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AIAudio>(create);
   static AIAudio? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -167,7 +164,7 @@ class AIAudioItem extends $pb.GeneratedMessage {
     $core.String? buttonTitle,
     $core.String? subtitleLang,
   }) {
-    final result = AIAudioItem._();
+    final result = create();
     if (audioInfo != null) result.audioInfo.addAll(audioInfo);
     if (title != null) result.title = title;
     if (buttonTitle != null) result.buttonTitle = buttonTitle;
@@ -179,18 +176,18 @@ class AIAudioItem extends $pb.GeneratedMessage {
 
   factory AIAudioItem.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      AIAudioItem()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory AIAudioItem.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      AIAudioItem()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'AIAudioItem',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: AIAudioItem.$_createMessage)
+      createEmptyInstance: create)
     ..pPM<DashItem>(1, _omitFieldNames ? '' : 'audioInfo',
-        subBuilder: DashItem.$_createMessage)
+        subBuilder: DashItem.create)
     ..aOS(2, _omitFieldNames ? '' : 'title')
     ..aOS(3, _omitFieldNames ? '' : 'buttonTitle')
     ..aOS(4, _omitFieldNames ? '' : 'subtitleLang')
@@ -207,15 +204,12 @@ class AIAudioItem extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use AIAudioItem() / AIAudioItem.new instead')
   static AIAudioItem create() => AIAudioItem._();
-  static $pb.GeneratedMessage $_createMessage() => AIAudioItem._();
   @$core.override
-  AIAudioItem createEmptyInstance() => AIAudioItem._();
+  AIAudioItem createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static AIAudioItem getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AIAudioItem>(
-          AIAudioItem.$_createMessage);
+  static AIAudioItem getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<AIAudioItem>(create);
   static AIAudioItem? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -257,7 +251,7 @@ class ArcConf extends $pb.GeneratedMessage {
     $core.Iterable<$core.int>? unsupportScene,
     UnsupportState? unsupportState,
   }) {
-    final result = ArcConf._();
+    final result = create();
     if (isSupport != null) result.isSupport = isSupport;
     if (disabled != null) result.disabled = disabled;
     if (extraContent != null) result.extraContent = extraContent;
@@ -270,20 +264,20 @@ class ArcConf extends $pb.GeneratedMessage {
 
   factory ArcConf.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ArcConf()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory ArcConf.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ArcConf()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'ArcConf',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: ArcConf.$_createMessage)
+      createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'isSupport')
     ..aOB(2, _omitFieldNames ? '' : 'disabled')
     ..aOM<ExtraContent>(3, _omitFieldNames ? '' : 'extraContent',
-        subBuilder: ExtraContent.$_createMessage)
+        subBuilder: ExtraContent.create)
     ..p<$core.int>(
         4, _omitFieldNames ? '' : 'unsupportScene', $pb.PbFieldType.K3)
     ..aE<UnsupportState>(5, _omitFieldNames ? '' : 'unsupportState',
@@ -300,14 +294,12 @@ class ArcConf extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use ArcConf() / ArcConf.new instead')
   static ArcConf create() => ArcConf._();
-  static $pb.GeneratedMessage $_createMessage() => ArcConf._();
   @$core.override
-  ArcConf createEmptyInstance() => ArcConf._();
+  ArcConf createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static ArcConf getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ArcConf>(ArcConf.$_createMessage);
+  static ArcConf getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ArcConf>(create);
   static ArcConf? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -362,7 +354,7 @@ class AutoQnCtl extends $pb.GeneratedMessage {
     $fixnum.Int64? mobileNologinFull,
     $core.Iterable<$core.MapEntry<$core.String, AutoQnRange>>? sceneQnRange,
   }) {
-    final result = AutoQnCtl._();
+    final result = create();
     if (loginHalf != null) result.loginHalf = loginHalf;
     if (nologinHalf != null) result.nologinHalf = nologinHalf;
     if (loginFull != null) result.loginFull = loginFull;
@@ -377,16 +369,16 @@ class AutoQnCtl extends $pb.GeneratedMessage {
 
   factory AutoQnCtl.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      AutoQnCtl()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory AutoQnCtl.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      AutoQnCtl()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'AutoQnCtl',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: AutoQnCtl.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'loginHalf')
     ..aInt64(2, _omitFieldNames ? '' : 'nologinHalf')
     ..aInt64(3, _omitFieldNames ? '' : 'loginFull')
@@ -397,7 +389,7 @@ class AutoQnCtl extends $pb.GeneratedMessage {
         entryClassName: 'AutoQnCtl.SceneQnRangeEntry',
         keyFieldType: $pb.PbFieldType.OS,
         valueFieldType: $pb.PbFieldType.OM,
-        valueCreator: AutoQnRange.$_createMessage,
+        valueCreator: AutoQnRange.create,
         valueDefaultOrMaker: AutoQnRange.getDefault,
         packageName: const $pb.PackageName('bilibili.playershared'))
     ..hasRequiredFields = false;
@@ -412,14 +404,12 @@ class AutoQnCtl extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use AutoQnCtl() / AutoQnCtl.new instead')
   static AutoQnCtl create() => AutoQnCtl._();
-  static $pb.GeneratedMessage $_createMessage() => AutoQnCtl._();
   @$core.override
-  AutoQnCtl createEmptyInstance() => AutoQnCtl._();
+  AutoQnCtl createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static AutoQnCtl getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<AutoQnCtl>(AutoQnCtl.$_createMessage);
+  static AutoQnCtl getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AutoQnCtl>(create);
   static AutoQnCtl? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -485,7 +475,7 @@ class AutoQnRange extends $pb.GeneratedMessage {
     $fixnum.Int64? max,
     $fixnum.Int64? min,
   }) {
-    final result = AutoQnRange._();
+    final result = create();
     if (max != null) result.max = max;
     if (min != null) result.min = min;
     return result;
@@ -495,16 +485,16 @@ class AutoQnRange extends $pb.GeneratedMessage {
 
   factory AutoQnRange.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      AutoQnRange()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory AutoQnRange.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      AutoQnRange()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'AutoQnRange',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: AutoQnRange.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'max')
     ..aInt64(2, _omitFieldNames ? '' : 'min')
     ..hasRequiredFields = false;
@@ -520,15 +510,12 @@ class AutoQnRange extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use AutoQnRange() / AutoQnRange.new instead')
   static AutoQnRange create() => AutoQnRange._();
-  static $pb.GeneratedMessage $_createMessage() => AutoQnRange._();
   @$core.override
-  AutoQnRange createEmptyInstance() => AutoQnRange._();
+  AutoQnRange createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static AutoQnRange getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AutoQnRange>(
-          AutoQnRange.$_createMessage);
+  static AutoQnRange getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<AutoQnRange>(create);
   static AutoQnRange? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -556,7 +543,7 @@ class BackgroundInfo extends $pb.GeneratedMessage {
     $core.String? drawableBitmapUrl,
     Effects? effects,
   }) {
-    final result = BackgroundInfo._();
+    final result = create();
     if (drawableColor != null) result.drawableColor = drawableColor;
     if (drawableBitmapUrl != null) result.drawableBitmapUrl = drawableBitmapUrl;
     if (effects != null) result.effects = effects;
@@ -567,16 +554,16 @@ class BackgroundInfo extends $pb.GeneratedMessage {
 
   factory BackgroundInfo.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      BackgroundInfo()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory BackgroundInfo.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      BackgroundInfo()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'BackgroundInfo',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: BackgroundInfo.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'drawableColor')
     ..aOS(2, _omitFieldNames ? '' : 'drawableBitmapUrl')
     ..aE<Effects>(3, _omitFieldNames ? '' : 'effects',
@@ -594,15 +581,12 @@ class BackgroundInfo extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use BackgroundInfo() / BackgroundInfo.new instead')
   static BackgroundInfo create() => BackgroundInfo._();
-  static $pb.GeneratedMessage $_createMessage() => BackgroundInfo._();
   @$core.override
-  BackgroundInfo createEmptyInstance() => BackgroundInfo._();
+  BackgroundInfo createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static BackgroundInfo getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BackgroundInfo>(
-          BackgroundInfo.$_createMessage);
+  static BackgroundInfo getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<BackgroundInfo>(create);
   static BackgroundInfo? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -644,7 +628,7 @@ class Badge extends $pb.GeneratedMessage {
     $core.String? borderColorNight,
     $core.int? bgStyle,
   }) {
-    final result = Badge._();
+    final result = create();
     if (text != null) result.text = text;
     if (textColor != null) result.textColor = textColor;
     if (textColorNight != null) result.textColorNight = textColorNight;
@@ -660,16 +644,16 @@ class Badge extends $pb.GeneratedMessage {
 
   factory Badge.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Badge()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory Badge.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Badge()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'Badge',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: Badge.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'text')
     ..aOS(2, _omitFieldNames ? '' : 'textColor')
     ..aOS(3, _omitFieldNames ? '' : 'textColorNight')
@@ -690,14 +674,12 @@ class Badge extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use Badge() / Badge.new instead')
   static Badge create() => Badge._();
-  static $pb.GeneratedMessage $_createMessage() => Badge._();
   @$core.override
-  Badge createEmptyInstance() => Badge._();
+  Badge createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static Badge getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<Badge>(Badge.$_createMessage);
+  static Badge getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Badge>(create);
   static Badge? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -782,7 +764,7 @@ class BadgeInfo extends $pb.GeneratedMessage {
     GradientColor? bgGradientColor,
     $core.String? img,
   }) {
-    final result = BadgeInfo._();
+    final result = create();
     if (text != null) result.text = text;
     if (bgColor != null) result.bgColor = bgColor;
     if (bgColorNight != null) result.bgColorNight = bgColorNight;
@@ -796,22 +778,22 @@ class BadgeInfo extends $pb.GeneratedMessage {
 
   factory BadgeInfo.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      BadgeInfo()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory BadgeInfo.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      BadgeInfo()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'BadgeInfo',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: BadgeInfo.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'text')
     ..aOS(2, _omitFieldNames ? '' : 'bgColor')
     ..aOS(3, _omitFieldNames ? '' : 'bgColorNight')
     ..aOS(4, _omitFieldNames ? '' : 'textColor')
     ..aOM<GradientColor>(5, _omitFieldNames ? '' : 'bgGradientColor',
-        subBuilder: GradientColor.$_createMessage)
+        subBuilder: GradientColor.create)
     ..aOS(6, _omitFieldNames ? '' : 'img')
     ..hasRequiredFields = false;
 
@@ -825,14 +807,12 @@ class BadgeInfo extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use BadgeInfo() / BadgeInfo.new instead')
   static BadgeInfo create() => BadgeInfo._();
-  static $pb.GeneratedMessage $_createMessage() => BadgeInfo._();
   @$core.override
-  BadgeInfo createEmptyInstance() => BadgeInfo._();
+  BadgeInfo createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static BadgeInfo getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<BadgeInfo>(BadgeInfo.$_createMessage);
+  static BadgeInfo getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BadgeInfo>(create);
   static BadgeInfo? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -899,7 +879,7 @@ class Banner extends $pb.GeneratedMessage {
     $core.String? halfImageLink,
     Report? report,
   }) {
-    final result = Banner._();
+    final result = create();
     if (jumpLink != null) result.jumpLink = jumpLink;
     if (imageLink != null) result.imageLink = imageLink;
     if (halfImageLink != null) result.halfImageLink = halfImageLink;
@@ -911,21 +891,20 @@ class Banner extends $pb.GeneratedMessage {
 
   factory Banner.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Banner()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory Banner.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Banner()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'Banner',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: Banner.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'jumpLink')
     ..aOS(2, _omitFieldNames ? '' : 'imageLink')
     ..aOS(3, _omitFieldNames ? '' : 'halfImageLink')
-    ..aOM<Report>(4, _omitFieldNames ? '' : 'report',
-        subBuilder: Report.$_createMessage)
+    ..aOM<Report>(4, _omitFieldNames ? '' : 'report', subBuilder: Report.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -938,14 +917,12 @@ class Banner extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use Banner() / Banner.new instead')
   static Banner create() => Banner._();
-  static $pb.GeneratedMessage $_createMessage() => Banner._();
   @$core.override
-  Banner createEmptyInstance() => Banner._();
+  Banner createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static Banner getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<Banner>(Banner.$_createMessage);
+  static Banner getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Banner>(create);
   static Banner? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -992,7 +969,7 @@ class BenefitInfo extends $pb.GeneratedMessage {
     $core.String? title,
     $core.String? icon,
   }) {
-    final result = BenefitInfo._();
+    final result = create();
     if (title != null) result.title = title;
     if (icon != null) result.icon = icon;
     return result;
@@ -1002,16 +979,16 @@ class BenefitInfo extends $pb.GeneratedMessage {
 
   factory BenefitInfo.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      BenefitInfo()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory BenefitInfo.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      BenefitInfo()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'BenefitInfo',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: BenefitInfo.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'title')
     ..aOS(2, _omitFieldNames ? '' : 'icon')
     ..hasRequiredFields = false;
@@ -1027,15 +1004,12 @@ class BenefitInfo extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use BenefitInfo() / BenefitInfo.new instead')
   static BenefitInfo create() => BenefitInfo._();
-  static $pb.GeneratedMessage $_createMessage() => BenefitInfo._();
   @$core.override
-  BenefitInfo createEmptyInstance() => BenefitInfo._();
+  BenefitInfo createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static BenefitInfo getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BenefitInfo>(
-          BenefitInfo.$_createMessage);
+  static BenefitInfo getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<BenefitInfo>(create);
   static BenefitInfo? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -1062,7 +1036,7 @@ class BottomDisplay extends $pb.GeneratedMessage {
     TextInfo? title,
     $core.String? icon,
   }) {
-    final result = BottomDisplay._();
+    final result = create();
     if (title != null) result.title = title;
     if (icon != null) result.icon = icon;
     return result;
@@ -1072,18 +1046,18 @@ class BottomDisplay extends $pb.GeneratedMessage {
 
   factory BottomDisplay.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      BottomDisplay()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory BottomDisplay.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      BottomDisplay()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'BottomDisplay',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: BottomDisplay.$_createMessage)
+      createEmptyInstance: create)
     ..aOM<TextInfo>(1, _omitFieldNames ? '' : 'title',
-        subBuilder: TextInfo.$_createMessage)
+        subBuilder: TextInfo.create)
     ..aOS(2, _omitFieldNames ? '' : 'icon')
     ..hasRequiredFields = false;
 
@@ -1098,15 +1072,12 @@ class BottomDisplay extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use BottomDisplay() / BottomDisplay.new instead')
   static BottomDisplay create() => BottomDisplay._();
-  static $pb.GeneratedMessage $_createMessage() => BottomDisplay._();
   @$core.override
-  BottomDisplay createEmptyInstance() => BottomDisplay._();
+  BottomDisplay createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static BottomDisplay getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BottomDisplay>(
-          BottomDisplay.$_createMessage);
+  static BottomDisplay getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<BottomDisplay>(create);
   static BottomDisplay? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -1136,7 +1107,7 @@ class Button extends $pb.GeneratedMessage {
     $core.String? link,
     $core.Iterable<$core.MapEntry<$core.String, $core.String>>? reportParams,
   }) {
-    final result = Button._();
+    final result = create();
     if (text != null) result.text = text;
     if (link != null) result.link = link;
     if (reportParams != null) result.reportParams.addEntries(reportParams);
@@ -1147,16 +1118,16 @@ class Button extends $pb.GeneratedMessage {
 
   factory Button.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Button()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory Button.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Button()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'Button',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: Button.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'text')
     ..aOS(2, _omitFieldNames ? '' : 'link')
     ..m<$core.String, $core.String>(3, _omitFieldNames ? '' : 'reportParams',
@@ -1176,14 +1147,12 @@ class Button extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use Button() / Button.new instead')
   static Button create() => Button._();
-  static $pb.GeneratedMessage $_createMessage() => Button._();
   @$core.override
-  Button createEmptyInstance() => Button._();
+  Button createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static Button getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<Button>(Button.$_createMessage);
+  static Button getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Button>(create);
   static Button? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -1233,7 +1202,7 @@ class ButtonInfo extends $pb.GeneratedMessage {
     $core.String? tipsLink,
     $core.String? deliverCode,
   }) {
-    final result = ButtonInfo._();
+    final result = create();
     if (text != null) result.text = text;
     if (textColor != null) result.textColor = textColor;
     if (textColorNight != null) result.textColorNight = textColorNight;
@@ -1265,16 +1234,16 @@ class ButtonInfo extends $pb.GeneratedMessage {
 
   factory ButtonInfo.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ButtonInfo()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory ButtonInfo.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ButtonInfo()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'ButtonInfo',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: ButtonInfo.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'text')
     ..aOS(2, _omitFieldNames ? '' : 'textColor')
     ..aOS(3, _omitFieldNames ? '' : 'textColorNight')
@@ -1284,16 +1253,15 @@ class ButtonInfo extends $pb.GeneratedMessage {
     ..aE<ButtonAction>(7, _omitFieldNames ? '' : 'actionType',
         enumValues: ButtonAction.values)
     ..aOM<BadgeInfo>(8, _omitFieldNames ? '' : 'badgeInfo',
-        subBuilder: BadgeInfo.$_createMessage)
-    ..aOM<Report>(9, _omitFieldNames ? '' : 'report',
-        subBuilder: Report.$_createMessage)
+        subBuilder: BadgeInfo.create)
+    ..aOM<Report>(9, _omitFieldNames ? '' : 'report', subBuilder: Report.create)
     ..aOS(10, _omitFieldNames ? '' : 'leftStrikethroughText')
     ..aOM<TextInfo>(11, _omitFieldNames ? '' : 'simpleTextInfo',
-        subBuilder: TextInfo.$_createMessage)
+        subBuilder: TextInfo.create)
     ..aOS(12, _omitFieldNames ? '' : 'simpleBgColor')
     ..aOS(13, _omitFieldNames ? '' : 'simpleBgColorNight')
     ..aOM<GradientColor>(14, _omitFieldNames ? '' : 'bgGradientColor',
-        subBuilder: GradientColor.$_createMessage)
+        subBuilder: GradientColor.create)
     ..m<$core.String, $core.String>(
         15, _omitFieldNames ? '' : 'orderReportParams',
         entryClassName: 'ButtonInfo.OrderReportParamsEntry',
@@ -1301,7 +1269,7 @@ class ButtonInfo extends $pb.GeneratedMessage {
         valueFieldType: $pb.PbFieldType.OS,
         packageName: const $pb.PackageName('bilibili.playershared'))
     ..aOM<TaskParam>(16, _omitFieldNames ? '' : 'taskParam',
-        subBuilder: TaskParam.$_createMessage)
+        subBuilder: TaskParam.create)
     ..aOS(17, _omitFieldNames ? '' : 'frameColor')
     ..aOS(18, _omitFieldNames ? '' : 'icon')
     ..aI(19, _omitFieldNames ? '' : 'fontSize')
@@ -1319,14 +1287,12 @@ class ButtonInfo extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use ButtonInfo() / ButtonInfo.new instead')
   static ButtonInfo create() => ButtonInfo._();
-  static $pb.GeneratedMessage $_createMessage() => ButtonInfo._();
   @$core.override
-  ButtonInfo createEmptyInstance() => ButtonInfo._();
+  ButtonInfo createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static ButtonInfo getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ButtonInfo>(ButtonInfo.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<ButtonInfo>(create);
   static ButtonInfo? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -1527,7 +1493,7 @@ class ChargingExt extends $pb.GeneratedMessage {
   factory ChargingExt({
     $core.bool? hideBgImg,
   }) {
-    final result = ChargingExt._();
+    final result = create();
     if (hideBgImg != null) result.hideBgImg = hideBgImg;
     return result;
   }
@@ -1536,16 +1502,16 @@ class ChargingExt extends $pb.GeneratedMessage {
 
   factory ChargingExt.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ChargingExt()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory ChargingExt.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ChargingExt()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'ChargingExt',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: ChargingExt.$_createMessage)
+      createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'hideBgImg')
     ..hasRequiredFields = false;
 
@@ -1560,15 +1526,12 @@ class ChargingExt extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use ChargingExt() / ChargingExt.new instead')
   static ChargingExt create() => ChargingExt._();
-  static $pb.GeneratedMessage $_createMessage() => ChargingExt._();
   @$core.override
-  ChargingExt createEmptyInstance() => ChargingExt._();
+  ChargingExt createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static ChargingExt getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ChargingExt>(
-          ChargingExt.$_createMessage);
+  static ChargingExt getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ChargingExt>(create);
   static ChargingExt? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -1592,7 +1555,7 @@ class ComprehensiveToast extends $pb.GeneratedMessage {
     $core.Iterable<$core.MapEntry<$core.String, $core.String>>?
         orderReportParams,
   }) {
-    final result = ComprehensiveToast._();
+    final result = create();
     if (type != null) result.type = type;
     if (button != null) result.button = button;
     if (showStyleType != null) result.showStyleType = showStyleType;
@@ -1608,27 +1571,26 @@ class ComprehensiveToast extends $pb.GeneratedMessage {
 
   factory ComprehensiveToast.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ComprehensiveToast()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory ComprehensiveToast.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ComprehensiveToast()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'ComprehensiveToast',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: ComprehensiveToast.$_createMessage)
+      createEmptyInstance: create)
     ..aE<ToastType>(1, _omitFieldNames ? '' : 'type',
         enumValues: ToastType.values)
     ..aOM<ButtonInfo>(2, _omitFieldNames ? '' : 'button',
-        subBuilder: ButtonInfo.$_createMessage)
+        subBuilder: ButtonInfo.create)
     ..aE<ShowStyleType>(3, _omitFieldNames ? '' : 'showStyleType',
         enumValues: ShowStyleType.values)
     ..aOS(4, _omitFieldNames ? '' : 'icon')
     ..aOM<TextInfo>(5, _omitFieldNames ? '' : 'toastText',
-        subBuilder: TextInfo.$_createMessage)
-    ..aOM<Report>(6, _omitFieldNames ? '' : 'report',
-        subBuilder: Report.$_createMessage)
+        subBuilder: TextInfo.create)
+    ..aOM<Report>(6, _omitFieldNames ? '' : 'report', subBuilder: Report.create)
     ..m<$core.String, $core.String>(
         7, _omitFieldNames ? '' : 'orderReportParams',
         entryClassName: 'ComprehensiveToast.OrderReportParamsEntry',
@@ -1648,15 +1610,12 @@ class ComprehensiveToast extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use ComprehensiveToast() / ComprehensiveToast.new instead')
   static ComprehensiveToast create() => ComprehensiveToast._();
-  static $pb.GeneratedMessage $_createMessage() => ComprehensiveToast._();
   @$core.override
-  ComprehensiveToast createEmptyInstance() => ComprehensiveToast._();
+  ComprehensiveToast createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static ComprehensiveToast getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ComprehensiveToast>(
-          ComprehensiveToast.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<ComprehensiveToast>(create);
   static ComprehensiveToast? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -1730,7 +1689,7 @@ class ConfValue extends $pb.GeneratedMessage {
     $core.bool? switchVal,
     $fixnum.Int64? selectedVal,
   }) {
-    final result = ConfValue._();
+    final result = create();
     if (switchVal != null) result.switchVal = switchVal;
     if (selectedVal != null) result.selectedVal = selectedVal;
     return result;
@@ -1740,10 +1699,10 @@ class ConfValue extends $pb.GeneratedMessage {
 
   factory ConfValue.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ConfValue()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory ConfValue.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ConfValue()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static const $core.Map<$core.int, ConfValue_Value> _ConfValue_ValueByTag = {
     1: ConfValue_Value.switchVal,
@@ -1754,7 +1713,7 @@ class ConfValue extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'ConfValue',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: ConfValue.$_createMessage)
+      createEmptyInstance: create)
     ..oo(0, [1, 2])
     ..aOB(1, _omitFieldNames ? '' : 'switchVal')
     ..aInt64(2, _omitFieldNames ? '' : 'selectedVal')
@@ -1770,14 +1729,12 @@ class ConfValue extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use ConfValue() / ConfValue.new instead')
   static ConfValue create() => ConfValue._();
-  static $pb.GeneratedMessage $_createMessage() => ConfValue._();
   @$core.override
-  ConfValue createEmptyInstance() => ConfValue._();
+  ConfValue createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static ConfValue getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ConfValue>(ConfValue.$_createMessage);
+  static ConfValue getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ConfValue>(create);
   static ConfValue? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -1812,7 +1769,7 @@ class CountDownItem extends $pb.GeneratedMessage {
     TextInfo? title,
     TextInfo? subtitle,
   }) {
-    final result = CountDownItem._();
+    final result = create();
     if (foldCountdown != null) result.foldCountdown = foldCountdown;
     if (title != null) result.title = title;
     if (subtitle != null) result.subtitle = subtitle;
@@ -1823,21 +1780,21 @@ class CountDownItem extends $pb.GeneratedMessage {
 
   factory CountDownItem.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      CountDownItem()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory CountDownItem.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      CountDownItem()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'CountDownItem',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: CountDownItem.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'foldCountdown')
     ..aOM<TextInfo>(2, _omitFieldNames ? '' : 'title',
-        subBuilder: TextInfo.$_createMessage)
+        subBuilder: TextInfo.create)
     ..aOM<TextInfo>(3, _omitFieldNames ? '' : 'subtitle',
-        subBuilder: TextInfo.$_createMessage)
+        subBuilder: TextInfo.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1851,15 +1808,12 @@ class CountDownItem extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use CountDownItem() / CountDownItem.new instead')
   static CountDownItem create() => CountDownItem._();
-  static $pb.GeneratedMessage $_createMessage() => CountDownItem._();
   @$core.override
-  CountDownItem createEmptyInstance() => CountDownItem._();
+  CountDownItem createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static CountDownItem getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CountDownItem>(
-          CountDownItem.$_createMessage);
+  static CountDownItem getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<CountDownItem>(create);
   static CountDownItem? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -1907,7 +1861,7 @@ class DashItem extends $pb.GeneratedMessage {
     $core.String? widevinePssh,
     $core.String? bilidrmUri,
   }) {
-    final result = DashItem._();
+    final result = create();
     if (id != null) result.id = id;
     if (baseUrl != null) result.baseUrl = baseUrl;
     if (backupUrl != null) result.backupUrl.addAll(backupUrl);
@@ -1925,16 +1879,16 @@ class DashItem extends $pb.GeneratedMessage {
 
   factory DashItem.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      DashItem()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory DashItem.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      DashItem()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'DashItem',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: DashItem.$_createMessage)
+      createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'baseUrl')
     ..pPS(3, _omitFieldNames ? '' : 'backupUrl')
@@ -1957,14 +1911,12 @@ class DashItem extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use DashItem() / DashItem.new instead')
   static DashItem create() => DashItem._();
-  static $pb.GeneratedMessage $_createMessage() => DashItem._();
   @$core.override
-  DashItem createEmptyInstance() => DashItem._();
+  DashItem createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static DashItem getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<DashItem>(DashItem.$_createMessage);
+  static DashItem getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DashItem>(create);
   static DashItem? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -2068,7 +2020,7 @@ class DashVideo extends $pb.GeneratedMessage {
     $core.String? widevinePssh,
     $core.String? bilidrmUri,
   }) {
-    final result = DashVideo._();
+    final result = create();
     if (baseUrl != null) result.baseUrl = baseUrl;
     if (backupUrl != null) result.backupUrl.addAll(backupUrl);
     if (bandwidth != null) result.bandwidth = bandwidth;
@@ -2089,16 +2041,16 @@ class DashVideo extends $pb.GeneratedMessage {
 
   factory DashVideo.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      DashVideo()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory DashVideo.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      DashVideo()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'DashVideo',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: DashVideo.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'baseUrl')
     ..pPS(2, _omitFieldNames ? '' : 'backupUrl')
     ..aI(3, _omitFieldNames ? '' : 'bandwidth')
@@ -2124,14 +2076,12 @@ class DashVideo extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use DashVideo() / DashVideo.new instead')
   static DashVideo create() => DashVideo._();
-  static $pb.GeneratedMessage $_createMessage() => DashVideo._();
   @$core.override
-  DashVideo createEmptyInstance() => DashVideo._();
+  DashVideo createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static DashVideo getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<DashVideo>(DashVideo.$_createMessage);
+  static DashVideo getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DashVideo>(create);
   static DashVideo? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -2250,7 +2200,7 @@ class DeviceConf extends $pb.GeneratedMessage {
   factory DeviceConf({
     ConfValue? confValue,
   }) {
-    final result = DeviceConf._();
+    final result = create();
     if (confValue != null) result.confValue = confValue;
     return result;
   }
@@ -2259,18 +2209,18 @@ class DeviceConf extends $pb.GeneratedMessage {
 
   factory DeviceConf.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      DeviceConf()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory DeviceConf.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      DeviceConf()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'DeviceConf',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: DeviceConf.$_createMessage)
+      createEmptyInstance: create)
     ..aOM<ConfValue>(1, _omitFieldNames ? '' : 'confValue',
-        subBuilder: ConfValue.$_createMessage)
+        subBuilder: ConfValue.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2283,14 +2233,12 @@ class DeviceConf extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use DeviceConf() / DeviceConf.new instead')
   static DeviceConf create() => DeviceConf._();
-  static $pb.GeneratedMessage $_createMessage() => DeviceConf._();
   @$core.override
-  DeviceConf createEmptyInstance() => DeviceConf._();
+  DeviceConf createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static DeviceConf getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<DeviceConf>(DeviceConf.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<DeviceConf>(create);
   static DeviceConf? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -2325,7 +2273,7 @@ class Dialog extends $pb.GeneratedMessage {
     $core.String? deliverWinId,
     $core.Iterable<$core.MapEntry<$core.String, $core.String>>? conditions,
   }) {
-    final result = Dialog._();
+    final result = create();
     if (styleType != null) result.styleType = styleType;
     if (backgroundInfo != null) result.backgroundInfo = backgroundInfo;
     if (title != null) result.title = title;
@@ -2350,39 +2298,38 @@ class Dialog extends $pb.GeneratedMessage {
 
   factory Dialog.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Dialog()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory Dialog.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Dialog()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'Dialog',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: Dialog.$_createMessage)
+      createEmptyInstance: create)
     ..aE<GuideStyle>(1, _omitFieldNames ? '' : 'styleType',
         enumValues: GuideStyle.values)
     ..aOM<BackgroundInfo>(2, _omitFieldNames ? '' : 'backgroundInfo',
-        subBuilder: BackgroundInfo.$_createMessage)
+        subBuilder: BackgroundInfo.create)
     ..aOM<TextInfo>(3, _omitFieldNames ? '' : 'title',
-        subBuilder: TextInfo.$_createMessage)
+        subBuilder: TextInfo.create)
     ..aOM<TextInfo>(4, _omitFieldNames ? '' : 'subtitle',
-        subBuilder: TextInfo.$_createMessage)
+        subBuilder: TextInfo.create)
     ..aOM<ImageInfo>(5, _omitFieldNames ? '' : 'image',
-        subBuilder: ImageInfo.$_createMessage)
+        subBuilder: ImageInfo.create)
     ..pPM<ButtonInfo>(6, _omitFieldNames ? '' : 'button',
-        subBuilder: ButtonInfo.$_createMessage)
+        subBuilder: ButtonInfo.create)
     ..aOM<ButtonInfo>(7, _omitFieldNames ? '' : 'bottomDesc',
-        subBuilder: ButtonInfo.$_createMessage)
-    ..aOM<Report>(8, _omitFieldNames ? '' : 'report',
-        subBuilder: Report.$_createMessage)
+        subBuilder: ButtonInfo.create)
+    ..aOM<Report>(8, _omitFieldNames ? '' : 'report', subBuilder: Report.create)
     ..aI(9, _omitFieldNames ? '' : 'countDownSec')
     ..aOM<TextInfo>(10, _omitFieldNames ? '' : 'rightBottomDesc',
-        subBuilder: TextInfo.$_createMessage)
+        subBuilder: TextInfo.create)
     ..pPM<BottomDisplay>(11, _omitFieldNames ? '' : 'bottomDisplay',
-        subBuilder: BottomDisplay.$_createMessage)
+        subBuilder: BottomDisplay.create)
     ..aOM<ExtData>(12, _omitFieldNames ? '' : 'extData',
-        subBuilder: ExtData.$_createMessage)
+        subBuilder: ExtData.create)
     ..aE<LimitActionType>(13, _omitFieldNames ? '' : 'limitActionType',
         enumValues: LimitActionType.values)
     ..aI(14, _omitFieldNames ? '' : 'isHideMoreBtn')
@@ -2405,14 +2352,12 @@ class Dialog extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use Dialog() / Dialog.new instead')
   static Dialog create() => Dialog._();
-  static $pb.GeneratedMessage $_createMessage() => Dialog._();
   @$core.override
-  Dialog createEmptyInstance() => Dialog._();
+  Dialog createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static Dialog getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<Dialog>(Dialog.$_createMessage);
+  static Dialog getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Dialog>(create);
   static Dialog? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -2574,7 +2519,7 @@ class Dimension extends $pb.GeneratedMessage {
     $fixnum.Int64? rotate,
     $fixnum.Int64? variable,
   }) {
-    final result = Dimension._();
+    final result = create();
     if (width != null) result.width = width;
     if (height != null) result.height = height;
     if (rotate != null) result.rotate = rotate;
@@ -2586,16 +2531,16 @@ class Dimension extends $pb.GeneratedMessage {
 
   factory Dimension.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Dimension()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory Dimension.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Dimension()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'Dimension',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: Dimension.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'width')
     ..aInt64(2, _omitFieldNames ? '' : 'height')
     ..aInt64(3, _omitFieldNames ? '' : 'rotate')
@@ -2612,14 +2557,12 @@ class Dimension extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use Dimension() / Dimension.new instead')
   static Dimension create() => Dimension._();
-  static $pb.GeneratedMessage $_createMessage() => Dimension._();
   @$core.override
-  Dimension createEmptyInstance() => Dimension._();
+  Dimension createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static Dimension getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<Dimension>(Dimension.$_createMessage);
+  static Dimension getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Dimension>(create);
   static Dimension? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -2664,7 +2607,7 @@ class DolbyItem extends $pb.GeneratedMessage {
     DolbyItem_Type? type,
     $core.Iterable<DashItem>? audio,
   }) {
-    final result = DolbyItem._();
+    final result = create();
     if (type != null) result.type = type;
     if (audio != null) result.audio.addAll(audio);
     return result;
@@ -2674,20 +2617,20 @@ class DolbyItem extends $pb.GeneratedMessage {
 
   factory DolbyItem.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      DolbyItem()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory DolbyItem.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      DolbyItem()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'DolbyItem',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: DolbyItem.$_createMessage)
+      createEmptyInstance: create)
     ..aE<DolbyItem_Type>(1, _omitFieldNames ? '' : 'type',
         enumValues: DolbyItem_Type.values)
     ..pPM<DashItem>(2, _omitFieldNames ? '' : 'audio',
-        subBuilder: DashItem.$_createMessage)
+        subBuilder: DashItem.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2700,14 +2643,12 @@ class DolbyItem extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use DolbyItem() / DolbyItem.new instead')
   static DolbyItem create() => DolbyItem._();
-  static $pb.GeneratedMessage $_createMessage() => DolbyItem._();
   @$core.override
-  DolbyItem createEmptyInstance() => DolbyItem._();
+  DolbyItem createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static DolbyItem getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<DolbyItem>(DolbyItem.$_createMessage);
+  static DolbyItem getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DolbyItem>(create);
   static DolbyItem? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -2729,7 +2670,7 @@ class EpInlineVideo extends $pb.GeneratedMessage {
     $fixnum.Int64? aid,
     $fixnum.Int64? cid,
   }) {
-    final result = EpInlineVideo._();
+    final result = create();
     if (materialNo != null) result.materialNo = materialNo;
     if (aid != null) result.aid = aid;
     if (cid != null) result.cid = cid;
@@ -2740,16 +2681,16 @@ class EpInlineVideo extends $pb.GeneratedMessage {
 
   factory EpInlineVideo.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      EpInlineVideo()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory EpInlineVideo.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      EpInlineVideo()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'EpInlineVideo',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: EpInlineVideo.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'materialNo')
     ..aInt64(2, _omitFieldNames ? '' : 'aid')
     ..aInt64(3, _omitFieldNames ? '' : 'cid')
@@ -2766,15 +2707,12 @@ class EpInlineVideo extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use EpInlineVideo() / EpInlineVideo.new instead')
   static EpInlineVideo create() => EpInlineVideo._();
-  static $pb.GeneratedMessage $_createMessage() => EpInlineVideo._();
   @$core.override
-  EpInlineVideo createEmptyInstance() => EpInlineVideo._();
+  EpInlineVideo createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static EpInlineVideo getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EpInlineVideo>(
-          EpInlineVideo.$_createMessage);
+  static EpInlineVideo getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<EpInlineVideo>(create);
   static EpInlineVideo? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -2809,7 +2747,7 @@ class EpInlineVideoInfo extends $pb.GeneratedMessage {
   factory EpInlineVideoInfo({
     $core.Iterable<EpInlineVideo>? epInlineVideo,
   }) {
-    final result = EpInlineVideoInfo._();
+    final result = create();
     if (epInlineVideo != null) result.epInlineVideo.addAll(epInlineVideo);
     return result;
   }
@@ -2818,18 +2756,18 @@ class EpInlineVideoInfo extends $pb.GeneratedMessage {
 
   factory EpInlineVideoInfo.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      EpInlineVideoInfo()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory EpInlineVideoInfo.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      EpInlineVideoInfo()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'EpInlineVideoInfo',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: EpInlineVideoInfo.$_createMessage)
+      createEmptyInstance: create)
     ..pPM<EpInlineVideo>(1, _omitFieldNames ? '' : 'epInlineVideo',
-        subBuilder: EpInlineVideo.$_createMessage)
+        subBuilder: EpInlineVideo.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2843,15 +2781,12 @@ class EpInlineVideoInfo extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use EpInlineVideoInfo() / EpInlineVideoInfo.new instead')
   static EpInlineVideoInfo create() => EpInlineVideoInfo._();
-  static $pb.GeneratedMessage $_createMessage() => EpInlineVideoInfo._();
   @$core.override
-  EpInlineVideoInfo createEmptyInstance() => EpInlineVideoInfo._();
+  EpInlineVideoInfo createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static EpInlineVideoInfo getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EpInlineVideoInfo>(
-          EpInlineVideoInfo.$_createMessage);
+  static EpInlineVideoInfo getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<EpInlineVideoInfo>(create);
   static EpInlineVideoInfo? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -2863,7 +2798,7 @@ class Event extends $pb.GeneratedMessage {
     Shake? shake,
     QnTip? qnTip,
   }) {
-    final result = Event._();
+    final result = create();
     if (shake != null) result.shake = shake;
     if (qnTip != null) result.qnTip = qnTip;
     return result;
@@ -2873,20 +2808,18 @@ class Event extends $pb.GeneratedMessage {
 
   factory Event.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Event()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory Event.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Event()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'Event',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: Event.$_createMessage)
-    ..aOM<Shake>(1, _omitFieldNames ? '' : 'shake',
-        subBuilder: Shake.$_createMessage)
-    ..aOM<QnTip>(2, _omitFieldNames ? '' : 'qnTip',
-        subBuilder: QnTip.$_createMessage)
+      createEmptyInstance: create)
+    ..aOM<Shake>(1, _omitFieldNames ? '' : 'shake', subBuilder: Shake.create)
+    ..aOM<QnTip>(2, _omitFieldNames ? '' : 'qnTip', subBuilder: QnTip.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2899,14 +2832,12 @@ class Event extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use Event() / Event.new instead')
   static Event create() => Event._();
-  static $pb.GeneratedMessage $_createMessage() => Event._();
   @$core.override
-  Event createEmptyInstance() => Event._();
+  Event createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static Event getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<Event>(Event.$_createMessage);
+  static Event getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Event>(create);
   static Event? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -2937,7 +2868,7 @@ class ExpSwitch extends $pb.GeneratedMessage {
     $core.int? hitOptiTryWatch,
     $core.Iterable<$core.MapEntry<$core.String, $core.String>>? expAb,
   }) {
-    final result = ExpSwitch._();
+    final result = create();
     if (hitOptiTryWatch != null) result.hitOptiTryWatch = hitOptiTryWatch;
     if (expAb != null) result.expAb.addEntries(expAb);
     return result;
@@ -2947,16 +2878,16 @@ class ExpSwitch extends $pb.GeneratedMessage {
 
   factory ExpSwitch.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ExpSwitch()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory ExpSwitch.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ExpSwitch()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'ExpSwitch',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: ExpSwitch.$_createMessage)
+      createEmptyInstance: create)
     ..aI(2, _omitFieldNames ? '' : 'hitOptiTryWatch')
     ..m<$core.String, $core.String>(3, _omitFieldNames ? '' : 'expAb',
         entryClassName: 'ExpSwitch.ExpAbEntry',
@@ -2975,14 +2906,12 @@ class ExpSwitch extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use ExpSwitch() / ExpSwitch.new instead')
   static ExpSwitch create() => ExpSwitch._();
-  static $pb.GeneratedMessage $_createMessage() => ExpSwitch._();
   @$core.override
-  ExpSwitch createEmptyInstance() => ExpSwitch._();
+  ExpSwitch createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static ExpSwitch getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ExpSwitch>(ExpSwitch.$_createMessage);
+  static ExpSwitch getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ExpSwitch>(create);
   static ExpSwitch? _defaultInstance;
 
   @$pb.TagNumber(2)
@@ -3016,7 +2945,7 @@ class ExtData extends $pb.GeneratedMessage {
     ChargingExt? chargingExt,
     QrCode? qrCode,
   }) {
-    final result = ExtData._();
+    final result = create();
     if (type != null) result.type = type;
     if (playListInfo != null) result.playListInfo = playListInfo;
     if (banner != null) result.banner = banner;
@@ -3030,10 +2959,10 @@ class ExtData extends $pb.GeneratedMessage {
 
   factory ExtData.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ExtData()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory ExtData.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ExtData()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static const $core.Map<$core.int, ExtData_Data> _ExtData_DataByTag = {
     2: ExtData_Data.playListInfo,
@@ -3047,20 +2976,18 @@ class ExtData extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'ExtData',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: ExtData.$_createMessage)
+      createEmptyInstance: create)
     ..oo(0, [2, 3, 4, 5, 6])
     ..aE<ExtDataType>(1, _omitFieldNames ? '' : 'type',
         enumValues: ExtDataType.values)
     ..aOM<PlayListInfo>(2, _omitFieldNames ? '' : 'playListInfo',
-        subBuilder: PlayListInfo.$_createMessage)
-    ..aOM<Banner>(3, _omitFieldNames ? '' : 'banner',
-        subBuilder: Banner.$_createMessage)
+        subBuilder: PlayListInfo.create)
+    ..aOM<Banner>(3, _omitFieldNames ? '' : 'banner', subBuilder: Banner.create)
     ..aOM<EpInlineVideoInfo>(4, _omitFieldNames ? '' : 'epInlineVideoInfo',
-        subBuilder: EpInlineVideoInfo.$_createMessage)
+        subBuilder: EpInlineVideoInfo.create)
     ..aOM<ChargingExt>(5, _omitFieldNames ? '' : 'chargingExt',
-        subBuilder: ChargingExt.$_createMessage)
-    ..aOM<QrCode>(6, _omitFieldNames ? '' : 'qrCode',
-        subBuilder: QrCode.$_createMessage)
+        subBuilder: ChargingExt.create)
+    ..aOM<QrCode>(6, _omitFieldNames ? '' : 'qrCode', subBuilder: QrCode.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -3073,14 +3000,12 @@ class ExtData extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use ExtData() / ExtData.new instead')
   static ExtData create() => ExtData._();
-  static $pb.GeneratedMessage $_createMessage() => ExtData._();
   @$core.override
-  ExtData createEmptyInstance() => ExtData._();
+  ExtData createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static ExtData getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ExtData>(ExtData.$_createMessage);
+  static ExtData getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ExtData>(create);
   static ExtData? _defaultInstance;
 
   @$pb.TagNumber(2)
@@ -3166,7 +3091,7 @@ class ExtraContent extends $pb.GeneratedMessage {
     $core.String? disabledReason,
     $fixnum.Int64? disabledCode,
   }) {
-    final result = ExtraContent._();
+    final result = create();
     if (disabledReason != null) result.disabledReason = disabledReason;
     if (disabledCode != null) result.disabledCode = disabledCode;
     return result;
@@ -3176,16 +3101,16 @@ class ExtraContent extends $pb.GeneratedMessage {
 
   factory ExtraContent.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ExtraContent()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory ExtraContent.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ExtraContent()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'ExtraContent',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: ExtraContent.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'disabledReason')
     ..aInt64(2, _omitFieldNames ? '' : 'disabledCode')
     ..hasRequiredFields = false;
@@ -3201,15 +3126,12 @@ class ExtraContent extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use ExtraContent() / ExtraContent.new instead')
   static ExtraContent create() => ExtraContent._();
-  static $pb.GeneratedMessage $_createMessage() => ExtraContent._();
   @$core.override
-  ExtraContent createEmptyInstance() => ExtraContent._();
+  ExtraContent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static ExtraContent getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ExtraContent>(
-          ExtraContent.$_createMessage);
+  static ExtraContent getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ExtraContent>(create);
   static ExtraContent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -3238,7 +3160,7 @@ class FoldData extends $pb.GeneratedMessage {
     FoldStyle? foldStyle,
     CountDownItem? countDown,
   }) {
-    final result = FoldData._();
+    final result = create();
     if (foldStyle != null) result.foldStyle = foldStyle;
     if (countDown != null) result.countDown = countDown;
     return result;
@@ -3248,10 +3170,10 @@ class FoldData extends $pb.GeneratedMessage {
 
   factory FoldData.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FoldData()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FoldData.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FoldData()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static const $core.Map<$core.int, FoldData_Data> _FoldData_DataByTag = {
     2: FoldData_Data.countDown,
@@ -3261,12 +3183,12 @@ class FoldData extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'FoldData',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: FoldData.$_createMessage)
+      createEmptyInstance: create)
     ..oo(0, [2])
     ..aE<FoldStyle>(1, _omitFieldNames ? '' : 'foldStyle',
         enumValues: FoldStyle.values)
     ..aOM<CountDownItem>(2, _omitFieldNames ? '' : 'countDown',
-        subBuilder: CountDownItem.$_createMessage)
+        subBuilder: CountDownItem.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -3279,14 +3201,12 @@ class FoldData extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use FoldData() / FoldData.new instead')
   static FoldData create() => FoldData._();
-  static $pb.GeneratedMessage $_createMessage() => FoldData._();
   @$core.override
-  FoldData createEmptyInstance() => FoldData._();
+  FoldData createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static FoldData getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<FoldData>(FoldData.$_createMessage);
+  static FoldData getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FoldData>(create);
   static FoldData? _defaultInstance;
 
   @$pb.TagNumber(2)
@@ -3319,7 +3239,7 @@ class Fragment extends $pb.GeneratedMessage {
   factory Fragment({
     $core.Iterable<FragmentInfo>? infos,
   }) {
-    final result = Fragment._();
+    final result = create();
     if (infos != null) result.infos.addAll(infos);
     return result;
   }
@@ -3328,18 +3248,18 @@ class Fragment extends $pb.GeneratedMessage {
 
   factory Fragment.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Fragment()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory Fragment.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Fragment()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'Fragment',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: Fragment.$_createMessage)
+      createEmptyInstance: create)
     ..pPM<FragmentInfo>(1, _omitFieldNames ? '' : 'infos',
-        subBuilder: FragmentInfo.$_createMessage)
+        subBuilder: FragmentInfo.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -3352,14 +3272,12 @@ class Fragment extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use Fragment() / Fragment.new instead')
   static Fragment create() => Fragment._();
-  static $pb.GeneratedMessage $_createMessage() => Fragment._();
   @$core.override
-  Fragment createEmptyInstance() => Fragment._();
+  Fragment createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static Fragment getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<Fragment>(Fragment.$_createMessage);
+  static Fragment getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Fragment>(create);
   static Fragment? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -3376,7 +3294,7 @@ class FragmentInfo extends $pb.GeneratedMessage {
     $fixnum.Int64? startTime,
     $0.Any? report,
   }) {
-    final result = FragmentInfo._();
+    final result = create();
     if (index != null) result.index = index;
     if (fragmentPosition != null) result.fragmentPosition = fragmentPosition;
     if (fragmentType != null) result.fragmentType = fragmentType;
@@ -3391,16 +3309,16 @@ class FragmentInfo extends $pb.GeneratedMessage {
 
   factory FragmentInfo.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FragmentInfo()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FragmentInfo.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FragmentInfo()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'FragmentInfo',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: FragmentInfo.$_createMessage)
+      createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'index')
     ..aE<FragmentPosition>(2, _omitFieldNames ? '' : 'fragmentPosition',
         enumValues: FragmentPosition.values)
@@ -3409,8 +3327,7 @@ class FragmentInfo extends $pb.GeneratedMessage {
     ..aInt64(4, _omitFieldNames ? '' : 'aid')
     ..aInt64(5, _omitFieldNames ? '' : 'cid')
     ..aInt64(6, _omitFieldNames ? '' : 'startTime')
-    ..aOM<$0.Any>(7, _omitFieldNames ? '' : 'report',
-        subBuilder: $0.Any.$_createMessage)
+    ..aOM<$0.Any>(7, _omitFieldNames ? '' : 'report', subBuilder: $0.Any.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -3424,15 +3341,12 @@ class FragmentInfo extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use FragmentInfo() / FragmentInfo.new instead')
   static FragmentInfo create() => FragmentInfo._();
-  static $pb.GeneratedMessage $_createMessage() => FragmentInfo._();
   @$core.override
-  FragmentInfo createEmptyInstance() => FragmentInfo._();
+  FragmentInfo createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static FragmentInfo getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FragmentInfo>(
-          FragmentInfo.$_createMessage);
+  static FragmentInfo getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<FragmentInfo>(create);
   static FragmentInfo? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -3505,7 +3419,7 @@ class FragmentVideo extends $pb.GeneratedMessage {
   factory FragmentVideo({
     $core.Iterable<FragmentVideoInfo>? videos,
   }) {
-    final result = FragmentVideo._();
+    final result = create();
     if (videos != null) result.videos.addAll(videos);
     return result;
   }
@@ -3514,18 +3428,18 @@ class FragmentVideo extends $pb.GeneratedMessage {
 
   factory FragmentVideo.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FragmentVideo()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FragmentVideo.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FragmentVideo()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'FragmentVideo',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: FragmentVideo.$_createMessage)
+      createEmptyInstance: create)
     ..pPM<FragmentVideoInfo>(1, _omitFieldNames ? '' : 'videos',
-        subBuilder: FragmentVideoInfo.$_createMessage)
+        subBuilder: FragmentVideoInfo.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -3539,15 +3453,12 @@ class FragmentVideo extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use FragmentVideo() / FragmentVideo.new instead')
   static FragmentVideo create() => FragmentVideo._();
-  static $pb.GeneratedMessage $_createMessage() => FragmentVideo._();
   @$core.override
-  FragmentVideo createEmptyInstance() => FragmentVideo._();
+  FragmentVideo createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static FragmentVideo getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FragmentVideo>(
-          FragmentVideo.$_createMessage);
+  static FragmentVideo getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<FragmentVideo>(create);
   static FragmentVideo? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -3564,7 +3475,7 @@ class FragmentVideoInfo extends $pb.GeneratedMessage {
     BizType? videoType,
     $core.bool? playableStatus,
   }) {
-    final result = FragmentVideoInfo._();
+    final result = create();
     if (fragmentInfo != null) result.fragmentInfo = fragmentInfo;
     if (vodInfo != null) result.vodInfo = vodInfo;
     if (playArcConf != null) result.playArcConf = playArcConf;
@@ -3579,24 +3490,24 @@ class FragmentVideoInfo extends $pb.GeneratedMessage {
 
   factory FragmentVideoInfo.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FragmentVideoInfo()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FragmentVideoInfo.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FragmentVideoInfo()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'FragmentVideoInfo',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: FragmentVideoInfo.$_createMessage)
+      createEmptyInstance: create)
     ..aOM<FragmentInfo>(1, _omitFieldNames ? '' : 'fragmentInfo',
-        subBuilder: FragmentInfo.$_createMessage)
+        subBuilder: FragmentInfo.create)
     ..aOM<VodInfo>(2, _omitFieldNames ? '' : 'vodInfo',
-        subBuilder: VodInfo.$_createMessage)
+        subBuilder: VodInfo.create)
     ..aOM<PlayArcConf>(3, _omitFieldNames ? '' : 'playArcConf',
-        subBuilder: PlayArcConf.$_createMessage)
+        subBuilder: PlayArcConf.create)
     ..aOM<Dimension>(4, _omitFieldNames ? '' : 'dimension',
-        subBuilder: Dimension.$_createMessage)
+        subBuilder: Dimension.create)
     ..aInt64(5, _omitFieldNames ? '' : 'timelength')
     ..aE<BizType>(6, _omitFieldNames ? '' : 'videoType',
         enumValues: BizType.values)
@@ -3614,15 +3525,12 @@ class FragmentVideoInfo extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use FragmentVideoInfo() / FragmentVideoInfo.new instead')
   static FragmentVideoInfo create() => FragmentVideoInfo._();
-  static $pb.GeneratedMessage $_createMessage() => FragmentVideoInfo._();
   @$core.override
-  FragmentVideoInfo createEmptyInstance() => FragmentVideoInfo._();
+  FragmentVideoInfo createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static FragmentVideoInfo getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FragmentVideoInfo>(
-          FragmentVideoInfo.$_createMessage);
+  static FragmentVideoInfo getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<FragmentVideoInfo>(create);
   static FragmentVideoInfo? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -3710,7 +3618,7 @@ class FullPromptBar extends $pb.GeneratedMessage {
     $core.String? bgImage,
     $core.int? barHeight,
   }) {
-    final result = FullPromptBar._();
+    final result = create();
     if (icon != null) result.icon = icon;
     if (title != null) result.title = title;
     if (timerCountdown != null) result.timerCountdown = timerCountdown;
@@ -3728,29 +3636,28 @@ class FullPromptBar extends $pb.GeneratedMessage {
 
   factory FullPromptBar.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FullPromptBar()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory FullPromptBar.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      FullPromptBar()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'FullPromptBar',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: FullPromptBar.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'icon')
     ..aOM<TextInfo>(2, _omitFieldNames ? '' : 'title',
-        subBuilder: TextInfo.$_createMessage)
+        subBuilder: TextInfo.create)
     ..aInt64(3, _omitFieldNames ? '' : 'timerCountdown')
     ..aOB(4, _omitFieldNames ? '' : 'countdownEnable')
     ..aOM<TextInfo>(5, _omitFieldNames ? '' : 'subtitle',
-        subBuilder: TextInfo.$_createMessage)
+        subBuilder: TextInfo.create)
     ..pPM<ButtonInfo>(6, _omitFieldNames ? '' : 'button',
-        subBuilder: ButtonInfo.$_createMessage)
+        subBuilder: ButtonInfo.create)
     ..aOM<FoldData>(7, _omitFieldNames ? '' : 'foldData',
-        subBuilder: FoldData.$_createMessage)
-    ..aOM<Report>(8, _omitFieldNames ? '' : 'report',
-        subBuilder: Report.$_createMessage)
+        subBuilder: FoldData.create)
+    ..aOM<Report>(8, _omitFieldNames ? '' : 'report', subBuilder: Report.create)
     ..aOS(9, _omitFieldNames ? '' : 'bgImage')
     ..aI(10, _omitFieldNames ? '' : 'barHeight')
     ..hasRequiredFields = false;
@@ -3766,15 +3673,12 @@ class FullPromptBar extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use FullPromptBar() / FullPromptBar.new instead')
   static FullPromptBar create() => FullPromptBar._();
-  static $pb.GeneratedMessage $_createMessage() => FullPromptBar._();
   @$core.override
-  FullPromptBar createEmptyInstance() => FullPromptBar._();
+  FullPromptBar createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static FullPromptBar getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FullPromptBar>(
-          FullPromptBar.$_createMessage);
+  static FullPromptBar getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<FullPromptBar>(create);
   static FullPromptBar? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -3875,7 +3779,7 @@ class GradientColor extends $pb.GeneratedMessage {
     $core.String? startColor,
     $core.String? endColor,
   }) {
-    final result = GradientColor._();
+    final result = create();
     if (startColor != null) result.startColor = startColor;
     if (endColor != null) result.endColor = endColor;
     return result;
@@ -3885,16 +3789,16 @@ class GradientColor extends $pb.GeneratedMessage {
 
   factory GradientColor.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      GradientColor()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory GradientColor.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      GradientColor()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'GradientColor',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: GradientColor.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'startColor')
     ..aOS(2, _omitFieldNames ? '' : 'endColor')
     ..hasRequiredFields = false;
@@ -3910,15 +3814,12 @@ class GradientColor extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use GradientColor() / GradientColor.new instead')
   static GradientColor create() => GradientColor._();
-  static $pb.GeneratedMessage $_createMessage() => GradientColor._();
   @$core.override
-  GradientColor createEmptyInstance() => GradientColor._();
+  GradientColor createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static GradientColor getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GradientColor>(
-          GradientColor.$_createMessage);
+  static GradientColor getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GradientColor>(create);
   static GradientColor? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -3945,7 +3846,7 @@ class History extends $pb.GeneratedMessage {
     HistoryInfo? currentVideo,
     HistoryInfo? relatedVideo,
   }) {
-    final result = History._();
+    final result = create();
     if (currentVideo != null) result.currentVideo = currentVideo;
     if (relatedVideo != null) result.relatedVideo = relatedVideo;
     return result;
@@ -3955,20 +3856,20 @@ class History extends $pb.GeneratedMessage {
 
   factory History.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      History()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory History.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      History()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'History',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: History.$_createMessage)
+      createEmptyInstance: create)
     ..aOM<HistoryInfo>(1, _omitFieldNames ? '' : 'currentVideo',
-        subBuilder: HistoryInfo.$_createMessage)
+        subBuilder: HistoryInfo.create)
     ..aOM<HistoryInfo>(2, _omitFieldNames ? '' : 'relatedVideo',
-        subBuilder: HistoryInfo.$_createMessage)
+        subBuilder: HistoryInfo.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -3981,14 +3882,12 @@ class History extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use History() / History.new instead')
   static History create() => History._();
-  static $pb.GeneratedMessage $_createMessage() => History._();
   @$core.override
-  History createEmptyInstance() => History._();
+  History createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static History getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<History>(History.$_createMessage);
+  static History getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<History>(create);
   static History? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -4022,7 +3921,7 @@ class HistoryInfo extends $pb.GeneratedMessage {
     Toast? toastWithoutTime,
     $fixnum.Int64? lastPlayAid,
   }) {
-    final result = HistoryInfo._();
+    final result = create();
     if (progress != null) result.progress = progress;
     if (lastPlayCid != null) result.lastPlayCid = lastPlayCid;
     if (toast != null) result.toast = toast;
@@ -4035,22 +3934,21 @@ class HistoryInfo extends $pb.GeneratedMessage {
 
   factory HistoryInfo.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      HistoryInfo()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory HistoryInfo.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      HistoryInfo()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'HistoryInfo',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: HistoryInfo.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'progress')
     ..aInt64(2, _omitFieldNames ? '' : 'lastPlayCid')
-    ..aOM<Toast>(3, _omitFieldNames ? '' : 'toast',
-        subBuilder: Toast.$_createMessage)
+    ..aOM<Toast>(3, _omitFieldNames ? '' : 'toast', subBuilder: Toast.create)
     ..aOM<Toast>(4, _omitFieldNames ? '' : 'toastWithoutTime',
-        subBuilder: Toast.$_createMessage)
+        subBuilder: Toast.create)
     ..aInt64(5, _omitFieldNames ? '' : 'lastPlayAid')
     ..hasRequiredFields = false;
 
@@ -4065,15 +3963,12 @@ class HistoryInfo extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use HistoryInfo() / HistoryInfo.new instead')
   static HistoryInfo create() => HistoryInfo._();
-  static $pb.GeneratedMessage $_createMessage() => HistoryInfo._();
   @$core.override
-  HistoryInfo createEmptyInstance() => HistoryInfo._();
+  HistoryInfo createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static HistoryInfo getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<HistoryInfo>(
-          HistoryInfo.$_createMessage);
+  static HistoryInfo getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<HistoryInfo>(create);
   static HistoryInfo? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -4130,7 +4025,7 @@ class ImageInfo extends $pb.GeneratedMessage {
   factory ImageInfo({
     $core.String? url,
   }) {
-    final result = ImageInfo._();
+    final result = create();
     if (url != null) result.url = url;
     return result;
   }
@@ -4139,16 +4034,16 @@ class ImageInfo extends $pb.GeneratedMessage {
 
   factory ImageInfo.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ImageInfo()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory ImageInfo.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ImageInfo()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'ImageInfo',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: ImageInfo.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'url')
     ..hasRequiredFields = false;
 
@@ -4162,14 +4057,12 @@ class ImageInfo extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use ImageInfo() / ImageInfo.new instead')
   static ImageInfo create() => ImageInfo._();
-  static $pb.GeneratedMessage $_createMessage() => ImageInfo._();
   @$core.override
-  ImageInfo createEmptyInstance() => ImageInfo._();
+  ImageInfo createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static ImageInfo getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ImageInfo>(ImageInfo.$_createMessage);
+  static ImageInfo getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ImageInfo>(create);
   static ImageInfo? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -4189,7 +4082,7 @@ class Interaction extends $pb.GeneratedMessage {
     $core.String? msg,
     $fixnum.Int64? mark,
   }) {
-    final result = Interaction._();
+    final result = create();
     if (historyNode != null) result.historyNode = historyNode;
     if (graphVersion != null) result.graphVersion = graphVersion;
     if (msg != null) result.msg = msg;
@@ -4201,18 +4094,18 @@ class Interaction extends $pb.GeneratedMessage {
 
   factory Interaction.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Interaction()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory Interaction.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Interaction()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'Interaction',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: Interaction.$_createMessage)
+      createEmptyInstance: create)
     ..aOM<Node>(1, _omitFieldNames ? '' : 'historyNode',
-        subBuilder: Node.$_createMessage)
+        subBuilder: Node.create)
     ..aInt64(2, _omitFieldNames ? '' : 'graphVersion')
     ..aOS(3, _omitFieldNames ? '' : 'msg')
     ..aInt64(4, _omitFieldNames ? '' : 'mark')
@@ -4229,15 +4122,12 @@ class Interaction extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use Interaction() / Interaction.new instead')
   static Interaction create() => Interaction._();
-  static $pb.GeneratedMessage $_createMessage() => Interaction._();
   @$core.override
-  Interaction createEmptyInstance() => Interaction._();
+  Interaction createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static Interaction getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Interaction>(
-          Interaction.$_createMessage);
+  static Interaction getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<Interaction>(create);
   static Interaction? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -4285,7 +4175,7 @@ class LossLessItem extends $pb.GeneratedMessage {
     DashItem? audio,
     $core.bool? needVip,
   }) {
-    final result = LossLessItem._();
+    final result = create();
     if (isLosslessAudio != null) result.isLosslessAudio = isLosslessAudio;
     if (audio != null) result.audio = audio;
     if (needVip != null) result.needVip = needVip;
@@ -4296,19 +4186,19 @@ class LossLessItem extends $pb.GeneratedMessage {
 
   factory LossLessItem.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      LossLessItem()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory LossLessItem.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      LossLessItem()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'LossLessItem',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: LossLessItem.$_createMessage)
+      createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'isLosslessAudio')
     ..aOM<DashItem>(2, _omitFieldNames ? '' : 'audio',
-        subBuilder: DashItem.$_createMessage)
+        subBuilder: DashItem.create)
     ..aOB(3, _omitFieldNames ? '' : 'needVip')
     ..hasRequiredFields = false;
 
@@ -4323,15 +4213,12 @@ class LossLessItem extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use LossLessItem() / LossLessItem.new instead')
   static LossLessItem create() => LossLessItem._();
-  static $pb.GeneratedMessage $_createMessage() => LossLessItem._();
   @$core.override
-  LossLessItem createEmptyInstance() => LossLessItem._();
+  LossLessItem createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static LossLessItem getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LossLessItem>(
-          LossLessItem.$_createMessage);
+  static LossLessItem getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<LossLessItem>(create);
   static LossLessItem? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -4368,7 +4255,7 @@ class MultiDashVideo extends $pb.GeneratedMessage {
   factory MultiDashVideo({
     $core.Iterable<DashVideo>? dashVideos,
   }) {
-    final result = MultiDashVideo._();
+    final result = create();
     if (dashVideos != null) result.dashVideos.addAll(dashVideos);
     return result;
   }
@@ -4377,18 +4264,18 @@ class MultiDashVideo extends $pb.GeneratedMessage {
 
   factory MultiDashVideo.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MultiDashVideo()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory MultiDashVideo.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      MultiDashVideo()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'MultiDashVideo',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: MultiDashVideo.$_createMessage)
+      createEmptyInstance: create)
     ..pPM<DashVideo>(1, _omitFieldNames ? '' : 'dashVideos',
-        subBuilder: DashVideo.$_createMessage)
+        subBuilder: DashVideo.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -4402,15 +4289,12 @@ class MultiDashVideo extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use MultiDashVideo() / MultiDashVideo.new instead')
   static MultiDashVideo create() => MultiDashVideo._();
-  static $pb.GeneratedMessage $_createMessage() => MultiDashVideo._();
   @$core.override
-  MultiDashVideo createEmptyInstance() => MultiDashVideo._();
+  MultiDashVideo createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static MultiDashVideo getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MultiDashVideo>(
-          MultiDashVideo.$_createMessage);
+  static MultiDashVideo getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<MultiDashVideo>(create);
   static MultiDashVideo? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -4423,7 +4307,7 @@ class Node extends $pb.GeneratedMessage {
     $core.String? title,
     $fixnum.Int64? cid,
   }) {
-    final result = Node._();
+    final result = create();
     if (nodeId != null) result.nodeId = nodeId;
     if (title != null) result.title = title;
     if (cid != null) result.cid = cid;
@@ -4434,16 +4318,16 @@ class Node extends $pb.GeneratedMessage {
 
   factory Node.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Node()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory Node.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Node()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'Node',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: Node.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'nodeId')
     ..aOS(2, _omitFieldNames ? '' : 'title')
     ..aInt64(3, _omitFieldNames ? '' : 'cid')
@@ -4459,14 +4343,12 @@ class Node extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use Node() / Node.new instead')
   static Node create() => Node._();
-  static $pb.GeneratedMessage $_createMessage() => Node._();
   @$core.override
-  Node createEmptyInstance() => Node._();
+  Node createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static Node getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<Node>(Node.$_createMessage);
+  static Node getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Node>(create);
   static Node? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -4504,7 +4386,7 @@ class PayWallOnshowAction extends $pb.GeneratedMessage {
         orderReportParams,
     ButtonAction? actionType,
   }) {
-    final result = PayWallOnshowAction._();
+    final result = create();
     if (link != null) result.link = link;
     if (orderReportParams != null)
       result.orderReportParams.addEntries(orderReportParams);
@@ -4516,16 +4398,16 @@ class PayWallOnshowAction extends $pb.GeneratedMessage {
 
   factory PayWallOnshowAction.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PayWallOnshowAction()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PayWallOnshowAction.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PayWallOnshowAction()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'PayWallOnshowAction',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: PayWallOnshowAction.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'link')
     ..m<$core.String, $core.String>(
         2, _omitFieldNames ? '' : 'orderReportParams',
@@ -4548,16 +4430,12 @@ class PayWallOnshowAction extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core
-      .Deprecated('Use PayWallOnshowAction() / PayWallOnshowAction.new instead')
   static PayWallOnshowAction create() => PayWallOnshowAction._();
-  static $pb.GeneratedMessage $_createMessage() => PayWallOnshowAction._();
   @$core.override
-  PayWallOnshowAction createEmptyInstance() => PayWallOnshowAction._();
+  PayWallOnshowAction createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static PayWallOnshowAction getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<PayWallOnshowAction>(
-          PayWallOnshowAction.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<PayWallOnshowAction>(create);
   static PayWallOnshowAction? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -4596,7 +4474,7 @@ class PlayArc extends $pb.GeneratedMessage {
     $fixnum.Int64? watchTimeLength,
     $fixnum.Int64? durationMs,
   }) {
-    final result = PlayArc._();
+    final result = create();
     if (videoType != null) result.videoType = videoType;
     if (aid != null) result.aid = aid;
     if (cid != null) result.cid = cid;
@@ -4615,16 +4493,16 @@ class PlayArc extends $pb.GeneratedMessage {
 
   factory PlayArc.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlayArc()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PlayArc.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlayArc()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'PlayArc',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: PlayArc.$_createMessage)
+      createEmptyInstance: create)
     ..aE<BizType>(1, _omitFieldNames ? '' : 'videoType',
         enumValues: BizType.values)
     ..aInt64(2, _omitFieldNames ? '' : 'aid')
@@ -4634,9 +4512,9 @@ class PlayArc extends $pb.GeneratedMessage {
     ..aE<ArcType>(5, _omitFieldNames ? '' : 'arcType',
         enumValues: ArcType.values)
     ..aOM<Interaction>(6, _omitFieldNames ? '' : 'interaction',
-        subBuilder: Interaction.$_createMessage)
+        subBuilder: Interaction.create)
     ..aOM<Dimension>(7, _omitFieldNames ? '' : 'dimension',
-        subBuilder: Dimension.$_createMessage)
+        subBuilder: Dimension.create)
     ..aInt64(8, _omitFieldNames ? '' : 'duration')
     ..aOB(9, _omitFieldNames ? '' : 'isPreview')
     ..aInt64(10, _omitFieldNames ? '' : 'watchTimeLength')
@@ -4653,14 +4531,12 @@ class PlayArc extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use PlayArc() / PlayArc.new instead')
   static PlayArc create() => PlayArc._();
-  static $pb.GeneratedMessage $_createMessage() => PlayArc._();
   @$core.override
-  PlayArc createEmptyInstance() => PlayArc._();
+  PlayArc createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static PlayArc getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<PlayArc>(PlayArc.$_createMessage);
+  static PlayArc getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PlayArc>(create);
   static PlayArc? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -4771,7 +4647,7 @@ class PlayArcConf extends $pb.GeneratedMessage {
   factory PlayArcConf({
     $core.Iterable<$core.MapEntry<$core.int, ArcConf>>? arcConfs,
   }) {
-    final result = PlayArcConf._();
+    final result = create();
     if (arcConfs != null) result.arcConfs.addEntries(arcConfs);
     return result;
   }
@@ -4780,21 +4656,21 @@ class PlayArcConf extends $pb.GeneratedMessage {
 
   factory PlayArcConf.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlayArcConf()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PlayArcConf.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlayArcConf()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'PlayArcConf',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: PlayArcConf.$_createMessage)
+      createEmptyInstance: create)
     ..m<$core.int, ArcConf>(1, _omitFieldNames ? '' : 'arcConfs',
         entryClassName: 'PlayArcConf.ArcConfsEntry',
         keyFieldType: $pb.PbFieldType.O3,
         valueFieldType: $pb.PbFieldType.OM,
-        valueCreator: ArcConf.$_createMessage,
+        valueCreator: ArcConf.create,
         valueDefaultOrMaker: ArcConf.getDefault,
         packageName: const $pb.PackageName('bilibili.playershared'))
     ..hasRequiredFields = false;
@@ -4810,15 +4686,12 @@ class PlayArcConf extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use PlayArcConf() / PlayArcConf.new instead')
   static PlayArcConf create() => PlayArcConf._();
-  static $pb.GeneratedMessage $_createMessage() => PlayArcConf._();
   @$core.override
-  PlayArcConf createEmptyInstance() => PlayArcConf._();
+  PlayArcConf createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static PlayArcConf getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PlayArcConf>(
-          PlayArcConf.$_createMessage);
+  static PlayArcConf getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PlayArcConf>(create);
   static PlayArcConf? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -4829,7 +4702,7 @@ class PlayDeviceConf extends $pb.GeneratedMessage {
   factory PlayDeviceConf({
     $core.Iterable<$core.MapEntry<$core.int, DeviceConf>>? deviceConfs,
   }) {
-    final result = PlayDeviceConf._();
+    final result = create();
     if (deviceConfs != null) result.deviceConfs.addEntries(deviceConfs);
     return result;
   }
@@ -4838,21 +4711,21 @@ class PlayDeviceConf extends $pb.GeneratedMessage {
 
   factory PlayDeviceConf.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlayDeviceConf()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PlayDeviceConf.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlayDeviceConf()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'PlayDeviceConf',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: PlayDeviceConf.$_createMessage)
+      createEmptyInstance: create)
     ..m<$core.int, DeviceConf>(1, _omitFieldNames ? '' : 'deviceConfs',
         entryClassName: 'PlayDeviceConf.DeviceConfsEntry',
         keyFieldType: $pb.PbFieldType.O3,
         valueFieldType: $pb.PbFieldType.OM,
-        valueCreator: DeviceConf.$_createMessage,
+        valueCreator: DeviceConf.create,
         valueDefaultOrMaker: DeviceConf.getDefault,
         packageName: const $pb.PackageName('bilibili.playershared'))
     ..hasRequiredFields = false;
@@ -4868,15 +4741,12 @@ class PlayDeviceConf extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use PlayDeviceConf() / PlayDeviceConf.new instead')
   static PlayDeviceConf create() => PlayDeviceConf._();
-  static $pb.GeneratedMessage $_createMessage() => PlayDeviceConf._();
   @$core.override
-  PlayDeviceConf createEmptyInstance() => PlayDeviceConf._();
+  PlayDeviceConf createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static PlayDeviceConf getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PlayDeviceConf>(
-          PlayDeviceConf.$_createMessage);
+  static PlayDeviceConf getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PlayDeviceConf>(create);
   static PlayDeviceConf? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -4891,7 +4761,7 @@ class PlayList extends $pb.GeneratedMessage {
     $core.String? link,
     BadgeInfo? badgeInfo,
   }) {
-    final result = PlayList._();
+    final result = create();
     if (seasonId != null) result.seasonId = seasonId;
     if (title != null) result.title = title;
     if (cover != null) result.cover = cover;
@@ -4904,22 +4774,22 @@ class PlayList extends $pb.GeneratedMessage {
 
   factory PlayList.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlayList()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PlayList.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlayList()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'PlayList',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: PlayList.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'seasonId')
     ..aOS(2, _omitFieldNames ? '' : 'title')
     ..aOS(3, _omitFieldNames ? '' : 'cover')
     ..aOS(4, _omitFieldNames ? '' : 'link')
     ..aOM<BadgeInfo>(5, _omitFieldNames ? '' : 'badgeInfo',
-        subBuilder: BadgeInfo.$_createMessage)
+        subBuilder: BadgeInfo.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -4932,14 +4802,12 @@ class PlayList extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use PlayList() / PlayList.new instead')
   static PlayList create() => PlayList._();
-  static $pb.GeneratedMessage $_createMessage() => PlayList._();
   @$core.override
-  PlayList createEmptyInstance() => PlayList._();
+  PlayList createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static PlayList getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<PlayList>(PlayList.$_createMessage);
+  static PlayList getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PlayList>(create);
   static PlayList? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -4994,7 +4862,7 @@ class PlayListInfo extends $pb.GeneratedMessage {
   factory PlayListInfo({
     $core.Iterable<PlayList>? playList,
   }) {
-    final result = PlayListInfo._();
+    final result = create();
     if (playList != null) result.playList.addAll(playList);
     return result;
   }
@@ -5003,18 +4871,18 @@ class PlayListInfo extends $pb.GeneratedMessage {
 
   factory PlayListInfo.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlayListInfo()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PlayListInfo.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PlayListInfo()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'PlayListInfo',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: PlayListInfo.$_createMessage)
+      createEmptyInstance: create)
     ..pPM<PlayList>(2, _omitFieldNames ? '' : 'playList',
-        subBuilder: PlayList.$_createMessage)
+        subBuilder: PlayList.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -5028,15 +4896,12 @@ class PlayListInfo extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use PlayListInfo() / PlayListInfo.new instead')
   static PlayListInfo create() => PlayListInfo._();
-  static $pb.GeneratedMessage $_createMessage() => PlayListInfo._();
   @$core.override
-  PlayListInfo createEmptyInstance() => PlayListInfo._();
+  PlayListInfo createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static PlayListInfo getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PlayListInfo>(
-          PlayListInfo.$_createMessage);
+  static PlayListInfo getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PlayListInfo>(create);
   static PlayListInfo? _defaultInstance;
 
   @$pb.TagNumber(2)
@@ -5060,7 +4925,7 @@ class PromptBar extends $pb.GeneratedMessage {
     $fixnum.Int64? endTime,
     $core.int? showOnPaywall,
   }) {
-    final result = PromptBar._();
+    final result = create();
     if (title != null) result.title = title;
     if (subTitle != null) result.subTitle = subTitle;
     if (subTitleIcon != null) result.subTitleIcon = subTitleIcon;
@@ -5083,37 +4948,36 @@ class PromptBar extends $pb.GeneratedMessage {
 
   factory PromptBar.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PromptBar()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory PromptBar.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      PromptBar()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'PromptBar',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: PromptBar.$_createMessage)
+      createEmptyInstance: create)
     ..aOM<TextInfo>(1, _omitFieldNames ? '' : 'title',
-        subBuilder: TextInfo.$_createMessage)
+        subBuilder: TextInfo.create)
     ..aOM<TextInfo>(2, _omitFieldNames ? '' : 'subTitle',
-        subBuilder: TextInfo.$_createMessage)
+        subBuilder: TextInfo.create)
     ..aOS(3, _omitFieldNames ? '' : 'subTitleIcon')
     ..aOS(4, _omitFieldNames ? '' : 'bgImage')
     ..aOM<GradientColor>(5, _omitFieldNames ? '' : 'bgGradientColor',
-        subBuilder: GradientColor.$_createMessage)
+        subBuilder: GradientColor.create)
     ..pPM<ButtonInfo>(6, _omitFieldNames ? '' : 'button',
-        subBuilder: ButtonInfo.$_createMessage)
-    ..aOM<Report>(7, _omitFieldNames ? '' : 'report',
-        subBuilder: Report.$_createMessage)
+        subBuilder: ButtonInfo.create)
+    ..aOM<Report>(7, _omitFieldNames ? '' : 'report', subBuilder: Report.create)
     ..aOS(8, _omitFieldNames ? '' : 'fullScreenIpIcon')
     ..aOM<GradientColor>(9, _omitFieldNames ? '' : 'fullScreenBgGradientColor',
-        subBuilder: GradientColor.$_createMessage)
+        subBuilder: GradientColor.create)
     ..aE<PromptBarType>(10, _omitFieldNames ? '' : 'promptBarType',
         enumValues: PromptBarType.values)
     ..aE<PromptBarStyle>(11, _omitFieldNames ? '' : 'promptBarStyle',
         enumValues: PromptBarStyle.values)
     ..pPM<BenefitInfo>(12, _omitFieldNames ? '' : 'benefitInfos',
-        subBuilder: BenefitInfo.$_createMessage)
+        subBuilder: BenefitInfo.create)
     ..aInt64(13, _omitFieldNames ? '' : 'endTime')
     ..aI(14, _omitFieldNames ? '' : 'showOnPaywall')
     ..hasRequiredFields = false;
@@ -5128,14 +4992,12 @@ class PromptBar extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use PromptBar() / PromptBar.new instead')
   static PromptBar create() => PromptBar._();
-  static $pb.GeneratedMessage $_createMessage() => PromptBar._();
   @$core.override
-  PromptBar createEmptyInstance() => PromptBar._();
+  PromptBar createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static PromptBar getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<PromptBar>(PromptBar.$_createMessage);
+  static PromptBar getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PromptBar>(create);
   static PromptBar? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -5268,7 +5130,7 @@ class QnExp extends $pb.GeneratedMessage {
     $core.bool? qnExp1,
     $core.bool? qnExp2,
   }) {
-    final result = QnExp._();
+    final result = create();
     if (qnExp1 != null) result.qnExp1 = qnExp1;
     if (qnExp2 != null) result.qnExp2 = qnExp2;
     return result;
@@ -5278,16 +5140,16 @@ class QnExp extends $pb.GeneratedMessage {
 
   factory QnExp.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      QnExp()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory QnExp.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      QnExp()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'QnExp',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: QnExp.$_createMessage)
+      createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'qnExp1')
     ..aOB(2, _omitFieldNames ? '' : 'qnExp2')
     ..hasRequiredFields = false;
@@ -5302,14 +5164,12 @@ class QnExp extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use QnExp() / QnExp.new instead')
   static QnExp create() => QnExp._();
-  static $pb.GeneratedMessage $_createMessage() => QnExp._();
   @$core.override
-  QnExp createEmptyInstance() => QnExp._();
+  QnExp createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static QnExp getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<QnExp>(QnExp.$_createMessage);
+  static QnExp getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<QnExp>(create);
   static QnExp? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -5335,7 +5195,7 @@ class QnTip extends $pb.GeneratedMessage {
   factory QnTip({
     $core.String? msg,
   }) {
-    final result = QnTip._();
+    final result = create();
     if (msg != null) result.msg = msg;
     return result;
   }
@@ -5344,16 +5204,16 @@ class QnTip extends $pb.GeneratedMessage {
 
   factory QnTip.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      QnTip()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory QnTip.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      QnTip()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'QnTip',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: QnTip.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'msg')
     ..hasRequiredFields = false;
 
@@ -5367,14 +5227,12 @@ class QnTip extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use QnTip() / QnTip.new instead')
   static QnTip create() => QnTip._();
-  static $pb.GeneratedMessage $_createMessage() => QnTip._();
   @$core.override
-  QnTip createEmptyInstance() => QnTip._();
+  QnTip createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static QnTip getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<QnTip>(QnTip.$_createMessage);
+  static QnTip getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<QnTip>(create);
   static QnTip? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -5398,7 +5256,7 @@ class QnTrialInfo extends $pb.GeneratedMessage {
     Button? qualityOpenTipBtn,
     $core.int? trialQualityType,
   }) {
-    final result = QnTrialInfo._();
+    final result = create();
     if (trialAble != null) result.trialAble = trialAble;
     if (remainingTimes != null) result.remainingTimes = remainingTimes;
     if (start != null) result.start = start;
@@ -5414,26 +5272,25 @@ class QnTrialInfo extends $pb.GeneratedMessage {
 
   factory QnTrialInfo.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      QnTrialInfo()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory QnTrialInfo.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      QnTrialInfo()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'QnTrialInfo',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: QnTrialInfo.$_createMessage)
+      createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'trialAble')
     ..aI(2, _omitFieldNames ? '' : 'remainingTimes')
     ..aI(3, _omitFieldNames ? '' : 'start')
     ..aI(4, _omitFieldNames ? '' : 'timeLength')
     ..aOM<Toast>(5, _omitFieldNames ? '' : 'startToast',
-        subBuilder: Toast.$_createMessage)
-    ..aOM<Toast>(6, _omitFieldNames ? '' : 'endToast',
-        subBuilder: Toast.$_createMessage)
+        subBuilder: Toast.create)
+    ..aOM<Toast>(6, _omitFieldNames ? '' : 'endToast', subBuilder: Toast.create)
     ..aOM<Button>(8, _omitFieldNames ? '' : 'qualityOpenTipBtn',
-        subBuilder: Button.$_createMessage)
+        subBuilder: Button.create)
     ..aI(9, _omitFieldNames ? '' : 'trialQualityType')
     ..hasRequiredFields = false;
 
@@ -5448,15 +5305,12 @@ class QnTrialInfo extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use QnTrialInfo() / QnTrialInfo.new instead')
   static QnTrialInfo create() => QnTrialInfo._();
-  static $pb.GeneratedMessage $_createMessage() => QnTrialInfo._();
   @$core.override
-  QnTrialInfo createEmptyInstance() => QnTrialInfo._();
+  QnTrialInfo createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static QnTrialInfo getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<QnTrialInfo>(
-          QnTrialInfo.$_createMessage);
+  static QnTrialInfo getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<QnTrialInfo>(create);
   static QnTrialInfo? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -5543,7 +5397,7 @@ class QrCode extends $pb.GeneratedMessage {
     $core.String? link,
     $core.String? linkDesc,
   }) {
-    final result = QrCode._();
+    final result = create();
     if (link != null) result.link = link;
     if (linkDesc != null) result.linkDesc = linkDesc;
     return result;
@@ -5553,16 +5407,16 @@ class QrCode extends $pb.GeneratedMessage {
 
   factory QrCode.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      QrCode()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory QrCode.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      QrCode()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'QrCode',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: QrCode.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'link')
     ..aOS(2, _omitFieldNames ? '' : 'linkDesc')
     ..hasRequiredFields = false;
@@ -5577,14 +5431,12 @@ class QrCode extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use QrCode() / QrCode.new instead')
   static QrCode create() => QrCode._();
-  static $pb.GeneratedMessage $_createMessage() => QrCode._();
   @$core.override
-  QrCode createEmptyInstance() => QrCode._();
+  QrCode createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static QrCode getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<QrCode>(QrCode.$_createMessage);
+  static QrCode getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<QrCode>(create);
   static QrCode? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -5612,7 +5464,7 @@ class Report extends $pb.GeneratedMessage {
     $core.String? clickEventId,
     $core.String? extends_3,
   }) {
-    final result = Report._();
+    final result = create();
     if (showEventId != null) result.showEventId = showEventId;
     if (clickEventId != null) result.clickEventId = clickEventId;
     if (extends_3 != null) result.extends_3 = extends_3;
@@ -5623,16 +5475,16 @@ class Report extends $pb.GeneratedMessage {
 
   factory Report.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Report()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory Report.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Report()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'Report',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: Report.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'showEventId')
     ..aOS(2, _omitFieldNames ? '' : 'clickEventId')
     ..aOS(3, _omitFieldNames ? '' : 'extends')
@@ -5648,14 +5500,12 @@ class Report extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use Report() / Report.new instead')
   static Report create() => Report._();
-  static $pb.GeneratedMessage $_createMessage() => Report._();
   @$core.override
-  Report createEmptyInstance() => Report._();
+  Report createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static Report getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<Report>(Report.$_createMessage);
+  static Report getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Report>(create);
   static Report? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -5695,7 +5545,7 @@ class ResidentBar extends $pb.GeneratedMessage {
     Report? report,
     $core.String? bgImage,
   }) {
-    final result = ResidentBar._();
+    final result = create();
     if (icon != null) result.icon = icon;
     if (questionText != null) result.questionText = questionText;
     if (button != null) result.button = button;
@@ -5709,24 +5559,23 @@ class ResidentBar extends $pb.GeneratedMessage {
 
   factory ResidentBar.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ResidentBar()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory ResidentBar.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ResidentBar()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'ResidentBar',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: ResidentBar.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'icon')
     ..aOM<TextInfo>(2, _omitFieldNames ? '' : 'questionText',
-        subBuilder: TextInfo.$_createMessage)
+        subBuilder: TextInfo.create)
     ..aOM<ButtonInfo>(3, _omitFieldNames ? '' : 'button',
-        subBuilder: ButtonInfo.$_createMessage)
+        subBuilder: ButtonInfo.create)
     ..aOS(4, _omitFieldNames ? '' : 'link')
-    ..aOM<Report>(5, _omitFieldNames ? '' : 'report',
-        subBuilder: Report.$_createMessage)
+    ..aOM<Report>(5, _omitFieldNames ? '' : 'report', subBuilder: Report.create)
     ..aOS(6, _omitFieldNames ? '' : 'bgImage')
     ..hasRequiredFields = false;
 
@@ -5741,15 +5590,12 @@ class ResidentBar extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use ResidentBar() / ResidentBar.new instead')
   static ResidentBar create() => ResidentBar._();
-  static $pb.GeneratedMessage $_createMessage() => ResidentBar._();
   @$core.override
-  ResidentBar createEmptyInstance() => ResidentBar._();
+  ResidentBar createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static ResidentBar getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ResidentBar>(
-          ResidentBar.$_createMessage);
+  static ResidentBar getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ResidentBar>(create);
   static ResidentBar? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -5818,7 +5664,7 @@ class ResponseDash extends $pb.GeneratedMessage {
     $core.Iterable<DashItem>? video,
     $core.Iterable<DashItem>? audio,
   }) {
-    final result = ResponseDash._();
+    final result = create();
     if (video != null) result.video.addAll(video);
     if (audio != null) result.audio.addAll(audio);
     return result;
@@ -5828,20 +5674,20 @@ class ResponseDash extends $pb.GeneratedMessage {
 
   factory ResponseDash.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ResponseDash()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory ResponseDash.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ResponseDash()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'ResponseDash',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: ResponseDash.$_createMessage)
+      createEmptyInstance: create)
     ..pPM<DashItem>(1, _omitFieldNames ? '' : 'video',
-        subBuilder: DashItem.$_createMessage)
+        subBuilder: DashItem.create)
     ..pPM<DashItem>(2, _omitFieldNames ? '' : 'audio',
-        subBuilder: DashItem.$_createMessage)
+        subBuilder: DashItem.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -5855,15 +5701,12 @@ class ResponseDash extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use ResponseDash() / ResponseDash.new instead')
   static ResponseDash create() => ResponseDash._();
-  static $pb.GeneratedMessage $_createMessage() => ResponseDash._();
   @$core.override
-  ResponseDash createEmptyInstance() => ResponseDash._();
+  ResponseDash createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static ResponseDash getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ResponseDash>(
-          ResponseDash.$_createMessage);
+  static ResponseDash getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ResponseDash>(create);
   static ResponseDash? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -5882,7 +5725,7 @@ class ResponseUrl extends $pb.GeneratedMessage {
     $core.Iterable<$core.String>? backupUrl,
     $core.String? md5,
   }) {
-    final result = ResponseUrl._();
+    final result = create();
     if (order != null) result.order = order;
     if (length != null) result.length = length;
     if (size != null) result.size = size;
@@ -5896,16 +5739,16 @@ class ResponseUrl extends $pb.GeneratedMessage {
 
   factory ResponseUrl.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ResponseUrl()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory ResponseUrl.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ResponseUrl()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'ResponseUrl',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: ResponseUrl.$_createMessage)
+      createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'order')
     ..aInt64(2, _omitFieldNames ? '' : 'length')
     ..aInt64(3, _omitFieldNames ? '' : 'size')
@@ -5925,15 +5768,12 @@ class ResponseUrl extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use ResponseUrl() / ResponseUrl.new instead')
   static ResponseUrl create() => ResponseUrl._();
-  static $pb.GeneratedMessage $_createMessage() => ResponseUrl._();
   @$core.override
-  ResponseUrl createEmptyInstance() => ResponseUrl._();
+  ResponseUrl createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static ResponseUrl getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ResponseUrl>(
-          ResponseUrl.$_createMessage);
+  static ResponseUrl getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ResponseUrl>(create);
   static ResponseUrl? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -5990,7 +5830,7 @@ class Scheme extends $pb.GeneratedMessage {
     Scheme_ActionType? actionType,
     $core.String? toast,
   }) {
-    final result = Scheme._();
+    final result = create();
     if (actionType != null) result.actionType = actionType;
     if (toast != null) result.toast = toast;
     return result;
@@ -6000,16 +5840,16 @@ class Scheme extends $pb.GeneratedMessage {
 
   factory Scheme.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Scheme()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory Scheme.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Scheme()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'Scheme',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: Scheme.$_createMessage)
+      createEmptyInstance: create)
     ..aE<Scheme_ActionType>(1, _omitFieldNames ? '' : 'actionType',
         enumValues: Scheme_ActionType.values)
     ..aOS(2, _omitFieldNames ? '' : 'toast')
@@ -6025,14 +5865,12 @@ class Scheme extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use Scheme() / Scheme.new instead')
   static Scheme create() => Scheme._();
-  static $pb.GeneratedMessage $_createMessage() => Scheme._();
   @$core.override
-  Scheme createEmptyInstance() => Scheme._();
+  Scheme createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static Scheme getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<Scheme>(Scheme.$_createMessage);
+  static Scheme getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Scheme>(create);
   static Scheme? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -6058,7 +5896,7 @@ class SegmentVideo extends $pb.GeneratedMessage {
   factory SegmentVideo({
     $core.Iterable<ResponseUrl>? segment,
   }) {
-    final result = SegmentVideo._();
+    final result = create();
     if (segment != null) result.segment.addAll(segment);
     return result;
   }
@@ -6067,18 +5905,18 @@ class SegmentVideo extends $pb.GeneratedMessage {
 
   factory SegmentVideo.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      SegmentVideo()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory SegmentVideo.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      SegmentVideo()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'SegmentVideo',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: SegmentVideo.$_createMessage)
+      createEmptyInstance: create)
     ..pPM<ResponseUrl>(1, _omitFieldNames ? '' : 'segment',
-        subBuilder: ResponseUrl.$_createMessage)
+        subBuilder: ResponseUrl.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -6092,15 +5930,12 @@ class SegmentVideo extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use SegmentVideo() / SegmentVideo.new instead')
   static SegmentVideo create() => SegmentVideo._();
-  static $pb.GeneratedMessage $_createMessage() => SegmentVideo._();
   @$core.override
-  SegmentVideo createEmptyInstance() => SegmentVideo._();
+  SegmentVideo createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static SegmentVideo getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SegmentVideo>(
-          SegmentVideo.$_createMessage);
+  static SegmentVideo getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<SegmentVideo>(create);
   static SegmentVideo? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -6115,7 +5950,7 @@ class SettingBase extends $pb.GeneratedMessage {
     SettingControl? control,
     $core.Iterable<$core.MapEntry<$core.String, $core.String>>? report,
   }) {
-    final result = SettingBase._();
+    final result = create();
     if (leftIcon != null) result.leftIcon = leftIcon;
     if (leftTitle != null) result.leftTitle = leftTitle;
     if (type != null) result.type = type;
@@ -6128,22 +5963,22 @@ class SettingBase extends $pb.GeneratedMessage {
 
   factory SettingBase.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      SettingBase()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory SettingBase.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      SettingBase()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'SettingBase',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: SettingBase.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'leftIcon')
     ..aOS(2, _omitFieldNames ? '' : 'leftTitle')
     ..aE<SettingItemType>(3, _omitFieldNames ? '' : 'type',
         enumValues: SettingItemType.values)
     ..aOM<SettingControl>(4, _omitFieldNames ? '' : 'control',
-        subBuilder: SettingControl.$_createMessage)
+        subBuilder: SettingControl.create)
     ..m<$core.String, $core.String>(5, _omitFieldNames ? '' : 'report',
         entryClassName: 'SettingBase.ReportEntry',
         keyFieldType: $pb.PbFieldType.OS,
@@ -6162,15 +5997,12 @@ class SettingBase extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use SettingBase() / SettingBase.new instead')
   static SettingBase create() => SettingBase._();
-  static $pb.GeneratedMessage $_createMessage() => SettingBase._();
   @$core.override
-  SettingBase createEmptyInstance() => SettingBase._();
+  SettingBase createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static SettingBase getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SettingBase>(
-          SettingBase.$_createMessage);
+  static SettingBase getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<SettingBase>(create);
   static SettingBase? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -6221,7 +6053,7 @@ class SettingControl extends $pb.GeneratedMessage {
     $core.String? disabledReason,
     $core.bool? disableGray,
   }) {
-    final result = SettingControl._();
+    final result = create();
     if (disabled != null) result.disabled = disabled;
     if (disabledReason != null) result.disabledReason = disabledReason;
     if (disableGray != null) result.disableGray = disableGray;
@@ -6232,16 +6064,16 @@ class SettingControl extends $pb.GeneratedMessage {
 
   factory SettingControl.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      SettingControl()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory SettingControl.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      SettingControl()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'SettingControl',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: SettingControl.$_createMessage)
+      createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'disabled')
     ..aOS(2, _omitFieldNames ? '' : 'disabledReason')
     ..aOB(3, _omitFieldNames ? '' : 'disableGray')
@@ -6258,15 +6090,12 @@ class SettingControl extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use SettingControl() / SettingControl.new instead')
   static SettingControl create() => SettingControl._();
-  static $pb.GeneratedMessage $_createMessage() => SettingControl._();
   @$core.override
-  SettingControl createEmptyInstance() => SettingControl._();
+  SettingControl createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static SettingControl getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SettingControl>(
-          SettingControl.$_createMessage);
+  static SettingControl getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<SettingControl>(create);
   static SettingControl? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -6303,7 +6132,7 @@ class SettingGroup extends $pb.GeneratedMessage {
     $core.Iterable<SettingItem>? items,
     GroupStyle? groupStyle,
   }) {
-    final result = SettingGroup._();
+    final result = create();
     if (title != null) result.title = title;
     if (items != null) result.items.addAll(items);
     if (groupStyle != null) result.groupStyle = groupStyle;
@@ -6314,19 +6143,19 @@ class SettingGroup extends $pb.GeneratedMessage {
 
   factory SettingGroup.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      SettingGroup()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory SettingGroup.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      SettingGroup()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'SettingGroup',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: SettingGroup.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'title')
     ..pPM<SettingItem>(2, _omitFieldNames ? '' : 'items',
-        subBuilder: SettingItem.$_createMessage)
+        subBuilder: SettingItem.create)
     ..aE<GroupStyle>(3, _omitFieldNames ? '' : 'groupStyle',
         enumValues: GroupStyle.values)
     ..hasRequiredFields = false;
@@ -6342,15 +6171,12 @@ class SettingGroup extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use SettingGroup() / SettingGroup.new instead')
   static SettingGroup create() => SettingGroup._();
-  static $pb.GeneratedMessage $_createMessage() => SettingGroup._();
   @$core.override
-  SettingGroup createEmptyInstance() => SettingGroup._();
+  SettingGroup createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static SettingGroup getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SettingGroup>(
-          SettingGroup.$_createMessage);
+  static SettingGroup getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<SettingGroup>(create);
   static SettingGroup? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -6385,7 +6211,7 @@ class SettingItem extends $pb.GeneratedMessage {
     SettingVertical? vertical,
     SettingSwitch? switch_5,
   }) {
-    final result = SettingItem._();
+    final result = create();
     if (base != null) result.base = base;
     if (style != null) result.style = style;
     if (more != null) result.more = more;
@@ -6398,10 +6224,10 @@ class SettingItem extends $pb.GeneratedMessage {
 
   factory SettingItem.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      SettingItem()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory SettingItem.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      SettingItem()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static const $core.Map<$core.int, SettingItem_Value> _SettingItem_ValueByTag =
       {
@@ -6414,18 +6240,18 @@ class SettingItem extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'SettingItem',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: SettingItem.$_createMessage)
+      createEmptyInstance: create)
     ..oo(0, [3, 4, 5])
     ..aOM<SettingBase>(1, _omitFieldNames ? '' : 'base',
-        subBuilder: SettingBase.$_createMessage)
+        subBuilder: SettingBase.create)
     ..aE<SettingItemStyle>(2, _omitFieldNames ? '' : 'style',
         enumValues: SettingItemStyle.values)
     ..aOM<SettingMore>(3, _omitFieldNames ? '' : 'more',
-        subBuilder: SettingMore.$_createMessage)
+        subBuilder: SettingMore.create)
     ..aOM<SettingVertical>(4, _omitFieldNames ? '' : 'vertical',
-        subBuilder: SettingVertical.$_createMessage)
+        subBuilder: SettingVertical.create)
     ..aOM<SettingSwitch>(5, _omitFieldNames ? '' : 'switch',
-        subBuilder: SettingSwitch.$_createMessage)
+        subBuilder: SettingSwitch.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -6439,15 +6265,12 @@ class SettingItem extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use SettingItem() / SettingItem.new instead')
   static SettingItem create() => SettingItem._();
-  static $pb.GeneratedMessage $_createMessage() => SettingItem._();
   @$core.override
-  SettingItem createEmptyInstance() => SettingItem._();
+  SettingItem createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static SettingItem getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SettingItem>(
-          SettingItem.$_createMessage);
+  static SettingItem getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<SettingItem>(create);
   static SettingItem? _defaultInstance;
 
   @$pb.TagNumber(3)
@@ -6522,7 +6345,7 @@ class SettingMore extends $pb.GeneratedMessage {
     $core.bool? needLogin,
     Badge? badge,
   }) {
-    final result = SettingMore._();
+    final result = create();
     if (url != null) result.url = url;
     if (rightTitle != null) result.rightTitle = rightTitle;
     if (rightIcon != null) result.rightIcon = rightIcon;
@@ -6536,24 +6359,23 @@ class SettingMore extends $pb.GeneratedMessage {
 
   factory SettingMore.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      SettingMore()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory SettingMore.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      SettingMore()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'SettingMore',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: SettingMore.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'url')
     ..aOS(2, _omitFieldNames ? '' : 'rightTitle')
     ..aOS(3, _omitFieldNames ? '' : 'rightIcon')
     ..aE<SettingJumpType>(4, _omitFieldNames ? '' : 'jumpType',
         enumValues: SettingJumpType.values)
     ..aOB(5, _omitFieldNames ? '' : 'needLogin')
-    ..aOM<Badge>(6, _omitFieldNames ? '' : 'badge',
-        subBuilder: Badge.$_createMessage)
+    ..aOM<Badge>(6, _omitFieldNames ? '' : 'badge', subBuilder: Badge.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -6567,15 +6389,12 @@ class SettingMore extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use SettingMore() / SettingMore.new instead')
   static SettingMore create() => SettingMore._();
-  static $pb.GeneratedMessage $_createMessage() => SettingMore._();
   @$core.override
-  SettingMore createEmptyInstance() => SettingMore._();
+  SettingMore createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static SettingMore getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SettingMore>(
-          SettingMore.$_createMessage);
+  static SettingMore getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<SettingMore>(create);
   static SettingMore? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -6639,7 +6458,7 @@ class SettingSwitch extends $pb.GeneratedMessage {
   factory SettingSwitch({
     Badge? badge,
   }) {
-    final result = SettingSwitch._();
+    final result = create();
     if (badge != null) result.badge = badge;
     return result;
   }
@@ -6648,18 +6467,17 @@ class SettingSwitch extends $pb.GeneratedMessage {
 
   factory SettingSwitch.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      SettingSwitch()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory SettingSwitch.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      SettingSwitch()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'SettingSwitch',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: SettingSwitch.$_createMessage)
-    ..aOM<Badge>(1, _omitFieldNames ? '' : 'badge',
-        subBuilder: Badge.$_createMessage)
+      createEmptyInstance: create)
+    ..aOM<Badge>(1, _omitFieldNames ? '' : 'badge', subBuilder: Badge.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -6673,15 +6491,12 @@ class SettingSwitch extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use SettingSwitch() / SettingSwitch.new instead')
   static SettingSwitch create() => SettingSwitch._();
-  static $pb.GeneratedMessage $_createMessage() => SettingSwitch._();
   @$core.override
-  SettingSwitch createEmptyInstance() => SettingSwitch._();
+  SettingSwitch createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static SettingSwitch getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SettingSwitch>(
-          SettingSwitch.$_createMessage);
+  static SettingSwitch getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<SettingSwitch>(create);
   static SettingSwitch? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -6703,7 +6518,7 @@ class SettingVertical extends $pb.GeneratedMessage {
     $core.bool? needLogin,
     Badge? badge,
   }) {
-    final result = SettingVertical._();
+    final result = create();
     if (url != null) result.url = url;
     if (jumpType != null) result.jumpType = jumpType;
     if (needLogin != null) result.needLogin = needLogin;
@@ -6715,22 +6530,21 @@ class SettingVertical extends $pb.GeneratedMessage {
 
   factory SettingVertical.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      SettingVertical()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory SettingVertical.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      SettingVertical()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'SettingVertical',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: SettingVertical.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'url')
     ..aE<SettingJumpType>(2, _omitFieldNames ? '' : 'jumpType',
         enumValues: SettingJumpType.values)
     ..aOB(3, _omitFieldNames ? '' : 'needLogin')
-    ..aOM<Badge>(4, _omitFieldNames ? '' : 'badge',
-        subBuilder: Badge.$_createMessage)
+    ..aOM<Badge>(4, _omitFieldNames ? '' : 'badge', subBuilder: Badge.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -6744,15 +6558,12 @@ class SettingVertical extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use SettingVertical() / SettingVertical.new instead')
   static SettingVertical create() => SettingVertical._();
-  static $pb.GeneratedMessage $_createMessage() => SettingVertical._();
   @$core.override
-  SettingVertical createEmptyInstance() => SettingVertical._();
+  SettingVertical createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static SettingVertical getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SettingVertical>(
-          SettingVertical.$_createMessage);
+  static SettingVertical getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<SettingVertical>(create);
   static SettingVertical? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -6798,7 +6609,7 @@ class Shake extends $pb.GeneratedMessage {
   factory Shake({
     $core.String? file,
   }) {
-    final result = Shake._();
+    final result = create();
     if (file != null) result.file = file;
     return result;
   }
@@ -6807,16 +6618,16 @@ class Shake extends $pb.GeneratedMessage {
 
   factory Shake.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Shake()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory Shake.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Shake()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'Shake',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: Shake.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'file')
     ..hasRequiredFields = false;
 
@@ -6830,14 +6641,12 @@ class Shake extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use Shake() / Shake.new instead')
   static Shake create() => Shake._();
-  static $pb.GeneratedMessage $_createMessage() => Shake._();
   @$core.override
-  Shake createEmptyInstance() => Shake._();
+  Shake createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static Shake getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<Shake>(Shake.$_createMessage);
+  static Shake getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Shake>(create);
   static Shake? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -6859,7 +6668,7 @@ class Stream extends $pb.GeneratedMessage {
     SegmentVideo? segmentVideo,
     MultiDashVideo? multiDashVideo,
   }) {
-    final result = Stream._();
+    final result = create();
     if (streamInfo != null) result.streamInfo = streamInfo;
     if (dashVideo != null) result.dashVideo = dashVideo;
     if (segmentVideo != null) result.segmentVideo = segmentVideo;
@@ -6871,10 +6680,10 @@ class Stream extends $pb.GeneratedMessage {
 
   factory Stream.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Stream()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory Stream.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Stream()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static const $core.Map<$core.int, Stream_Content> _Stream_ContentByTag = {
     2: Stream_Content.dashVideo,
@@ -6886,16 +6695,16 @@ class Stream extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'Stream',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: Stream.$_createMessage)
+      createEmptyInstance: create)
     ..oo(0, [2, 3, 4])
     ..aOM<StreamInfo>(1, _omitFieldNames ? '' : 'streamInfo',
-        subBuilder: StreamInfo.$_createMessage)
+        subBuilder: StreamInfo.create)
     ..aOM<DashVideo>(2, _omitFieldNames ? '' : 'dashVideo',
-        subBuilder: DashVideo.$_createMessage)
+        subBuilder: DashVideo.create)
     ..aOM<SegmentVideo>(3, _omitFieldNames ? '' : 'segmentVideo',
-        subBuilder: SegmentVideo.$_createMessage)
+        subBuilder: SegmentVideo.create)
     ..aOM<MultiDashVideo>(4, _omitFieldNames ? '' : 'multiDashVideo',
-        subBuilder: MultiDashVideo.$_createMessage)
+        subBuilder: MultiDashVideo.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -6908,14 +6717,12 @@ class Stream extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use Stream() / Stream.new instead')
   static Stream create() => Stream._();
-  static $pb.GeneratedMessage $_createMessage() => Stream._();
   @$core.override
-  Stream createEmptyInstance() => Stream._();
+  Stream createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static Stream getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<Stream>(Stream.$_createMessage);
+  static Stream getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Stream>(create);
   static Stream? _defaultInstance;
 
   @$pb.TagNumber(2)
@@ -6992,7 +6799,7 @@ class StreamInfo extends $pb.GeneratedMessage {
     Scheme? scheme,
     $core.bool? supportDrm,
   }) {
-    final result = StreamInfo._();
+    final result = create();
     if (quality != null) result.quality = quality;
     if (format != null) result.format = format;
     if (description != null) result.description = description;
@@ -7017,23 +6824,23 @@ class StreamInfo extends $pb.GeneratedMessage {
 
   factory StreamInfo.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      StreamInfo()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory StreamInfo.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      StreamInfo()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'StreamInfo',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: StreamInfo.$_createMessage)
+      createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'quality')
     ..aOS(2, _omitFieldNames ? '' : 'format')
     ..aOS(3, _omitFieldNames ? '' : 'description')
     ..aE<PlayErr>(4, _omitFieldNames ? '' : 'errCode',
         enumValues: PlayErr.values)
     ..aOM<StreamLimit>(5, _omitFieldNames ? '' : 'limit',
-        subBuilder: StreamLimit.$_createMessage)
+        subBuilder: StreamLimit.create)
     ..aOB(6, _omitFieldNames ? '' : 'needVip')
     ..aOB(7, _omitFieldNames ? '' : 'needLogin')
     ..aOB(8, _omitFieldNames ? '' : 'intact')
@@ -7045,7 +6852,7 @@ class StreamInfo extends $pb.GeneratedMessage {
     ..aOB(14, _omitFieldNames ? '' : 'vipFree')
     ..aOS(15, _omitFieldNames ? '' : 'subtitle')
     ..aOM<Scheme>(16, _omitFieldNames ? '' : 'scheme',
-        subBuilder: Scheme.$_createMessage)
+        subBuilder: Scheme.create)
     ..aOB(17, _omitFieldNames ? '' : 'supportDrm')
     ..hasRequiredFields = false;
 
@@ -7059,14 +6866,12 @@ class StreamInfo extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use StreamInfo() / StreamInfo.new instead')
   static StreamInfo create() => StreamInfo._();
-  static $pb.GeneratedMessage $_createMessage() => StreamInfo._();
   @$core.override
-  StreamInfo createEmptyInstance() => StreamInfo._();
+  StreamInfo createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static StreamInfo getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<StreamInfo>(StreamInfo.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<StreamInfo>(create);
   static StreamInfo? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -7233,7 +7038,7 @@ class StreamLimit extends $pb.GeneratedMessage {
     $core.String? uri,
     $core.String? msg,
   }) {
-    final result = StreamLimit._();
+    final result = create();
     if (title != null) result.title = title;
     if (uri != null) result.uri = uri;
     if (msg != null) result.msg = msg;
@@ -7244,16 +7049,16 @@ class StreamLimit extends $pb.GeneratedMessage {
 
   factory StreamLimit.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      StreamLimit()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory StreamLimit.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      StreamLimit()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'StreamLimit',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: StreamLimit.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'title')
     ..aOS(2, _omitFieldNames ? '' : 'uri')
     ..aOS(3, _omitFieldNames ? '' : 'msg')
@@ -7270,15 +7075,12 @@ class StreamLimit extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use StreamLimit() / StreamLimit.new instead')
   static StreamLimit create() => StreamLimit._();
-  static $pb.GeneratedMessage $_createMessage() => StreamLimit._();
   @$core.override
-  StreamLimit createEmptyInstance() => StreamLimit._();
+  StreamLimit createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static StreamLimit getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamLimit>(
-          StreamLimit.$_createMessage);
+  static StreamLimit getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<StreamLimit>(create);
   static StreamLimit? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -7315,7 +7117,7 @@ class TaskParam extends $pb.GeneratedMessage {
     $fixnum.Int64? activityId,
     $fixnum.Int64? tipsId,
   }) {
-    final result = TaskParam._();
+    final result = create();
     if (taskType != null) result.taskType = taskType;
     if (activityId != null) result.activityId = activityId;
     if (tipsId != null) result.tipsId = tipsId;
@@ -7326,16 +7128,16 @@ class TaskParam extends $pb.GeneratedMessage {
 
   factory TaskParam.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      TaskParam()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory TaskParam.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      TaskParam()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'TaskParam',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: TaskParam.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'taskType')
     ..aInt64(2, _omitFieldNames ? '' : 'activityId')
     ..aInt64(3, _omitFieldNames ? '' : 'tipsId')
@@ -7351,14 +7153,12 @@ class TaskParam extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use TaskParam() / TaskParam.new instead')
   static TaskParam create() => TaskParam._();
-  static $pb.GeneratedMessage $_createMessage() => TaskParam._();
   @$core.override
-  TaskParam createEmptyInstance() => TaskParam._();
+  TaskParam createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static TaskParam getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<TaskParam>(TaskParam.$_createMessage);
+  static TaskParam getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TaskParam>(create);
   static TaskParam? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -7396,7 +7196,7 @@ class TextInfo extends $pb.GeneratedMessage {
     $core.String? textColorNight,
     $core.int? fontSize,
   }) {
-    final result = TextInfo._();
+    final result = create();
     if (text != null) result.text = text;
     if (textColor != null) result.textColor = textColor;
     if (textColorNight != null) result.textColorNight = textColorNight;
@@ -7408,16 +7208,16 @@ class TextInfo extends $pb.GeneratedMessage {
 
   factory TextInfo.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      TextInfo()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory TextInfo.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      TextInfo()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'TextInfo',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: TextInfo.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'text')
     ..aOS(2, _omitFieldNames ? '' : 'textColor')
     ..aOS(3, _omitFieldNames ? '' : 'textColorNight')
@@ -7434,14 +7234,12 @@ class TextInfo extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use TextInfo() / TextInfo.new instead')
   static TextInfo create() => TextInfo._();
-  static $pb.GeneratedMessage $_createMessage() => TextInfo._();
   @$core.override
-  TextInfo createEmptyInstance() => TextInfo._();
+  TextInfo createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static TextInfo getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<TextInfo>(TextInfo.$_createMessage);
+  static TextInfo getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TextInfo>(create);
   static TextInfo? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -7486,7 +7284,7 @@ class Toast extends $pb.GeneratedMessage {
     $core.String? text,
     Button? button,
   }) {
-    final result = Toast._();
+    final result = create();
     if (text != null) result.text = text;
     if (button != null) result.button = button;
     return result;
@@ -7496,19 +7294,18 @@ class Toast extends $pb.GeneratedMessage {
 
   factory Toast.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Toast()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory Toast.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Toast()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'Toast',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: Toast.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'text')
-    ..aOM<Button>(2, _omitFieldNames ? '' : 'button',
-        subBuilder: Button.$_createMessage)
+    ..aOM<Button>(2, _omitFieldNames ? '' : 'button', subBuilder: Button.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -7521,14 +7318,12 @@ class Toast extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use Toast() / Toast.new instead')
   static Toast create() => Toast._();
-  static $pb.GeneratedMessage $_createMessage() => Toast._();
   @$core.override
-  Toast createEmptyInstance() => Toast._();
+  Toast createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static Toast getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<Toast>(Toast.$_createMessage);
+  static Toast getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Toast>(create);
   static Toast? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -7557,7 +7352,7 @@ class VideoCtrl extends $pb.GeneratedMessage {
     AutoQnCtl? autoQnCtl,
     QnExp? qnExp,
   }) {
-    final result = VideoCtrl._();
+    final result = create();
     if (autoQnCtl != null) result.autoQnCtl = autoQnCtl;
     if (qnExp != null) result.qnExp = qnExp;
     return result;
@@ -7567,20 +7362,19 @@ class VideoCtrl extends $pb.GeneratedMessage {
 
   factory VideoCtrl.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      VideoCtrl()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory VideoCtrl.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      VideoCtrl()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'VideoCtrl',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: VideoCtrl.$_createMessage)
+      createEmptyInstance: create)
     ..aOM<AutoQnCtl>(1, _omitFieldNames ? '' : 'autoQnCtl',
-        subBuilder: AutoQnCtl.$_createMessage)
-    ..aOM<QnExp>(2, _omitFieldNames ? '' : 'qnExp',
-        subBuilder: QnExp.$_createMessage)
+        subBuilder: AutoQnCtl.create)
+    ..aOM<QnExp>(2, _omitFieldNames ? '' : 'qnExp', subBuilder: QnExp.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -7593,14 +7387,12 @@ class VideoCtrl extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use VideoCtrl() / VideoCtrl.new instead')
   static VideoCtrl create() => VideoCtrl._();
-  static $pb.GeneratedMessage $_createMessage() => VideoCtrl._();
   @$core.override
-  VideoCtrl createEmptyInstance() => VideoCtrl._();
+  VideoCtrl createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static VideoCtrl getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<VideoCtrl>(VideoCtrl.$_createMessage);
+  static VideoCtrl getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<VideoCtrl>(create);
   static VideoCtrl? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -7642,7 +7434,7 @@ class VideoVod extends $pb.GeneratedMessage {
     QnPolicy? qnPolicy,
     $fixnum.Int64? softFnval,
   }) {
-    final result = VideoVod._();
+    final result = create();
     if (aid != null) result.aid = aid;
     if (cid != null) result.cid = cid;
     if (qn != null) result.qn = qn;
@@ -7663,16 +7455,16 @@ class VideoVod extends $pb.GeneratedMessage {
 
   factory VideoVod.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      VideoVod()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory VideoVod.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      VideoVod()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'VideoVod',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: VideoVod.$_createMessage)
+      createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'aid')
     ..aInt64(2, _omitFieldNames ? '' : 'cid')
     ..aInt64(3, _omitFieldNames ? '' : 'qn')
@@ -7700,14 +7492,12 @@ class VideoVod extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use VideoVod() / VideoVod.new instead')
   static VideoVod create() => VideoVod._();
-  static $pb.GeneratedMessage $_createMessage() => VideoVod._();
   @$core.override
-  VideoVod createEmptyInstance() => VideoVod._();
+  VideoVod createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static VideoVod getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<VideoVod>(VideoVod.$_createMessage);
+  static VideoVod getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<VideoVod>(create);
   static VideoVod? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -7838,7 +7628,7 @@ class ViewInfo extends $pb.GeneratedMessage {
     FullPromptBar? fullPromptBar,
     ResidentBar? residentBar,
   }) {
-    final result = ViewInfo._();
+    final result = create();
     if (dialogMap != null) result.dialogMap.addEntries(dialogMap);
     if (promptBar != null) result.promptBar = promptBar;
     if (toasts != null) result.toasts.addAll(toasts);
@@ -7854,35 +7644,35 @@ class ViewInfo extends $pb.GeneratedMessage {
 
   factory ViewInfo.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ViewInfo()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory ViewInfo.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      ViewInfo()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'ViewInfo',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: ViewInfo.$_createMessage)
+      createEmptyInstance: create)
     ..m<$core.String, Dialog>(1, _omitFieldNames ? '' : 'dialogMap',
         entryClassName: 'ViewInfo.DialogMapEntry',
         keyFieldType: $pb.PbFieldType.OS,
         valueFieldType: $pb.PbFieldType.OM,
-        valueCreator: Dialog.$_createMessage,
+        valueCreator: Dialog.create,
         valueDefaultOrMaker: Dialog.getDefault,
         packageName: const $pb.PackageName('bilibili.playershared'))
     ..aOM<PromptBar>(2, _omitFieldNames ? '' : 'promptBar',
-        subBuilder: PromptBar.$_createMessage)
+        subBuilder: PromptBar.create)
     ..pPM<ComprehensiveToast>(3, _omitFieldNames ? '' : 'toasts',
-        subBuilder: ComprehensiveToast.$_createMessage)
+        subBuilder: ComprehensiveToast.create)
     ..aOM<PayWallOnshowAction>(4, _omitFieldNames ? '' : 'payWallOnshowAction',
-        subBuilder: PayWallOnshowAction.$_createMessage)
+        subBuilder: PayWallOnshowAction.create)
     ..aOM<ExpSwitch>(5, _omitFieldNames ? '' : 'expSwitch',
-        subBuilder: ExpSwitch.$_createMessage)
+        subBuilder: ExpSwitch.create)
     ..aOM<FullPromptBar>(6, _omitFieldNames ? '' : 'fullPromptBar',
-        subBuilder: FullPromptBar.$_createMessage)
+        subBuilder: FullPromptBar.create)
     ..aOM<ResidentBar>(7, _omitFieldNames ? '' : 'residentBar',
-        subBuilder: ResidentBar.$_createMessage)
+        subBuilder: ResidentBar.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -7895,14 +7685,12 @@ class ViewInfo extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use ViewInfo() / ViewInfo.new instead')
   static ViewInfo create() => ViewInfo._();
-  static $pb.GeneratedMessage $_createMessage() => ViewInfo._();
   @$core.override
-  ViewInfo createEmptyInstance() => ViewInfo._();
+  ViewInfo createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static ViewInfo getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ViewInfo>(ViewInfo.$_createMessage);
+  static ViewInfo getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ViewInfo>(create);
   static ViewInfo? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -7981,7 +7769,7 @@ class VodInfo extends $pb.GeneratedMessage {
     $core.bool? supportProject,
     AIAudio? aiAudio,
   }) {
-    final result = VodInfo._();
+    final result = create();
     if (quality != null) result.quality = quality;
     if (format != null) result.format = format;
     if (timelength != null) result.timelength = timelength;
@@ -8000,33 +7788,33 @@ class VodInfo extends $pb.GeneratedMessage {
 
   factory VodInfo.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      VodInfo()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory VodInfo.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      VodInfo()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'VodInfo',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: VodInfo.$_createMessage)
+      createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'quality')
     ..aOS(2, _omitFieldNames ? '' : 'format')
     ..aInt64(3, _omitFieldNames ? '' : 'timelength')
     ..aI(4, _omitFieldNames ? '' : 'videoCodecid')
     ..pPM<Stream>(5, _omitFieldNames ? '' : 'streamList',
-        subBuilder: Stream.$_createMessage)
+        subBuilder: Stream.create)
     ..pPM<DashItem>(6, _omitFieldNames ? '' : 'dashAudio',
-        subBuilder: DashItem.$_createMessage)
+        subBuilder: DashItem.create)
     ..aOM<DolbyItem>(7, _omitFieldNames ? '' : 'dolby',
-        subBuilder: DolbyItem.$_createMessage)
+        subBuilder: DolbyItem.create)
     ..aOM<VolumeInfo>(8, _omitFieldNames ? '' : 'volume',
-        subBuilder: VolumeInfo.$_createMessage)
+        subBuilder: VolumeInfo.create)
     ..aOM<LossLessItem>(9, _omitFieldNames ? '' : 'lossLessItem',
-        subBuilder: LossLessItem.$_createMessage)
+        subBuilder: LossLessItem.create)
     ..aOB(10, _omitFieldNames ? '' : 'supportProject')
     ..aOM<AIAudio>(11, _omitFieldNames ? '' : 'aiAudio',
-        subBuilder: AIAudio.$_createMessage)
+        subBuilder: AIAudio.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -8039,14 +7827,12 @@ class VodInfo extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use VodInfo() / VodInfo.new instead')
   static VodInfo create() => VodInfo._();
-  static $pb.GeneratedMessage $_createMessage() => VodInfo._();
   @$core.override
-  VodInfo createEmptyInstance() => VodInfo._();
+  VodInfo createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static VodInfo getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<VodInfo>(VodInfo.$_createMessage);
+  static VodInfo getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<VodInfo>(create);
   static VodInfo? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -8156,7 +7942,7 @@ class VolumeInfo extends $pb.GeneratedMessage {
     $core.double? targetTp,
     $core.Iterable<$core.MapEntry<$core.String, $core.String>>? multiSceneArgs,
   }) {
-    final result = VolumeInfo._();
+    final result = create();
     if (measuredI != null) result.measuredI = measuredI;
     if (measuredLra != null) result.measuredLra = measuredLra;
     if (measuredTp != null) result.measuredTp = measuredTp;
@@ -8173,16 +7959,16 @@ class VolumeInfo extends $pb.GeneratedMessage {
 
   factory VolumeInfo.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      VolumeInfo()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory VolumeInfo.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      VolumeInfo()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'VolumeInfo',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.playershared'),
-      createEmptyInstance: VolumeInfo.$_createMessage)
+      createEmptyInstance: create)
     ..aD(1, _omitFieldNames ? '' : 'measuredI')
     ..aD(2, _omitFieldNames ? '' : 'measuredLra')
     ..aD(3, _omitFieldNames ? '' : 'measuredTp')
@@ -8207,14 +7993,12 @@ class VolumeInfo extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use VolumeInfo() / VolumeInfo.new instead')
   static VolumeInfo create() => VolumeInfo._();
-  static $pb.GeneratedMessage $_createMessage() => VolumeInfo._();
   @$core.override
-  VolumeInfo createEmptyInstance() => VolumeInfo._();
+  VolumeInfo createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
   static VolumeInfo getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<VolumeInfo>(VolumeInfo.$_createMessage);
+      $pb.GeneratedMessage.$_defaultFor<VolumeInfo>(create);
   static VolumeInfo? _defaultInstance;
 
   @$pb.TagNumber(1)

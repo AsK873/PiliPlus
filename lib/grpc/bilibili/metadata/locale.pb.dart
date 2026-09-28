@@ -26,7 +26,7 @@ class Locale extends $pb.GeneratedMessage {
     $core.bool? isDaylightTime,
     $core.bool? alwaysTranslate,
   }) {
-    final result = Locale._();
+    final result = create();
     if (cLocale != null) result.cLocale = cLocale;
     if (sLocale != null) result.sLocale = sLocale;
     if (simCode != null) result.simCode = simCode;
@@ -41,20 +41,20 @@ class Locale extends $pb.GeneratedMessage {
 
   factory Locale.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Locale()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory Locale.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Locale()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'Locale',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.metadata.locale'),
-      createEmptyInstance: Locale.$_createMessage)
+      createEmptyInstance: create)
     ..aOM<LocaleIds>(1, _omitFieldNames ? '' : 'cLocale',
-        subBuilder: LocaleIds.$_createMessage)
+        subBuilder: LocaleIds.create)
     ..aOM<LocaleIds>(2, _omitFieldNames ? '' : 'sLocale',
-        subBuilder: LocaleIds.$_createMessage)
+        subBuilder: LocaleIds.create)
     ..aOS(3, _omitFieldNames ? '' : 'simCode')
     ..aOS(4, _omitFieldNames ? '' : 'timezone')
     ..aOS(5, _omitFieldNames ? '' : 'utcOffset')
@@ -72,14 +72,12 @@ class Locale extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use Locale() / Locale.new instead')
   static Locale create() => Locale._();
-  static $pb.GeneratedMessage $_createMessage() => Locale._();
   @$core.override
-  Locale createEmptyInstance() => Locale._();
+  Locale createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static Locale getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<Locale>(Locale.$_createMessage);
+  static Locale getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Locale>(create);
   static Locale? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -156,7 +154,7 @@ class LocaleIds extends $pb.GeneratedMessage {
     $core.String? script,
     $core.String? region,
   }) {
-    final result = LocaleIds._();
+    final result = create();
     if (language != null) result.language = language;
     if (script != null) result.script = script;
     if (region != null) result.region = region;
@@ -167,16 +165,16 @@ class LocaleIds extends $pb.GeneratedMessage {
 
   factory LocaleIds.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      LocaleIds()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory LocaleIds.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      LocaleIds()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'LocaleIds',
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'bilibili.metadata.locale'),
-      createEmptyInstance: LocaleIds.$_createMessage)
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'language')
     ..aOS(2, _omitFieldNames ? '' : 'script')
     ..aOS(3, _omitFieldNames ? '' : 'region')
@@ -192,14 +190,12 @@ class LocaleIds extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use LocaleIds() / LocaleIds.new instead')
   static LocaleIds create() => LocaleIds._();
-  static $pb.GeneratedMessage $_createMessage() => LocaleIds._();
   @$core.override
-  LocaleIds createEmptyInstance() => LocaleIds._();
+  LocaleIds createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static LocaleIds getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<LocaleIds>(LocaleIds.$_createMessage);
+  static LocaleIds getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LocaleIds>(create);
   static LocaleIds? _defaultInstance;
 
   @$pb.TagNumber(1)

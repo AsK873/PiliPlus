@@ -1,6 +1,7 @@
 import 'package:PiliPlus/common/skeleton/fav_pgc_item.dart';
 import 'package:PiliPlus/common/sliver_single_child_delegate.dart';
 import 'package:PiliPlus/common/widgets/button/icon_button.dart';
+import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/common/widgets/dialog/dialog.dart';
 import 'package:PiliPlus/common/widgets/flutter/refresh_indicator.dart';
 import 'package:PiliPlus/common/widgets/loading_widget/http_error.dart';
@@ -10,6 +11,7 @@ import 'package:PiliPlus/pages/fav/pgc/controller.dart';
 import 'package:PiliPlus/pages/fav/pgc/pgc_layout.dart';
 import 'package:PiliPlus/pages/fav/pgc/widget/item.dart';
 import 'package:PiliPlus/utils/grid.dart';
+import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:get/get.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -53,9 +55,15 @@ class _FavPgcChildPageState extends State<FavPgcChildPage>
           physics: const AlwaysScrollableScrollPhysics(),
           slivers: [
             SliverPadding(
-              padding: EdgeInsets.only(bottom: padding.bottom + 100),
-              sliver: Obx(
-                () => _buildBody(_favPgcController.loadingState.value),
+              padding: EdgeInsets.only(
+                bottom: PlatformUtils.isDesktop
+                    ? 24
+                    : padding.bottom + 100,
+              ),
+              // M7：桌面内容限宽居中（收藏-追番）。
+              sliver: desktopLimitSliver(
+                Obx(() => _buildBody(_favPgcController.loadingState.value)),
+                maxWidth: 1280,
               ),
             ),
           ],

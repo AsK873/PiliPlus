@@ -1,5 +1,6 @@
 import 'package:PiliPlus/common/skeleton/whisper_item.dart';
 import 'package:PiliPlus/common/sliver_single_child_delegate.dart';
+import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/common/widgets/flutter/refresh_indicator.dart';
 import 'package:PiliPlus/common/widgets/loading_widget/http_error.dart';
 import 'package:PiliPlus/common/widgets/scaffold/simple_scaffold.dart';
@@ -8,6 +9,7 @@ import 'package:PiliPlus/http/loading_state.dart';
 import 'package:PiliPlus/pages/whisper/widgets/item.dart';
 import 'package:PiliPlus/pages/whisper_secondary/controller.dart';
 import 'package:PiliPlus/utils/extension/three_dot_ext.dart';
+import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:get/get.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -79,9 +81,15 @@ class _WhisperSecPageState extends State<WhisperSecPage> {
           slivers: [
             SliverPadding(
               padding: EdgeInsets.only(
-                bottom: MediaQuery.viewPaddingOf(context).bottom + 100,
+                bottom: PlatformUtils.isDesktop
+                    ? 24
+                    : MediaQuery.viewPaddingOf(context).bottom + 100,
               ),
-              sliver: Obx(() => _buildBody(_controller.loadingState.value)),
+              // M8：桌面内容限宽居中（会话消息）。
+              sliver: desktopLimitSliver(
+                Obx(() => _buildBody(_controller.loadingState.value)),
+                maxWidth: 1280,
+              ),
             ),
           ],
         ),

@@ -23,7 +23,7 @@ class Status extends $pb.GeneratedMessage {
     $core.String? message,
     $core.Iterable<$0.Any>? details,
   }) {
-    final result = Status._();
+    final result = create();
     if (code != null) result.code = code;
     if (message != null) result.message = message;
     if (details != null) result.details.addAll(details);
@@ -34,19 +34,19 @@ class Status extends $pb.GeneratedMessage {
 
   factory Status.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Status()..mergeFromBuffer(data, registry);
+      create()..mergeFromBuffer(data, registry);
   factory Status.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
-      Status()..mergeFromJson(json, registry);
+      create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       _omitMessageNames ? '' : 'Status',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'bilibili.rpc'),
-      createEmptyInstance: Status.$_createMessage)
+      createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'code')
     ..aOS(2, _omitFieldNames ? '' : 'message')
     ..pPM<$0.Any>(3, _omitFieldNames ? '' : 'details',
-        subBuilder: $0.Any.$_createMessage)
+        subBuilder: $0.Any.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -59,14 +59,12 @@ class Status extends $pb.GeneratedMessage {
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  @$core.Deprecated('Use Status() / Status.new instead')
   static Status create() => Status._();
-  static $pb.GeneratedMessage $_createMessage() => Status._();
   @$core.override
-  Status createEmptyInstance() => Status._();
+  Status createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static Status getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<Status>(Status.$_createMessage);
+  static Status getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Status>(create);
   static Status? _defaultInstance;
 
   @$pb.TagNumber(1)

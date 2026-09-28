@@ -1,6 +1,7 @@
 import 'package:PiliPlus/common/skeleton/space_opus.dart';
 import 'package:PiliPlus/common/sliver_single_child_delegate.dart';
 import 'package:PiliPlus/common/style.dart';
+import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/common/widgets/flutter/refresh_indicator.dart';
 import 'package:PiliPlus/common/widgets/loading_widget/http_error.dart';
 import 'package:PiliPlus/common/widgets/scaffold/simple_scaffold.dart';
@@ -10,6 +11,7 @@ import 'package:PiliPlus/pages/common/fab_mixin.dart';
 import 'package:PiliPlus/pages/member_opus/controller.dart';
 import 'package:PiliPlus/pages/member_opus/widgets/space_opus_item.dart';
 import 'package:PiliPlus/utils/grid.dart';
+import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:PiliPlus/utils/waterfall.dart';
 import 'package:get/get.dart';
 import 'package:material_ui/material_ui.dart';
@@ -69,9 +71,15 @@ class _MemberOpusState extends State<MemberOpus>
                   top: widget.isSingle ? 12 : 0,
                   left: Style.safeSpace,
                   right: Style.safeSpace,
-                  bottom: bottom + 100,
+                  bottom: PlatformUtils.isDesktop
+                      ? 24
+                      : bottom + 100,
                 ),
-                sliver: Obx(() => _buildBody(_controller.loadingState.value)),
+                // M8：桌面内容限宽居中（UP-图文）。
+                sliver: desktopLimitSliver(
+                  Obx(() => _buildBody(_controller.loadingState.value)),
+                  maxWidth: 1280,
+                ),
               ),
             ],
           ),

@@ -3,6 +3,9 @@ import 'dart:io';
 import 'package:PiliPlus/common/assets.dart';
 import 'package:PiliPlus/common/constants.dart';
 import 'package:PiliPlus/common/style.dart';
+import 'package:PiliPlus/common/widgets/desktop/desktop_shortcuts.dart';
+import 'package:PiliPlus/common/widgets/desktop/desktop_side_bar.dart';
+import 'package:PiliPlus/common/widgets/desktop/desktop_top_bar.dart';
 import 'package:PiliPlus/common/widgets/floating_navigation_bar.dart';
 import 'package:PiliPlus/common/widgets/flutter/pop_scope.dart';
 import 'package:PiliPlus/common/widgets/image/network_img_layer.dart';
@@ -406,6 +409,15 @@ class _MainAppState extends PopScopeState<MainApp>
   }
 
   Widget _sideBar() {
+    // M2 桌面导航（Phase3 主壳改造；仅 UI，desktop && 宽窗口启用）
+    if (PlatformUtils.isDesktop &&
+        MediaQuery.sizeOf(context).width >= 900) {
+      return DesktopSideBar(
+        mainController: _mainController,
+        colorScheme: _colorScheme,
+        onSelect: _mainController.setIndex,
+      );
+    }
     if (_mainController.navigationBars.length > 1) {
       if (context.isTablet && _mainController.optTabletNav) {
         return Padding(
@@ -517,11 +529,26 @@ class _MainAppState extends PopScopeState<MainApp>
       padding = .only(top: _padding.top, right: _padding.right);
     }
 
+    // M2 桌面顶栏：desktop && 宽窗口时在内容区上方插入全局工具条（纯 UI）。
+    final Widget body = (PlatformUtils.isDesktop &&
+            MediaQuery.sizeOf(context).width >= 900)
+        ? Column(
+            children: [
+              DesktopTopBar(
+                mainController: _mainController,
+                colorScheme: _colorScheme,
+              ),
+              const Divider(height: 1),
+              Expanded(child: child),
+            ],
+          )
+        : child;
+
     child = Material(
       child: MainLayout(
         sideBar: sideBar,
         bottomNav: bottomNav,
-        body: Padding(padding: padding, child: child),
+        body: Padding(padding: padding, child: body),
       ),
     );
 
@@ -537,6 +564,12 @@ class _MainAppState extends PopScopeState<MainApp>
         ),
         child: child,
       );
+    }
+
+    // M2 桌面快捷键（Ctrl+1/2/3 切主入口、Ctrl+K 搜索）
+    if (PlatformUtils.isDesktop &&
+        MediaQuery.sizeOf(context).width >= 900) {
+      child = DesktopShortcuts(mainController: _mainController, child: child);
     }
 
     return child;

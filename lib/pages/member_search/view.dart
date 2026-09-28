@@ -3,6 +3,7 @@ import 'package:PiliPlus/common/widgets/scroll_physics.dart' show tabBarView;
 import 'package:PiliPlus/common/widgets/view_safe_area.dart';
 import 'package:PiliPlus/pages/member_search/child/view.dart';
 import 'package:PiliPlus/pages/member_search/controller.dart';
+import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:PiliPlus/utils/utils.dart';
 import 'package:get/get.dart';
 import 'package:material_ui/material_ui.dart';
@@ -22,6 +23,74 @@ class _MemberSearchPageState extends State<MemberSearchPage> {
 
   @override
   Widget build(BuildContext context) {
+    final content = ViewSafeArea(
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Obx(() {
+            return Opacity(
+              opacity: _controller.hasData.value ? 1 : 0,
+              child: Column(
+                children: [
+                  TabBar(
+                    controller: _controller.tabController,
+                    tabs: [
+                      Obx(
+                        () => Tab(
+                          text:
+                              '视频 ${_controller.counts[0] != -1 ? _controller.counts[0] : ''}',
+                        ),
+                      ),
+                      Obx(
+                        () => Tab(
+                          text:
+                              '动态 ${_controller.counts[1] != -1 ? _controller.counts[1] : ''}',
+                        ),
+                      ),
+                    ],
+                    onTap: (index) {
+                      if (!_controller.tabController.indexIsChanging) {
+                        if (index == 0) {
+                          _controller.arcCtr.animateToTop();
+                        } else {
+                          _controller.dynCtr.animateToTop();
+                        }
+                      }
+                    },
+                  ),
+                  Expanded(
+                    child: tabBarView(
+                      controller: _controller.tabController,
+                      children: [
+                        MemberSearchChildPage(
+                          controller: _controller.arcCtr,
+                          searchType: .archive,
+                        ),
+                        MemberSearchChildPage(
+                          controller: _controller.dynCtr,
+                          searchType: .dynamic,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }),
+          Obx(
+            () => _controller.hasData.value
+                ? const SizedBox.shrink()
+                : Align(
+                    alignment: const Alignment(0, -0.5),
+                    child: Text(
+                      '搜索「${_controller.uname}」的动态、视频',
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+          ),
+        ],
+      ),
+    );
     return SimpleScaffold(
       appBar: AppBar(
         actions: [
@@ -56,74 +125,15 @@ class _MemberSearchPageState extends State<MemberSearchPage> {
           },
         ),
       ),
-      body: ViewSafeArea(
-        child: Stack(
-          clipBehavior: Clip.none,
-          children: [
-            Obx(() {
-              return Opacity(
-                opacity: _controller.hasData.value ? 1 : 0,
-                child: Column(
-                  children: [
-                    TabBar(
-                      controller: _controller.tabController,
-                      tabs: [
-                        Obx(
-                          () => Tab(
-                            text:
-                                '视频 ${_controller.counts[0] != -1 ? _controller.counts[0] : ''}',
-                          ),
-                        ),
-                        Obx(
-                          () => Tab(
-                            text:
-                                '动态 ${_controller.counts[1] != -1 ? _controller.counts[1] : ''}',
-                          ),
-                        ),
-                      ],
-                      onTap: (index) {
-                        if (!_controller.tabController.indexIsChanging) {
-                          if (index == 0) {
-                            _controller.arcCtr.animateToTop();
-                          } else {
-                            _controller.dynCtr.animateToTop();
-                          }
-                        }
-                      },
-                    ),
-                    Expanded(
-                      child: tabBarView(
-                        controller: _controller.tabController,
-                        children: [
-                          MemberSearchChildPage(
-                            controller: _controller.arcCtr,
-                            searchType: .archive,
-                          ),
-                          MemberSearchChildPage(
-                            controller: _controller.dynCtr,
-                            searchType: .dynamic,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            }),
-            Obx(
-              () => _controller.hasData.value
-                  ? const SizedBox.shrink()
-                  : Align(
-                      alignment: const Alignment(0, -0.5),
-                      child: Text(
-                        '搜索「${_controller.uname}」的动态、视频',
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-            ),
-          ],
-        ),
-      ),
+      // M8：桌面内容限宽居中（UP-内搜索页）。
+      body: PlatformUtils.isDesktop
+          ? Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 1280),
+                child: content,
+              ),
+            )
+          : content,
     );
   }
 }

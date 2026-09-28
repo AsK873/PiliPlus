@@ -1,3 +1,4 @@
+import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/common/widgets/button/icon_button.dart';
 import 'package:PiliPlus/common/widgets/dialog/dialog.dart';
 import 'package:PiliPlus/common/widgets/flutter/refresh_indicator.dart';
@@ -13,6 +14,7 @@ import 'package:PiliPlus/models/horizontal_video_model.dart';
 import 'package:PiliPlus/pages/member_video_web/base/controller.dart';
 import 'package:PiliPlus/pages/search/widgets/search_text.dart';
 import 'package:PiliPlus/utils/grid.dart';
+import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
@@ -69,10 +71,16 @@ abstract class BaseVideoWebState<
           slivers: [
             SliverPadding(
               padding: .only(
-                bottom: MediaQuery.viewPaddingOf(context).bottom + 100,
+                bottom: PlatformUtils.isDesktop
+                    ? 24
+                    : MediaQuery.viewPaddingOf(context).bottom + 100,
               ),
-              sliver: Obx(
-                () => buildBody(colorScheme, controller.loadingState.value),
+              // M8：桌面内容限宽居中（UP-网页投稿视频）。
+              sliver: desktopLimitSliver(
+                Obx(
+                  () => buildBody(colorScheme, controller.loadingState.value),
+                ),
+                maxWidth: 1280,
               ),
             ),
           ],

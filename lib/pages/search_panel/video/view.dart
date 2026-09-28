@@ -1,3 +1,4 @@
+import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/common/widgets/sliver/sliver_floating_header.dart';
 import 'package:PiliPlus/common/widgets/video_card/video_card_h.dart';
 import 'package:PiliPlus/models/common/search/video_search_type.dart';
@@ -111,20 +112,25 @@ mixin SearchVideoPanelMixin<S extends SearchVideoPanel>
 
   @override
   Widget buildList(List<SearchVideoItemModel> list) {
-    return SliverGrid.builder(
-      gridDelegate: gridDelegate,
-      itemBuilder: (context, index) {
-        if (index == list.length - 1) {
-          controller.onLoadMore();
-        }
-        return VideoCardH(
-          videoItem: list[index],
-          onRemove: () => controller.loadingState
-            ..value.data!.removeAt(index)
-            ..refresh(),
-        );
-      },
-      itemCount: list.length,
+    return desktopLimitSliver(
+      SliverGrid.builder(
+        gridDelegate: gridDelegate,
+        itemBuilder: (context, index) {
+          if (index == list.length - 1) {
+            controller.onLoadMore();
+          }
+          return desktopCard(
+            VideoCardH(
+              videoItem: list[index],
+              onRemove: () => controller.loadingState
+                ..value.data!.removeAt(index)
+                ..refresh(),
+            ),
+          );
+        },
+        itemCount: list.length,
+      ),
+      maxWidth: 1280,
     );
   }
 
