@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:PiliPlus/common/assets.dart';
 import 'package:PiliPlus/common/style.dart';
+import 'package:PiliPlus/common/widgets/desktop/winui_section.dart';
 import 'package:PiliPlus/common/widgets/flutter/list_tile.dart';
 import 'package:PiliPlus/common/widgets/flutter/refresh_indicator.dart';
 import 'package:PiliPlus/common/widgets/image/network_img_layer.dart';
@@ -88,26 +89,33 @@ class _MediaPageState extends CommonPageState<MinePage>
             child: refreshIndicator(
               onRefresh: controller.onRefresh,
               child: onBuild(
-                ListView(
-                  padding: EdgeInsets.only(
-                    left: _sidePad(context),
-                    right: _sidePad(context),
-                    bottom: PlatformUtils.isDesktop ? 24 : 100,
-                  ),
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  children: [
-                    _buildUserInfo(theme, secondary),
-                    _buildActions(secondary),
-                    Obx(
-                      () => controller.loadingState.value is Loading
-                          ? const SizedBox.shrink()
-                          : _buildFav(theme, secondary),
-                    ),
-                  ],
-                ),
+                PlatformUtils.isDesktop
+                    ? _buildDesktopList(theme)
+                    : _buildMobileList(theme, secondary),
               ),
             ),
           ),
+        ),
+      ],
+    );
+  }
+
+  /// 移动端：保持原有排版不变。
+  Widget _buildMobileList(ThemeData theme, Color secondary) {
+    return ListView(
+      padding: EdgeInsets.only(
+        left: _sidePad(context),
+        right: _sidePad(context),
+        bottom: PlatformUtils.isDesktop ? 24 : 100,
+      ),
+      physics: const AlwaysScrollableScrollPhysics(),
+      children: [
+        _buildUserInfo(theme, secondary),
+        _buildActions(secondary),
+        Obx(
+          () => controller.loadingState.value is Loading
+              ? const SizedBox.shrink()
+              : _buildFav(theme, secondary),
         ),
       ],
     );
@@ -577,5 +585,380 @@ class _MediaPageState extends CommonPageState<MinePage>
         ),
       ),
     };
+  }
+
+  // ===========================================================
+  // 桌面端：WinUI(Fluent) 风格排版
+  // 结构：用户卡片 → 「快捷入口」分组 → 「我的收藏」分组
+  // 度量：4px 栅格 / 页面边距 24 / 卡片内边距 16 / 行高 48 / 圆角 8
+  // 说明：仅桌面端生效，移动端走 _buildMobileList（原实现）。
+  // ===========================================================
+  Widget _buildDesktopList(ThemeData theme) {
+    final double sidePad = _sidePad(context);
+    return ListView(
+      padding: EdgeInsets.only(
+        left: sidePad + WinUi.padPage,
+        right: sidePad + WinUi.padPage,
+        top: WinUi.padPage,
+        bottom: WinUi.padPage,
+      ),
+      physics: const AlwaysScrollableScrollPhysics(),
+      children: [
+        _winuiUserCard(theme),
+        const SizedBox(height: WinUi.gap24),
+        const WinUiSectionHeader(title: '快捷入口'),
+        FluentCard(
+          child: Column(
+            children: List.generate(controller.list.length, (index) {
+              final item = controller.list[index];
+              return WinUiRow(
+                leading: Icon(item.icon),
+                title: item.title,
+                trailing: const WinUiChevron(),
+                onTap: item.onTap,
+                showDivider: index != controller.list.length - 1,
+              );
+            }),
+          ),
+        ),
+        const SizedBox(height: WinUi.gap24),
+        Obx(() {
+          if (controller.loadingState.value is Loading) {
+            return const SizedBox.shrink();
+          }
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              WinUiSectionHeader(
+                title: controller.favFolderCount == null
+                    ? '我的收藏'
+                    : '我的收藏  ·  ${controller.favFolderCount}',
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      tooltip: '刷新',
+                      visualDensity: VisualDensity.compact,
+                      onPressed: controller.onRefresh,
+                      icon: const Icon(Icons.refresh, size: 18),
+                    ),
+                    IconButton(
+                      tooltip: '查看全部',
+                      visualDensity: VisualDensity.compact,
+                      onPressed: () =>
+                          Get.toNamed('/fav')?.whenComplete(_autoRefresh),
+                      icon: const Icon(Icons.arrow_forward_ios, size: 15),
+                    ),
+                  ],
+                ),
+              ),
+              _winuiFavBody(theme),
+            ],
+          );
+        }),
+      ],
+    );
+  }
+
+  /// 用户卡片：头像 + 昵称/等级 + 硬币·经验 + 经验条，右侧三列统计。
+  Widget _winuiUserCard(ThemeData theme) {
+    final colorScheme = theme.colorScheme;
+    final labelStyle = theme.textTheme.bodySmall!.copyWith(
+      color: colorScheme.onSurfaceVariant,
+    );
+    final valueStyle = theme.textTheme.bodyMedium!.copyWith(
+      fontWeight: FontWeight.w600,
+      color: colorScheme.secondary,
+    );
+    return Obx(() {
+      final userInfo = controller.userInfo.value;
+      final levelInfo = userInfo.levelInfo;
+      final hasLevel = levelInfo != null;
+      final isVip = userInfo.vipStatus != null && userInfo.vipStatus! > 0;
+      final userStat = controller.userStat.value;
+      return FluentCard(
+        child: Padding(
+          padding: const EdgeInsets.all(WinUi.pad),
+          child: Row(
+            children: [
+              _winuiUserArea(
+                child: userInfo.face != null
+                    ? Stack(
+                        clipBehavior: Clip.none,
+                        children: [
+                          NetworkImgLayer(
+                            src: userInfo.face,
+                            type: .avatar,
+                            width: 64,
+                            height: 64,
+                          ),
+                          if (isVip)
+                            Positioned(
+                              right: -1,
+                              bottom: -2,
+                              child: SvgPicture.asset(
+                                Assets.vipIcon,
+                                height: 20,
+                                semanticsLabel: '大会员',
+                              ),
+                            ),
+                        ],
+                      )
+                    : ClipOval(
+                        child: Image.asset(
+                          width: 64,
+                          height: 64,
+                          cacheHeight: 64.cacheSize(context),
+                          Assets.avatarPlaceHolder,
+                          semanticLabel: '默认头像',
+                        ),
+                      ),
+              ),
+              const SizedBox(width: WinUi.gap16),
+              Expanded(
+                child: _winuiUserArea(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        spacing: 6,
+                        children: [
+                          Flexible(
+                            child: Text(
+                              userInfo.uname ?? '点击登录',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: theme.textTheme.titleMedium!.copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: isVip && userInfo.vipType == 2
+                                    ? theme.colorScheme.vipColor
+                                    : null,
+                              ),
+                            ),
+                          ),
+                          BiliUtils.levelPicture(
+                            levelInfo?.currentLevel ?? 0,
+                            isSeniorMember: userInfo.isSeniorMember == 1,
+                            height: 10,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: WinUi.gap8),
+                      Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(text: '硬币 ', style: labelStyle),
+                            TextSpan(
+                              text: userInfo.money?.toString() ?? '-',
+                              style: valueStyle,
+                            ),
+                            TextSpan(text: '    经验 ', style: labelStyle),
+                            TextSpan(
+                              text: levelInfo?.currentExp?.toString() ?? '-',
+                              style: valueStyle,
+                            ),
+                            TextSpan(
+                              text: '/${levelInfo?.nextExp ?? '-'}',
+                              style: labelStyle,
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: WinUi.gap12),
+                      SizedBox(
+                        width: 240,
+                        child: ClipRRect(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(2),
+                          ),
+                          child: LinearProgressIndicator(
+                            minHeight: 4,
+                            value: hasLevel
+                                ? levelInfo.currentExp! / levelInfo.nextExp!
+                                : 0,
+                            backgroundColor: colorScheme.outlineVariant,
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              colorScheme.secondary,
+                            ),
+                            stopIndicatorColor: Colors.transparent,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(width: WinUi.gap24),
+              Container(
+                width: 1,
+                height: 44,
+                color: colorScheme.outlineVariant.withValues(alpha: .5),
+              ),
+              _winuiStat(
+                theme,
+                '动态',
+                userStat.dynamicCount,
+                () => controller.push('memberDynamics'),
+              ),
+              _winuiStat(
+                theme,
+                '关注',
+                userStat.following,
+                () => controller.push('follow'),
+              ),
+              _winuiStat(
+                theme,
+                '粉丝',
+                userStat.follower,
+                () => controller.push('fan'),
+              ),
+            ],
+          ),
+        ),
+      );
+    });
+  }
+
+  /// 用户卡片的可点击区域（行为与原实现一致：点击/长按/右键 → 登录页或空间页）。
+  Widget _winuiUserArea({required Widget child}) {
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: controller.onLogin,
+      onLongPress: () {
+        Feedback.forLongPress(context);
+        controller.onLogin(true);
+      },
+      onSecondaryTap: () => controller.onLogin(true),
+      child: child,
+    );
+  }
+
+  /// 统计列：等宽、垂直居中，与左右各列共用 1px 竖分隔线。
+  Widget _winuiStat(
+    ThemeData theme,
+    String label,
+    int? count,
+    VoidCallback onTap,
+  ) {
+    return SizedBox(
+      width: 84,
+      child: Material(
+        type: MaterialType.transparency,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(WinUi.radius),
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: WinUi.gap8),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  count?.toString() ?? '-',
+                  style: theme.textTheme.titleMedium!.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: WinUi.gap4),
+                Text(
+                  label,
+                  style: theme.textTheme.bodySmall!.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// 收藏区：自适应网格（列宽随可用宽度计算，卡片为 Fluent 卡片）。
+  Widget _winuiFavBody(ThemeData theme) {
+    return switch (controller.loadingState.value) {
+      Loading() => const SizedBox.shrink(),
+      Success(:final response) => Builder(
+        builder: (context) {
+          final List<FavFolderInfo>? favFolderList = response.list;
+          if (favFolderList == null || favFolderList.isEmpty) {
+            return const SizedBox.shrink();
+          }
+          final bool flag =
+              (controller.favFolderCount ?? 0) > favFolderList.length;
+          return LayoutBuilder(
+            builder: (context, constraints) {
+              const double gap = WinUi.gap16;
+              final int columns = (constraints.maxWidth / 240)
+                  .floor()
+                  .clamp(2, 4)
+                  .toInt();
+              final double itemWidth =
+                  (constraints.maxWidth - gap * (columns - 1)) / columns;
+              return Wrap(
+                spacing: gap,
+                runSpacing: gap,
+                children: [
+                  for (final item in favFolderList)
+                    SizedBox(
+                      width: itemWidth,
+                      child: FavFolderItem(
+                        heroTag: Utils.generateRandomString(8),
+                        item: item,
+                        onPop: _autoRefresh,
+                        width: itemWidth,
+                      ),
+                    ),
+                  if (flag)
+                    SizedBox(width: itemWidth, child: _winuiMoreTile(theme)),
+                ],
+              );
+            },
+          );
+        },
+      ),
+      Error(:final errMsg) => SizedBox(
+        height: 160,
+        child: Center(
+          child: Text(errMsg ?? '', textAlign: .center),
+        ),
+      ),
+    };
+  }
+
+  /// 「查看更多」磁贴：与收藏卡片同宽同高比，仅作跳转入口。
+  Widget _winuiMoreTile(ThemeData theme) {
+    final colorScheme = theme.colorScheme;
+    return Material(
+      type: MaterialType.transparency,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(WinUi.radius),
+        onTap: () => Get.toNamed('/fav')?.whenComplete(_autoRefresh),
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(WinUi.radius),
+            border: Border.all(
+              color: colorScheme.outlineVariant.withValues(alpha: .55),
+            ),
+          ),
+          child: AspectRatio(
+            aspectRatio: 16 / 10,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.more_horiz, color: colorScheme.onSurfaceVariant),
+                const SizedBox(height: WinUi.gap8),
+                Text(
+                  '查看更多',
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: colorScheme.onSurfaceVariant,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

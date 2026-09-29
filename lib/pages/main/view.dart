@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:PiliPlus/common/assets.dart';
 import 'package:PiliPlus/common/constants.dart';
 import 'package:PiliPlus/common/style.dart';
+import 'package:PiliPlus/common/widgets/desktop/desktop_search_panel.dart';
 import 'package:PiliPlus/common/widgets/desktop/desktop_shortcuts.dart';
 import 'package:PiliPlus/common/widgets/desktop/desktop_side_bar.dart';
 import 'package:PiliPlus/common/widgets/desktop/desktop_top_bar.dart';
@@ -50,6 +51,9 @@ class _MainAppState extends PopScopeState<MainApp>
   late EdgeInsets _padding;
   late ColorScheme _colorScheme;
   Brightness? _brightness;
+
+  /// 顶栏搜索面板是否展开（桌面端）
+  bool _searchPanelOpen = false;
 
   @override
   bool get initCanPop => false;
@@ -410,8 +414,7 @@ class _MainAppState extends PopScopeState<MainApp>
 
   Widget _sideBar() {
     // M2 桌面导航（Phase3 主壳改造；仅 UI，desktop && 宽窗口启用）
-    if (PlatformUtils.isDesktop &&
-        MediaQuery.sizeOf(context).width >= 900) {
+    if (PlatformUtils.isDesktop && MediaQuery.sizeOf(context).width >= 900) {
       return DesktopSideBar(
         mainController: _mainController,
         colorScheme: _colorScheme,
@@ -530,16 +533,68 @@ class _MainAppState extends PopScopeState<MainApp>
     }
 
     // M2 桌面顶栏：desktop && 宽窗口时在内容区上方插入全局工具条（纯 UI）。
-    final Widget body = (PlatformUtils.isDesktop &&
-            MediaQuery.sizeOf(context).width >= 900)
-        ? Column(
+    // 搜索面板：点击顶栏搜索框 / Ctrl+K 后，在顶栏下方就地展开（不再跳转搜索页）。
+    final bool isWideDesktop =
+        PlatformUtils.isDesktop && MediaQuery.sizeOf(context).width >= 900;
+    final Widget body = isWideDesktop
+        ? Stack(
+            fit: StackFit.expand,
             children: [
-              DesktopTopBar(
-                mainController: _mainController,
-                colorScheme: _colorScheme,
+              Column(
+                children: [
+                  DesktopTopBar(
+                    mainController: _mainController,
+                    colorScheme: _colorScheme,
+                    searchPanelOpen: _searchPanelOpen,
+                    onOpenSearch: () => setState(() => _searchPanelOpen = true),
+                    onCloseSearch: () =>
+                        setState(() => _searchPanelOpen = false),
+                  ),
+                  const Divider(height: 1),
+                  Expanded(child: child),
+                ],
               ),
-              const Divider(height: 1),
-              Expanded(child: child),
+              if (_searchPanelOpen) ...[
+                // 透明遮罩：覆盖整个背景（顶栏 + 侧栏 + 内容区），但**挖空搜索框**
+                // 所在矩形。因此：点搜索框不取消；点「搜索历史」面板不取消
+                // （面板自身吸收点击）；点其余任何位置都取消搜索状态。
+                Positioned(
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: DesktopTopBar.searchTop,
+                  child: _searchDismissBarrier(),
+                ),
+                Positioned(
+                  top: DesktopTopBar.searchTop + DesktopTopBar.searchHeight,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  child: _searchDismissBarrier(),
+                ),
+                Positioned(
+                  top: DesktopTopBar.searchTop,
+                  left: 0,
+                  right: DesktopTopBar.searchWidth + DesktopTopBar.paddingH,
+                  height: DesktopTopBar.searchHeight,
+                  child: _searchDismissBarrier(),
+                ),
+                Positioned(
+                  top: DesktopTopBar.searchTop,
+                  right: 0,
+                  width: DesktopTopBar.paddingH,
+                  height: DesktopTopBar.searchHeight,
+                  child: _searchDismissBarrier(),
+                ),
+                // 搜索历史面板：锚定在顶栏搜索框正下方，右对齐
+                Positioned(
+                  top: DesktopTopBar.height + 1,
+                  right: DesktopTopBar.paddingH,
+                  child: DesktopSearchPanel(
+                    onClose: () => setState(() => _searchPanelOpen = false),
+                  ),
+                ),
+              ],
             ],
           )
         : child;
@@ -567,13 +622,22 @@ class _MainAppState extends PopScopeState<MainApp>
     }
 
     // M2 桌面快捷键（Ctrl+1/2/3 切主入口、Ctrl+K 搜索）
-    if (PlatformUtils.isDesktop &&
-        MediaQuery.sizeOf(context).width >= 900) {
-      child = DesktopShortcuts(mainController: _mainController, child: child);
+    if (PlatformUtils.isDesktop && MediaQuery.sizeOf(context).width >= 900) {
+      child = DesktopShortcuts(
+        mainController: _mainController,
+        onSearch: () => setState(() => _searchPanelOpen = true),
+        child: child,
+      );
     }
 
     return child;
   }
+
+  /// 点击即退出搜索状态的透明遮罩（覆盖搜索框与历史面板之外的背景）
+  Widget _searchDismissBarrier() => GestureDetector(
+    behavior: HitTestBehavior.opaque,
+    onTap: () => setState(() => _searchPanelOpen = false),
+  );
 
   Widget _buildIcon({required NavigationBarType type, bool selected = false}) {
     final icon = selected ? type.selectIcon : type.icon;
