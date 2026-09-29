@@ -4,13 +4,11 @@ import 'package:PiliPlus/common/widgets/dialog/export_import.dart';
 import 'package:PiliPlus/common/widgets/disabled_icon.dart';
 import 'package:PiliPlus/common/widgets/loading_widget/http_error.dart';
 import 'package:PiliPlus/common/widgets/scaffold/simple_scaffold.dart';
-import 'package:PiliPlus/common/widgets/sliver_wrap.dart';
 import 'package:PiliPlus/common/widgets/view_insets_safe_area.dart';
 import 'package:PiliPlus/http/loading_state.dart';
 import 'package:PiliPlus/models_new/search/search_rcmd/data.dart';
 import 'package:PiliPlus/pages/search/controller.dart';
 import 'package:PiliPlus/pages/search/widgets/hot_keyword.dart';
-import 'package:PiliPlus/pages/search/widgets/search_text.dart';
 import 'package:PiliPlus/utils/em.dart' show Em;
 import 'package:PiliPlus/utils/extension/size_ext.dart';
 import 'package:PiliPlus/utils/storage.dart';
@@ -49,9 +47,7 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    final trending = _searchController.enableTrending
-        ? _buildHotSearch()
-        : null;
+    // 搜索框下方的热搜区已改为「搜索历史」（两列、按搜索时间倒序）。
     final rcmd = _searchController.enableSearchRcmd
         ? _buildHotSearch(isTrending: false)
         : null;
@@ -64,19 +60,8 @@ class _SearchPageState extends State<SearchPage> {
           child: CustomScrollView(
             slivers: [
               if (_searchController.searchSuggestion) _buildSearchSuggest(),
-              if (isPortrait) ...[
-                ?trending,
-                _buildHistory,
-                ?rcmd,
-              ] else if (trending != null || rcmd != null)
-                SliverCrossAxisGroup(
-                  slivers: [
-                    SliverMainAxisGroup(slivers: [?trending, ?rcmd]),
-                    _buildHistory,
-                  ],
-                )
-              else
-                _buildHistory,
+              _buildHistory,
+              ?rcmd,
               SliverPadding(padding: .only(bottom: padding.bottom)),
             ],
           ),
@@ -284,7 +269,6 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
-  late final mainAxisExtent = 16 + MediaQuery.textScalerOf(context).scale(14);
   Widget get _buildHistory {
     return Obx(
       () {
@@ -294,16 +278,7 @@ class _SearchPageState extends State<SearchPage> {
         }
         final secondary = theme.colorScheme.secondary;
         return SliverPadding(
-          padding: .fromLTRB(
-            10,
-            !isPortrait
-                ? 25
-                : _searchController.enableTrending
-                ? 0
-                : 6,
-            6,
-            25,
-          ),
+          padding: const .fromLTRB(10, 25, 10, 25),
           sliver: SliverMainAxisGroup(
             slivers: [
               SliverPadding(
@@ -346,30 +321,50 @@ class _SearchPageState extends State<SearchPage> {
                   ),
                 ),
               ),
-              SliverFixedWrap(
-                mainAxisExtent: mainAxisExtent,
-                spacing: 8,
-                runSpacing: 8,
-                delegate: SliverChildBuilderDelegate(
-                  addAutomaticKeepAlives: false,
-                  addRepaintBoundaries: false,
-                  childCount: list.length,
-                  (context, index) => SearchText(
-                    text: list[index],
-                    onTap: _searchController.onClickKeyword,
-                    onLongPress: _searchController.onLongSelect,
-                    height: 1,
-                    maxLines: 1,
-                    fontSize: 14,
-                    overflow: .ellipsis,
-                    padding: const .fromLTRB(11, 8, 11, 0),
-                  ),
+              // 两列历史列表：布局与视觉沿用参考图，内容为真实搜索词；
+              // 无「热/新」标签、无排名，顺序为搜索时间倒序（最新在最前）。
+              SliverToBoxAdapter(
+                child: Column(
+                  children: [
+                    for (var i = 0; i < list.length; i += 2)
+                      Row(
+                        children: [
+                          Expanded(child: _historyItem(list[i])),
+                          Expanded(
+                            child: i + 1 < list.length
+                                ? _historyItem(list[i + 1])
+                                : const SizedBox.shrink(),
+                          ),
+                        ],
+                      ),
+                  ],
                 ),
               ),
             ],
           ),
         );
       },
+    );
+  }
+
+  /// 单条搜索历史：点击直接执行该搜索，长按删除该条。
+  Widget _historyItem(String word) {
+    return Material(
+      type: MaterialType.transparency,
+      child: InkWell(
+        borderRadius: const .all(.circular(6)),
+        onTap: () => _searchController.onClickKeyword(word),
+        onLongPress: () => _searchController.onLongSelect(word),
+        child: Padding(
+          padding: const .symmetric(horizontal: 6, vertical: 8),
+          child: Text(
+            word,
+            maxLines: 1,
+            overflow: .ellipsis,
+            style: const TextStyle(fontSize: 14),
+          ),
+        ),
+      ),
     );
   }
 
