@@ -27,11 +27,7 @@
 
 ## 适配平台
 
-- [x] Android
-- [x] iOS
-- [x] Pad
 - [x] Windows
-- [x] Linux
 
 [![Packaging status](https://repology.org/badge/vertical-allrepos/piliplus.svg)](https://repology.org/project/piliplus/versions)
 
