@@ -657,7 +657,6 @@ class ReplyItemGrpc extends StatelessWidget {
                       PlatformUtils.isMobile || PlatformUtils.isDesktop
                       ? null
                       : showMore,
-                  // M8-19：桌面可框选复制（楼中楼回复，原生选中文本）。
                   child: Padding(
                     padding: padding,
                     child: Builder(
@@ -704,30 +703,18 @@ class ReplyItemGrpc extends StatelessWidget {
                             ),
                           ],
                         );
-                        return PlatformUtils.isDesktop
-                            ? SelectableText.rich(
-                                childTextSpan,
-                                style: TextStyle(
-                                  height: 1.6,
-                                  fontSize: 14,
-                                  color: colorScheme.onSurface.withValues(
-                                    alpha: 0.85,
-                                  ),
-                                ),
-                                maxLines: 2,
-                              )
-                            : TextEllipsis.rich(
-                                style: TextStyle(
-                                  height: 1.6,
-                                  fontSize: 14,
-                                  color: colorScheme.onSurface.withValues(
-                                    alpha: 0.85,
-                                  ),
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 2,
-                                childTextSpan,
-                              );
+                        // M8-21：楼中楼（二级评论）及其文字尾部空白区域不适用于
+                        // 「可选中复制」，一律用普通文本渲染，不参与选中/复制。
+                        return TextEllipsis.rich(
+                          style: TextStyle(
+                            height: 1.6,
+                            fontSize: 14,
+                            color: colorScheme.onSurface.withValues(alpha: 0.85),
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          childTextSpan,
+                        );
                       },
                     ),
                   ),
