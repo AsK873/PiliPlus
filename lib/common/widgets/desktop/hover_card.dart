@@ -7,12 +7,14 @@ import 'dart:async';
 
 import 'package:material_ui/material_ui.dart';
 
+const _kWinUiCurve = Curves.fastOutSlowIn;
+
 class HoverCard extends StatefulWidget {
   const HoverCard({
     super.key,
     required this.child,
     this.scale = 1.015,
-    this.duration = const Duration(milliseconds: 140),
+    this.duration = const Duration(milliseconds: 120),
     this.onHoverDelay,
     this.hoverDelay = const Duration(milliseconds: 400),
   });
@@ -61,27 +63,28 @@ class _HoverCardState extends State<HoverCard> {
       cursor: SystemMouseCursors.click,
       onEnter: (_) => _onEnter(),
       onExit: (_) => _onExit(),
-      child: AnimatedScale(
-        scale: _hover ? widget.scale : 1.0,
+      child: AnimatedContainer(
         duration: widget.duration,
-        curve: Curves.easeOutCubic,
-        child: AnimatedContainer(
-          duration: widget.duration,
-          curve: Curves.easeOutCubic,
-          decoration: _hover
-              ? BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.16),
-                      blurRadius: 18,
-                      offset: const Offset(0, 6),
-                    ),
-                  ],
+        curve: _kWinUiCurve,
+        // WinUI 3 风格：悬停只做表面微提亮，不做缩放/位移
+        decoration: BoxDecoration(
+          color: _hover
+              ? ColorScheme.of(context).surfaceContainerHighest.withValues(
+                  alpha: 0.5,
                 )
-              : null,
-          child: widget.child,
+              : Colors.transparent,
+          borderRadius: BorderRadius.circular(10),
         ),
+        // 细边用 foregroundDecoration 绘制，完全不参与布局
+        foregroundDecoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+            color: _hover
+                ? ColorScheme.of(context).outlineVariant
+                : Colors.transparent,
+          ),
+        ),
+        child: widget.child,
       ),
     );
   }

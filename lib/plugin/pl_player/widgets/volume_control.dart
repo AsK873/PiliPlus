@@ -1,3 +1,5 @@
+import 'dart:async' show Timer;
+
 import 'dart:math' as math;
 
 import 'package:PiliPlus/common/widgets/flutter/vertical_slider.dart';
@@ -35,6 +37,7 @@ class _VolumeControlState extends State<VolumeControl>
   /// 音量浮层与按钮共用同一 tap 组：组外任意位置点击即收起
   static const int _volumeTapGroup = 7;
   double _lastVolume = 1.0;
+  bool _closing = false;
 
   @override
   void initState() {
@@ -55,6 +58,7 @@ class _VolumeControlState extends State<VolumeControl>
       _closePanel();
     } else {
       _controller.show();
+      _closing = false;
       // 进入音量调节状态：底部控制栏常驻，禁用自动隐藏
       widget.plPlayerController.volumePanelShowing = true;
       widget.plPlayerController.volumePanelCloser = _closePanel;
@@ -64,10 +68,19 @@ class _VolumeControlState extends State<VolumeControl>
 
   /// 退出音量调节状态：关闭滑块并恢复控制栏原有的自动隐藏机制
   void _closePanel() {
-    _controller.hide();
     widget.plPlayerController.volumePanelShowing = false;
     widget.plPlayerController.volumePanelCloser = null;
-    if (mounted) setState(() {});
+    if (!mounted) {
+      _controller.hide();
+      return;
+    }
+    // WinUI 风格：先播淡出+下移过渡（160ms），结束后再移除浮层
+    setState(() => _closing = true);
+    Timer(const Duration(milliseconds: 160), () {
+      if (!mounted) return;
+      _controller.hide();
+      setState(() => _closing = false);
+    });
   }
 
   /// 指针在音量按钮/滑块浮层内时唤醒控制栏；移开后交还原自动隐藏机制
@@ -116,59 +129,73 @@ class _VolumeControlState extends State<VolumeControl>
           );
           return _VolumePanel(
             offset: offset,
-            child: TapRegion(
-              groupId: _volumeTapGroup,
-              onTapOutside: (_) => _closePanel(),
-              child: GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: _closePanel,
-                child: Container(
-                  padding: const EdgeInsets.fromLTRB(4, 7, 4, 3),
-                  decoration: const BoxDecoration(
-                    color: Color(0xE6202020),
-                    borderRadius: BorderRadius.all(Radius.circular(6)),
-                  ),
-                  child: SliderTheme(
-                    data: const SliderThemeData(
-                      trackHeight: 4,
-                      overlayColor: Colors.transparent,
-                      thumbShape: RoundSliderThumbShape(enabledThumbRadius: 6),
+            child: TweenAnimationBuilder<double>(
+              tween: Tween(begin: 0, end: _closing ? 0 : 1),
+              duration: const Duration(milliseconds: 160),
+              curve: Curves.fastOutSlowIn,
+              builder: (context, t, child) => Opacity(
+                opacity: t,
+                child: Transform.translate(
+                  offset: Offset(0, (1 - t) * 6),
+                  child: child,
+                ),
+              ),
+              child: TapRegion(
+                groupId: _volumeTapGroup,
+                onTapOutside: (_) => _closePanel(),
+                child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: _closePanel,
+                  child: Container(
+                    padding: const EdgeInsets.fromLTRB(4, 7, 4, 3),
+                    decoration: const BoxDecoration(
+                      color: Color(0xE6202020),
+                      borderRadius: BorderRadius.all(Radius.circular(6)),
                     ),
-                    child: Obx(
-                      () {
-                        final volume = ctr.volume.value;
-                        return Column(
-                          spacing: 2,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              '${(volume * 100).round()}',
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
+                    child: SliderTheme(
+                      data: const SliderThemeData(
+                        trackHeight: 4,
+                        overlayColor: Colors.transparent,
+                        thumbShape: RoundSliderThumbShape(
+                          enabledThumbRadius: 6,
+                        ),
+                      ),
+                      child: Obx(
+                        () {
+                          final volume = ctr.volume.value;
+                          return Column(
+                            spacing: 2,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                '${(volume * 100).round()}',
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                ),
                               ),
-                            ),
-                            Expanded(
-                              child: VerticalSlider(
-                                year2023: true,
-                                min: 0.0,
-                                max: ctr.maxVolume,
-                                value: volume
-                                    .clamp(0.0, ctr.maxVolume)
-                                    .toDouble(),
-                                showValueIndicator: .never,
-                                activeColor: Colors.white,
-                                inactiveColor: Colors.white38,
-                                onChanged: (value) {
-                                  ctr
-                                    ..setVolume(value)
-                                    ..isMuted = value == 0;
-                                },
+                              Expanded(
+                                child: VerticalSlider(
+                                  year2023: true,
+                                  min: 0.0,
+                                  max: ctr.maxVolume,
+                                  value: volume
+                                      .clamp(0.0, ctr.maxVolume)
+                                      .toDouble(),
+                                  showValueIndicator: .never,
+                                  activeColor: Colors.white,
+                                  inactiveColor: Colors.white38,
+                                  onChanged: (value) {
+                                    ctr
+                                      ..setVolume(value)
+                                      ..isMuted = value == 0;
+                                  },
+                                ),
                               ),
-                            ),
-                          ],
-                        );
-                      },
+                            ],
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),
