@@ -4,6 +4,7 @@ import 'package:PiliPlus/build_config.dart';
 import 'package:PiliPlus/common/constants.dart';
 import 'package:PiliPlus/common/widgets/back_detector.dart';
 import 'package:PiliPlus/common/widgets/custom_toast.dart';
+import 'package:PiliPlus/common/widgets/desktop/winui_entrance.dart';
 import 'package:PiliPlus/common/widgets/route_aware_mixin.dart';
 import 'package:PiliPlus/common/widgets/scale_app.dart';
 import 'package:PiliPlus/common/widgets/scroll_behavior.dart';
@@ -300,7 +301,11 @@ class MyApp extends StatelessWidget {
         notifyStyle: const FlutterSmartNotifyStyle(
           warningBuilder: NotifyWarning.new,
         ),
-        builder: _builder,
+        builder: (context, child) => WinUiEntrance(
+          // WinUI 3 风格：弹层 150ms 淡入 + 8px 上移（仅桌面，移动端原样）
+          enabled: PlatformUtils.isDesktop,
+          child: _builder(context, child),
+        ),
       ),
       navigatorObservers: [
         routeObserver,
