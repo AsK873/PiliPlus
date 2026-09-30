@@ -6,6 +6,7 @@
 //   - 点击历史词 → 直接执行搜索；Esc / 点击面板外 → 关闭
 // 视觉：surfaceContainer 底色 + outlineVariant 描边 + 圆角 8 + 16 内边距
 //   + 与桌面 hover 卡片同一套柔和阴影；列表字号 13.5。
+//   + 历史条目悬停/按下与 hover_card.dart 同一套反馈（微提亮 + 1px 细边 + NoSplash）。
 // 历史复用既有本地存储（BaseSearchController.historyList），不新增网络请求。
 // =============================================================
 import 'package:PiliPlus/pages/search/controller.dart';
@@ -142,24 +143,78 @@ class DesktopSearchPanel extends StatelessWidget {
 
   /// 单条搜索历史：点击直接执行该搜索。
   Widget _item(String word) {
-    return Material(
-      type: MaterialType.transparency,
-      child: InkWell(
-        borderRadius: BorderRadius.circular(_radius - 2),
-        onTap: () {
-          onClose();
-          desktopSearch(word);
-        },
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: _pad,
-            vertical: _gap8,
+    return _SearchHistoryItem(
+      word: word,
+      onTap: () {
+        onClose();
+        desktopSearch(word);
+      },
+    );
+  }
+}
+
+/// 单条搜索历史条目：悬停/按下反馈与桌面 hover 卡片（hover_card.dart）
+/// 完全同一套 —— 悬停 surfaceContainerHighest 微提亮 + 1px 细边、
+/// 按下 primary 略深、无涟漪（NoSplash）、120ms fastOutSlowIn。
+/// 只改反馈表现，内边距/字号/点击行为与原先一致。
+class _SearchHistoryItem extends StatefulWidget {
+  const _SearchHistoryItem({required this.word, required this.onTap});
+
+  final String word;
+  final VoidCallback onTap;
+
+  @override
+  State<_SearchHistoryItem> createState() => _SearchHistoryItemState();
+}
+
+class _SearchHistoryItemState extends State<_SearchHistoryItem> {
+  bool _hover = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final radius = BorderRadius.circular(_radius - 2);
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) => setState(() => _hover = true),
+      onExit: (_) => setState(() => _hover = false),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 120),
+        curve: Curves.fastOutSlowIn,
+        decoration: BoxDecoration(
+          color: _hover
+              ? colorScheme.surfaceContainerHighest.withValues(alpha: .5)
+              : Colors.transparent,
+          borderRadius: radius,
+        ),
+        // 细边用 foregroundDecoration 绘制，完全不参与布局
+        foregroundDecoration: BoxDecoration(
+          borderRadius: radius,
+          border: Border.all(
+            color: _hover ? colorScheme.outlineVariant : Colors.transparent,
           ),
-          child: Text(
-            word,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: const TextStyle(fontSize: 13.5),
+        ),
+        child: Material(
+          type: MaterialType.transparency,
+          child: InkWell(
+            borderRadius: radius,
+            onTap: widget.onTap,
+            // 悬停提亮已由外层承担，这里只保留按下态
+            hoverColor: Colors.transparent,
+            highlightColor: colorScheme.primary.withValues(alpha: .14),
+            splashFactory: NoSplash.splashFactory,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: _pad,
+                vertical: _gap8,
+              ),
+              child: Text(
+                widget.word,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontSize: 13.5),
+              ),
+            ),
           ),
         ),
       ),
