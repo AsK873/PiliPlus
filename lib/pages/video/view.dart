@@ -589,6 +589,7 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
                     child: tabBarView(
                       hitTestBehavior: .translucent,
                       controller: videoDetailController.tabCtr,
+                      physics: const NeverScrollableScrollPhysics(),
                       children: [
                         videoIntro(isHorizontal: false, needCtr: false),
                         if (videoDetailController.showReply)
@@ -799,10 +800,7 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
                   Expanded(
                     child: tabBarView(
                       controller: videoDetailController.tabCtr,
-                      // 桌面禁止鼠标左右拖动切 Tab，仅点 Tab 切换（移动端保持原行为）。
-                      physics: PlatformUtils.isDesktop
-                          ? const NeverScrollableScrollPhysics()
-                          : null,
+                      physics: const NeverScrollableScrollPhysics(),
                       children: [
                         videoIntro(
                           width: introWidth,
@@ -864,12 +862,9 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
                       children: [
                         buildTabBar(showIntro: false),
                         Expanded(
-                          // M8-20：桌面禁止鼠标左右拖动切 Tab（评论页等），仅点 Tab 切换。
                           child: tabBarView(
                             controller: videoDetailController.tabCtr,
-                            physics: PlatformUtils.isDesktop
-                                ? const NeverScrollableScrollPhysics()
-                                : null,
+                            physics: const NeverScrollableScrollPhysics(),
                             children: [
                               if (videoDetailController.showReply)
                                 videoReplyPanel(),
@@ -896,9 +891,7 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
     double width =
         clampDouble(maxHeight / maxWidth * 1.08, 0.5, 0.7) * maxWidth;
     if (maxWidth >= 560) {
-      // M4：桌面横屏右栏(相关/回复/选集)由 280-425 放宽到 340-460，
-      // 提升 PC 信息密度；该分支仅命中桌面宽屏布局。
-      width = maxWidth - clampDouble(maxWidth - width, 340, 460);
+      width = maxWidth - clampDouble(maxWidth - width, 280, 425);
     }
     final videoWidth = isFullScreen ? maxWidth : width;
     final double height = width / Style.aspectRatio16x9;
@@ -960,10 +953,7 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
                   Expanded(
                     child: tabBarView(
                       controller: videoDetailController.tabCtr,
-                      // 桌面禁止鼠标左右拖动切 Tab，仅点 Tab 切换（移动端保持原行为）。
-                      physics: PlatformUtils.isDesktop
-                          ? const NeverScrollableScrollPhysics()
-                          : null,
+                      physics: const NeverScrollableScrollPhysics(),
                       children: [
                         if (videoDetailController.isFileSource)
                           localIntroPanel()
