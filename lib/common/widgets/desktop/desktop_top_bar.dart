@@ -97,6 +97,14 @@ class _DesktopTopBarState extends State<DesktopTopBar> {
         child: Row(
           children: [
             IconButton(
+              // WinUI 3 风格：悬停=表面微提亮、按下=略深，无涟漪
+              style: IconButton.styleFrom(
+                hoverColor: widget.colorScheme.primary.withValues(alpha: 0.08),
+                highlightColor: widget.colorScheme.primary.withValues(
+                  alpha: 0.14,
+                ),
+                splashFactory: NoSplash.splashFactory,
+              ),
               tooltip: '后退 (Esc)',
               visualDensity: VisualDensity.compact,
               onPressed:
@@ -106,6 +114,14 @@ class _DesktopTopBarState extends State<DesktopTopBar> {
               icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 17),
             ),
             IconButton(
+              // 与后退按钮同一套 WinUI 悬停/按下反馈
+              style: IconButton.styleFrom(
+                hoverColor: widget.colorScheme.primary.withValues(alpha: 0.08),
+                highlightColor: widget.colorScheme.primary.withValues(
+                  alpha: 0.14,
+                ),
+                splashFactory: NoSplash.splashFactory,
+              ),
               tooltip: '刷新当前页',
               visualDensity: VisualDensity.compact,
               onPressed: () {
