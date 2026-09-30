@@ -172,6 +172,9 @@ void main() async {
       // 最小窗口 = 程序默认窗口尺寸（windows/runner 默认 1280x720 逻辑，即默认值）
       minimumSize: const Size(1280, 720),
       skipTaskbar: false,
+      // 窗口底色压黑：Windows 默认背景刷是白色，全屏/最大化切换瞬间若有一帧
+      // 未被 Flutter 视图覆盖的客户区，就会闪出一圈亮色"边框"。
+      backgroundColor: Colors.black,
       titleBarStyle: Pref.showWindowTitleBar
           ? TitleBarStyle.normal
           : TitleBarStyle.hidden,
