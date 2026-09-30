@@ -151,19 +151,6 @@ class ReplyItemGrpc extends StatelessWidget {
         ],
       );
     }
-    // M8-17/18：桌面悬停评论行 → 右上浮出 复制全文 / 自由复制。
-    if (PlatformUtils.isDesktop) {
-      final message = replyItem.content.message;
-      child = _CommentHoverCopy(
-        message: message,
-        freeCopy: () => showReplyCopyDialog(
-          context,
-          message,
-          replyItem.content.emotes,
-        ),
-        child: child,
-      );
-    }
     return Material(
       type: MaterialType.transparency,
       child: InkWell(
@@ -359,7 +346,8 @@ class ReplyItemGrpc extends StatelessWidget {
   Widget _buildContent(BuildContext context, ColorScheme colorScheme) {
     final replyControl = replyItem.replyControl;
     final padding = EdgeInsets.only(left: replyLevel == 0 ? 6 : 45, right: 6);
-    return Column(
+    // 本条评论「自身内容」：头部 / 投票 / 正文 / 图片 / 操作栏。
+    final ownContent = Column(
       mainAxisSize: .min,
       crossAxisAlignment: .start,
       children: [
@@ -438,6 +426,22 @@ class ReplyItemGrpc extends StatelessWidget {
           const SizedBox(height: 4),
           buttonAction(context, colorScheme, replyControl),
         ],
+      ],
+    );
+    return Column(
+      mainAxisSize: .min,
+      crossAxisAlignment: .start,
+      children: [
+        // M8-17/18：桌面悬停本条评论 → 右上浮出复制按钮。
+        // M8-20：触发区只覆盖上面的「自身内容」—— 楼中楼（二级评论）在下面
+        // 独立成块，悬停在楼中楼及其文字尾部空白上不再浮出父评论的复制按钮。
+        if (PlatformUtils.isDesktop)
+          _CommentHoverCopy(
+            message: replyItem.content.message,
+            child: ownContent,
+          )
+        else
+          ownContent,
         if (replyLevel == 1 && replyItem.count > Int64.ZERO) ...[
           Padding(
             padding: const EdgeInsets.only(top: 5, bottom: 12),
@@ -1292,16 +1296,13 @@ class ReplyItemGrpc extends StatelessWidget {
   }
 }
 
-/// M8-17/18：桌面评论行悬浮工具：悬停显示 复制全文 / 自由复制 两个入口。
+/// M8-17/18：桌面评论行悬浮工具：悬停显示复制入口。
+/// M8-20：按需求移除「自由复制（框选部分文本）」入口 —— 桌面正文本身可框选，
+/// 不再提供这个多余的触发入口。
 class _CommentHoverCopy extends StatefulWidget {
-  const _CommentHoverCopy({
-    required this.message,
-    this.freeCopy,
-    required this.child,
-  });
+  const _CommentHoverCopy({required this.message, required this.child});
 
   final String message;
-  final VoidCallback? freeCopy;
   final Widget child;
 
   @override
@@ -1351,30 +1352,6 @@ class _CommentHoverCopyState extends State<_CommentHoverCopy> {
                         ),
                       ),
                     ),
-                    if (widget.freeCopy != null) ...[
-                      Container(
-                        width: 1,
-                        height: 16,
-                        color: colorScheme.outline.withValues(alpha: 0.2),
-                      ),
-                      Tooltip(
-                        message: '自由复制（框选部分文本）',
-                        child: InkWell(
-                          onTap: () {
-                            setState(() => _hover = false);
-                            widget.freeCopy!();
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(6),
-                            child: Icon(
-                              Icons.content_cut,
-                              size: 15,
-                              color: colorScheme.onSurfaceVariant,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
                   ],
                 ),
               ),
