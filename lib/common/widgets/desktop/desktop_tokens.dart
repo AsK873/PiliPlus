@@ -1,0 +1,91 @@
+// =============================================================
+// PiliPlus Windows 桌面化 · 桌面组件 token（仅服务 desktop_* 新组件）
+// 数值与既有实现保持一致，只做「单一来源」集中：
+//   WinUi（winui_section.dart）  → 间距/内边距/圆角/行高/图标尺寸
+//   HoverCard（hover_card.dart） → 悬停提亮/细边透明度、动效时长与曲线
+//   FluentCard（winui_section.dart）→ 卡片描边透明度
+// 说明：本文件不修改、不替换上述既有实现，仅被
+//   DesktopCard / DesktopListTile / DesktopSection 引用。
+// =============================================================
+import 'package:PiliPlus/common/widgets/desktop/winui_section.dart'
+    show WinUi;
+import 'package:material_ui/material_ui.dart';
+
+abstract final class DesktopTokens {
+  // ===== 栅格间距（4px 栅格，沿用 WinUi） =====
+  static const double gap4 = WinUi.gap4;
+  static const double gap8 = WinUi.gap8;
+  static const double gap12 = WinUi.gap12;
+  static const double gap16 = WinUi.gap16;
+  static const double gap24 = WinUi.gap24;
+
+  /// 卡片内边距 / 列表行左右内边距
+  static const double pad = WinUi.pad;
+
+  /// 页面外边距（供调用方排版使用）
+  static const double padPage = WinUi.padPage;
+
+  /// 卡片与控件圆角（8）
+  static const double radius = WinUi.radius;
+
+  /// 列表行高（48）
+  static const double rowHeight = WinUi.rowHeight;
+
+  /// 行内图标尺寸（20）
+  static const double iconSize = WinUi.iconSize;
+
+  /// 内容限宽（1080，沿用「我的」页既有决定）
+  static const double contentWidth = WinUi.contentWidth;
+
+  // ===== 描边 =====
+
+  /// 卡片描边透明度（与 FluentCard 一致）
+  static const double cardBorderAlpha = .55;
+
+  /// 行末分隔线透明度（与 WinUiRow 一致）
+  static const double dividerAlpha = .45;
+
+  /// 悬停细边（不透明度 1，仅切换颜色）
+  static const double hoverBorderAlpha = 1;
+
+  // ===== 交互反馈 =====
+
+  /// 悬停底色透明度（HoverCard：surfaceContainerHighest @ .5）
+  static const double hoverAlpha = .5;
+
+  /// 选中行底色透明度（desktop_side_bar 选中态同一观感：secondaryContainer @ .55）
+  static const double selectedAlpha = .55;
+
+  /// 悬停/选中态过渡时长与曲线（HoverCard：120ms fastOutSlowIn）
+  static const Duration hoverDuration = Duration(milliseconds: 120);
+  static const Curve curve = Curves.fastOutSlowIn;
+
+  // ===== 语义色（只取 ColorScheme，天然兼容纯黑主题覆写） =====
+
+  /// 卡片/面板底色
+  static Color surface(ColorScheme cs) => cs.surfaceContainer;
+
+  /// 悬停提亮底色
+  static Color hoverSurface(ColorScheme cs) =>
+      cs.surfaceContainerHighest.withValues(alpha: hoverAlpha);
+
+  /// 选中行底色
+  static Color selectedSurface(ColorScheme cs) =>
+      cs.secondaryContainer.withValues(alpha: selectedAlpha);
+
+  /// 卡片/控件描边
+  static Color border(ColorScheme cs) =>
+      cs.outlineVariant.withValues(alpha: cardBorderAlpha);
+
+  /// 行末分隔线
+  static Color divider(ColorScheme cs) =>
+      cs.outlineVariant.withValues(alpha: dividerAlpha);
+
+  /// 主文字
+  static Color titleColor(ColorScheme cs, {bool selected = false}) =>
+      selected ? cs.onSecondaryContainer : cs.onSurface;
+
+  /// 次级文字（副标题、未选中图标）
+  static Color subtitleColor(ColorScheme cs, {bool selected = false}) =>
+      selected ? cs.onSecondaryContainer : cs.onSurfaceVariant;
+}
