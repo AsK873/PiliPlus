@@ -1,3 +1,5 @@
+import 'package:PiliPlus/common/widgets/desktop/desktop_list_tile.dart';
+import 'package:PiliPlus/common/widgets/desktop/desktop_section.dart';
 import 'package:PiliPlus/common/widgets/flutter/list_tile.dart';
 import 'package:PiliPlus/common/widgets/scaffold/simple_scaffold.dart';
 import 'package:PiliPlus/common/widgets/view_safe_area.dart';
@@ -179,6 +181,17 @@ class _SettingPageState extends State<SettingPage> {
 
   Widget _buildList(ThemeData theme) {
     final padding = MediaQuery.viewPaddingOf(context);
+    // 桌面主从分支：左列整列收进一张 Fluent 分组卡片（DesktopSection +
+    // DesktopCard + DesktopListTile），移动端单列仍走原 ListTile 写法。
+    if (!_isPortrait) {
+      return ListView(
+        padding: EdgeInsets.only(bottom: padding.bottom + 100),
+        children: [
+          _buildSearchItem(theme),
+          DesktopSection(children: _buildDesktopRows(theme)),
+        ],
+      );
+    }
     TextStyle titleStyle = theme.textTheme.titleMedium!;
     TextStyle subTitleStyle = theme.textTheme.labelMedium!.copyWith(
       color: theme.colorScheme.outline,
@@ -222,6 +235,43 @@ class _SettingPageState extends State<SettingPage> {
         ),
       ],
     );
+  }
+
+  /// 桌面左列分组卡片的行列表（8 行）：
+  /// 带副标题的设置项 height 64（保住双行信息），无副标题的 3 行用默认 48。
+  List<Widget> _buildDesktopRows(ThemeData theme) {
+    final selectedType = _type;
+    return [
+      for (final item in _items.take(_items.length - 1))
+        DesktopListTile(
+          height: item.subtitle == null ? null : 64,
+          leading: item.icon,
+          title: Text(item.type.title),
+          subtitle: item.subtitle == null ? null : Text(item.subtitle!),
+          selected: item.type == selectedType,
+          onTap: () => _toPage(item.type),
+        ),
+      DesktopListTile(
+        leading: const Icon(Icons.switch_account_outlined),
+        title: const Text('切换账号'),
+        onTap: () => LoginPageController.switchAccountDialog(context),
+      ),
+      Obx(
+        () => _noAccount.value
+            ? const SizedBox.shrink()
+            : DesktopListTile(
+                leading: const Icon(Icons.logout_outlined),
+                title: const Text('退出登录'),
+                onTap: () => _logoutDialog(context),
+              ),
+      ),
+      DesktopListTile(
+        leading: _items.last.icon,
+        title: Text(_items.last.type.title),
+        selected: _items.last.type == selectedType,
+        onTap: () => _toPage(_items.last.type),
+      ),
+    ];
   }
 
   Future<void> _removeAccounts(Set<LoginAccount> accounts) async {
