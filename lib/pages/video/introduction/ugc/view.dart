@@ -23,7 +23,6 @@ import 'package:PiliPlus/pages/mine/controller.dart';
 import 'package:PiliPlus/pages/search/widgets/search_text.dart';
 import 'package:PiliPlus/pages/video/controller.dart';
 import 'package:PiliPlus/pages/video/introduction/ugc/controller.dart';
-import 'package:PiliPlus/pages/video/introduction/ugc/widgets/action_item.dart';
 import 'package:PiliPlus/pages/video/introduction/ugc/widgets/page.dart';
 import 'package:PiliPlus/pages/video/introduction/ugc/widgets/season.dart';
 import 'package:PiliPlus/utils/app_scheme.dart';
@@ -42,7 +41,6 @@ import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:PiliPlus/utils/request_utils.dart';
 import 'package:PiliPlus/utils/utils.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:material_ui/material_ui.dart';
@@ -117,7 +115,6 @@ class _UgcIntroPanelState extends State<UgcIntroPanel> {
                     child: _buildOwnerInfo(
                       isLoading,
                       isPortrait,
-                      isHorizontal,
                       videoDetail,
                     ),
                   ),
@@ -170,16 +167,6 @@ class _UgcIntroPanelState extends State<UgcIntroPanel> {
                             ),
                           ),
                   ),
-                  // 点赞收藏转发 布局样式2
-                  if (!isHorizontal) ...[
-                    const SizedBox(height: 8),
-                    actionGrid(
-                      context,
-                      isLoading,
-                      introController,
-                      videoDetail.stat,
-                    ),
-                  ],
                   // 合集
                   if (!isLoading &&
                       videoDetail.ugcSeason != null &&
@@ -460,90 +447,6 @@ class _UgcIntroPanelState extends State<UgcIntroPanel> {
     );
   }
 
-  Widget actionGrid(
-    BuildContext context,
-    bool isLoading,
-    UgcIntroController introController,
-    VideoStat? stat,
-  ) {
-    return SizedBox(
-      height: 48,
-      child: Row(
-        crossAxisAlignment: .start,
-        children: [
-          Obx(
-            () => ActionItem(
-              animation: introController.tripleAnimation,
-              icon: const Icon(FontAwesomeIcons.thumbsUp),
-              selectIcon: const Icon(FontAwesomeIcons.solidThumbsUp),
-              selectStatus: introController.hasLike.value,
-              semanticsLabel: '点赞',
-              text: !isLoading ? NumUtils.numFormat(stat!.like) : null,
-              onStartTriple: introController.onStartTriple,
-              onCancelTriple: introController.onCancelTriple,
-            ),
-          ),
-          Obx(
-            () => ActionItem(
-              icon: const Icon(FontAwesomeIcons.thumbsDown),
-              selectIcon: const Icon(FontAwesomeIcons.solidThumbsDown),
-              onTap: () => introController.handleAction(
-                introController.actionDislikeVideo,
-              ),
-              selectStatus: introController.hasDislike.value,
-              semanticsLabel: '点踩',
-              text: "点踩",
-            ),
-          ),
-          Obx(
-            () => ActionItem(
-              animation: introController.tripleAnimation,
-              icon: const Icon(FontAwesomeIcons.b),
-              selectIcon: const Icon(FontAwesomeIcons.b),
-              onTap: introController.actionCoinVideo,
-              selectStatus: introController.hasCoin,
-              semanticsLabel: '投币',
-              text: !isLoading ? NumUtils.numFormat(stat!.coin) : null,
-            ),
-          ),
-          Obx(
-            () => ActionItem(
-              animation: introController.tripleAnimation,
-              icon: const Icon(FontAwesomeIcons.star),
-              selectIcon: const Icon(FontAwesomeIcons.solidStar),
-              onTap: () => introController.showFavBottomSheet(context),
-              onLongPress: () => introController.showFavBottomSheet(
-                context,
-                isLongPress: true,
-              ),
-              selectStatus: introController.hasFav.value,
-              semanticsLabel: '收藏',
-              text: !isLoading ? NumUtils.numFormat(stat!.favorite) : null,
-            ),
-          ),
-          Obx(
-            () => ActionItem(
-              icon: const Icon(FontAwesomeIcons.clock),
-              selectIcon: const Icon(FontAwesomeIcons.solidClock),
-              onTap: () =>
-                  introController.handleAction(introController.viewLater),
-              selectStatus: introController.hasLater.value,
-              semanticsLabel: '再看',
-              text: '再看',
-            ),
-          ),
-          ActionItem(
-            icon: const Icon(FontAwesomeIcons.shareFromSquare),
-            onTap: () => introController.actionShareVideo(context),
-            selectStatus: false,
-            semanticsLabel: '分享',
-            text: !isLoading ? NumUtils.numFormat(stat!.share!) : null,
-          ),
-        ],
-      ),
-    );
-  }
-
   static final RegExp urlRegExp = RegExp(
     Constants.urlRegex.pattern + r'|av\d+|bv[a-z\d]{10}|(?:\d+[:：])?\d+[:：]\d+',
     caseSensitive: false,
@@ -702,7 +605,6 @@ class _UgcIntroPanelState extends State<UgcIntroPanel> {
   Widget _buildOwnerInfo(
     bool isLoading,
     bool isPortrait,
-    bool isHorizontal,
     VideoDetailData videoDetail,
   ) {
     final mid = videoDetail.owner?.mid;
@@ -743,17 +645,6 @@ class _UgcIntroPanelState extends State<UgcIntroPanel> {
             ),
           ),
           followButton(context),
-        ],
-        if (isHorizontal) ...[
-          const SizedBox(width: 10),
-          Expanded(
-            child: actionGrid(
-              context,
-              isLoading,
-              introController,
-              videoDetail.stat,
-            ),
-          ),
         ],
       ],
     );
