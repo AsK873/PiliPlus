@@ -1,3 +1,4 @@
+import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/common/widgets/flutter/refresh_indicator.dart';
 import 'package:PiliPlus/common/widgets/loading_widget/http_error.dart';
 import 'package:PiliPlus/common/widgets/scaffold/simple_scaffold.dart';
@@ -45,19 +46,24 @@ class _SubPageState extends State<SubPage> with GridMixin {
       Loading() => gridSkeleton,
       Success(:final response) =>
         response != null && response.isNotEmpty
-            ? SliverGrid.builder(
-                gridDelegate: gridDelegate,
-                itemBuilder: (context, index) {
-                  if (index == response.length - 1) {
-                    _subController.onLoadMore();
-                  }
-                  final item = response[index];
-                  return SubItem(
-                    item: item,
-                    cancelSub: () => _subController.cancelSub(item),
-                  );
-                },
-                itemCount: response.length,
+            ? desktopLimitSliver(
+                SliverGrid.builder(
+                  gridDelegate: gridDelegate,
+                  itemBuilder: (context, index) {
+                    if (index == response.length - 1) {
+                      _subController.onLoadMore();
+                    }
+                    final item = response[index];
+                    return desktopCard(
+                      SubItem(
+                        item: item,
+                        cancelSub: () => _subController.cancelSub(item),
+                      ),
+                    );
+                  },
+                  itemCount: response.length,
+                ),
+                maxWidth: 1280,
               )
             : HttpError(onReload: _subController.onReload),
       Error(:final errMsg) => HttpError(

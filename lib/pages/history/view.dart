@@ -15,6 +15,7 @@ import 'package:PiliPlus/pages/history/controller.dart';
 import 'package:PiliPlus/pages/history/widgets/item.dart';
 import 'package:PiliPlus/utils/extension/scroll_controller_ext.dart';
 import 'package:PiliPlus/utils/grid.dart';
+import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:get/get.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -71,7 +72,9 @@ class _HistoryPageState extends State<HistoryPage>
           SliverPadding(
             padding: EdgeInsets.only(
               top: 7,
-              bottom: padding.bottom + 100,
+              bottom: PlatformUtils.isDesktop
+                  ? 24
+                  : padding.bottom + 100,
             ),
             // 桌面端内容限宽居中（1280）
             sliver: desktopLimitSliver(
@@ -221,11 +224,13 @@ class _HistoryPageState extends State<HistoryPage>
                     _historyController.onLoadMore();
                   }
                   final item = response[index];
-                  return HistoryItem(
-                    item: item,
-                    ctr: _historyController,
-                    onDelete: (kid, business) =>
-                        _historyController.delHistory(item),
+                  return desktopCard(
+                    HistoryItem(
+                      item: item,
+                      ctr: _historyController,
+                      onDelete: (kid, business) =>
+                          _historyController.delHistory(item),
+                    ),
                   );
                 },
                 itemCount: response.length,

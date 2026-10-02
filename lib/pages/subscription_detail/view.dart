@@ -1,3 +1,4 @@
+import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/common/widgets/flutter/refresh_indicator.dart';
 import 'package:PiliPlus/common/widgets/image/network_img_layer.dart';
 import 'package:PiliPlus/common/widgets/loading_widget/http_error.dart';
@@ -8,6 +9,7 @@ import 'package:PiliPlus/pages/subscription_detail/controller.dart';
 import 'package:PiliPlus/pages/subscription_detail/widget/sub_video_card.dart';
 import 'package:PiliPlus/utils/grid.dart';
 import 'package:PiliPlus/utils/num_utils.dart';
+import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:PiliPlus/utils/utils.dart';
 import 'package:get/get.dart';
 import 'package:material_ui/material_ui.dart';
@@ -64,7 +66,9 @@ class _SubDetailPageState extends State<SubDetailPage> with GridMixin {
                 top: 7,
                 left: padding.left,
                 right: padding.right,
-                bottom: padding.bottom + 100,
+                bottom: PlatformUtils.isDesktop
+                    ? 24
+                    : padding.bottom + 100,
               ),
               sliver: Obx(
                 () => _buildBody(_subDetailController.loadingState.value),
@@ -81,17 +85,22 @@ class _SubDetailPageState extends State<SubDetailPage> with GridMixin {
       Loading() => gridSkeleton,
       Success(:final response) =>
         response != null && response.isNotEmpty
-            ? SliverGrid.builder(
-                gridDelegate: gridDelegate,
-                itemBuilder: (context, index) {
-                  if (index == response.length - 1) {
-                    _subDetailController.onLoadMore();
-                  }
-                  return SubVideoCardH(
-                    videoItem: response[index],
-                  );
-                },
-                itemCount: response.length,
+            ? desktopLimitSliver(
+                SliverGrid.builder(
+                  gridDelegate: gridDelegate,
+                  itemBuilder: (context, index) {
+                    if (index == response.length - 1) {
+                      _subDetailController.onLoadMore();
+                    }
+                    return desktopCard(
+                      SubVideoCardH(
+                        videoItem: response[index],
+                      ),
+                    );
+                  },
+                  itemCount: response.length,
+                ),
+                maxWidth: 1280,
               )
             : HttpError(onReload: _subDetailController.onReload),
       Error(:final errMsg) => HttpError(
