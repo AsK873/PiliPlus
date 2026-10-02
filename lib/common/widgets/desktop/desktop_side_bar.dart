@@ -2,7 +2,9 @@
 // PiliPlus Windows PC 化 · M2 主壳导航（UI 呈现层，2026-09-05）
 // 桌面专用扩展侧栏（图标+文字）：
 //   - 主入口：首页 / 动态 / 我的（顺序、显隐仍尊重用户 navBarSort）
-//   - 快捷区：历史/稍后再看/收藏/订阅/消息/设置（搜索改由顶栏搜索框就地展开）
+//   - 快捷区：历史/稍后再看/收藏/订阅/消息（搜索改由顶栏搜索框就地展开）
+//   - 2026-10-03：快捷区下方（设置上方）新增「深色模式 / 浅色模式」快捷切换，
+//     图标与悬停提示随当前模式变化；点击写入同一 Pref.themeType，与设置页「主题模式」同源。
 //   - 底部：账号入口（未登录=登录）
 // 行为全部复用现有 MainController.setIndex / Get.toNamed / 未读角标逻辑，
 // 不含任何业务/数据改动；移动/平板分支不受影响（仅 PlatformUtils.isDesktop 且宽度≥900 时启用）。
@@ -14,7 +16,12 @@ import 'package:PiliPlus/common/widgets/image/network_img_layer.dart';
 import 'package:PiliPlus/models/common/dynamic/dynamic_badge_mode.dart';
 import 'package:PiliPlus/models/common/image_type.dart';
 import 'package:PiliPlus/models/common/nav_bar_config.dart';
+import 'package:PiliPlus/models/common/theme/theme_type.dart';
 import 'package:PiliPlus/pages/main/controller.dart';
+import 'package:PiliPlus/pages/mine/controller.dart';
+import 'package:PiliPlus/utils/storage.dart';
+import 'package:PiliPlus/utils/storage_key.dart';
+import 'package:PiliPlus/utils/theme_utils.dart';
 import 'package:get/get.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -83,6 +90,8 @@ class DesktopSideBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // 依赖 Theme：主题模式切换后本侧栏随之重建（图标/提示同步更新）
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return SizedBox(
       width: width,
       child: Column(
@@ -92,7 +101,7 @@ class DesktopSideBar extends StatelessWidget {
           _brand(),
           const Divider(height: 1),
           // 主入口
-          Expanded(child: _primaryNav()),
+          Expanded(child: _primaryNav(isDark)),
           const Divider(height: 1),
           // 底部账号区
           _accountArea(context),
@@ -130,7 +139,7 @@ class DesktopSideBar extends StatelessWidget {
     );
   }
 
-  Widget _primaryNav() {
+  Widget _primaryNav(bool isDark) {
     return Obx(() {
       final selected = mainController.selectedIndex.value;
       return ListView(
@@ -158,6 +167,17 @@ class DesktopSideBar extends StatelessWidget {
             ),
           ),
           for (final entry in _shortcuts) _shortcutItem(entry),
+          // 分隔线：把「深色模式切换 + 设置」与上面的快捷入口区分开
+          const Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 12,
+              vertical: _Dimens.shortcutHeaderGap,
+            ),
+            child: Divider(height: 1),
+          ),
+          // 深色模式快捷切换（图标 / 文字 / 悬停提示均指向「将要切换到的模式」）
+          _themeToggleItem(isDark),
+          _shortcutItem(_setting),
         ],
       );
     });
@@ -169,8 +189,37 @@ class DesktopSideBar extends StatelessWidget {
     const DesktopNavEntry('我的收藏', '/fav', icon: Icons.star_border_outlined),
     const DesktopNavEntry('订阅', '/subscription', icon: Icons.subscriptions_outlined),
     const DesktopNavEntry('私信', '/whisper', icon: Icons.chat_bubble_outline),
-    const DesktopNavEntry('设置', '/setting', icon: Icons.settings_outlined),
   ];
+
+  /// 设置（固定排在深色模式切换之后）
+  static const DesktopNavEntry _setting = DesktopNavEntry(
+    '设置',
+    '/setting',
+    icon: Icons.settings_outlined,
+  );
+
+  /// 深色模式快捷切换：浅色模式显示月亮（→深色），深色模式显示太阳（→浅色）
+  Widget _themeToggleItem(bool isDark) {
+    return _tile(
+      selected: false,
+      onTap: () => _toggleThemeMode(isDark),
+      leading: Icon(
+        isDark ? Icons.light_mode_outlined : Icons.dark_mode_outlined,
+      ),
+      label: isDark ? '浅色模式' : '深色模式',
+      tooltip: isDark ? '切换至浅色模式' : '切换至深色模式',
+    );
+  }
+
+  /// 写入与设置页「主题模式」相同的 Pref，立即生效（无需重启）
+  void _toggleThemeMode(bool isDark) {
+    final next = isDark ? ThemeType.light : ThemeType.dark;
+    try {
+      Get.find<MineController>().themeType.value = next;
+    } catch (_) {}
+    GStorage.setting.put(SettingBoxKey.themeMode, next.index);
+    Get.changeThemeMode(ThemeUtils.themeMode = next.toThemeMode);
+  }
 
   Widget _navItem({
     required Icon icon,
@@ -213,8 +262,9 @@ class DesktopSideBar extends StatelessWidget {
     required VoidCallback onTap,
     required Widget leading,
     required String label,
+    String? tooltip,
   }) {
-    return Padding(
+    final Widget tile = Padding(
       padding: _Dimens.tileMargin,
       child: Material(
         color: selected
@@ -259,6 +309,9 @@ class DesktopSideBar extends StatelessWidget {
         ),
       ),
     );
+    // 仅深色模式切换带悬停提示，其余条目保持原样
+    if (tooltip == null) return tile;
+    return Tooltip(message: tooltip, child: tile);
   }
 
   Widget _accountArea(BuildContext context) {
