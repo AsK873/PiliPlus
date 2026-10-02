@@ -25,6 +25,7 @@ import 'package:PiliPlus/utils/mobile_observer.dart';
 import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:PiliPlus/utils/storage.dart';
 import 'package:PiliPlus/utils/storage_key.dart';
+import 'package:PiliPlus/utils/storage_pref.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:material_ui/material_ui.dart';
@@ -529,6 +530,13 @@ class _MainAppState extends PopScopeState<MainApp>
     } else {
       sideBar = DecoratedBox(
         decoration: BoxDecoration(
+          // 桌面深色模式：侧栏用「深色模式颜色」里的侧栏配色
+          // （浅色模式 / 非桌面端为 null → 沿用主题底色，行为不变）
+          color:
+              PlatformUtils.isDesktop &&
+                  _colorScheme.brightness == Brightness.dark
+              ? Pref.darkThemeColor.sidebar
+              : null,
           border: Border(
             right: BorderSide(
               color: _colorScheme.outline.withValues(alpha: 0.06),

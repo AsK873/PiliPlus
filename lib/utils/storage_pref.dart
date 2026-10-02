@@ -17,6 +17,7 @@ import 'package:PiliPlus/models/common/sponsor_block/segment_type.dart';
 import 'package:PiliPlus/models/common/sponsor_block/skip_type.dart';
 import 'package:PiliPlus/models/common/super_chat_type.dart';
 import 'package:PiliPlus/models/common/super_resolution_type.dart';
+import 'package:PiliPlus/models/common/theme/dark_theme_color.dart';
 import 'package:PiliPlus/models/common/theme/theme_type.dart';
 import 'package:PiliPlus/models/common/video/audio_quality.dart';
 import 'package:PiliPlus/models/common/video/cdn_type.dart';
@@ -519,6 +520,13 @@ abstract final class Pref {
 
   static bool get isPureBlackTheme =>
       _setting.get(SettingBoxKey.isPureBlackTheme, defaultValue: false);
+
+  /// 桌面端深色模式背景配色；默认「深灰色」（与既有深色主题接近）
+  static DarkThemeColor get darkThemeColor =>
+      DarkThemeColor.values[_setting.get(
+        SettingBoxKey.darkThemeColor,
+        defaultValue: DarkThemeColor.gray.index,
+      )];
 
   static bool get antiGoodsDyn =>
       _setting.get(SettingBoxKey.antiGoodsDyn, defaultValue: false);

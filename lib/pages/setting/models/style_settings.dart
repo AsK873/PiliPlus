@@ -15,6 +15,7 @@ import 'package:PiliPlus/models/common/dynamic/up_panel_position.dart';
 import 'package:PiliPlus/models/common/home_tab_type.dart';
 import 'package:PiliPlus/models/common/msg/msg_unread_type.dart';
 import 'package:PiliPlus/models/common/nav_bar_config.dart';
+import 'package:PiliPlus/models/common/theme/dark_theme_color.dart';
 import 'package:PiliPlus/models/common/theme/theme_color_type.dart';
 import 'package:PiliPlus/models/common/theme/theme_type.dart';
 import 'package:PiliPlus/pages/main/controller.dart';
@@ -305,6 +306,15 @@ List<SettingsModel> get styleSettings => [
       }
     },
   ),
+  // 桌面端：深色模式下的背景配色（侧栏 / 主功能区）
+  if (PlatformUtils.isDesktop)
+    PopupModel<DarkThemeColor>(
+      leading: const Icon(Icons.dark_mode_outlined),
+      title: '深色模式颜色',
+      value: () => Pref.darkThemeColor,
+      items: DarkThemeColor.values,
+      onSelected: _setDarkThemeColor,
+    ),
   NormalModel(
     onTap: (context, setState) => Get.toNamed('/colorSetting'),
     leading: const Icon(Icons.color_lens_outlined),
@@ -819,6 +829,16 @@ void _setThemeType(ThemeType value, VoidCallback setState) {
   } catch (_) {}
   GStorage.setting.put(SettingBoxKey.themeMode, value.index);
   Get.changeThemeMode(ThemeUtils.themeMode = value.toThemeMode);
+  setState();
+}
+
+/// 桌面端「深色模式颜色」：持久化后立即重建主题数据
+/// （配色只在深色模式下可见，但浅色下改也要重建，切到深色即用最新配色）
+void _setDarkThemeColor(DarkThemeColor value, VoidCallback setState) {
+  GStorage.setting.put(SettingBoxKey.darkThemeColor, value.index);
+  // 无论当前是深色还是浅色都重建主题数据：否则浅色下改配色后，
+  // 再用侧栏 / 设置里的「主题模式」切到深色会用到旧配色。
+  Get.updateMyAppTheme();
   setState();
 }
 

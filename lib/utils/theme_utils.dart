@@ -182,10 +182,36 @@ abstract final class ThemeUtils {
         },
       ),
     );
+    // 纯黑主题优先，保持既有行为不变
     if (isDark && Pref.isPureBlackTheme) {
       return darkenTheme(theme);
     }
+    // 桌面端深色模式背景配色（仅覆盖「主功能区」背景；侧栏由主壳单独绘制）
+    if (isDark && PlatformUtils.isDesktop) {
+      return applyDesktopDarkBackground(theme);
+    }
     return theme;
+  }
+
+  /// 桌面端深色模式背景配色：把「主功能区」背景换成用户在
+  /// 「深色模式颜色」里选择的颜色（见 [Pref.darkThemeColor]）。
+  ///
+  /// 只覆盖与主功能区底色直接相关、且当前就等于 `colorScheme.surface` 的三处：
+  ///   - `canvasColor`：`Material`（主壳及各页 SimpleScaffold）的默认底色
+  ///   - `scaffoldBackgroundColor`：原生 `Scaffold` 页面的底色
+  ///   - `appBarTheme.backgroundColor`：顶栏（原本取 `colorScheme.surface`，
+  ///     与主功能区同色，不一起改会在顶栏下方露出接缝）
+  /// 卡片、弹窗、弹出菜单、搜索框、文字与图标仍走 ColorScheme，不受影响。
+  ///
+  /// 侧栏背景与主功能区共用同一层 Material，因此无法在此处区分，
+  /// 由主壳（pages/main/view.dart）按同一 Pref 单独绘制。
+  static ThemeData applyDesktopDarkBackground(ThemeData theme) {
+    final content = Pref.darkThemeColor.content;
+    return theme.copyWith(
+      canvasColor: content,
+      scaffoldBackgroundColor: content,
+      appBarTheme: theme.appBarTheme.copyWith(backgroundColor: content),
+    );
   }
 
   static ThemeData darkenTheme(ThemeData theme) {
