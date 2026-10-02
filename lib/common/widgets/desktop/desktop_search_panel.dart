@@ -9,6 +9,7 @@
 //   + 历史条目悬停/按下与 hover_card.dart 同一套反馈（微提亮 + 1px 细边 + NoSplash）。
 // 历史复用既有本地存储（BaseSearchController.historyList），不新增网络请求。
 // =============================================================
+import 'package:PiliPlus/common/widgets/dialog/dialog.dart';
 import 'package:PiliPlus/pages/search/controller.dart';
 import 'package:PiliPlus/utils/extension/get_ext.dart';
 import 'package:PiliPlus/utils/storage.dart';
@@ -89,11 +90,43 @@ class DesktopSearchPanel extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.fromLTRB(_pad, _gap12, _pad, _gap8),
-                  child: Text(
-                    '搜索历史',
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
+                  child: Row(
+                    children: [
+                      Text(
+                        '搜索历史',
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const Spacer(),
+                      // 与搜索页「清空」同一个语义：弹确认框后一次性清空全部搜索历史
+                      Obx(
+                        () => baseCtr.historyList.isEmpty
+                            ? const SizedBox.shrink()
+                            : TextButton.icon(
+                                style: const ButtonStyle(
+                                  visualDensity: .compact,
+                                  tapTargetSize: .shrinkWrap,
+                                  padding: WidgetStatePropertyAll(
+                                    .symmetric(horizontal: 10),
+                                  ),
+                                ),
+                                onPressed: () => _clearHistory(baseCtr),
+                                icon: Icon(
+                                  Icons.clear_all_outlined,
+                                  size: 18,
+                                  color: colorScheme.secondary,
+                                ),
+                                label: Text(
+                                  '清空历史记录',
+                                  style: TextStyle(
+                                    height: 1,
+                                    color: colorScheme.secondary,
+                                  ),
+                                ),
+                              ),
+                      ),
+                    ],
                   ),
                 ),
                 ConstrainedBox(
@@ -148,6 +181,18 @@ class DesktopSearchPanel extends StatelessWidget {
       onTap: () {
         onClose();
         desktopSearch(word);
+      },
+    );
+  }
+
+  /// 一键清空全部搜索历史：确认后清空内存列表与本地存储
+  void _clearHistory(BaseSearchController baseCtr) {
+    showConfirmDialog(
+      context: Get.context!,
+      title: const Text('确定清空搜索历史？'),
+      onConfirm: () {
+        baseCtr.historyList.clear();
+        GStorage.historyWord.delete('cacheList');
       },
     );
   }
