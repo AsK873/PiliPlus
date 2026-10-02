@@ -1,5 +1,6 @@
 import 'package:PiliPlus/common/widgets/desktop/desktop_search_box.dart';
 import 'package:PiliPlus/common/widgets/desktop/desktop_search_panel.dart';
+import 'package:PiliPlus/common/widgets/desktop/desktop_tokens.dart';
 import 'package:PiliPlus/common/widgets/desktop/desktop_top_bar.dart';
 import 'package:PiliPlus/common/widgets/scaffold/simple_scaffold.dart';
 import 'package:PiliPlus/common/widgets/scroll_physics.dart' show tabBarView;
@@ -94,10 +95,33 @@ class _SearchResultPageState extends State<SearchResultPage>
             width: 1,
           ),
         ),
-        // 桌面：当前关键词显示在右侧搜索框内，title 槽留空；
-        // 移动端维持原有「点标题回到搜索页继续编辑」的行为。
+        // 桌面：返回按钮右侧给出当前搜索上下文 —— 辅助标题「搜索结果」+ 关键词，
+        // 填掉左上空白；字号层级与主页顶栏标题一致（14 / w600 / onSurface），
+        // 间距走 4px 栅格。移动端维持原有「点标题回到搜索页继续编辑」的行为。
         title: PlatformUtils.isDesktop
-            ? const SizedBox.shrink()
+            ? Row(
+                children: [
+                  Text(
+                    '搜索结果',
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: DesktopTokens.subtitleColor(theme.colorScheme),
+                    ),
+                  ),
+                  const SizedBox(width: DesktopTokens.gap8),
+                  Flexible(
+                    child: Text(
+                      _searchResultController.keyword,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: DesktopTokens.titleColor(theme.colorScheme),
+                      ),
+                    ),
+                  ),
+                ],
+              )
             : GestureDetector(
                 onTap: () {
                   if (_isFromSearch) {
