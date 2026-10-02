@@ -175,7 +175,8 @@ class _MediaPageState extends CommonPageState<MinePage>
           spacing: 5,
           mainAxisSize: .min,
           children: [
-            if (!_mainController.hasHome) ...[
+            // 桌面端不再提供 /search 入口：壳层顶栏搜索框是唯一的搜索入口
+            if (!_mainController.hasHome && !PlatformUtils.isDesktop) ...[
               IconButton(
                 iconSize: iconSize,
                 padding: padding,

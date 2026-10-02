@@ -52,8 +52,13 @@ class _MainAppState extends PopScopeState<MainApp>
   late ColorScheme _colorScheme;
   Brightness? _brightness;
 
-  /// 桌面顶栏的搜索历史面板是否展开
+  /// 桌面顶栏的搜索浮层是否展开
   bool _searchPanelOpen = false;
+
+  /// 顶栏搜索浮层状态（历史 / 联想；顶栏写入，浮层据此渲染）
+  final ValueNotifier<DesktopSearchOverlayState> _searchOverlay = ValueNotifier(
+    DesktopSearchOverlayState.empty,
+  );
 
   @override
   bool get initCanPop => false;
@@ -137,6 +142,7 @@ class _MainAppState extends PopScopeState<MainApp>
     }
     removeObserverMobile(this);
     PiliScheme.listener?.cancel();
+    _searchOverlay.dispose();
     GStorage.close();
     super.dispose();
   }
@@ -535,8 +541,8 @@ class _MainAppState extends PopScopeState<MainApp>
     }
 
     // 桌面顶栏：桌面 + 宽窗口（沿用既有 showNavbar = width > 800，不新增断点）
-    // 时在内容区上方插入全局工具条（后退/刷新/标题 + 唯一搜索入口）；
-    // 搜索历史面板在顶栏下方就地展开，不跳转搜索页。
+    // 时在内容区上方插入全局工具条（后退/刷新/标题 + 唯一搜索入口，搜索框贴右）；
+    // 搜索历史 / 联想浮层在搜索框正下方按同一右边缘就地展开，不跳转搜索页。
     final Widget body = PlatformUtils.isDesktop && context.showNavbar
         ? Stack(
             fit: StackFit.expand,
@@ -548,54 +554,76 @@ class _MainAppState extends PopScopeState<MainApp>
                     colorScheme: _colorScheme,
                     searchPanelOpen: _searchPanelOpen,
                     onOpenSearch: () => setState(() => _searchPanelOpen = true),
-                    onCloseSearch: () =>
-                        setState(() => _searchPanelOpen = false),
+                    onCloseSearch: _closeSearch,
+                    onOverlayChanged: (state) => _searchOverlay.value = state,
                   ),
                   const Divider(height: 1),
                   Expanded(child: child),
                 ],
               ),
-              if (_searchPanelOpen) ...[
-                // 透明遮罩：覆盖整个背景，但**挖空搜索框**所在矩形。
-                // 点搜索框不取消；点「搜索历史」面板不取消（面板自身吸收点击）；
-                // 点其余任何位置都取消搜索状态。
-                Positioned(
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  height: DesktopTopBar.searchTop,
-                  child: _searchDismissBarrier(),
+              // 搜索浮层：输入为空显示搜索历史，输入关键词后显示联想推荐。
+              if (_searchPanelOpen)
+                ValueListenableBuilder<DesktopSearchOverlayState>(
+                  valueListenable: _searchOverlay,
+                  builder: (context, state, _) {
+                    if (!state.visible) {
+                      return const SizedBox.shrink();
+                    }
+                    return Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        // 透明遮罩：覆盖整个背景，但**挖空搜索框**所在矩形。
+                        // 点搜索框不取消；点浮层不取消（浮层自身吸收点击）；
+                        // 点其余任何位置都收起浮层。
+                        Positioned(
+                          top: 0,
+                          left: 0,
+                          right: 0,
+                          height: DesktopTopBar.searchTop,
+                          child: _searchDismissBarrier(),
+                        ),
+                        Positioned(
+                          top:
+                              DesktopTopBar.searchTop +
+                              DesktopTopBar.searchHeight,
+                          left: 0,
+                          right: 0,
+                          bottom: 0,
+                          child: _searchDismissBarrier(),
+                        ),
+                        Positioned(
+                          top: DesktopTopBar.searchTop,
+                          left: 0,
+                          right:
+                              DesktopTopBar.searchWidth +
+                              DesktopTopBar.paddingH,
+                          height: DesktopTopBar.searchHeight,
+                          child: _searchDismissBarrier(),
+                        ),
+                        Positioned(
+                          top: DesktopTopBar.searchTop,
+                          right: 0,
+                          width: DesktopTopBar.paddingH,
+                          height: DesktopTopBar.searchHeight,
+                          child: _searchDismissBarrier(),
+                        ),
+                        // 浮层：锚定在搜索框正下方，右边缘与搜索框一致
+                        Positioned(
+                          top: DesktopTopBar.height + 1,
+                          right: DesktopTopBar.paddingH,
+                          child: DesktopSearchPanel(
+                            state: state,
+                            onSelect: (word) {
+                              _closeSearch();
+                              desktopSearch(word);
+                            },
+                            onClose: _closeSearch,
+                          ),
+                        ),
+                      ],
+                    );
+                  },
                 ),
-                Positioned(
-                  top: DesktopTopBar.searchTop + DesktopTopBar.searchHeight,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  child: _searchDismissBarrier(),
-                ),
-                Positioned(
-                  top: DesktopTopBar.searchTop,
-                  left: 0,
-                  right: DesktopTopBar.searchWidth + DesktopTopBar.paddingH,
-                  height: DesktopTopBar.searchHeight,
-                  child: _searchDismissBarrier(),
-                ),
-                Positioned(
-                  top: DesktopTopBar.searchTop,
-                  right: 0,
-                  width: DesktopTopBar.paddingH,
-                  height: DesktopTopBar.searchHeight,
-                  child: _searchDismissBarrier(),
-                ),
-                // 搜索历史面板：锚定在顶栏搜索框正下方，右对齐
-                Positioned(
-                  top: DesktopTopBar.height + 1,
-                  right: DesktopTopBar.paddingH,
-                  child: DesktopSearchPanel(
-                    onClose: () => setState(() => _searchPanelOpen = false),
-                  ),
-                ),
-              ],
             ],
           )
         : child;
@@ -635,11 +663,15 @@ class _MainAppState extends PopScopeState<MainApp>
     return child;
   }
 
-  /// 点击即退出搜索状态的透明遮罩（覆盖搜索框与历史面板之外的背景）
-  Widget _searchDismissBarrier() => GestureDetector(
-    behavior: HitTestBehavior.opaque,
-    onTap: () => setState(() => _searchPanelOpen = false),
-  );
+  /// 收起搜索浮层：回到「输入为空」状态并退出输入状态
+  void _closeSearch() {
+    _searchOverlay.value = DesktopSearchOverlayState.empty;
+    setState(() => _searchPanelOpen = false);
+  }
+
+  /// 点击即收起联想浮层的透明遮罩（覆盖搜索框与浮层之外的背景）
+  Widget _searchDismissBarrier() =>
+      GestureDetector(behavior: HitTestBehavior.opaque, onTap: _closeSearch);
 
   Widget _buildIcon({required NavigationBarType type, bool selected = false}) {
     final icon = selected ? type.selectIcon : type.icon;
