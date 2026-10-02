@@ -1,3 +1,4 @@
+import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/common/widgets/sliver/sliver_floating_header.dart';
 import 'package:PiliPlus/models/search/result.dart';
 import 'package:PiliPlus/pages/search_panel/article/controller.dart';
@@ -91,15 +92,18 @@ class _SearchArticlePanelState
 
   @override
   Widget buildList(List<SearchArticleItemModel> list) {
-    return SliverGrid.builder(
-      gridDelegate: gridDelegate,
-      itemBuilder: (context, index) {
-        if (index == list.length - 1) {
-          controller.onLoadMore();
-        }
-        return SearchArticleItem(item: list[index]);
-      },
-      itemCount: list.length,
+    return desktopLimitSliver(
+      SliverGrid.builder(
+        gridDelegate: gridDelegate,
+        itemBuilder: (context, index) {
+          if (index == list.length - 1) {
+            controller.onLoadMore();
+          }
+          return SearchArticleItem(item: list[index]);
+        },
+        itemCount: list.length,
+      ),
+      maxWidth: 1280,
     );
   }
 
