@@ -3,6 +3,7 @@ import 'dart:math' show min;
 import 'package:PiliPlus/common/assets.dart';
 import 'package:PiliPlus/common/style.dart';
 import 'package:PiliPlus/common/widgets/button/icon_button.dart';
+import 'package:PiliPlus/common/widgets/desktop/desktop_tokens.dart';
 import 'package:PiliPlus/common/widgets/flutter/refresh_indicator.dart';
 import 'package:PiliPlus/common/widgets/gesture/tap_gesture_recognizer.dart';
 import 'package:PiliPlus/common/widgets/image/network_img_layer.dart';
@@ -204,9 +205,14 @@ class _AudioPageState extends State<AudioPage> {
       showModalBottomSheet(
         context: context,
         useSafeArea: true,
+        enableDrag: !PlatformUtils.isDesktop,
         isScrollControlled: true,
         constraints: BoxConstraints(
           maxWidth: min(640, context.mediaQueryShortestSide),
+          // 桌面端补统一最大高度；移动端 double.infinity 即原「不限高」行为
+          maxHeight: PlatformUtils.isDesktop
+              ? DesktopTokens.sheetMaxHeight
+              : double.infinity,
         ),
         builder: (context) {
           final colorScheme = ColorScheme.of(context);
@@ -453,9 +459,14 @@ class _AudioPageState extends State<AudioPage> {
     showModalBottomSheet(
       context: context,
       useSafeArea: true,
+      enableDrag: !PlatformUtils.isDesktop,
       isScrollControlled: true,
       constraints: BoxConstraints(
         maxWidth: min(640, context.mediaQueryShortestSide),
+        // 桌面端补统一最大高度；移动端 double.infinity 即原「不限高」行为
+        maxHeight: PlatformUtils.isDesktop
+            ? DesktopTokens.sheetMaxHeight
+            : double.infinity,
       ),
       builder: (context) {
         final colorScheme = ColorScheme.of(context);
@@ -585,9 +596,14 @@ class _AudioPageState extends State<AudioPage> {
     showModalBottomSheet(
       context: context,
       useSafeArea: true,
+      enableDrag: !PlatformUtils.isDesktop,
       isScrollControlled: true,
       constraints: BoxConstraints(
         maxWidth: min(640, context.mediaQueryShortestSide),
+        // 桌面端补统一最大高度；移动端 double.infinity 即原「不限高」行为
+        maxHeight: PlatformUtils.isDesktop
+            ? DesktopTokens.sheetMaxHeight
+            : double.infinity,
       ),
       builder: (context) {
         final colorScheme = ColorScheme.of(context);

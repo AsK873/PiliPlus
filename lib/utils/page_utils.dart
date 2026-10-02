@@ -152,22 +152,28 @@ abstract final class PageUtils {
     required BuildContext context,
     required FavMixin ctr,
   }) {
+    final bool isDesktop = PlatformUtils.isDesktop;
     showModalBottomSheet(
       context: context,
       useSafeArea: true,
       isScrollControlled: true,
-      constraints: BoxConstraints(
-        maxWidth: min(640, context.mediaQueryShortestSide),
-      ),
+      // 桌面端：取消拖拽关闭语义（enableDrag 是形参硬默认 true，主题无法控制）
+      enableDrag: !isDesktop,
+      // 桌面端交给主题统一尺寸（DesktopTokens.sheetConstraints）；
+      // 移动端保持原有宽度约束不变
+      constraints: isDesktop
+          ? null
+          : BoxConstraints(maxWidth: min(640, context.mediaQueryShortestSide)),
       builder: (BuildContext context) {
         final maxChildSize =
             PlatformUtils.isMobile && !context.mediaQuerySize.isPortrait
             ? 1.0
             : 0.7;
         return DraggableScrollableSheet(
-          minChildSize: 0,
-          maxChildSize: 1,
-          snap: true,
+          // 桌面端：固定尺寸 —— min=max 使拖拽无行程，并关闭吸附
+          minChildSize: isDesktop ? maxChildSize : 0,
+          maxChildSize: isDesktop ? maxChildSize : 1,
+          snap: !isDesktop,
           expand: false,
           snapSizes: [maxChildSize],
           initialChildSize: maxChildSize,

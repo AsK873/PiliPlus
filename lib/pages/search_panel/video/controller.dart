@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:PiliPlus/common/widgets/desktop/desktop_tokens.dart';
 import 'package:PiliPlus/http/loading_state.dart';
 import 'package:PiliPlus/models/common/search/video_search_type.dart';
 import 'package:PiliPlus/models/search/result.dart';
@@ -9,6 +10,7 @@ import 'package:PiliPlus/utils/app_scheme.dart';
 import 'package:PiliPlus/utils/date_utils.dart';
 import 'package:PiliPlus/utils/extension/context_ext.dart';
 import 'package:PiliPlus/utils/id_utils.dart';
+import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
 import 'package:material_ui/material_ui.dart';
@@ -89,9 +91,14 @@ class SearchVideoController
     showModalBottomSheet(
       context: context,
       useSafeArea: true,
+      enableDrag: !PlatformUtils.isDesktop,
       isScrollControlled: true,
       constraints: BoxConstraints(
         maxWidth: min(640, context.mediaQueryShortestSide),
+        // 桌面端补统一最大高度；移动端 double.infinity 即原「不限高」行为
+        maxHeight: PlatformUtils.isDesktop
+            ? DesktopTokens.sheetMaxHeight
+            : double.infinity,
       ),
       builder: (context) => StatefulBuilder(
         builder: (context, setState) {

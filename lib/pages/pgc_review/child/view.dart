@@ -141,6 +141,7 @@ class _PgcReviewChildPageState extends State<PgcReviewChildPage>
                 showModalBottomSheet(
                   context: context,
                   useSafeArea: true,
+                  enableDrag: !PlatformUtils.isDesktop,
                   isScrollControlled: true,
                   builder: (context) {
                     return PgcReviewPostPanel(

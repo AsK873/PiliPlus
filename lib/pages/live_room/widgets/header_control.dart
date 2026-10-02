@@ -2,6 +2,7 @@ import 'dart:io' show Platform;
 import 'dart:math' as math;
 
 import 'package:PiliPlus/common/style.dart';
+import 'package:PiliPlus/common/widgets/desktop/desktop_tokens.dart';
 import 'package:PiliPlus/common/widgets/draggable_sheet/dyn.dart';
 import 'package:PiliPlus/common/widgets/marquee.dart';
 import 'package:PiliPlus/models/common/video/live_quality.dart';
@@ -303,9 +304,14 @@ class _LiveHeaderControlState extends State<LiveHeaderControl>
     showModalBottomSheet(
       context: context,
       useSafeArea: true,
+      enableDrag: !PlatformUtils.isDesktop,
       isScrollControlled: true,
       constraints: BoxConstraints(
         maxWidth: math.min(640, context.mediaQueryShortestSide),
+        // 桌面端补统一最大高度；移动端 double.infinity 即原「不限高」行为
+        maxHeight: PlatformUtils.isDesktop
+            ? DesktopTokens.sheetMaxHeight
+            : double.infinity,
       ),
       builder: (context) {
         final maxChildSize =
@@ -313,9 +319,9 @@ class _LiveHeaderControlState extends State<LiveHeaderControl>
             ? 1.0
             : 0.7;
         return DynDraggableScrollableSheet(
-          minChildSize: 0,
+          minChildSize: PlatformUtils.isDesktop ? maxChildSize : 0,
           maxChildSize: maxChildSize,
-          snap: true,
+          snap: !PlatformUtils.isDesktop,
           expand: false,
           snapSizes: [maxChildSize],
           initialChildSize: maxChildSize,

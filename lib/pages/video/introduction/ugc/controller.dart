@@ -364,6 +364,7 @@ class UgcIntroController extends CommonIntroController with ReloadMixin {
                   context: context,
                   isScrollControlled: true,
                   useSafeArea: true,
+                  enableDrag: !PlatformUtils.isDesktop,
                   builder: (context) => RepostPanel(
                     rid: videoDetail.aid,
                     dynType: 8,

@@ -6,6 +6,7 @@ import 'package:PiliPlus/common/assets.dart';
 import 'package:PiliPlus/common/style.dart';
 import 'package:PiliPlus/common/widgets/button/icon_button.dart';
 import 'package:PiliPlus/common/widgets/custom_icon.dart';
+import 'package:PiliPlus/common/widgets/desktop/desktop_tokens.dart';
 import 'package:PiliPlus/common/widgets/extra_hittest_stack.dart';
 import 'package:PiliPlus/common/widgets/flutter/pop_scope.dart';
 import 'package:PiliPlus/common/widgets/gesture/horizontal_drag_gesture_recognizer.dart';
@@ -524,9 +525,16 @@ class _LiveRoomPageState extends State<LiveRoomPage>
       showModalBottomSheet(
         context: context,
         useSafeArea: true,
+        enableDrag: !PlatformUtils.isDesktop,
         clipBehavior: .hardEdge,
         isScrollControlled: true,
-        constraints: const BoxConstraints(maxWidth: 450),
+        constraints: BoxConstraints(
+          maxWidth: 450,
+          // 桌面端补统一最大高度；移动端 double.infinity 即原「不限高」行为
+          maxHeight: PlatformUtils.isDesktop
+              ? DesktopTokens.sheetMaxHeight
+              : double.infinity,
+        ),
         builder: (context) => FractionallySizedBox(
           widthFactor: 1.0,
           heightFactor: heightFactor,

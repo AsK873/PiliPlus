@@ -5,6 +5,7 @@ import 'package:PiliPlus/common/constants.dart';
 import 'package:PiliPlus/common/style.dart';
 import 'package:PiliPlus/common/widgets/badge.dart';
 import 'package:PiliPlus/common/widgets/custom_icon.dart';
+import 'package:PiliPlus/common/widgets/desktop/desktop_tokens.dart';
 import 'package:PiliPlus/common/widgets/dialog/dialog.dart';
 import 'package:PiliPlus/common/widgets/dialog/report.dart';
 import 'package:PiliPlus/common/widgets/emote_tooltip.dart';
@@ -107,9 +108,14 @@ class ReplyItemGrpc extends StatelessWidget {
     showModalBottomSheet(
       context: context,
       useSafeArea: true,
+      enableDrag: !PlatformUtils.isDesktop,
       isScrollControlled: true,
       constraints: BoxConstraints(
         maxWidth: min(640, context.mediaQueryShortestSide),
+        // 桌面端补统一最大高度；移动端 double.infinity 即原「不限高」行为
+        maxHeight: PlatformUtils.isDesktop
+            ? DesktopTokens.sheetMaxHeight
+            : double.infinity,
       ),
       builder: (sheetContext) {
         return morePanel(

@@ -3,6 +3,7 @@ import 'dart:math' as math;
 
 import 'package:PiliPlus/common/style.dart';
 import 'package:PiliPlus/common/widgets/button/icon_button.dart';
+import 'package:PiliPlus/common/widgets/desktop/desktop_tokens.dart';
 import 'package:PiliPlus/common/widgets/dialog/report_member.dart';
 import 'package:PiliPlus/common/widgets/dynamic_sliver_app_bar/dynamic_sliver_app_bar.dart';
 import 'package:PiliPlus/common/widgets/gesture/tap_gesture_recognizer.dart';
@@ -187,9 +188,14 @@ class _MemberPageState extends State<MemberPage> {
     showModalBottomSheet(
       context: context,
       useSafeArea: true,
+      enableDrag: !PlatformUtils.isDesktop,
       isScrollControlled: true,
       constraints: BoxConstraints(
         maxWidth: math.min(640, context.mediaQueryShortestSide),
+        // 桌面端补统一最大高度；移动端 double.infinity 即原「不限高」行为
+        maxHeight: PlatformUtils.isDesktop
+            ? DesktopTokens.sheetMaxHeight
+            : double.infinity,
       ),
       builder: (context) {
         final scheme = ColorScheme.of(context);

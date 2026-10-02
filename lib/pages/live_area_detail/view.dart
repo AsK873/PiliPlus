@@ -9,6 +9,7 @@ import 'package:PiliPlus/pages/live_area_detail/child/controller.dart';
 import 'package:PiliPlus/pages/live_area_detail/child/view.dart';
 import 'package:PiliPlus/pages/live_area_detail/controller.dart';
 import 'package:PiliPlus/pages/live_search/view.dart';
+import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:material_ui/material_ui.dart';
@@ -188,16 +189,18 @@ class _LiveAreaDetailPageState extends State<LiveAreaDetailPage> {
     double bottom,
     List<AreaItem> list,
   ) {
+    final bool isDesktop = PlatformUtils.isDesktop;
     showModalBottomSheet(
       context: context,
       useSafeArea: true,
+      enableDrag: !isDesktop,
       isScrollControlled: true,
       builder: (_) {
         return DraggableScrollableSheet(
-          minChildSize: 0,
+          minChildSize: isDesktop ? 1 : 0,
           maxChildSize: 1,
           initialChildSize: 1,
-          snap: true,
+          snap: !isDesktop,
           expand: false,
           snapSizes: const [1],
           builder: (_, scrollController) {

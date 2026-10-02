@@ -6,6 +6,7 @@ import 'package:PiliPlus/pages/pgc_review/child/view.dart';
 import 'package:PiliPlus/pages/pgc_review/post/view.dart';
 import 'package:PiliPlus/utils/extension/scroll_controller_ext.dart';
 import 'package:PiliPlus/utils/extension/theme_ext.dart';
+import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:get/get.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -126,6 +127,7 @@ class _PgcReviewPageState extends State<PgcReviewPage>
                     showModalBottomSheet(
                       context: context,
                       useSafeArea: true,
+                      enableDrag: !PlatformUtils.isDesktop,
                       isScrollControlled: true,
                       builder: (context) {
                         return PgcReviewPostPanel(

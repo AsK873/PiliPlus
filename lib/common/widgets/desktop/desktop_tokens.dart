@@ -88,4 +88,26 @@ abstract final class DesktopTokens {
   /// 次级文字（副标题、未选中图标）
   static Color subtitleColor(ColorScheme cs, {bool selected = false}) =>
       selected ? cs.onSecondaryContainer : cs.onSurfaceVariant;
+
+  // ===== BottomSheet（桌面弹层，见 theme_utils 的 bottomSheetTheme） =====
+
+  /// 桌面 BottomSheet 最大宽度
+  /// （与既有调用点 `min(640, shortestSide)` 同值，保证新旧调用点宽窄一致）
+  static const double sheetMaxWidth = 640;
+
+  /// 桌面 BottomSheet 最大高度（超过则浮层内部滚动）
+  static const double sheetMaxHeight = 640;
+
+  /// 桌面 BottomSheet 尺寸约束（由 theme_utils 统一注入主题，无需逐个调用点传参）
+  static const BoxConstraints sheetConstraints = BoxConstraints(
+    maxWidth: sheetMaxWidth,
+    maxHeight: sheetMaxHeight,
+  );
+
+  /// 桌面 BottomSheet 内容推荐内边距
+  /// （新写的 sheet 统一沿用；存量 sheet 的水平边距已由子组件自身达成，不强制回填）
+  static const EdgeInsets sheetContentPadding = EdgeInsets.symmetric(
+    horizontal: gap16,
+    vertical: gap8,
+  );
 }

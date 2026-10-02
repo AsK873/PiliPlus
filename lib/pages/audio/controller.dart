@@ -650,6 +650,7 @@ class AudioController extends GetxController
                     context: context,
                     isScrollControlled: true,
                     useSafeArea: true,
+                    enableDrag: !PlatformUtils.isDesktop,
                     builder: (context) => RepostPanel(
                       rid: oid.toInt(),
                       dynType: isUgc ? 8 : 256,

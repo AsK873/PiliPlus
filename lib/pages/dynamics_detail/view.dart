@@ -576,6 +576,7 @@ class _DynamicDetailPageState
                           context: context,
                           isScrollControlled: true,
                           useSafeArea: true,
+                          enableDrag: !PlatformUtils.isDesktop,
                           builder: (context) => RepostPanel(
                             item: controller.dynItem,
                             onSuccess: () {

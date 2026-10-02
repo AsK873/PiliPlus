@@ -1,4 +1,5 @@
 import 'package:PiliPlus/common/style.dart';
+import 'package:PiliPlus/common/widgets/desktop/desktop_tokens.dart';
 import 'package:PiliPlus/utils/extension/theme_ext.dart';
 import 'package:PiliPlus/utils/font_utils.dart';
 import 'package:PiliPlus/utils/platform_utils.dart';
@@ -76,6 +77,7 @@ abstract final class ThemeUtils {
           color: colorScheme.onSurface,
         ),
       ),
+      // 桌面端：BottomSheet 统一为固定尺寸弹层（详见下面 bottomSheetTheme）
       navigationBarTheme: NavigationBarThemeData(
         surfaceTintColor: isDark ? colorScheme.surfaceContainerHighest : null,
       ),
@@ -122,10 +124,19 @@ abstract final class ThemeUtils {
         shape: const RoundedRectangleBorder(
           borderRadius: Style.bottomSheetRadius,
         ),
-        // 桌面端弹层宿主限宽：模态面板不再横向铺满整窗，由框架自动底部居中。
-        // 移动端保持 null（全宽），行为与原来完全一致。
+        // 桌面端弹层宿主统一为「固定尺寸浮层」：最大宽/高取自 DesktopTokens
+        // （宽度 640 与各调用点既有值同值），由框架自动底部居中、超高则内部滚动，
+        // 不再横向铺满整窗；移动端保持 null（全宽、不限高），行为与原来完全一致。
+        //
+        // 主题能统一的只有尺寸与外观：
+        //   - `constraints` 由 `widget.constraints ?? bottomSheetTheme.constraints`
+        //     兜底采用（material_ui bottom_sheet.dart:356），无需逐调用点传参；
+        //     但调用点自带 constraints 时会整体覆盖主题值（本项目 15 处如此）。
+        //   - `enableDrag` / `isDismissible` 是 showModalBottomSheet 的形参且硬默认
+        //     true，主题无对应字段（同文件 1322 → 780），只能在调用点关闭。
+        //   - `BottomSheetThemeData` 没有 padding 字段，内容内边距由调用方自理。
         constraints: PlatformUtils.isDesktop
-            ? const BoxConstraints(maxWidth: 640)
+            ? DesktopTokens.sheetConstraints
             : null,
       ),
       // ignore: deprecated_member_use

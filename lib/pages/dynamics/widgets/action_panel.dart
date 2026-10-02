@@ -2,6 +2,7 @@ import 'package:PiliPlus/models/dynamics/result.dart';
 import 'package:PiliPlus/pages/dynamics_repost/view.dart';
 import 'package:PiliPlus/utils/num_utils.dart';
 import 'package:PiliPlus/utils/page_utils.dart';
+import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:PiliPlus/utils/request_utils.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:material_ui/material_ui.dart';
@@ -38,6 +39,7 @@ class ActionPanel extends StatelessWidget {
                   context: context,
                   isScrollControlled: true,
                   useSafeArea: true,
+                  enableDrag: !PlatformUtils.isDesktop,
                   builder: (_) => RepostPanel(
                     item: item,
                     onSuccess: () {

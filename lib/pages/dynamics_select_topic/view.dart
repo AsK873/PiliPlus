@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:PiliPlus/common/widgets/desktop/desktop_tokens.dart';
 import 'package:PiliPlus/common/widgets/loading_widget/loading_widget.dart';
 import 'package:PiliPlus/http/loading_state.dart';
 import 'package:PiliPlus/models_new/dynamic/dyn_topic_top/topic_item.dart';
@@ -9,6 +10,7 @@ import 'package:PiliPlus/pages/dynamics_select_topic/widgets/item.dart';
 import 'package:PiliPlus/pages/search/controller.dart' show DebounceStreamState;
 import 'package:PiliPlus/utils/extension/context_ext.dart';
 import 'package:PiliPlus/utils/extension/scroll_controller_ext.dart';
+import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:get/get.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -27,19 +29,27 @@ class SelectTopicPanel extends StatefulWidget {
     double offset = 0,
     ValueChanged<double>? onCachePos,
   }) {
+    final bool isDesktop = PlatformUtils.isDesktop;
+    // 桌面端：DSS 固定高度（min = max = initial）并取消吸附；移动端保持原值
+    final double initialSize = offset == 0 ? 0.65 : 1;
     return showModalBottomSheet<TopicItem?>(
       context: Get.context!,
       useSafeArea: true,
+      enableDrag: !isDesktop,
       isScrollControlled: true,
       constraints: BoxConstraints(
         maxWidth: min(600, context.mediaQueryShortestSide),
+        // 桌面端补统一最大高度；移动端 double.infinity 即原「不限高」行为
+        maxHeight: PlatformUtils.isDesktop
+            ? DesktopTokens.sheetMaxHeight
+            : double.infinity,
       ),
       builder: (context) => DraggableScrollableSheet(
         expand: false,
-        snap: true,
-        minChildSize: 0,
-        maxChildSize: 1,
-        initialChildSize: offset == 0 ? 0.65 : 1,
+        snap: !isDesktop,
+        minChildSize: isDesktop ? initialSize : 0,
+        maxChildSize: isDesktop ? initialSize : 1,
+        initialChildSize: initialSize,
         initialScrollOffset: offset,
         snapSizes: const [0.65],
         builder: (context, scrollController) => SelectTopicPanel(

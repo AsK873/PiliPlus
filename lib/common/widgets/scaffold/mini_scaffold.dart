@@ -2,6 +2,7 @@ import 'dart:async' show Completer;
 
 import 'package:PiliPlus/common/widgets/scaffold/bottom_sheet.dart';
 import 'package:PiliPlus/common/widgets/scaffold/bottom_sheet_layout.dart';
+import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:material_ui/material_ui.dart';
@@ -116,7 +117,14 @@ class MiniScaffoldState extends State<MiniScaffold>
       },
       builder: builder,
       isPersistent: false,
-      constraints: constraints,
+      // 桌面端主题为「模态弹层」统一了 BottomSheet 尺寸（theme_utils.bottomSheetTheme）；
+      // 这里是页面内常驻面板（播放器/评论/笔记等），不属于弹窗浮层，
+      // 因此未显式传约束时补一个空约束把它排除在外。
+      // 空 BoxConstraints 在 BottomSheet_ 中已被当作「无约束」跳过（bottom_sheet.dart:61），
+      // 布局与改造前完全一致。
+      constraints:
+          constraints ??
+          (PlatformUtils.isDesktop ? const BoxConstraints() : null),
     );
 
     (Get.routing.route! as ModalRoute).addLocalHistoryEntry(entry);

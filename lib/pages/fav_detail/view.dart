@@ -15,6 +15,7 @@ import 'package:PiliPlus/pages/fav_detail/controller.dart';
 import 'package:PiliPlus/pages/fav_detail/widget/fav_video_card.dart';
 import 'package:PiliPlus/utils/bili_utils.dart';
 import 'package:PiliPlus/utils/grid.dart';
+import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:PiliPlus/utils/request_utils.dart';
 import 'package:PiliPlus/utils/share_utils.dart';
 import 'package:PiliPlus/utils/utils.dart';
@@ -278,6 +279,7 @@ class _FavDetailPageState extends State<FavDetailPage> with GridMixin {
                     context: context,
                     isScrollControlled: true,
                     useSafeArea: true,
+                    enableDrag: !PlatformUtils.isDesktop,
                     builder: (context) => RepostPanel(
                       rid: _favDetailController.mediaId,
                       dynType: 4300,

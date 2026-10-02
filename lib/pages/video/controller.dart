@@ -3,6 +3,7 @@ import 'dart:math' show min;
 import 'dart:ui';
 
 import 'package:PiliPlus/common/style.dart';
+import 'package:PiliPlus/common/widgets/desktop/desktop_tokens.dart';
 import 'package:PiliPlus/common/widgets/pair.dart';
 import 'package:PiliPlus/common/widgets/progress_bar/segment_progress_bar.dart';
 import 'package:PiliPlus/common/widgets/scaffold/mini_scaffold.dart';
@@ -1483,9 +1484,14 @@ class VideoDetailController extends GetxController
       showModalBottomSheet(
         context: context,
         useSafeArea: true,
+        enableDrag: !PlatformUtils.isDesktop,
         isScrollControlled: true,
         constraints: BoxConstraints(
           maxWidth: min(640, context.mediaQueryShortestSide),
+          // 桌面端补统一最大高度；移动端 double.infinity 即原「不限高」行为
+          maxHeight: PlatformUtils.isDesktop
+              ? DesktopTokens.sheetMaxHeight
+              : double.infinity,
         ),
         builder: (context) {
           final maxChildSize =
@@ -1493,9 +1499,9 @@ class VideoDetailController extends GetxController
               ? 1.0
               : 0.7;
           return DraggableScrollableSheet(
-            snap: true,
+            snap: !PlatformUtils.isDesktop,
             expand: false,
-            minChildSize: 0,
+            minChildSize: PlatformUtils.isDesktop ? maxChildSize : 0,
             snapSizes: [maxChildSize],
             maxChildSize: maxChildSize,
             initialChildSize: maxChildSize,

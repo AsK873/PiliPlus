@@ -197,19 +197,26 @@ abstract final class RequestUtils {
                     context: context,
                     useSafeArea: true,
                     isScrollControlled: true,
-                    constraints: BoxConstraints(
-                      maxWidth: min(640, context.mediaQueryShortestSide),
-                    ),
+                    // 桌面端：取消拖拽关闭；尺寸交给主题统一
+                    // （DesktopTokens.sheetConstraints），移动端保持原样
+                    enableDrag: !PlatformUtils.isDesktop,
+                    constraints: PlatformUtils.isDesktop
+                        ? null
+                        : BoxConstraints(
+                            maxWidth: min(640, context.mediaQueryShortestSide),
+                          ),
                     builder: (BuildContext context) {
                       final maxChildSize =
                           PlatformUtils.isMobile &&
                               !context.mediaQuerySize.isPortrait
                           ? 1.0
                           : 0.7;
+                      final bool isDesktop = PlatformUtils.isDesktop;
                       return DraggableScrollableSheet(
-                        minChildSize: 0,
-                        maxChildSize: 1,
-                        snap: true,
+                        // 桌面端：固定尺寸（min=max → 拖拽无行程）并关闭吸附
+                        minChildSize: isDesktop ? maxChildSize : 0,
+                        maxChildSize: isDesktop ? maxChildSize : 1,
+                        snap: !isDesktop,
                         expand: false,
                         snapSizes: [maxChildSize],
                         initialChildSize: maxChildSize,

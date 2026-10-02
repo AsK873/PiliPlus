@@ -26,6 +26,7 @@ import 'package:PiliPlus/utils/grid.dart';
 import 'package:PiliPlus/utils/image_utils.dart';
 import 'package:PiliPlus/utils/num_utils.dart';
 import 'package:PiliPlus/utils/page_utils.dart';
+import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:PiliPlus/utils/share_utils.dart';
 import 'package:PiliPlus/utils/utils.dart';
 import 'package:cached_network_image_ce/cached_network_image.dart';
@@ -426,6 +427,7 @@ class _ArticlePageState extends CommonDynPageState<ArticlePage> {
                               context: context,
                               isScrollControlled: true,
                               useSafeArea: true,
+                              enableDrag: !PlatformUtils.isDesktop,
                               builder: (context) => RepostPanel(
                                 item: controller.opusData,
                                 dynIdStr: controller.articleData?.dynIdStr,

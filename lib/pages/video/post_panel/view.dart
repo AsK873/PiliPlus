@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:PiliPlus/common/widgets/button/icon_button.dart';
+import 'package:PiliPlus/common/widgets/desktop/desktop_tokens.dart';
 import 'package:PiliPlus/common/widgets/loading_widget/loading_widget.dart';
 import 'package:PiliPlus/common/widgets/pair.dart';
 import 'package:PiliPlus/common/widgets/scaffold/simple_scaffold.dart';
@@ -156,8 +157,15 @@ class PostPanel extends CommonSlidePage {
                   res = await showModalBottomSheet<String>(
                     context: context,
                     useSafeArea: true,
+                    enableDrag: !PlatformUtils.isDesktop,
                     isScrollControlled: true,
-                    constraints: const BoxConstraints(maxWidth: 450),
+                    constraints: BoxConstraints(
+                      maxWidth: 450,
+                      // 桌面端补统一最大高度；移动端 double.infinity 即原「不限高」行为
+                      maxHeight: PlatformUtils.isDesktop
+                          ? DesktopTokens.sheetMaxHeight
+                          : double.infinity,
+                    ),
                     builder: (context) {
                       final colorScheme = ColorScheme.of(context);
                       return Padding(

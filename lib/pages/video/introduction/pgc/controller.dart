@@ -169,6 +169,7 @@ class PgcIntroController extends CommonIntroController {
                   context: context,
                   isScrollControlled: true,
                   useSafeArea: true,
+                  enableDrag: !PlatformUtils.isDesktop,
                   builder: (context) => RepostPanel(
                     rid: epId,
                     /*

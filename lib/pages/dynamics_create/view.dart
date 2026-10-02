@@ -30,6 +30,7 @@ import 'package:PiliPlus/utils/accounts.dart';
 import 'package:PiliPlus/utils/date_utils.dart';
 import 'package:PiliPlus/utils/extension/context_ext.dart';
 import 'package:PiliPlus/utils/grid.dart';
+import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:PiliPlus/utils/request_utils.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/services.dart' show LengthLimitingTextInputFormatter;
@@ -76,12 +77,13 @@ class CreateDynPanel extends CommonRichTextPubPage {
   }) => showModalBottomSheet(
     context: context,
     useSafeArea: true,
+    enableDrag: !PlatformUtils.isDesktop,
     isScrollControlled: true,
     builder: (context) => DynDraggableScrollableSheet(
-      snap: true,
+      snap: !PlatformUtils.isDesktop,
       expand: false,
       initialChildSize: 1,
-      minChildSize: 0,
+      minChildSize: PlatformUtils.isDesktop ? 1 : 0,
       maxChildSize: 1,
       snapSizes: const [1],
       builder: (context, scrollController) => CreateDynPanel(
