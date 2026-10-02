@@ -5,6 +5,7 @@ import 'package:PiliPlus/common/constants.dart';
 import 'package:PiliPlus/common/style.dart';
 import 'package:PiliPlus/common/widgets/desktop/desktop_search_panel.dart';
 import 'package:PiliPlus/common/widgets/desktop/desktop_shortcuts.dart';
+import 'package:PiliPlus/common/widgets/desktop/desktop_side_bar.dart';
 import 'package:PiliPlus/common/widgets/desktop/desktop_top_bar.dart';
 import 'package:PiliPlus/common/widgets/floating_navigation_bar.dart';
 import 'package:PiliPlus/common/widgets/flutter/pop_scope.dart';
@@ -414,6 +415,14 @@ class _MainAppState extends PopScopeState<MainApp>
   }
 
   Widget _sideBar() {
+    // M2 桌面导航（与构建树同一套：桌面端走图标+文字扩展侧栏）
+    if (PlatformUtils.isDesktop) {
+      return DesktopSideBar(
+        mainController: _mainController,
+        colorScheme: _colorScheme,
+        onSelect: _mainController.setIndex,
+      );
+    }
     if (_mainController.navigationBars.length > 1) {
       if (context.isTablet && _mainController.optTabletNav) {
         return Padding(

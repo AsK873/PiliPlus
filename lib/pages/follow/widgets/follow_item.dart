@@ -12,12 +12,17 @@ class FollowItem extends StatelessWidget {
   final ValueChanged? afterMod;
   final ValueChanged<UserModel>? onSelect;
 
+  /// 行内边距覆盖：桌面两列网格用 16/10，让鼠标目标与列内留白更宽松；
+  /// 为空时沿用移动端列表原有的 12/10。
+  final EdgeInsetsGeometry? gridPadding;
+
   const FollowItem({
     super.key,
     required this.item,
     this.afterMod,
     bool? isOwner,
     this.onSelect,
+    this.gridPadding,
   }) : isOwner = isOwner ?? false;
 
   @override
@@ -49,6 +54,8 @@ class FollowItem extends StatelessWidget {
     return Material(
       type: .transparency,
       child: InkWell(
+        // 鼠标指针：桌面端悬停即给出可点击反馈
+        mouseCursor: SystemMouseCursors.click,
         onTap: () {
           if (onSelect != null) {
             onSelect!.call(
@@ -65,7 +72,7 @@ class FollowItem extends StatelessWidget {
           }
         },
         child: Padding(
-          padding: const .symmetric(horizontal: 12, vertical: 10),
+          padding: gridPadding ?? const .symmetric(horizontal: 12, vertical: 10),
           child: Row(
             children: [
               PendantAvatar(
