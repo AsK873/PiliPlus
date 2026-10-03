@@ -32,7 +32,7 @@ class LoginDevicesPageState extends State<LoginDevicesPage> {
           physics: const AlwaysScrollableScrollPhysics(),
           slivers: [
             ViewSliverSafeArea(
-              // M8：桌面内容限宽居中（登录设备）。
+              // M8：桌面内容限宽居中（登录设备；默认 1480 = Style.contentMaxWidth）
               sliver: desktopLimitSliver(
                 Obx(
                   () => _buildBody(
@@ -40,7 +40,6 @@ class LoginDevicesPageState extends State<LoginDevicesPage> {
                     _controller.loadingState.value,
                   ),
                 ),
-                maxWidth: 1280,
               ),
             ),
           ],

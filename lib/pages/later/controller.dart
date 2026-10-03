@@ -85,14 +85,24 @@ mixin BaseLaterController
 
 class LaterController extends MultiSelectController<LaterData, LaterItemModel>
     with BaseLaterController {
-  LaterController(this.laterViewType);
+  LaterController(this.laterViewType, {this.instanceSuffix = ''});
   final LaterViewType laterViewType;
+
+  /// GetX 实例命名空间后缀：由页面按「是否为『我的』页内嵌预览实例」下发，
+  /// 并逐级传给子页。移动端 / 路由方式 / 主壳内容区嵌入恒为 `''`
+  /// ⇒ 注册 key 与改动前逐字一致。
+  final String instanceSuffix;
+
+  String _tag(String base) => '$base$instanceSuffix';
 
   late final mid = Accounts.main.mid;
 
   final RxBool asc = false.obs;
 
-  final LaterBaseController baseCtr = Get.put(LaterBaseController());
+  late final LaterBaseController baseCtr = Get.put(
+    LaterBaseController(),
+    tag: instanceSuffix,
+  );
 
   @override
   RxBool get enableMultiSelect => baseCtr.enableMultiSelect;
@@ -145,7 +155,9 @@ class LaterController extends MultiSelectController<LaterData, LaterItemModel>
             ..remove(laterViewType);
           for (final item in restTypes) {
             try {
-              Get.find<LaterController>(tag: item.type.toString()).onReload();
+              Get.find<LaterController>(
+                tag: _tag(item.type.toString()),
+              ).onReload();
             } catch (_) {}
           }
           SmartDialog.showToast('已清空');

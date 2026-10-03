@@ -5,7 +5,6 @@ import 'package:PiliPlus/common/widgets/color_palette.dart';
 import 'package:PiliPlus/common/widgets/custom_toast.dart';
 import 'package:PiliPlus/common/widgets/dialog/dialog.dart';
 import 'package:PiliPlus/common/widgets/image/network_img_layer.dart';
-import 'package:PiliPlus/common/widgets/scale_app.dart';
 import 'package:PiliPlus/common/widgets/scroll_physics.dart'
     show kSpringDescription;
 import 'package:PiliPlus/common/widgets/stateful_builder.dart';
@@ -494,7 +493,6 @@ void _showUiScaleDialog(
             GStorage.setting.delete(SettingBoxKey.uiScale).whenComplete(() {
               setState();
               Get.appUpdate();
-              ScaledWidgetsFlutterBinding.instance.scaleFactor = 1.0;
             });
           },
           child: const Text('重置'),
@@ -513,7 +511,6 @@ void _showUiScaleDialog(
               () {
                 setState();
                 Get.appUpdate();
-                ScaledWidgetsFlutterBinding.instance.scaleFactor = uiScale;
               },
             );
           },

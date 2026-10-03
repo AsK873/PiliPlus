@@ -38,6 +38,28 @@ class MineController extends CommonDataController<FavFolderData, FavFolderData>
   ThemeType get nextThemeType =>
       ThemeType.values[(themeType.value.index + 1) % ThemeType.values.length];
 
+  // ===== 桌面端主题切换：循环里不再出现「跟随系统」（仅桌面端入口） =====
+  // 「跟随系统」仍完整保留在设置页「主题模式」（setting/models/style_settings.dart）；
+  // 桌面端侧栏的那个循环入口不再提供它，因此当前为 [ThemeType.system]（可能来自
+  // 设置页或旧偏好）时，按**实际生效的明暗**（`Theme.of(context).brightness`，
+  // 由宿主侧栏传入）解析成具体目标与图标，入口始终只在浅色/深色之间往返。
+  // 移动端（「我的」页顶栏同一个按钮）继续使用 [nextThemeType] / [onChangeTheme]，
+  // 行为逐字不变。
+
+  /// 桌面端主题图标：system 按实际生效的明暗显示（不再出现「跟随系统」图标）
+  Icon themeIconDesktop({required bool isDark}) => switch (themeType.value) {
+    ThemeType.system => (isDark ? ThemeType.dark : ThemeType.light).icon,
+    final ThemeType type => type.icon,
+  };
+
+  /// 桌面端「下一项」：浅色 ⇄ 深色，不经过 system
+  ThemeType nextThemeTypeDesktop({required bool isDark}) =>
+      switch (themeType.value) {
+        ThemeType.light => ThemeType.dark,
+        ThemeType.dark => ThemeType.light,
+        ThemeType.system => isDark ? ThemeType.light : ThemeType.dark,
+      };
+
   static RxBool anonymity =
       (Accounts.account.isNotEmpty && !Accounts.heartbeat.isLogin).obs;
 
@@ -264,6 +286,15 @@ class MineController extends CommonDataController<FavFolderData, FavFolderData>
 
   void onChangeTheme() {
     final newVal = nextThemeType;
+    themeType.value = newVal;
+    GStorage.setting.put(SettingBoxKey.themeMode, newVal.index);
+    Get.changeThemeMode(ThemeUtils.themeMode = newVal.toThemeMode);
+  }
+
+  /// 桌面端主题切换：写入与设置页「主题模式」相同的 Pref，立即生效，
+  /// 与 [onChangeTheme] 唯一区别是**循环不含 system**（见 [nextThemeTypeDesktop]）。
+  void onChangeThemeDesktop({required bool isDark}) {
+    final newVal = nextThemeTypeDesktop(isDark: isDark);
     themeType.value = newVal;
     GStorage.setting.put(SettingBoxKey.themeMode, newVal.index);
     Get.changeThemeMode(ThemeUtils.themeMode = newVal.toThemeMode);

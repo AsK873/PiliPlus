@@ -103,7 +103,6 @@ class _SearchArticlePanelState
         },
         itemCount: list.length,
       ),
-      maxWidth: 1280,
     );
   }
 

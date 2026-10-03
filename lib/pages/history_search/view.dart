@@ -47,7 +47,6 @@ class _HistorySearchPageState
         },
         itemCount: list.length,
       ),
-      maxWidth: 1280,
     );
   }
 }

@@ -6,6 +6,7 @@ import 'package:PiliPlus/common/style.dart';
 import 'package:PiliPlus/common/widgets/desktop/desktop_search_panel.dart';
 import 'package:PiliPlus/common/widgets/desktop/desktop_shortcuts.dart';
 import 'package:PiliPlus/common/widgets/desktop/desktop_side_bar.dart';
+import 'package:PiliPlus/main.dart' show windowMinimumSize;
 import 'package:PiliPlus/common/widgets/desktop/desktop_top_bar.dart';
 import 'package:PiliPlus/common/widgets/floating_navigation_bar.dart';
 import 'package:PiliPlus/common/widgets/flutter/pop_scope.dart';
@@ -13,8 +14,14 @@ import 'package:PiliPlus/common/widgets/image/network_img_layer.dart';
 import 'package:PiliPlus/common/widgets/main_layout.dart';
 import 'package:PiliPlus/common/widgets/route_aware_mixin.dart';
 import 'package:PiliPlus/models/common/nav_bar_config.dart';
+import 'package:PiliPlus/pages/fav/view.dart';
+import 'package:PiliPlus/pages/history/view.dart';
 import 'package:PiliPlus/pages/home/view.dart';
+import 'package:PiliPlus/pages/later/view.dart';
 import 'package:PiliPlus/pages/main/controller.dart';
+import 'package:PiliPlus/pages/mine/view.dart';
+import 'package:PiliPlus/pages/subscription/view.dart';
+import 'package:PiliPlus/pages/whisper/view.dart';
 import 'package:PiliPlus/plugin/pl_player/controller.dart';
 import 'package:PiliPlus/utils/android/android_helper.dart';
 import 'package:PiliPlus/utils/app_scheme.dart';
@@ -119,6 +126,14 @@ class _MainAppState extends PopScopeState<MainApp>
   @override
   void didPushNext() {
     removeObserverMobile(this);
+    // 「我的」页快捷入口的就地预览（真实页面组件的第二个实例）不能与同类型的
+    // 完整页面同时存活：这些页面在 initState 里 Get.put、dispose 里 Get.delete，
+    // 两实例会共用同一个控制器并互相删除（例如 /fav 的 FavController.scrollController
+    // 被两个滚动视图同时 attach）。压入同名路由（/fav、/whisper、/history…）前
+    // 先收起预览，预览实例在本帧出树后再由路由页自行注册。
+    if (_mainController.desktopShortcutPreview.value == Get.currentRoute) {
+      _mainController.desktopShortcutPreview.value = null;
+    }
     super.didPushNext();
   }
 
@@ -170,6 +185,11 @@ class _MainAppState extends PopScopeState<MainApp>
     if (PlPlayerController.instance?.isDesktopPip ?? false) {
       return;
     }
+    // 播放器全屏（含全屏期间窗口被移动）同样不写回几何：
+    // 全屏是一次性 SetWindowPos，若在此持久化会把全屏尺寸/位置当成用户窗口几何。
+    if (PlPlayerController.instance?.isFullScreen.value == true) {
+      return;
+    }
     final Offset offset = await windowManager.getPosition();
     _setting.put(SettingBoxKey.windowPosition, [offset.dx, offset.dy]);
   }
@@ -179,7 +199,18 @@ class _MainAppState extends PopScopeState<MainApp>
     if (PlPlayerController.instance?.isDesktopPip ?? false) {
       return;
     }
+    // 同上：播放器全屏期间不写回 windowSize / windowPosition，退出全屏后恢复保存。
+    if (PlPlayerController.instance?.isFullScreen.value == true) {
+      return;
+    }
     final Rect bounds = await windowManager.getBounds();
+    // 被最小窗口尺寸（固定 960x640）夹住时不写回：
+    // 该尺寸不是用户选择，持久化后会把窗口几何整体撑大。
+    final minSize = windowMinimumSize();
+    if (bounds.width <= minSize.width + 0.5 &&
+        bounds.height <= minSize.height + 0.5) {
+      return;
+    }
     _setting.putAll({
       SettingBoxKey.windowSize: [bounds.width, bounds.height],
       SettingBoxKey.windowPosition: [bounds.left, bounds.top],
@@ -421,13 +452,134 @@ class _MainAppState extends PopScopeState<MainApp>
     return bottomNav;
   }
 
+  /// 桌面端：右侧主内容区 = 常驻的主 Tab + 带动画的内容页层。
+  /// 主 Tab 的 PageView/TabBarView 始终留在树中（不销毁），只叠加 / 移除
+  /// 内容页层，因此首页/动态/我的的滚动位置与状态保持
+  /// （与改动前 IndexedStack 的保活语义一致）。
+  Widget _desktopContentArea(Widget child) {
+    if (!PlatformUtils.isDesktop) {
+      return child;
+    }
+    return Obx(() {
+      final content = _mainController.desktopContentPage.value;
+      _syncRootCanPop(hasContentPage: content != null);
+      return _DesktopContentArea(
+        route: _mainController.desktopContentRoute.value,
+        content: content,
+        child: child,
+      );
+    });
+  }
+
+  /// 同步根路由的 pop 否决（[PopScopeState.canPopNotifier]，仅桌面端）：
+  ///
+  /// 主壳 MainApp 通过 `initCanPop => false` 在根路由上登记了 pop 否决，用于把
+  /// 返回请求交给它自己的 onPopInvokedWithResult（退出 / 切回首页 Tab）。
+  /// 但桌面内容页（历史记录等）是**就地承载、不是路由**，它们 `popScope(canPop:
+  /// !enableMultiSelect)` 内部态也登记在同一个根路由上；两者混在一起会让
+  /// `Get.routing.route.popDisposition` 恒为 doNotPop，导致 main.dart 的 `_onBack`
+  /// 在到达 desktopContentBackHandler 之前就 return（侧键失效的根因）。
+  ///
+  /// 因此：承载内容页时撤掉主壳自己的否决，让根路由的否决只反映内容页声明的内部态
+  /// （多选态 → 由内容页自己退出，与改动前一致）；收起内容页后恢复否决，
+  /// 维持原有根路由兜底行为。移动端不执行（[PlatformUtils.isDesktop] 保护）。
+  void _syncRootCanPop({required bool hasContentPage}) {
+    // 未承载内容页 → 保持主壳原有的否决（canPop=false）；
+    // 承载内容页 → 撤掉主壳的否决（canPop=true），把否决权让给内容页自己的 popScope。
+    final canPop = hasContentPage;
+    if (canPopNotifier.value != canPop) {
+      canPopNotifier.value = canPop;
+    }
+  }
+
+  /// 桌面顶栏是否显示：只在「当前主 Tab 是首页 且 未承载桌面内容页」时显示。
+  /// 其余页面（动态 / 我的 / 历史记录等就地内容页）完全无顶栏。
+  /// 注意：读取了 Rx，必须在响应式构建（Obx）里调用。
+  bool get _showDesktopTopBar {
+    final nav = _mainController.navigationBars;
+    final index = _mainController.selectedIndex.value;
+    return _mainController.desktopContentPage.value == null &&
+        index < nav.length &&
+        nav[index] == NavigationBarType.home;
+  }
+
+  /// 主 Tab 页：桌面端把「快捷入口」的就地打开回调交给「我的」页
+  /// （与侧栏共用同一个闭包 → 两处入口行为完全一致）；
+  /// 移动端 / 其它主 Tab 保持原样（返回既有页面实例）。
+  Widget _tabPage(NavigationBarType type) {
+    if (PlatformUtils.isDesktop && type == NavigationBarType.mine) {
+      return MinePage(onSelectShortcut: _openDesktopShortcut);
+    }
+    return type.page;
+  }
+
+  /// 桌面快捷入口的统一点击路径（侧栏与「我的」页共用同一个闭包）：
+  /// 在主内容区就地承载对应页面（页面自带返回按钮 + 两级返回 + 鼠标侧键），
+  /// 返回 true 表示已处理；未接入的入口返回 false → 调用方保持原有
+  /// `Get.toNamed(entry.route)` 行为不变。
+  ///
+  /// 「我的」页的就地预览若正在显示，先把它收起（清空预览选中项）并**推迟一帧**
+  /// 再建内容页：预览实例与内容页实例会用同一套 GetX 控制器
+  /// （initState `Get.put` / dispose `Get.delete`），必须先让预览出树销毁，
+  /// 内容页才能拿到干净的控制器与滚动控制器（否则预览 dispose 会删掉内容页正在
+  /// 用的控制器，例如 LaterBaseController）。
+  bool _openDesktopShortcut(DesktopNavEntry entry) {
+    if (_mainController.desktopShortcutPreview.value != null) {
+      _mainController.desktopShortcutPreview.value = null;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) _openDesktopContentPage(entry);
+      });
+      return true;
+    }
+    return _openDesktopContentPage(entry);
+  }
+
+  bool _openDesktopContentPage(DesktopNavEntry entry) {
+    final Widget? page = switch (entry.route) {
+      '/history' => HistoryPage(
+        desktopEmbedded: true,
+        onBack: _mainController.closeDesktopContentPage,
+      ),
+      '/later' => LaterPage(
+        desktopEmbedded: true,
+        onBack: _mainController.closeDesktopContentPage,
+      ),
+      '/fav' => FavPage(
+        desktopEmbedded: true,
+        onBack: _mainController.closeDesktopContentPage,
+      ),
+      '/subscription' => SubPage(
+        desktopEmbedded: true,
+        onBack: _mainController.closeDesktopContentPage,
+      ),
+      '/whisper' => WhisperPage(
+        desktopEmbedded: true,
+        onBack: _mainController.closeDesktopContentPage,
+      ),
+      _ => null,
+    };
+    if (page == null) {
+      return false;
+    }
+    _mainController.openDesktopContentPage(entry.route, page);
+    return true;
+  }
+
   Widget _sideBar() {
     // M2 桌面导航（与构建树同一套：桌面端走图标+文字扩展侧栏）
     if (PlatformUtils.isDesktop) {
       return DesktopSideBar(
         mainController: _mainController,
         colorScheme: _colorScheme,
-        onSelect: _mainController.setIndex,
+        onSelect: (value) {
+          // 切回主 Tab（首页/动态/我的）时先收起桌面内容页
+          _mainController
+            ..closeDesktopContentPage()
+            ..setIndex(value);
+        },
+        // 桌面主内容区就地承载的快捷入口（页面自带返回按钮 + 两级返回 + 侧键），
+        // 与「我的」页快捷入口共用同一个闭包
+        onSelectShortcut: _openDesktopShortcut,
       );
     }
     if (_mainController.navigationBars.length > 1) {
@@ -504,13 +656,13 @@ class _MainAppState extends PopScopeState<MainApp>
         controller: _mainController.controller,
         physics: const NeverScrollableScrollPhysics(),
         scrollDirection: _mainController.useBottomNav ? .horizontal : .vertical,
-        children: _mainController.navigationBars.map((i) => i.page).toList(),
+        children: _mainController.navigationBars.map(_tabPage).toList(),
       );
     } else {
       child = PageView(
         controller: _mainController.controller,
         physics: const NeverScrollableScrollPhysics(),
-        children: _mainController.navigationBars.map((i) => i.page).toList(),
+        children: _mainController.navigationBars.map(_tabPage).toList(),
       );
     }
 
@@ -549,7 +701,9 @@ class _MainAppState extends PopScopeState<MainApp>
     }
 
     // 桌面顶栏：桌面 + 宽窗口（沿用既有 showNavbar = width > 800，不新增断点）
-    // 时在内容区上方插入全局工具条（后退/刷新/标题 + 唯一搜索入口，搜索框贴右）；
+    // 时，**仅首页**（当前主 Tab 是首页，且未承载桌面内容页）在内容区上方保留
+    // 一个只有搜索框的顶栏；其余页面（动态 / 我的 / 桌面内容页）顶栏与其下的
+    // Divider 都不进 widget 树，内容直接顶到原顶栏位置。
     // 搜索历史 / 联想浮层在搜索框正下方按同一右边缘就地展开，不跳转搜索页。
     final Widget body = PlatformUtils.isDesktop && context.showNavbar
         ? Stack(
@@ -557,84 +711,109 @@ class _MainAppState extends PopScopeState<MainApp>
             children: [
               Column(
                 children: [
-                  DesktopTopBar(
-                    mainController: _mainController,
-                    colorScheme: _colorScheme,
-                    searchPanelOpen: _searchPanelOpen,
-                    onOpenSearch: () => setState(() => _searchPanelOpen = true),
-                    onCloseSearch: _closeSearch,
-                    onOverlayChanged: (state) => _searchOverlay.value = state,
-                  ),
-                  const Divider(height: 1),
-                  Expanded(child: child),
+                  // 顶栏槽位固定为同一个 Obx（元素类型不随显示 / 隐藏变化），
+                  // 因此下方 Expanded 不会被重建，_desktopContentArea 里
+                  // IndexedStack 的保活语义不变（主 Tab 滚动位置不丢）。
+                  Obx(() {
+                    if (!_showDesktopTopBar) {
+                      // 顶栏不在树里时浮层也不渲染，并同步收起展开状态，
+                      // 避免切回首页时残留搜索历史浮层。
+                      if (_searchPanelOpen) {
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          if (mounted) _closeSearch();
+                        });
+                      }
+                      return const SizedBox.shrink();
+                    }
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        DesktopTopBar(
+                          searchPanelOpen: _searchPanelOpen,
+                          onOpenSearch: () =>
+                              setState(() => _searchPanelOpen = true),
+                          onCloseSearch: _closeSearch,
+                          onOverlayChanged: (state) =>
+                              _searchOverlay.value = state,
+                        ),
+                        const Divider(height: 1),
+                      ],
+                    );
+                  }),
+                  Expanded(child: _desktopContentArea(child)),
                 ],
               ),
               // 搜索浮层：输入为空显示搜索历史，输入关键词后显示联想推荐。
+              // 只在顶栏显示（首页）时渲染：非首页连遮挡层一起消失。
               if (_searchPanelOpen)
-                ValueListenableBuilder<DesktopSearchOverlayState>(
-                  valueListenable: _searchOverlay,
-                  builder: (context, state, _) {
-                    if (!state.visible) {
-                      return const SizedBox.shrink();
-                    }
-                    return Stack(
-                      fit: StackFit.expand,
-                      children: [
-                        // 透明遮罩：覆盖整个背景，但**挖空搜索框**所在矩形。
-                        // 点搜索框不取消；点浮层不取消（浮层自身吸收点击）；
-                        // 点其余任何位置都收起浮层。
-                        Positioned(
-                          top: 0,
-                          left: 0,
-                          right: 0,
-                          height: DesktopTopBar.searchTop,
-                          child: _searchDismissBarrier(),
-                        ),
-                        Positioned(
-                          top:
-                              DesktopTopBar.searchTop +
-                              DesktopTopBar.searchHeight,
-                          left: 0,
-                          right: 0,
-                          bottom: 0,
-                          child: _searchDismissBarrier(),
-                        ),
-                        Positioned(
-                          top: DesktopTopBar.searchTop,
-                          left: 0,
-                          right:
-                              DesktopTopBar.searchWidth +
-                              DesktopTopBar.paddingH,
-                          height: DesktopTopBar.searchHeight,
-                          child: _searchDismissBarrier(),
-                        ),
-                        Positioned(
-                          top: DesktopTopBar.searchTop,
-                          right: 0,
-                          width: DesktopTopBar.paddingH,
-                          height: DesktopTopBar.searchHeight,
-                          child: _searchDismissBarrier(),
-                        ),
-                        // 浮层：锚定在搜索框正下方，右边缘与搜索框一致
-                        Positioned(
-                          top: DesktopTopBar.height + 1,
-                          right: DesktopTopBar.paddingH,
-                          child: DesktopSearchPanel(
-                            state: state,
-                            onSelect: (word) {
-                              _closeSearch();
-                              desktopSearch(word);
-                            },
-                            onClose: _closeSearch,
-                          ),
-                        ),
-                      ],
-                    );
-                  },
+                Obx(
+                  () => _showDesktopTopBar
+                      ? ValueListenableBuilder<DesktopSearchOverlayState>(
+                          valueListenable: _searchOverlay,
+                          builder: (context, state, _) {
+                            if (!state.visible) {
+                              return const SizedBox.shrink();
+                            }
+                            return Stack(
+                              fit: StackFit.expand,
+                              children: [
+                                // 透明遮罩：覆盖整个背景，但**挖空搜索框**所在矩形。
+                                // 点搜索框不取消；点浮层不取消（浮层自身吸收点击）；
+                                // 点其余任何位置都收起浮层。
+                                Positioned(
+                                  top: 0,
+                                  left: 0,
+                                  right: 0,
+                                  height: DesktopTopBar.searchTop,
+                                  child: _searchDismissBarrier(),
+                                ),
+                                Positioned(
+                                  top:
+                                      DesktopTopBar.searchTop +
+                                      DesktopTopBar.searchHeight,
+                                  left: 0,
+                                  right: 0,
+                                  bottom: 0,
+                                  child: _searchDismissBarrier(),
+                                ),
+                                Positioned(
+                                  top: DesktopTopBar.searchTop,
+                                  left: 0,
+                                  right:
+                                      DesktopTopBar.searchWidth +
+                                      DesktopTopBar.paddingH,
+                                  height: DesktopTopBar.searchHeight,
+                                  child: _searchDismissBarrier(),
+                                ),
+                                Positioned(
+                                  top: DesktopTopBar.searchTop,
+                                  right: 0,
+                                  width: DesktopTopBar.paddingH,
+                                  height: DesktopTopBar.searchHeight,
+                                  child: _searchDismissBarrier(),
+                                ),
+                                // 浮层：锚定在搜索框正下方，右边缘与搜索框一致
+                                Positioned(
+                                  top: DesktopTopBar.height + 1,
+                                  right: DesktopTopBar.paddingH,
+                                  child: DesktopSearchPanel(
+                                    state: state,
+                                    onSelect: (word) {
+                                      _closeSearch();
+                                      desktopSearch(word);
+                                    },
+                                    onClose: _closeSearch,
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        )
+                      : const SizedBox.shrink(),
                 ),
             ],
           )
-        : child;
+        : _desktopContentArea(child);
 
     child = Material(
       child: MainLayout(
@@ -707,6 +886,112 @@ class _MainAppState extends PopScopeState<MainApp>
         userAvatar(colorScheme: _colorScheme, mainController: _mainController),
         const SizedBox(height: 8),
         msgBadge(_mainController),
+      ],
+    );
+  }
+}
+
+/// 桌面端右侧「主内容区」的过渡容器（仅桌面端构建，移动端不经此处）。
+///
+/// - [child]：主 Tab（首页 / 动态 / 我的）常驻树中、**不参与动画**，
+///   保活语义与改动前的 IndexedStack 一致（这三个页的滚动位置与状态不丢）；
+/// - [content]：内容页层，打开 / 换页时做统一的「淡入 + 自下方 6px 上移入位」；
+///   旧内容页立即出树，内容页 initState / dispose 的时机与改动前完全相同
+///   （内容页在 initState 里 `Get.put`、在 dispose 里 `Get.delete`，不能让旧实例
+///   多留一个过渡周期，否则快速重开同一入口会出现两个实例共用同一控制器）；
+/// - 收起内容页时，改由常驻的主 Tab 层走同一套入场动画（方向对称）。
+class _DesktopContentArea extends StatefulWidget {
+  const _DesktopContentArea({
+    required this.child,
+    required this.route,
+    required this.content,
+  });
+
+  final Widget child;
+
+  /// 当前内容页对应的路由（仅用于识别「内容页是否发生了切换」）
+  final String? route;
+
+  /// 当前内容页；null = 显示主 Tab
+  final Widget? content;
+
+  @override
+  State<_DesktopContentArea> createState() => _DesktopContentAreaState();
+}
+
+class _DesktopContentAreaState extends State<_DesktopContentArea>
+    with SingleTickerProviderStateMixin {
+  /// 过渡时长 ≈180ms，曲线 Curves.easeOutCubic
+  static const Duration _duration = Duration(milliseconds: 180);
+
+  /// 入场位移：+6px → 0px
+  /// （SlideTransition 的偏移是「分数」，这里用像素位移做到精确 6px）
+  static const double _offsetY = 6;
+
+  late final AnimationController _controller = AnimationController(
+    vsync: this,
+    duration: _duration,
+    value: 1.0,
+  );
+
+  late final CurvedAnimation _enter = CurvedAnimation(
+    parent: _controller,
+    curve: Curves.easeOutCubic,
+  );
+
+  @override
+  void didUpdateWidget(covariant _DesktopContentArea oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // 只在内容页发生切换（打开 / 换页 / 收起）时重播一次入场动画；
+    // 重复点击同一入口（route 不变）不重播。
+    if (widget.route != oldWidget.route) {
+      _controller.forward(from: 0.0);
+    }
+  }
+
+  @override
+  void dispose() {
+    _enter.dispose();
+    _controller.dispose();
+    super.dispose();
+  }
+
+  /// 入场过渡：FadeTransition（opacity 0 → 1）+ 自下方 6px 上移入位
+  /// （无 Scale 动画）。[animation] 传 [kAlwaysCompleteAnimation] 表示
+  /// 该层常驻、当前不参与过渡。
+  Widget _enterTransition(Widget child, Animation<double> animation) {
+    return FadeTransition(
+      opacity: animation,
+      child: AnimatedBuilder(
+        animation: animation,
+        child: child,
+        builder: (context, child) => Transform.translate(
+          offset: Offset(0.0, _offsetY * (1.0 - animation.value)),
+          child: child,
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final content = widget.content;
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        // 主 Tab 层：常驻保活；只有「收起内容页」时才播一次入场动画
+        _enterTransition(
+          widget.child,
+          content == null ? _enter : kAlwaysCompleteAnimation,
+        ),
+        if (content != null)
+          // 内容页层：透明色只用于挡住下层主 Tab 的命中测试（不改观感），
+          // 等价于原 IndexedStack「只命中当前显示页」的行为；
+          // 放在过渡之外，保证位移期间整块区域都不可穿透
+          ColoredBox(
+            color: Colors.transparent,
+            child: _enterTransition(content, _enter),
+          ),
       ],
     );
   }

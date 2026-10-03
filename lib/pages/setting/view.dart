@@ -1,3 +1,4 @@
+import 'package:PiliPlus/common/style.dart';
 import 'package:PiliPlus/common/widgets/desktop/desktop_list_tile.dart';
 import 'package:PiliPlus/common/widgets/desktop/desktop_section.dart';
 import 'package:PiliPlus/common/widgets/flutter/list_tile.dart';
@@ -15,6 +16,7 @@ import 'package:PiliPlus/utils/accounts/account.dart';
 import 'package:PiliPlus/utils/extension/context_ext.dart';
 import 'package:PiliPlus/utils/extension/size_ext.dart';
 import 'package:PiliPlus/utils/extension/widget_ext.dart';
+import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:PiliPlus/utils/utils.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
@@ -138,9 +140,13 @@ class _SettingPageState extends State<SettingPage> {
                       ),
                     ],
                   ),
-            // 桌面端内容限宽居中（1280）；窄屏下宽度本来就不足，自动无效果
+            // 桌面端内容限宽居中（1480 = [Style.contentMaxWidth]，与首页/历史/
+            // 稍后/收藏/订阅/私信同一唯一来源）；非桌面（含宽屏平板）保持原
+            // 1280，移动端不受本轮影响。
           ).constraintWidth(
-            constraints: const BoxConstraints(maxWidth: 1280),
+            constraints: BoxConstraints(
+              maxWidth: PlatformUtils.isDesktop ? Style.contentMaxWidth : 1280,
+            ),
           ),
     );
   }

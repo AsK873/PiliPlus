@@ -8,7 +8,14 @@ enum LaterViewType {
   // viewed(3, '已看完'),
   ;
 
-  Widget get page => LaterViewChildPage(laterViewType: this);
+  /// 页面工厂方法（原为 `Widget get page`）。
+  /// [instanceSuffix]：GetX 实例命名空间后缀，由宿主逐级下发
+  /// （「我的」页内嵌预览实例为 `@preview`；移动端 / 路由方式 / 主壳内容区
+  /// 嵌入为 `''`，与改动前的 key 逐字一致）。
+  Widget page({String instanceSuffix = ''}) => LaterViewChildPage(
+    laterViewType: this,
+    instanceSuffix: instanceSuffix,
+  );
 
   final int type;
   final String title;

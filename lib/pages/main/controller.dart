@@ -333,6 +333,58 @@ class MainController extends GetxController
     }
   }
 
+  // ===== 桌面端：主内容区承载的二级页（当前仅接入「历史记录」） =====
+
+  /// 桌面主内容区当前就地显示的二级页；null = 显示主 Tab（首页/动态/我的）
+  final Rxn<Widget> desktopContentPage = Rxn<Widget>();
+
+  /// 当前内容页对应的路由（供侧栏把选中态定位到该入口）
+  final RxnString desktopContentRoute = RxnString();
+
+  /// 桌面内容页的返回处理器（由内容页在嵌入期间注册）。
+  /// 供既有全局鼠标返回侧键机制（main.dart 的 BackDetector → _onBack）复用，
+  /// 不新增第二套监听/导航。
+  VoidCallback? desktopContentBackHandler;
+
+  /// 「我的」页快捷入口当前就地预览的入口 route（null = 未预览）。
+  /// 预览是**同一份页面组件的第二个实例**（desktopEmbedded=false），
+  /// 而这些页面在 initState 里 `Get.put` 控制器、在 dispose 里 `Get.delete`，
+  /// 两个实例同时存活时会共用同一个控制器（含其 ScrollController）并互相删除；
+  /// 因此本值由主壳统一看管：打开完整内容页之前先清空它并等预览实例出树
+  /// （见 main.dart 的 `_openDesktopShortcut`），压入同名的二级路由时也先清空
+  /// （见 main.dart 的 `didPushNext`）。
+  final RxnString desktopShortcutPreview = RxnString();
+
+  /// 「我的」页快捷入口**上一次选中的预览项**（记忆字段，仅桌面端）。
+  ///
+  /// 与 [desktopShortcutPreview] 的区别：后者是「当前正在就地预览的项」，
+  /// 会被主壳在打开完整内容页前清空（见 main.dart 的 `_openDesktopShortcut`
+  /// 与 `didPushNext`），因此不能用来记忆用户的选择；本字段只在用户在
+  /// 「我的」页点击选项卡时写入，主壳的清空动作不会碰它。
+  ///
+  /// 仅桌面端读写（`PlatformUtils.isDesktop` 分支内）；移动端不渲染
+  /// 桌面分支、也不读取本字段，行为不变。
+  String? desktopShortcutLastRoute;
+
+  /// 「我的」页进入时默认展开的预览项：优先上次选中项，
+  /// **从未选过 → 默认「历史记录」**（`/history`，即侧栏快捷入口第一项）。
+  String get desktopShortcutDefaultRoute =>
+      desktopShortcutLastRoute ?? '/history';
+
+  /// 在桌面主内容区就地显示二级页（不 push 路由，侧栏与顶栏保持常驻）
+  void openDesktopContentPage(String route, Widget page) {
+    desktopContentRoute.value = route;
+    desktopContentPage.value = page;
+  }
+
+  /// 收起桌面二级页，回到主 Tab
+  void closeDesktopContentPage() {
+    if (desktopContentPage.value != null) {
+      desktopContentPage.value = null;
+      desktopContentRoute.value = null;
+    }
+  }
+
   void setSearchBar() {
     if (hasHome) {
       homeController.showTopBar?.value = true;

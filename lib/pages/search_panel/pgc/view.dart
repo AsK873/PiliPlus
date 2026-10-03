@@ -64,7 +64,6 @@ class _SearchPgcPanelState
         },
         itemCount: list.length,
       ),
-      maxWidth: 1280,
     );
   }
 

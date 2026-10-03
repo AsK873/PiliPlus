@@ -24,10 +24,11 @@ class DesktopSection extends StatelessWidget {
     this.onTitleTap,
   });
 
-  /// 分组标题（bodyMedium + w600，与既有 WinUiSectionHeader 一致）
+  /// 分组标题（桌面字号阶「分组/卡片标题」：[DesktopTokens.fontSectionTitle]
+  /// = 16 + w600，与既有 WinUiSectionHeader 一致）
   final String? title;
 
-  /// 分组副标题（bodySmall + 次级文字色）
+  /// 分组副标题（[DesktopTokens.fontSecondary] = 13 + 次级文字色）
   final String? subtitle;
 
   /// 标题行尾部控件（刷新按钮等）
@@ -129,6 +130,7 @@ class DesktopSection extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: theme.textTheme.bodyMedium?.copyWith(
+              fontSize: DesktopTokens.fontSectionTitle,
               fontWeight: FontWeight.w600,
               color: DesktopTokens.titleColor(colorScheme),
             ),
@@ -139,6 +141,7 @@ class DesktopSection extends StatelessWidget {
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: theme.textTheme.bodySmall?.copyWith(
+              fontSize: DesktopTokens.fontSecondary,
               color: DesktopTokens.subtitleColor(colorScheme),
             ),
           ),

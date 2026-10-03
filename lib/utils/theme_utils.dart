@@ -70,13 +70,28 @@ abstract final class ThemeUtils {
         centerTitle: false,
         scrolledUnderElevation: 0,
         backgroundColor: colorScheme.surface,
+        // 页面标题：桌面端走「桌面字号阶」的页面标题档（18），
+        // 移动端保持原 16（未改动，见 DesktopTokens.fontPageTitle）。
         titleTextStyle: TextStyle(
-          fontSize: 16,
+          fontSize: PlatformUtils.isDesktop
+              ? DesktopTokens.fontPageTitle
+              : 16,
           fontWeight: fontWeight,
           fontFamily: fontFamily,
           color: colorScheme.onSurface,
         ),
       ),
+      // Tab 标题：桌面端 14 → 16（桌面字号阶「分组/Tab 标题」），
+      // 移动端传 null → 与改动前完全一致（TabBarThemeData 为空时
+      // TabBar 取 Material3 默认 titleSmall 14）。
+      tabBarTheme: PlatformUtils.isDesktop
+          ? const TabBarThemeData(
+              labelStyle: TextStyle(fontSize: DesktopTokens.fontSectionTitle),
+              unselectedLabelStyle: TextStyle(
+                fontSize: DesktopTokens.fontSectionTitle,
+              ),
+            )
+          : null,
       // 桌面端：BottomSheet 统一为固定尺寸弹层（详见下面 bottomSheetTheme）
       navigationBarTheme: NavigationBarThemeData(
         surfaceTintColor: isDark ? colorScheme.surfaceContainerHighest : null,

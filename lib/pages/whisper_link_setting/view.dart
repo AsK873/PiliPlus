@@ -1,3 +1,4 @@
+import 'package:PiliPlus/common/style.dart';
 import 'package:PiliPlus/common/widgets/pendant_avatar.dart';
 import 'package:PiliPlus/common/widgets/scaffold/simple_scaffold.dart';
 import 'package:PiliPlus/http/loading_state.dart';
@@ -88,11 +89,13 @@ class _WhisperLinkSettingPageState extends State<WhisperLinkSettingPage> {
     );
     return SimpleScaffold(
       appBar: AppBar(title: const Text('聊天设置')),
-      // M8：桌面内容限宽居中（聊天设置）。
+      // M8：桌面内容限宽居中（1480 = Style.contentMaxWidth，桌面统一唯一来源）。
       body: PlatformUtils.isDesktop
           ? Center(
               child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 1280),
+                constraints: const BoxConstraints(
+                  maxWidth: Style.contentMaxWidth,
+                ),
                 child: listBody,
               ),
             )

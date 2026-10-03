@@ -1,5 +1,69 @@
 part of 'view.dart';
 
+/// 桌面「系统全屏」下放大的播放器 UI 控制层包装。
+///
+/// 用「虚拟视口」实现：先让 [child] 在缩小后的坐标系
+/// (`width / scale` × `height / scale`) 里按原逻辑布局，再用 [Transform.scale]
+/// 以左上角为原点放大 [scale] 倍。放大后占位仍是原来的 `width` × `height`，
+/// 只有控件本身变大，不会让父级约束去重排整个播放器。
+///
+/// [scale] <= 1.0（普通窗口、窗口最大化、小尺寸全屏）或非桌面系统全屏时
+/// 直接返回 [child]，不引入 Transform / LayoutBuilder / SizedBox 任何层。
+class _PlayerUiScale extends StatelessWidget {
+  const _PlayerUiScale({
+    required this.scale,
+    required this.viewport,
+    required this.child,
+    this.alignment = Alignment.topLeft,
+  });
+
+  /// 放大倍率，来自 `build()` 中按 `maxWidth`/`maxHeight` 算好的值。
+  final double scale;
+
+  /// 播放器整体尺寸：高度约束无界时（只给 left/right 的 Positioned）的兜底视口。
+  final Size viewport;
+
+  /// child 在虚拟视口内的对齐方式；底部对齐的浮层（进度条）传 [Alignment.bottomCenter]。
+  final Alignment alignment;
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    if (scale <= 1.0 ||
+        !PlatformUtils.isDesktop ||
+        !isDesktopSystemFullScreen) {
+      return child;
+    }
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final width = constraints.hasBoundedWidth
+            ? constraints.maxWidth
+            : viewport.width;
+        final height = constraints.hasBoundedHeight
+            ? constraints.maxHeight
+            : viewport.height;
+        return SizedBox(
+          width: width,
+          height: height,
+          child: OverflowBox(
+            alignment: Alignment.topLeft,
+            minWidth: width / scale,
+            maxWidth: width / scale,
+            minHeight: height / scale,
+            maxHeight: height / scale,
+            child: Transform.scale(
+              scale: scale,
+              alignment: Alignment.topLeft,
+              child: Align(alignment: alignment, child: child),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
 Widget buildDmChart(
   Color color,
   List<double> dmTrend,

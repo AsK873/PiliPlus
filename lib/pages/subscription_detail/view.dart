@@ -100,7 +100,6 @@ class _SubDetailPageState extends State<SubDetailPage> with GridMixin {
                   },
                   itemCount: response.length,
                 ),
-                maxWidth: 1280,
               )
             : HttpError(onReload: _subDetailController.onReload),
       Error(:final errMsg) => HttpError(

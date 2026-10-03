@@ -9,6 +9,13 @@ import 'package:window_manager/window_manager.dart';
 
 bool _isDesktopFullScreen = false;
 
+/// 当前是否处于桌面「系统全屏」。
+///
+/// 只在 [enterDesktopFullScreen] 且 `inAppFullScreen == false`（即非网页全屏）时
+/// 才为真，供播放器 UI 控制层判断要不要跟随系统全屏放大。
+/// 纯只读，不参与任何全屏状态管理。
+bool get isDesktopSystemFullScreen => _isDesktopFullScreen;
+
 /// 本次桌面全屏是否走了 `TitleBarStyle.hidden` 兜底。
 ///
 /// 只有"进入全屏前窗口已最大化"时才需要：那条路 window_manager 会跳过

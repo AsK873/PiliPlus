@@ -19,9 +19,15 @@ class LaterViewChildPage extends StatefulWidget {
   const LaterViewChildPage({
     super.key,
     required this.laterViewType,
+    this.instanceSuffix = '',
   });
 
   final LaterViewType laterViewType;
+
+  /// GetX 实例命名空间后缀：由宿主（[LaterPage] / `LaterViewType.page`）逐级
+  /// 下发。「我的」页内嵌预览实例为 `@preview`；移动端 / 路由方式 / 主壳内容区
+  /// 嵌入为 `''`（与改动前的 key 逐字一致）。
+  final String instanceSuffix;
 
   @override
   State<LaterViewChildPage> createState() => _LaterViewChildPageState();
@@ -30,14 +36,20 @@ class LaterViewChildPage extends StatefulWidget {
 class _LaterViewChildPageState extends State<LaterViewChildPage>
     with AutomaticKeepAliveClientMixin, GridMixin {
   late final LaterController _laterController;
-  late final _baseCtr = Get.putOrFind(LaterBaseController.new);
+  late final _baseCtr = Get.putOrFind(
+    LaterBaseController.new,
+    tag: widget.instanceSuffix,
+  );
 
   @override
   void initState() {
     super.initState();
     _laterController = Get.put(
-      LaterController(widget.laterViewType),
-      tag: widget.laterViewType.type.toString(),
+      LaterController(
+        widget.laterViewType,
+        instanceSuffix: widget.instanceSuffix,
+      ),
+      tag: '${widget.laterViewType.type}${widget.instanceSuffix}',
     );
   }
 
@@ -57,12 +69,11 @@ class _LaterViewChildPageState extends State<LaterViewChildPage>
                   ? 24
                   : MediaQuery.viewPaddingOf(context).bottom + 85,
             ),
-            // 桌面端内容限宽居中（1280）
+            // 桌面端内容限宽居中（默认 1480 = Style.contentMaxWidth）
             sliver: desktopLimitSliver(
               Obx(
                 () => _buildBody(_laterController.loadingState.value),
               ),
-              maxWidth: 1280,
             ),
           ),
         ],

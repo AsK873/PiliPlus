@@ -58,12 +58,11 @@ class _BlackListPageState extends State<BlackListPage> {
                     ? 24
                     : MediaQuery.viewPaddingOf(context).bottom + 100,
               ),
-              // M8：桌面内容限宽居中（黑名单）。
+              // M8：桌面内容限宽居中（黑名单；默认 1480 = Style.contentMaxWidth）
               sliver: desktopLimitSliver(
                 Obx(
                   () => _buildBody(_blackListController.loadingState.value),
                 ),
-                maxWidth: 1280,
               ),
             ),
           ],

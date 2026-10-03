@@ -39,12 +39,11 @@ class _FavCheesePageState extends State<FavCheesePage>
               top: 7,
               bottom: MediaQuery.viewPaddingOf(context).bottom + 100,
             ),
-            // 桌面端内容限宽居中（1280）
+            // 桌面端内容限宽居中（默认 1480 = Style.contentMaxWidth）
             sliver: desktopLimitSliver(
               Obx(
                 () => _buildBody(theme, _controller.loadingState.value),
               ),
-              maxWidth: 1280,
             ),
           ),
         ],

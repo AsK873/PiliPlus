@@ -112,7 +112,6 @@ class _SearchUserPanelState
         },
         itemCount: list.length,
       ),
-      maxWidth: 1280,
     );
   }
 

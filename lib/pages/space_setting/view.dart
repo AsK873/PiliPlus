@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:PiliPlus/common/style.dart';
 import 'package:PiliPlus/common/widgets/loading_widget/loading_widget.dart';
 import 'package:PiliPlus/common/widgets/scaffold/simple_scaffold.dart';
 import 'package:PiliPlus/http/loading_state.dart';
@@ -24,13 +25,15 @@ class _SpaceSettingPageState extends State<SpaceSettingPage> {
     final theme = Theme.of(context);
     return SimpleScaffold(
       appBar: AppBar(title: const Text('空间设置')),
-      // M8：桌面内容限宽居中（空间设置）。
+      // M8：桌面内容限宽居中（1480 = Style.contentMaxWidth，桌面统一唯一来源）。
       body: Obx(() {
         final body = _buildBody(theme, _controller.loadingState.value);
         return PlatformUtils.isDesktop
             ? Center(
                 child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 1280),
+                  constraints: const BoxConstraints(
+                    maxWidth: Style.contentMaxWidth,
+                  ),
                   child: body,
                 ),
               )

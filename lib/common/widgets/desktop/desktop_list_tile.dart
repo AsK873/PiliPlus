@@ -4,6 +4,7 @@
 // 行末可选 1px 分隔线（左右缩进 16，与卡片内边距对齐）。
 // 行骨架与 WinUiRow 保持一致，另补齐：selected 选中态、悬停提亮、
 // 手型光标、Widget 化 title/subtitle、可定制行高与内边距。
+// 字号（2026-10-05 桌面字号阶）：主标题 15 / 副标题 13；图标 20（与侧栏同值）。
 // 纯桌面组件：不做 PlatformUtils 平台判断，也不自动降级。
 // =============================================================
 import 'package:PiliPlus/common/widgets/desktop/desktop_tokens.dart';
@@ -108,6 +109,7 @@ class _DesktopListTileState extends State<DesktopListTile> {
                 if (widget.title != null)
                   DefaultTextStyle.merge(
                     style: theme.textTheme.bodyMedium?.copyWith(
+                      fontSize: DesktopTokens.fontRowTitle,
                       color: titleColor,
                       fontWeight: selected ? FontWeight.w600 : null,
                     ),
@@ -118,6 +120,7 @@ class _DesktopListTileState extends State<DesktopListTile> {
                 if (widget.subtitle != null)
                   DefaultTextStyle.merge(
                     style: theme.textTheme.bodySmall?.copyWith(
+                      fontSize: DesktopTokens.fontSecondary,
                       color: subtitleColor,
                     ),
                     maxLines: 1,

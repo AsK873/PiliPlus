@@ -147,7 +147,7 @@ class _DownloadDetailPageState extends State<DownloadDetailPage>
           body: CustomScrollView(
             slivers: [
               ViewSliverSafeArea(
-                // M8：桌面内容限宽居中（下载详情）。
+                // M8：桌面内容限宽居中（下载详情；默认 1480 = Style.contentMaxWidth）
                 sliver: desktopLimitSliver(
                   Obx(() {
                     if (_downloadItems.isNotEmpty) {
@@ -187,7 +187,6 @@ class _DownloadDetailPageState extends State<DownloadDetailPage>
                     }
                     return const HttpError();
                   }),
-                  maxWidth: 1280,
                 ),
               ),
             ],

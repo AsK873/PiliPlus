@@ -1,3 +1,4 @@
+import 'package:PiliPlus/common/style.dart';
 import 'package:PiliPlus/common/widgets/dialog/simple_dialog_option.dart';
 import 'package:PiliPlus/common/widgets/loading_widget/loading_widget.dart';
 import 'package:PiliPlus/common/widgets/scaffold/simple_scaffold.dart';
@@ -45,12 +46,14 @@ class _WhisperSettingsPageState extends State<WhisperSettingsPage> {
       appBar: AppBar(
         title: Obx(() => Text(_controller.title.value)),
       ),
-      // M8：桌面内容限宽居中（私信设置）。
+      // M8：桌面内容限宽居中（1480 = Style.contentMaxWidth，桌面统一唯一来源）。
       body: Obx(
         () => PlatformUtils.isDesktop
             ? Center(
                 child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 1280),
+                  constraints: const BoxConstraints(
+                    maxWidth: Style.contentMaxWidth,
+                  ),
                   child: _buildBody(theme, _controller.loadingState.value),
                 ),
               )

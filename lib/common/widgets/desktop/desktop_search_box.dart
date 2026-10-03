@@ -1,11 +1,14 @@
 // =============================================================
 // PiliPlus Windows 桌面化 · 可复用桌面搜索框
-// 桌面端所有「搜索框」共用这一个组件（顶栏、搜索结果页 AppBar）：
+// 桌面端所有「搜索框」共用这一个组件（顶栏、搜索结果页 AppBar、「我的」页预览）：
 //   - 点击即进入输入状态，不跳转任何页面（跳转由宿主的 onSubmit 决定）
 //   - 输入为空 → 通知宿主展示搜索历史
 //   - 输入关键词 → 200ms 尾部防抖后请求联想词（SearchHttp.searchSuggest），
 //     结果通过 onOverlayChanged 交给宿主渲染浮层
 //   - 回车 → onSubmit（宿主执行搜索）
+// 尺寸（2026-10-05 桌面 1.00 基准）：高 36 / 放大镜 20 / 文字 14（整数 px，
+// 替换原 34 / 18 / 12.5）；圆角 = 高/2、图标与文字由 Row 垂直居中，
+// 容器高 36 > 内容行高（max(icon 20, 文字 ~19)），不裁切、不变形。
 // 浮层本身由宿主渲染（见 desktop_search_panel.dart 的 DesktopSearchPanel）。
 // 复用既有搜索接口与数据模型，不新增请求类型。
 // =============================================================
@@ -18,6 +21,23 @@ import 'package:PiliPlus/models/search/suggest.dart';
 import 'package:PiliPlus/utils/storage_pref.dart';
 import 'package:material_ui/material_ui.dart';
 
+/// 宿主（桌面端「我的」页快捷入口内嵌预览的**一级标题行搜索框**）向
+/// **内嵌页面**下发的一次就地搜索请求（仅桌面端使用）。
+///
+/// 宿主每次提交都新建一个实例：[route] 标记请求属于哪个预览项（避免把
+/// 别的预览项的搜索串到当前页）；[keyword] 为空串表示退出搜索、回到该页
+/// 原有列表。内嵌页面在 `didUpdateWidget` 中按**实例**识别「这是一次新提交」，
+/// 从而复用该页自身既有的就地搜索实现；宿主不复制任何搜索 UI 与请求逻辑。
+class DesktopInlineSearchRequest {
+  const DesktopInlineSearchRequest({required this.route, required this.keyword});
+
+  /// 目标预览项的 route（与 `DesktopSideBar.shortcuts` 同一份数据）
+  final String route;
+
+  /// 搜索关键词；空串表示退出搜索、回到该页原有列表
+  final String keyword;
+}
+
 class DesktopSearchBox extends StatefulWidget {
   const DesktopSearchBox({
     super.key,
@@ -26,9 +46,9 @@ class DesktopSearchBox extends StatefulWidget {
     this.fallbackQuery,
     this.hintText = '搜索视频 / UP主 / 番剧',
     this.width,
-    this.height = 34,
-    this.fontSize = 12.5,
-    this.iconSize = 18,
+    this.height = 36,
+    this.fontSize = 14,
+    this.iconSize = 20,
     this.padH = 12,
     this.gap = 8,
     this.onActivated,

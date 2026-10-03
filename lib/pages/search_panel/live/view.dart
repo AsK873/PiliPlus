@@ -70,7 +70,6 @@ class _SearchLivePanelState
           itemCount: list.length,
         ),
       ),
-      maxWidth: 1280,
     );
   }
 

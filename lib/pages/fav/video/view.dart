@@ -11,7 +11,14 @@ import 'package:get/get.dart';
 import 'package:material_ui/material_ui.dart';
 
 class FavVideoPage extends StatefulWidget {
-  const FavVideoPage({super.key});
+  const FavVideoPage({super.key, this.instanceSuffix = ''});
+
+  /// GetX 实例命名空间后缀：由宿主（[FavPage] 的视频 tab）下发。
+  /// 「我的」页内嵌预览实例为 `@preview`；移动端 / 路由方式 / 主壳内容区
+  /// 嵌入为 `''`（与改动前的 key 逐字一致）。
+  /// 必须与宿主 `Get.put(FavController(), tag: ...)` 使用同一后缀，
+  /// 否则会查找不到 / 串到另一个实例。
+  final String instanceSuffix;
 
   @override
   State<FavVideoPage> createState() => _FavVideoPageState();
@@ -19,7 +26,9 @@ class FavVideoPage extends StatefulWidget {
 
 class _FavVideoPageState extends State<FavVideoPage>
     with AutomaticKeepAliveClientMixin, GridMixin {
-  final FavController _favController = Get.find<FavController>();
+  late final FavController _favController = Get.find<FavController>(
+    tag: widget.instanceSuffix,
+  );
 
   @override
   bool get wantKeepAlive => true;
@@ -38,12 +47,11 @@ class _FavVideoPageState extends State<FavVideoPage>
               top: 7,
               bottom: 100 + MediaQuery.viewPaddingOf(context).bottom,
             ),
-            // 桌面端内容限宽居中（1280）
+            // 桌面端内容限宽居中（默认 1480 = Style.contentMaxWidth）
             sliver: desktopLimitSliver(
               Obx(
                 () => _buildBody(_favController.loadingState.value),
               ),
-              maxWidth: 1280,
             ),
           ),
         ],

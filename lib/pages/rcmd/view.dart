@@ -43,12 +43,13 @@ class _RcmdPageState extends State<RcmdPage>
           slivers: [
             SliverPadding(
               padding: const .only(top: Style.cardSpace, bottom: 100),
-              // 桌面端内容限宽居中（超宽屏下不再横向铺满）
+              // 桌面端内容限宽居中（超宽屏下不再横向铺满）；
+              // 该宽度为唯一常量，首页 TabBar 复用同一个（见 pages/home/view.dart）
               sliver: desktopLimitSliver(
                 Obx(
                   () => _buildBody(colorScheme, controller.loadingState.value),
                 ),
-                maxWidth: 1560,
+                maxWidth: Style.contentMaxWidth,
               ),
             ),
           ],

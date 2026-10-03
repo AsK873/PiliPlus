@@ -111,7 +111,6 @@ class _SettingsSearchPageState
                           ),
                         ),
                 ),
-                maxWidth: 1280,
               ),
             ),
           ],

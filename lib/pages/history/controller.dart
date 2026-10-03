@@ -17,9 +17,17 @@ import 'package:material_ui/material_ui.dart';
 class HistoryController
     extends MultiSelectController<HistoryData, HistoryItemModel>
     with GetSingleTickerProviderStateMixin {
-  HistoryController(this.type);
+  HistoryController(this.type, {this.instanceSuffix = ''});
 
-  late final baseCtr = Get.put(HistoryBaseController());
+  /// GetX 实例命名空间后缀：由页面按「是否为『我的』页内嵌预览实例」下发。
+  /// 移动端 / 路由方式 / 主壳内容区嵌入恒为 `''` ⇒ 注册 key 与改动前逐字一致
+  /// （GetX `_getKey` 对 tag == null 与 tag == '' 同键）。
+  final String instanceSuffix;
+
+  late final baseCtr = Get.put(
+    HistoryBaseController(),
+    tag: instanceSuffix,
+  );
 
   Account get account => baseCtr.account;
 

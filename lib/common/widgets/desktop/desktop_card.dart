@@ -1,7 +1,7 @@
 // =============================================================
 // PiliPlus Windows 桌面化 · DesktopCard
 // Fluent/WinUI 风格卡片：surfaceContainer 底色 + 1px outlineVariant 描边
-// + 圆角 8，不用 Material 阴影表达层级（与 FluentCard 同一套视觉）。
+// + 圆角 10，不用 Material 阴影表达层级（与 FluentCard 同一套视觉）。
 // 在 FluentCard 的基础上补齐：padding / margin / radius / hover / onTap。
 // 纯桌面组件：不做 PlatformUtils 平台判断，也不自动降级。
 // =============================================================
@@ -33,7 +33,7 @@ class DesktopCard extends StatefulWidget {
   /// 卡片外边距；为空时不加外边距
   final EdgeInsetsGeometry? margin;
 
-  /// 圆角半径；为空时取 [DesktopTokens.radius]（8）
+  /// 圆角半径；为空时取 [DesktopTokens.radius]（10，大卡片档）
   final double? radius;
 
   /// 鼠标悬停时提亮 + 细边（默认开）

@@ -6,10 +6,10 @@ import 'package:PiliPlus/common/widgets/back_detector.dart';
 import 'package:PiliPlus/common/widgets/custom_toast.dart';
 import 'package:PiliPlus/common/widgets/desktop/winui_entrance.dart';
 import 'package:PiliPlus/common/widgets/route_aware_mixin.dart';
-import 'package:PiliPlus/common/widgets/scale_app.dart';
 import 'package:PiliPlus/common/widgets/scroll_behavior.dart';
 import 'package:PiliPlus/http/init.dart';
 import 'package:PiliPlus/models/common/theme/theme_color_type.dart';
+import 'package:PiliPlus/pages/main/controller.dart';
 import 'package:PiliPlus/plugin/pl_player/utils/fullscreen.dart';
 import 'package:PiliPlus/router/app_pages.dart';
 import 'package:PiliPlus/services/account_service.dart';
@@ -90,8 +90,27 @@ Future<void> _initAppPath() async {
   appSupportDirPath = (await getApplicationSupportDirectory()).path;
 }
 
+/// 窗口最小尺寸的固定设计值（**外框**的 logical 值：window_manager 原生侧在
+/// WM_GETMINMAXINFO 里再乘窗口真实 dpr，与应用内设置无关）。
+///
+/// 960x640 的推导（4px 栅格）：宽 —— 侧栏恒定 216（DesktopSideBar.width），
+/// 正文可用宽 = 客户区宽 - 216；一个 240 宽的视频卡（Pref.smallCardWidth = 240，
+/// 间距 8）要保证 2 列需 488 ⇒ 客户区 ≥ 216 + 488 = 704，再按 4px 栅格并留出内容
+/// 限宽 1480 之外的常规留白 ⇒ 960（实测客户区 944 ⇒ 正文 728，首页 3 列）。
+/// 高 —— 侧栏内容 ≈ 594 ⇒ 客户区 601 时正文剩约 7px（侧栏可滚动，账号区仍可见）；
+/// 不得小于约 600。实测外框 960x640 ⇒ 客户区 944x601（不可见边框 16x39）。
+/// 该尺寸已在本机 6 档分辨率审计中逐项验证可用（见 desktop100 审计报告）。
+///
+/// 该值为固定常量，不随任何应用内设置变化。
+const Size kWindowMinimumSize = Size(960, 640);
+
+/// 窗口最小尺寸（固定为 [kWindowMinimumSize]）。
+/// 保留函数形式以便启动处与窗口几何写回判定复用同一来源
+/// （`WindowOptions.minimumSize`、`pages/main/view.dart`）。
+Size windowMinimumSize() => kWindowMinimumSize;
+
 void main() async {
-  ScaledWidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   MediaKit.ensureInitialized();
   await _initAppPath();
   try {
@@ -101,7 +120,6 @@ void main() async {
     if (kDebugMode) debugPrint('GStorage init error: $e');
     exit(0);
   }
-  ScaledWidgetsFlutterBinding.instance.scaleFactor = Pref.uiScale;
   await Future.wait([
     _initDownPath(),
     _initTmpPath(),
@@ -169,8 +187,36 @@ void main() async {
     await windowManager.ensureInitialized();
 
     final windowOptions = WindowOptions(
-      // 最小窗口 = 程序默认窗口尺寸（windows/runner 默认 1280x720 逻辑，即默认值）
-      minimumSize: const Size(1280, 720),
+      // 最小窗口 960x640（4px 栅格）＝固定常量 kWindowMinimumSize。
+      // 注意 window_manager 的 minimumSize 约束的是**外框尺寸**（实测 100% 缩放下
+      // 外框 960x640 ⇒ 客户区 944x601，边框 16x39），下述算式按「客户区 = 窗口逻辑
+      // 尺寸」给出，故实际客户区略小于 960x640（944x601），仍满足全部下限要求。
+      //
+      // 宽：侧栏恒定 216（DesktopSideBar.width）；正文可用宽 = 客户区宽 - 216。
+      //   一个 240 宽的视频卡（maxCrossAxisExtent = Pref.smallCardWidth = 240，
+      //   间距 8）在首页限宽内要保证 2 列：2x240 + 8 = 488（即仅 1 列会让
+      //   卡片被拉宽或文字/封面比例劣化）；其余需求更小：
+      //   顶栏搜索框 260 + 左右内边距 12 = 272、预览标题行 16 + 260 = 276、
+      //   「我的」页 5 个选项卡 344 + 页面边距 24 = 368、用户卡 357 + 32 + 48
+      //   = 437（窄窗另有响应式紧凑变体，见 pages/mine/view.dart）。
+      //   取最大项 488 ⇒ 客户区 ≥ 216 + 488 = 704；再留出内容限宽 1480 之外的
+      //   常规留白并按 4px 栅格对齐 ⇒ 960：此时正文 744，首页 3 列
+      //   （3x240 + 2x8 = 736），「我的」页用户卡可用宽约 960-264=696
+      //   （实测 944 客户区 ⇒ 卡内内容宽 648，走紧凑变体，无塌缩）。
+      //   不取更小：< 960 时首页两列已无法在限宽内保证，视频卡会被压到 240
+      //   以下；不取更大：上述各页在 960 下均已完整可用。
+      // 高：侧栏内容（品牌区 40 + 主入口 3x31 + 分组头 22 + 快捷入口 5x31 +
+      //   2 组分隔线 26 + 「我的」入口 4x31 + 无痕/切换账号/主题 3x31 +
+      //   深色模式/设置 2x31 + 账号区 55）≈ 594 ⇒ 客户区 601 时正文剩约
+      //   7px（侧栏可滚动，账号区仍在可视区内）；不得小于 ~600，
+      //   否则账号区被挤出可视区。
+      //
+      // 不改默认窗口尺寸：下方 setBounds 仍用 Pref.windowSize（默认
+      // 1180x720，本机实测配置值 1325x825），只是小于本最小值时被系统夹住。
+      // 与 MainLayout 的耦合已确认安全：有侧栏时正文约束宽 =
+      // 窗口宽 - 侧栏宽 = 944 - 216 = 728 > 0，不会出现负宽/异常
+      // （main_layout.dart 用窗口宽计算，窗口 ≥ 217 即安全）。
+      minimumSize: windowMinimumSize(),
       skipTaskbar: false,
       titleBarStyle: Pref.showWindowTitleBar
           ? TitleBarStyle.normal
@@ -225,12 +271,21 @@ KeyEventResult _onKeyEvent(KeyEvent event) {
 }
 
 void _onBack() {
+  // 1) 弹层优先：有 SmartDialog 时先关它
   if (SmartDialog.checkExist()) {
     SmartDialog.dismiss();
     return;
   }
 
   final route = Get.routing.route;
+
+  // 2) 当前路由自己声明了「不可 pop」的内部态（popScope(canPop:false) 的多选态等）
+  //    → 交回该路由处理（与改动前优先级一致：先退内部态，绝不强推出页面）。
+  //    根路由（'/' 的主壳 MainApp）在**未承载桌面内容页**时同样在此兜底，维持原有
+  //    「directExitOnBack 退出 / 其余主 Tab 切回首页」行为；
+  //    承载内容页时主壳会撤掉自己的否决（见 main/view.dart 的 _syncRootCanPop），
+  //    于是这里只剩内容页自己声明的多选态，正常态会继续走到第 4 步
+  //    —— 这就是「从快捷入口进入的页面对鼠标侧键无反应」的根因所在。
   if (route is GetPageRoute) {
     if (route.popDisposition == .doNotPop) {
       route.onPopInvokedWithResult(false, null);
@@ -238,9 +293,30 @@ void _onBack() {
     }
   }
 
-  final navigator = Get.key.currentState!;
-  if (navigator.canPop()) {
+  // 3) 有压入的二级路由时优先 pop（保持本机制原有优先级：
+  // 例如从嵌入页打开的搜索页 / 视频页，必须先退掉该路由）
+  final navigator = Get.key.currentState;
+  if (navigator != null && navigator.canPop()) {
     navigator.pop();
+    return;
+  }
+
+  // 4) 桌面主内容区就地承载的页面（历史记录等）已注册返回处理器 →
+  //    调用它 = 与页面左上角返回按钮**完全一致**：搜索态 → 多选态 → 收起内容页
+  //    回到进入前的主页 / Tab（统一走全局这份逻辑，不在各页面重复实现）。
+  if (Get.isRegistered<MainController>()) {
+    final desktopContentBackHandler =
+        Get.find<MainController>().desktopContentBackHandler;
+    if (desktopContentBackHandler != null) {
+      desktopContentBackHandler();
+      return;
+    }
+  }
+
+  // 5) 兜底：根路由 doNotPop（主壳 PopScope）→ 维持原有行为
+  //    （directExitOnBack 退出应用 / 其余主 Tab 时切回首页 Tab）。
+  if (route is GetPageRoute && route.popDisposition == .doNotPop) {
+    route.onPopInvokedWithResult(false, null);
   }
 }
 
@@ -318,31 +394,15 @@ class MyApp extends StatelessWidget {
   }
 
   static Widget _builder(BuildContext context, Widget? child) {
-    final uiScale = Pref.uiScale;
     final mediaQuery = MediaQuery.of(context);
-    final textScaler = TextScaler.linear(Pref.defaultTextScale);
-    if (uiScale != 1.0) {
-      child = MediaQuery(
-        data: mediaQuery.copyWith(
-          textScaler: textScaler,
-          size: mediaQuery.size / uiScale,
-          padding: tmpPadding ?? mediaQuery.padding / uiScale,
-          viewInsets: mediaQuery.viewInsets / uiScale,
-          viewPadding: tmpPadding ?? mediaQuery.viewPadding / uiScale,
-          devicePixelRatio: mediaQuery.devicePixelRatio * uiScale,
-        ),
-        child: child!,
-      );
-    } else {
-      child = MediaQuery(
-        data: mediaQuery.copyWith(
-          textScaler: textScaler,
-          padding: tmpPadding,
-          viewPadding: tmpPadding,
-        ),
-        child: child!,
-      );
-    }
+    child = MediaQuery(
+      data: mediaQuery.copyWith(
+        textScaler: TextScaler.linear(Pref.defaultTextScale),
+        padding: tmpPadding,
+        viewPadding: tmpPadding,
+      ),
+      child: child!,
+    );
     if (PlatformUtils.isDesktop) {
       return BackDetector(
         onBack: _onBack,

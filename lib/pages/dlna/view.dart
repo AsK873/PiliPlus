@@ -88,10 +88,9 @@ class _DLNAPageState extends State<DLNAPage> {
         slivers: [
           if (_isSearching) linearLoading,
           ViewSliverSafeArea(
-            // M8：桌面内容限宽居中（投屏设备）。
+            // M8：桌面内容限宽居中（投屏设备；默认 1480 = Style.contentMaxWidth）
             sliver: desktopLimitSliver(
               _buildBody(colorScheme),
-              maxWidth: 1280,
             ),
           ),
         ],

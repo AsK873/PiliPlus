@@ -103,7 +103,6 @@ class _LaterSearchPageState
         },
         itemCount: list.length,
       ),
-      maxWidth: 1280,
     );
   }
 }

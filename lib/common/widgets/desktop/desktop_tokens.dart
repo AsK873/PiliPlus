@@ -25,7 +25,8 @@ abstract final class DesktopTokens {
   /// 页面外边距（供调用方排版使用）
   static const double padPage = WinUi.padPage;
 
-  /// 卡片与控件圆角（8）
+  /// 大卡片 / 分组区块 / 主容器圆角（10）；小控件档 8 见
+  /// `DesktopSearchPanel` 的搜索历史条目（本值 − 2）
   static const double radius = WinUi.radius;
 
   /// 列表行高（48）
@@ -34,8 +35,26 @@ abstract final class DesktopTokens {
   /// 行内图标尺寸（20）
   static const double iconSize = WinUi.iconSize;
 
-  /// 内容限宽（1080，沿用「我的」页既有决定）
+  /// 内容限宽（**唯一来源** = [WinUi.contentWidth] = `Style.contentMaxWidth`
+  /// = 1480；2026-10-05 由 1080 收敛而来）
   static const double contentWidth = WinUi.contentWidth;
+
+  // ===== 桌面字号阶（整数 px；单一来源 = WinUi，见 winui_section.dart）=====
+
+  /// 分组 / 卡片 / Tab 标题（16）
+  static const double fontSectionTitle = WinUi.fontSectionTitle;
+
+  /// 列表行主标题 / 行内正文（15）
+  static const double fontRowTitle = WinUi.fontRowTitle;
+
+  /// 次要信息（副标题、统计标签，13）
+  static const double fontSecondary = WinUi.fontSecondary;
+
+  /// 输入框文字（桌面搜索框，14）
+  static const double fontInput = WinUi.fontInput;
+
+  /// 桌面页面标题（AppBar，18）
+  static const double fontPageTitle = WinUi.fontPageTitle;
 
   // ===== 描边 =====
 

@@ -34,10 +34,9 @@ class _PopularPreciousPageState extends State<PopularPreciousPage>
           physics: const AlwaysScrollableScrollPhysics(),
           slivers: [
             ViewSliverSafeArea(
-              // 桌面端内容限宽居中（超宽屏下不再横向铺满）
+              // 桌面端内容限宽居中（默认 1480 = Style.contentMaxWidth，超宽屏下不再横向铺满）
               sliver: desktopLimitSliver(
                 Obx(() => _buildBody(_controller.loadingState.value)),
-                maxWidth: 1200,
               ),
             ),
           ],

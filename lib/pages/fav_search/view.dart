@@ -106,7 +106,6 @@ class _FavSearchPageState
         },
         itemCount: list.length,
       ),
-      maxWidth: 1280,
     );
   }
 }

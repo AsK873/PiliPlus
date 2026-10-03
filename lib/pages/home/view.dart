@@ -1,6 +1,9 @@
 import 'package:PiliPlus/common/style.dart';
 import 'package:PiliPlus/common/widgets/custom_height_widget.dart';
+import 'package:PiliPlus/common/widgets/desktop/desktop_content.dart';
 import 'package:PiliPlus/common/widgets/image/network_img_layer.dart';
+import 'package:PiliPlus/common/widgets/scroll_behavior.dart'
+    show desktopScrollbarLaneWidth;
 import 'package:PiliPlus/common/widgets/scroll_physics.dart' show tabBarView;
 import 'package:PiliPlus/pages/common/common_page.dart';
 import 'package:PiliPlus/pages/home/controller.dart';
@@ -44,27 +47,41 @@ class _HomePageState extends CommonPageState<HomePage>
     super.build(context);
     Widget tabBar;
     if (_homeController.tabs.length > 1) {
-      tabBar = Padding(
-        padding: const EdgeInsets.only(top: 4),
-        child: SizedBox(
-          height: 42,
-          width: double.infinity,
-          child: TabBar(
-            controller: _homeController.tabController,
-            tabs: _homeController.tabs.map((e) => Tab(text: e.label)).toList(),
-            isScrollable: true,
-            dividerColor: Colors.transparent,
-            dividerHeight: 0,
-            splashBorderRadius: Style.mdRadius,
-            tabAlignment: TabAlignment.center,
-            onTap: (_) {
-              feedBack();
-              if (!_homeController.tabController.indexIsChanging) {
-                _homeController.animateToTop();
-              }
-            },
+      // 桌面端：TabBar 复用首页正文（推荐流网格）的同一套内容限宽与居中几何
+      // （含正文自身的 Style.safeSpace 左边距与桌面滚动条专用车道），
+      // 超宽屏下左右缘与下方网格重合；未超限时 desktopLimitBox 原样返回 →
+      // 窄窗与移动端视觉零变化。
+      // 只包住 TabBar 自身：Padding/SizedBox 高度、tabs 顺序、onTap、
+      // isScrollable/tabAlignment 全部逐字不变；下方 Material 背景分支
+      // （hideTopBar + instant）与 Column 常驻（吸顶）行为也保持原状。
+      tabBar = desktopLimitBox(
+        Padding(
+          padding: const EdgeInsets.only(top: 4),
+          child: SizedBox(
+            height: 42,
+            width: double.infinity,
+            child: TabBar(
+              controller: _homeController.tabController,
+              tabs: _homeController.tabs
+                  .map((e) => Tab(text: e.label))
+                  .toList(),
+              isScrollable: true,
+              dividerColor: Colors.transparent,
+              dividerHeight: 0,
+              splashBorderRadius: Style.mdRadius,
+              tabAlignment: TabAlignment.center,
+              onTap: (_) {
+                feedBack();
+                if (!_homeController.tabController.indexIsChanging) {
+                  _homeController.animateToTop();
+                }
+              },
+            ),
           ),
         ),
+        maxWidth: Style.contentMaxWidth,
+        leadingInset: Style.safeSpace,
+        trailingInset: desktopScrollbarLaneWidth,
       );
       if (_homeController.hideTopBar &&
           _mainController.barHideType == .instant) {

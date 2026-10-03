@@ -42,6 +42,7 @@ import 'package:PiliPlus/plugin/pl_player/models/double_tap_type.dart';
 import 'package:PiliPlus/plugin/pl_player/models/fullscreen_mode.dart';
 import 'package:PiliPlus/plugin/pl_player/models/gesture_type.dart';
 import 'package:PiliPlus/plugin/pl_player/models/video_fit_type.dart';
+import 'package:PiliPlus/plugin/pl_player/utils/fullscreen.dart';
 import 'package:PiliPlus/plugin/pl_player/widgets/app_bar_ani.dart';
 import 'package:PiliPlus/plugin/pl_player/widgets/backward_seek.dart';
 import 'package:PiliPlus/plugin/pl_player/widgets/bottom_control.dart';
@@ -944,6 +945,35 @@ class _PLVideoPlayerState extends State<PLVideoPlayer>
 
   bool get isFullScreen => plPlayerController.isFullScreen.value;
 
+  /// 桌面「系统全屏」下播放器 UI 控制层的放大倍率。
+  ///
+  /// 基准 1280×720：`clamp(min(w / 1280, h / 720), 1.0, 1.5)`，量化到 0.05 步进。
+  /// 只读 [build] 里已算好的 [maxWidth]/[maxHeight]，不读 MediaQuery；
+  /// 普通窗口（含最大化）、网页全屏、PiP、移动端恒为 1.0。
+  double get _playerUiScale {
+    if (!PlatformUtils.isDesktop || !isDesktopSystemFullScreen) {
+      return 1.0;
+    }
+    final scale = math.min(maxWidth / 1280.0, maxHeight / 720.0);
+    return (scale.clamp(1.0, 1.5) * 20).round() / 20;
+  }
+
+  /// 把播放器「UI 控制层」交给 [_PlayerUiScale]。
+  ///
+  /// 仅桌面系统全屏且 [_playerUiScale] > 1.0 时才以虚拟视口放大，
+  /// 其余情况 [_PlayerUiScale] 原样返回 child（不增加任何层）。
+  Widget _playerUiScaled(
+    Widget child, [
+    Alignment alignment = Alignment.topLeft,
+  ]) {
+    return _PlayerUiScale(
+      scale: _playerUiScale,
+      viewport: Size(maxWidth, maxHeight),
+      alignment: alignment,
+      child: child,
+    );
+  }
+
   late final TransformationController _transformationController;
 
   late ColorScheme colorScheme;
@@ -1426,33 +1456,35 @@ class _PLVideoPlayerState extends State<PLVideoPlayer>
 
         /// 长按倍速 toast
         if (!isLive)
-          IgnorePointer(
-            ignoring: true,
-            child: Align(
-              alignment: Alignment.topCenter,
-              child: FractionalTranslation(
-                translation: isFullScreen
-                    ? const Offset(0.0, 1.2)
-                    : const Offset(0.0, 0.8),
-                child: Obx(
-                  () => AnimatedOpacity(
-                    curve: Curves.easeInOut,
-                    opacity: plPlayerController.longPressStatus.value
-                        ? 1.0
-                        : 0.0,
-                    duration: const Duration(milliseconds: 150),
-                    child: Container(
-                      padding: const EdgeInsets.all(6),
-                      decoration: const BoxDecoration(
-                        color: Color(0x88000000),
-                        borderRadius: BorderRadius.all(Radius.circular(16)),
-                      ),
-                      child: Obx(
-                        () => Text(
-                          '${plPlayerController.enableAutoLongPressSpeed ? (plPlayerController.longPressStatus.value ? plPlayerController.lastPlaybackSpeed : plPlayerController.playbackSpeed) * 2 : plPlayerController.longPressSpeed}倍速中',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 13,
+          _playerUiScaled(
+            IgnorePointer(
+              ignoring: true,
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: FractionalTranslation(
+                  translation: isFullScreen
+                      ? const Offset(0.0, 1.2)
+                      : const Offset(0.0, 0.8),
+                  child: Obx(
+                    () => AnimatedOpacity(
+                      curve: Curves.easeInOut,
+                      opacity: plPlayerController.longPressStatus.value
+                          ? 1.0
+                          : 0.0,
+                      duration: const Duration(milliseconds: 150),
+                      child: Container(
+                        padding: const EdgeInsets.all(6),
+                        decoration: const BoxDecoration(
+                          color: Color(0x88000000),
+                          borderRadius: BorderRadius.all(Radius.circular(16)),
+                        ),
+                        child: Obx(
+                          () => Text(
+                            '${plPlayerController.enableAutoLongPressSpeed ? (plPlayerController.longPressStatus.value ? plPlayerController.lastPlaybackSpeed : plPlayerController.playbackSpeed) * 2 : plPlayerController.longPressSpeed}倍速中',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 13,
+                            ),
                           ),
                         ),
                       ),
@@ -1465,51 +1497,53 @@ class _PLVideoPlayerState extends State<PLVideoPlayer>
 
         /// 时间进度 toast
         if (!isLive)
-          IgnorePointer(
-            ignoring: true,
-            child: Align(
-              alignment: Alignment.topCenter,
-              child: FractionalTranslation(
-                translation: isFullScreen
-                    ? const Offset(0.0, 1.2)
-                    : const Offset(0.0, 0.8),
-                child: Obx(
-                  () => AnimatedOpacity(
-                    curve: Curves.easeInOut,
-                    opacity: plPlayerController.isSeeking.value ? 1.0 : 0.0,
-                    duration: const Duration(milliseconds: 150),
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        color: Color(0x88000000),
-                        borderRadius: BorderRadius.all(Radius.circular(64)),
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 8,
-                      ),
-                      child: Row(
-                        spacing: 2,
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Obx(
-                            () => Text(
-                              DurationUtils.formatDuration(
-                                plPlayerController.seekPosition.value,
+          _playerUiScaled(
+            IgnorePointer(
+              ignoring: true,
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: FractionalTranslation(
+                  translation: isFullScreen
+                      ? const Offset(0.0, 1.2)
+                      : const Offset(0.0, 0.8),
+                  child: Obx(
+                    () => AnimatedOpacity(
+                      curve: Curves.easeInOut,
+                      opacity: plPlayerController.isSeeking.value ? 1.0 : 0.0,
+                      duration: const Duration(milliseconds: 150),
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          color: Color(0x88000000),
+                          borderRadius: BorderRadius.all(Radius.circular(64)),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 8,
+                        ),
+                        child: Row(
+                          spacing: 2,
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Obx(
+                              () => Text(
+                                DurationUtils.formatDuration(
+                                  plPlayerController.seekPosition.value,
+                                ),
+                                style: textStyle,
                               ),
-                              style: textStyle,
                             ),
-                          ),
-                          const Text('/', style: textStyle),
-                          Obx(
-                            () => Text(
-                              DurationUtils.formatDuration(
-                                plPlayerController.duration.value,
+                            const Text('/', style: textStyle),
+                            Obx(
+                              () => Text(
+                                DurationUtils.formatDuration(
+                                  plPlayerController.duration.value,
+                                ),
+                                style: textStyle,
                               ),
-                              style: textStyle,
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -1519,16 +1553,70 @@ class _PLVideoPlayerState extends State<PLVideoPlayer>
           ),
 
         /// 音量🔊 控制条展示
-        IgnorePointer(
-          ignoring: true,
-          child: Align(
-            alignment: Alignment.center,
-            child: Obx(
-              () {
-                final volume = plPlayerController.volume.value;
-                return AnimatedOpacity(
+        _playerUiScaled(
+          IgnorePointer(
+            ignoring: true,
+            child: Align(
+              alignment: Alignment.center,
+              child: Obx(
+                () {
+                  final volume = plPlayerController.volume.value;
+                  return AnimatedOpacity(
+                    curve: Curves.easeInOut,
+                    opacity: plPlayerController.volumeIndicator.value
+                        ? 1.0
+                        : 0.0,
+                    duration: const Duration(milliseconds: 150),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 5,
+                      ),
+                      decoration: const BoxDecoration(
+                        color: Color(0x88000000),
+                        borderRadius: BorderRadius.all(Radius.circular(64)),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(
+                            volume == 0.0
+                                ? Icons.volume_off
+                                : volume < 0.5
+                                ? Icons.volume_down
+                                : Icons.volume_up,
+                            color: Colors.white,
+                            size: 20.0,
+                          ),
+                          const SizedBox(width: 2.0),
+                          Text(
+                            '${(volume * 100.0).round()}%',
+                            style: const TextStyle(
+                              fontSize: 13.0,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+        ),
+
+        /// 亮度🌞 控制条展示
+        _playerUiScaled(
+          IgnorePointer(
+            ignoring: true,
+            child: Align(
+              alignment: Alignment.center,
+              child: Obx(
+                () => AnimatedOpacity(
                   curve: Curves.easeInOut,
-                  opacity: plPlayerController.volumeIndicator.value ? 1.0 : 0.0,
+                  opacity: _brightnessIndicator.value ? 1.0 : 0.0,
                   duration: const Duration(milliseconds: 150),
                   child: Container(
                     padding: const EdgeInsets.symmetric(
@@ -1544,17 +1632,17 @@ class _PLVideoPlayerState extends State<PLVideoPlayer>
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Icon(
-                          volume == 0.0
-                              ? Icons.volume_off
-                              : volume < 0.5
-                              ? Icons.volume_down
-                              : Icons.volume_up,
+                          _brightnessValue.value < 1.0 / 3.0
+                              ? Icons.brightness_low
+                              : _brightnessValue.value < 2.0 / 3.0
+                              ? Icons.brightness_medium
+                              : Icons.brightness_high,
                           color: Colors.white,
-                          size: 20.0,
+                          size: 18.0,
                         ),
                         const SizedBox(width: 2.0),
                         Text(
-                          '${(volume * 100.0).round()}%',
+                          '${(_brightnessValue.value * 100.0).round()}%',
                           style: const TextStyle(
                             fontSize: 13.0,
                             color: Colors.white,
@@ -1562,54 +1650,6 @@ class _PLVideoPlayerState extends State<PLVideoPlayer>
                         ),
                       ],
                     ),
-                  ),
-                );
-              },
-            ),
-          ),
-        ),
-
-        /// 亮度🌞 控制条展示
-        IgnorePointer(
-          ignoring: true,
-          child: Align(
-            alignment: Alignment.center,
-            child: Obx(
-              () => AnimatedOpacity(
-                curve: Curves.easeInOut,
-                opacity: _brightnessIndicator.value ? 1.0 : 0.0,
-                duration: const Duration(milliseconds: 150),
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 5,
-                  ),
-                  decoration: const BoxDecoration(
-                    color: Color(0x88000000),
-                    borderRadius: BorderRadius.all(Radius.circular(64)),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(
-                        _brightnessValue.value < 1.0 / 3.0
-                            ? Icons.brightness_low
-                            : _brightnessValue.value < 2.0 / 3.0
-                            ? Icons.brightness_medium
-                            : Icons.brightness_high,
-                        color: Colors.white,
-                        size: 18.0,
-                      ),
-                      const SizedBox(width: 2.0),
-                      Text(
-                        '${(_brightnessValue.value * 100.0).round()}%',
-                        style: const TextStyle(
-                          fontSize: 13.0,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
                   ),
                 ),
               ),
@@ -1621,43 +1661,45 @@ class _PLVideoPlayerState extends State<PLVideoPlayer>
         Positioned.fill(
           top: -1,
           bottom: -1,
-          child: ClipRect(
-            child: RepaintBoundary(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  AppBarAni(
-                    isTop: true,
-                    controller: _animationController,
-                    isFullScreen: isFullScreen,
-                    removeSafeArea: plPlayerController.removeSafeArea,
-                    child: plPlayerController.isDesktopPip
-                        ? GestureDetector(
-                            behavior: HitTestBehavior.translucent,
-                            onPanStart: (_) => windowManager.startDragging(),
-                            child: widget.headerControl,
-                          )
-                        : widget.headerControl,
-                  ),
-                  AppBarAni(
-                    isTop: false,
-                    controller: _animationController,
-                    isFullScreen: isFullScreen,
-                    removeSafeArea: plPlayerController.removeSafeArea,
-                    child:
-                        widget.bottomControl ??
-                        BottomControl(
-                          maxWidth: maxWidth,
-                          isFullScreen: isFullScreen,
-                          controller: plPlayerController,
-                          videoDetailController: videoDetailController,
-                          buildBottomControl: () => buildBottomControl(
-                            videoDetailController,
-                            maxWidth > maxHeight,
+          child: _playerUiScaled(
+            ClipRect(
+              child: RepaintBoundary(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    AppBarAni(
+                      isTop: true,
+                      controller: _animationController,
+                      isFullScreen: isFullScreen,
+                      removeSafeArea: plPlayerController.removeSafeArea,
+                      child: plPlayerController.isDesktopPip
+                          ? GestureDetector(
+                              behavior: HitTestBehavior.translucent,
+                              onPanStart: (_) => windowManager.startDragging(),
+                              child: widget.headerControl,
+                            )
+                          : widget.headerControl,
+                    ),
+                    AppBarAni(
+                      isTop: false,
+                      controller: _animationController,
+                      isFullScreen: isFullScreen,
+                      removeSafeArea: plPlayerController.removeSafeArea,
+                      child:
+                          widget.bottomControl ??
+                          BottomControl(
+                            maxWidth: maxWidth,
+                            isFullScreen: isFullScreen,
+                            controller: plPlayerController,
+                            videoDetailController: videoDetailController,
+                            buildBottomControl: () => buildBottomControl(
+                              videoDetailController,
+                              maxWidth > maxHeight,
+                            ),
                           ),
-                        ),
-                  ),
-                ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -1678,53 +1720,56 @@ class _PLVideoPlayerState extends State<PLVideoPlayer>
         //     child: const Text('scale'),
         //   ),
         // ),
-        Obx(
-          () =>
-              showRestoreScaleBtn.value && plPlayerController.showControls.value
-              ? Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 95),
-                    child: FilledButton.tonal(
-                      style: FilledButton.styleFrom(
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        backgroundColor: colorScheme.secondaryContainer
-                            .withValues(alpha: 0.8),
-                        visualDensity: VisualDensity.compact,
-                        padding: const EdgeInsets.all(15),
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(6),
+        _playerUiScaled(
+          Obx(
+            () =>
+                showRestoreScaleBtn.value &&
+                    plPlayerController.showControls.value
+                ? Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 95),
+                      child: FilledButton.tonal(
+                        style: FilledButton.styleFrom(
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          backgroundColor: colorScheme.secondaryContainer
+                              .withValues(alpha: 0.8),
+                          visualDensity: VisualDensity.compact,
+                          padding: const EdgeInsets.all(15),
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(6),
+                            ),
                           ),
                         ),
-                      ),
-                      onPressed: () async {
-                        showRestoreScaleBtn.value = false;
-                        final animController = AnimationController(
-                          vsync: this,
-                          duration: const Duration(milliseconds: 255),
-                        );
-                        final anim = animController.drive(
-                          Matrix4Tween(
-                            begin: _transformationController.value,
-                            end: Matrix4.identity(),
-                          ).chain(CurveTween(curve: Curves.easeOut)),
-                        );
-                        void listener() {
-                          _transformationController.value = anim.value;
-                        }
+                        onPressed: () async {
+                          showRestoreScaleBtn.value = false;
+                          final animController = AnimationController(
+                            vsync: this,
+                            duration: const Duration(milliseconds: 255),
+                          );
+                          final anim = animController.drive(
+                            Matrix4Tween(
+                              begin: _transformationController.value,
+                              end: Matrix4.identity(),
+                            ).chain(CurveTween(curve: Curves.easeOut)),
+                          );
+                          void listener() {
+                            _transformationController.value = anim.value;
+                          }
 
-                        animController.addListener(listener);
-                        await animController.forward(from: 0);
-                        animController
-                          ..removeListener(listener)
-                          ..dispose();
-                      },
-                      child: const Text('还原屏幕'),
+                          animController.addListener(listener);
+                          await animController.forward(from: 0);
+                          animController
+                            ..removeListener(listener)
+                            ..dispose();
+                        },
+                        child: const Text('还原屏幕'),
+                      ),
                     ),
-                  ),
-                )
-              : const SizedBox.shrink(),
+                  )
+                : const SizedBox.shrink(),
+          ),
         ),
 
         /// 进度条 live模式下禁用
@@ -1733,87 +1778,95 @@ class _PLVideoPlayerState extends State<PLVideoPlayer>
             bottom: -2.2,
             left: 0,
             right: 0,
-            child: Obx(
-              () {
-                final showControls = plPlayerController.showControls.value;
-                final bool offstage;
-                switch (plPlayerController.progressType) {
-                  case .alwaysShow:
-                    offstage = showControls;
-                  case .alwaysHide:
-                    if (!plPlayerController.isSeeking.value) {
-                      return const SizedBox.shrink();
-                    }
-                    offstage = showControls;
-                  case .onlyShowFullScreen:
-                    offstage =
-                        showControls ||
-                        (!isFullScreen && !plPlayerController.isSeeking.value);
-                  case .onlyHideFullScreen:
-                    offstage =
-                        showControls ||
-                        (isFullScreen && !plPlayerController.isSeeking.value);
-                }
-                return Offstage(
-                  offstage: offstage,
-                  child: Stack(
-                    clipBehavior: Clip.none,
-                    alignment: Alignment.bottomCenter,
-                    children: [
-                      Obx(
-                        () => ProgressBar(
-                          progress: plPlayerController.progress,
-                          buffered: plPlayerController.buffered.value,
-                          total: plPlayerController.duration.value,
-                          progressBarColor: primary,
-                          baseBarColor: const Color(0x33FFFFFF),
-                          bufferedBarColor: bufferedBarColor,
-                          thumbColor: primary,
-                          thumbGlowColor: thumbGlowColor,
-                          barHeight: 3.5,
-                          thumbRadius: 2.5,
-                        ),
-                      ),
-                      if (plPlayerController.enableBlock &&
-                          videoDetailController.segmentProgressList.isNotEmpty)
-                        Positioned(
-                          left: 0,
-                          right: 0,
-                          bottom: 0.75,
-                          child: SegmentProgressBar(
-                            segments: videoDetailController.segmentProgressList,
+            child: _playerUiScaled(
+              Obx(
+                () {
+                  final showControls = plPlayerController.showControls.value;
+                  final bool offstage;
+                  switch (plPlayerController.progressType) {
+                    case .alwaysShow:
+                      offstage = showControls;
+                    case .alwaysHide:
+                      if (!plPlayerController.isSeeking.value) {
+                        return const SizedBox.shrink();
+                      }
+                      offstage = showControls;
+                    case .onlyShowFullScreen:
+                      offstage =
+                          showControls ||
+                          (!isFullScreen &&
+                              !plPlayerController.isSeeking.value);
+                    case .onlyHideFullScreen:
+                      offstage =
+                          showControls ||
+                          (isFullScreen &&
+                              !plPlayerController.isSeeking.value);
+                  }
+                  return Offstage(
+                    offstage: offstage,
+                    child: Stack(
+                      clipBehavior: Clip.none,
+                      alignment: Alignment.bottomCenter,
+                      children: [
+                        Obx(
+                          () => ProgressBar(
+                            progress: plPlayerController.progress,
+                            buffered: plPlayerController.buffered.value,
+                            total: plPlayerController.duration.value,
+                            progressBarColor: primary,
+                            baseBarColor: const Color(0x33FFFFFF),
+                            bufferedBarColor: bufferedBarColor,
+                            thumbColor: primary,
+                            thumbGlowColor: thumbGlowColor,
+                            barHeight: 3.5,
+                            thumbRadius: 2.5,
                           ),
                         ),
-                      if (plPlayerController.showViewPoints &&
-                          videoDetailController.viewPointList.isNotEmpty &&
-                          videoDetailController.showVP.value)
-                        Padding(
-                          padding: const .only(bottom: 4.25),
-                          child: ViewPointSegmentProgressBar(
-                            segments: videoDetailController.viewPointList,
-                            onSeek: PlatformUtils.isMobile
-                                ? (position) {
-                                    if (!plPlayerController
-                                        .controlsLock
-                                        .value) {
-                                      plPlayerController.seekTo(
-                                        position,
-                                        isSeek: false,
-                                      );
+                        if (plPlayerController.enableBlock &&
+                            videoDetailController
+                                .segmentProgressList
+                                .isNotEmpty)
+                          Positioned(
+                            left: 0,
+                            right: 0,
+                            bottom: 0.75,
+                            child: SegmentProgressBar(
+                              segments:
+                                  videoDetailController.segmentProgressList,
+                            ),
+                          ),
+                        if (plPlayerController.showViewPoints &&
+                            videoDetailController.viewPointList.isNotEmpty &&
+                            videoDetailController.showVP.value)
+                          Padding(
+                            padding: const .only(bottom: 4.25),
+                            child: ViewPointSegmentProgressBar(
+                              segments: videoDetailController.viewPointList,
+                              onSeek: PlatformUtils.isMobile
+                                  ? (position) {
+                                      if (!plPlayerController
+                                          .controlsLock
+                                          .value) {
+                                        plPlayerController.seekTo(
+                                          position,
+                                          isSeek: false,
+                                        );
+                                      }
                                     }
-                                  }
-                                : null,
+                                  : null,
+                            ),
                           ),
-                        ),
-                      if (plPlayerController.showDmChart &&
-                          videoDetailController.showDmTrendChart.value)
-                        if (videoDetailController.dmTrend.value?.dataOrNull
-                            case final list?)
-                          buildDmChart(primary, list, videoDetailController),
-                    ],
-                  ),
-                );
-              },
+                        if (plPlayerController.showDmChart &&
+                            videoDetailController.showDmTrendChart.value)
+                          if (videoDetailController.dmTrend.value?.dataOrNull
+                              case final list?)
+                            buildDmChart(primary, list, videoDetailController),
+                      ],
+                    ),
+                  );
+                },
+              ),
+              Alignment.bottomCenter,
             ),
           ),
 
@@ -1828,41 +1881,44 @@ class _PLVideoPlayerState extends State<PLVideoPlayer>
         if (isFullScreen || plPlayerController.isDesktopPip) ...[
           // 锁
           if (plPlayerController.showFsLockBtn)
-            ViewSafeArea(
-              right: false,
-              left: !plPlayerController.removeSafeArea,
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: FractionalTranslation(
-                  translation: const Offset(1, -0.4),
-                  child: Obx(
-                    () => Offstage(
-                      offstage: !plPlayerController.showControls.value,
-                      child: DecoratedBox(
-                        decoration: const BoxDecoration(
-                          color: Color(0x45000000),
-                          borderRadius: BorderRadius.all(Radius.circular(8)),
+            _playerUiScaled(
+              ViewSafeArea(
+                right: false,
+                left: !plPlayerController.removeSafeArea,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: FractionalTranslation(
+                    translation: const Offset(1, -0.4),
+                    child: Obx(
+                      () => Offstage(
+                        offstage: !plPlayerController.showControls.value,
+                        child: DecoratedBox(
+                          decoration: const BoxDecoration(
+                            color: Color(0x45000000),
+                            borderRadius: BorderRadius.all(Radius.circular(8)),
+                          ),
+                          child: Obx(() {
+                            final controlsLock =
+                                plPlayerController.controlsLock.value;
+                            return ComBtn(
+                              tooltip: controlsLock ? '解锁' : '锁定',
+                              icon: controlsLock
+                                  ? const Icon(
+                                      FontAwesomeIcons.lock,
+                                      size: 15,
+                                      color: Colors.white,
+                                    )
+                                  : const Icon(
+                                      FontAwesomeIcons.lockOpen,
+                                      size: 15,
+                                      color: Colors.white,
+                                    ),
+                              onTap: () => plPlayerController.onLockControl(
+                                !controlsLock,
+                              ),
+                            );
+                          }),
                         ),
-                        child: Obx(() {
-                          final controlsLock =
-                              plPlayerController.controlsLock.value;
-                          return ComBtn(
-                            tooltip: controlsLock ? '解锁' : '锁定',
-                            icon: controlsLock
-                                ? const Icon(
-                                    FontAwesomeIcons.lock,
-                                    size: 15,
-                                    color: Colors.white,
-                                  )
-                                : const Icon(
-                                    FontAwesomeIcons.lockOpen,
-                                    size: 15,
-                                    color: Colors.white,
-                                  ),
-                            onTap: () =>
-                                plPlayerController.onLockControl(!controlsLock),
-                          );
-                        }),
                       ),
                     ),
                   ),
@@ -1872,33 +1928,35 @@ class _PLVideoPlayerState extends State<PLVideoPlayer>
 
           // 截图
           if (plPlayerController.showFsScreenshotBtn)
-            ViewSafeArea(
-              left: false,
-              right: !plPlayerController.removeSafeArea,
-              child: Obx(
-                () => Align(
-                  alignment: Alignment.centerRight,
-                  child: FractionalTranslation(
-                    translation: const Offset(-1, -0.4),
-                    child: Offstage(
-                      offstage: !plPlayerController.showControls.value,
-                      child: DecoratedBox(
-                        decoration: const BoxDecoration(
-                          color: Color(0x45000000),
-                          borderRadius: BorderRadius.all(Radius.circular(8)),
-                        ),
-                        child: ComBtn(
-                          tooltip: '截图',
-                          icon: const Icon(
-                            Icons.photo_camera,
-                            size: 20,
-                            color: Colors.white,
+            _playerUiScaled(
+              ViewSafeArea(
+                left: false,
+                right: !plPlayerController.removeSafeArea,
+                child: Obx(
+                  () => Align(
+                    alignment: Alignment.centerRight,
+                    child: FractionalTranslation(
+                      translation: const Offset(-1, -0.4),
+                      child: Offstage(
+                        offstage: !plPlayerController.showControls.value,
+                        child: DecoratedBox(
+                          decoration: const BoxDecoration(
+                            color: Color(0x45000000),
+                            borderRadius: BorderRadius.all(Radius.circular(8)),
                           ),
-                          onLongPress:
-                              (Platform.isAndroid || kDebugMode) && !isLive
-                              ? _screenshotWebp
-                              : null,
-                          onTap: plPlayerController.takeScreenshot,
+                          child: ComBtn(
+                            tooltip: '截图',
+                            icon: const Icon(
+                              Icons.photo_camera,
+                              size: 20,
+                              color: Colors.white,
+                            ),
+                            onLongPress:
+                                (Platform.isAndroid || kDebugMode) && !isLive
+                                ? _screenshotWebp
+                                : null,
+                            onTap: plPlayerController.takeScreenshot,
+                          ),
                         ),
                       ),
                     ),
@@ -1908,60 +1966,62 @@ class _PLVideoPlayerState extends State<PLVideoPlayer>
             ),
         ],
 
-        Obx(() {
-          if (plPlayerController.dataStatus.loading ||
-              (plPlayerController.isBuffering.value &&
-                  plPlayerController.playerStatus.isPlaying)) {
-            return Center(
-              child: GestureDetector(
-                onTap: plPlayerController.refreshPlayer,
-                child: Container(
-                  padding: const EdgeInsets.all(20),
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    gradient: RadialGradient(
-                      colors: [Colors.black26, Colors.transparent],
-                    ),
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Image.asset(
-                        Assets.buffering,
-                        height: 25,
-                        cacheHeight: 25.cacheSize(context),
-                        semanticLabel: "加载中",
-                        color: Colors.white,
+        _playerUiScaled(
+          Obx(() {
+            if (plPlayerController.dataStatus.loading ||
+                (plPlayerController.isBuffering.value &&
+                    plPlayerController.playerStatus.isPlaying)) {
+              return Center(
+                child: GestureDetector(
+                  onTap: plPlayerController.refreshPlayer,
+                  child: Container(
+                    padding: const EdgeInsets.all(20),
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      gradient: RadialGradient(
+                        colors: [Colors.black26, Colors.transparent],
                       ),
-                      if (plPlayerController.isBuffering.value)
-                        Obx(() {
-                          final buffered = plPlayerController.buffered.value;
-                          if (buffered == 0) {
-                            return const Text(
-                              '加载中...',
-                              style: TextStyle(
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Image.asset(
+                          Assets.buffering,
+                          height: 25,
+                          cacheHeight: 25.cacheSize(context),
+                          semanticLabel: "加载中",
+                          color: Colors.white,
+                        ),
+                        if (plPlayerController.isBuffering.value)
+                          Obx(() {
+                            final buffered = plPlayerController.buffered.value;
+                            if (buffered == 0) {
+                              return const Text(
+                                '加载中...',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                ),
+                              );
+                            }
+                            return Text(
+                              DurationUtils.formatDuration(buffered),
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 12,
                               ),
                             );
-                          }
-                          return Text(
-                            DurationUtils.formatDuration(buffered),
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                            ),
-                          );
-                        }),
-                    ],
+                          }),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            );
-          } else {
-            return const SizedBox.shrink();
-          }
-        }),
+              );
+            } else {
+              return const SizedBox.shrink();
+            }
+          }),
+        ),
 
         /// 点击 快进/快退
         if (!isLive)

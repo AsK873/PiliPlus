@@ -130,7 +130,6 @@ mixin SearchVideoPanelMixin<S extends SearchVideoPanel>
         },
         itemCount: list.length,
       ),
-      maxWidth: 1280,
     );
   }
 

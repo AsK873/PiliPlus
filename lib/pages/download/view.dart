@@ -116,11 +116,13 @@ class _DownloadPageState extends State<DownloadPage> with GridMixin {
               ],
             ),
           ),
-          // M8：桌面内容限宽居中（离线缓存）。
+          // M8：桌面内容限宽居中（1480 = Style.contentMaxWidth，桌面统一唯一来源）。
           body: PlatformUtils.isDesktop
               ? Center(
                   child: ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 1280),
+                    constraints: const BoxConstraints(
+                      maxWidth: Style.contentMaxWidth,
+                    ),
                     child: _pageBody(theme, padding, enableMultiSelect),
                   ),
                 )

@@ -48,12 +48,11 @@ class _FavNoteChildPageState extends State<FavNoteChildPage>
           slivers: [
             SliverPadding(
               padding: EdgeInsets.only(bottom: padding.bottom + 100),
-              // 桌面端内容限宽居中（1280）
+              // 桌面端内容限宽居中（默认 1480 = Style.contentMaxWidth）
               sliver: desktopLimitSliver(
                 Obx(
                   () => _buildBody(_favNoteController.loadingState.value),
                 ),
-                maxWidth: 1280,
               ),
             ),
           ],

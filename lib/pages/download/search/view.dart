@@ -101,7 +101,6 @@ class _DownloadSearchPageState
           },
           itemCount: list.length,
         ),
-        maxWidth: 1280,
       );
     }
     return const HttpError();

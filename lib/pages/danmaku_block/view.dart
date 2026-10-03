@@ -1,3 +1,4 @@
+import 'package:PiliPlus/common/style.dart';
 import 'package:PiliPlus/common/widgets/button/icon_button.dart';
 import 'package:PiliPlus/common/widgets/dialog/dialog.dart';
 import 'package:PiliPlus/common/widgets/keep_alive_wrapper.dart';
@@ -154,9 +155,10 @@ class _DanmakuBlockPageState extends State<DanmakuBlockPage> {
       },
     );
     if (PlatformUtils.isDesktop) {
+      // 桌面内容限宽居中（1480 = Style.contentMaxWidth，桌面统一唯一来源）
       return Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 1280),
+          constraints: const BoxConstraints(maxWidth: Style.contentMaxWidth),
           child: listView,
         ),
       );

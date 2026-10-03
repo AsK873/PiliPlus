@@ -6,7 +6,7 @@
 //   - 输入非空 → 关键词联想（顶栏 200ms 防抖后把结果传进来）
 // 点击历史词或联想词 → 用该关键词执行搜索（进入 /searchResult）。
 // Esc（浮层获得焦点时）/ 点击浮层外 → 收起。
-// 视觉沿用桌面组件度量（DesktopTokens：圆角 8 / 内边距 16 / 4px 栅格）：
+// 视觉沿用桌面组件度量（DesktopTokens：容器圆角 10 / 内边距 16 / 4px 栅格）：
 // 容器为 surfaceContainer 底色 + outlineVariant 描边 + 柔和阴影；
 // 联想行使用 DesktopListTile，与其余桌面页面同一套悬停 / 按下反馈。
 // 复用既有搜索接口与数据模型（SearchHttp.searchSuggest / SearchSuggestItem）
@@ -155,6 +155,7 @@ class DesktopSearchPanel extends StatelessWidget {
               Text(
                 '搜索历史',
                 style: theme.textTheme.bodyMedium?.copyWith(
+                  fontSize: DesktopTokens.fontSectionTitle,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -174,7 +175,7 @@ class DesktopSearchPanel extends StatelessWidget {
                         onPressed: () => _clearHistory(baseCtr),
                         icon: Icon(
                           Icons.clear_all_outlined,
-                          size: 18,
+                          size: DesktopTokens.iconSize,
                           color: colorScheme.secondary,
                         ),
                         label: Text(
@@ -355,7 +356,7 @@ class _SearchHistoryItemState extends State<_SearchHistoryItem> {
                 widget.word,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontSize: 13.5),
+                style: const TextStyle(fontSize: DesktopTokens.fontInput),
               ),
             ),
           ),
