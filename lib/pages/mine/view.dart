@@ -141,8 +141,13 @@ class _MediaPageState extends CommonPageState<MinePage>
             child: refreshIndicator(
               onRefresh: controller.onRefresh,
               child: onBuild(
+                // 桌面端：用 LayoutBuilder 取「页面正文的实际可用高度」，
+                // 预览区高度由它推导（不再固定 420）⇒ 随窗口高度变化。
                 PlatformUtils.isDesktop
-                    ? _buildDesktopList(theme)
+                    ? LayoutBuilder(
+                        builder: (context, constraints) =>
+                            _buildDesktopList(theme, constraints.maxHeight),
+                      )
                     : _buildMobileList(theme, secondary),
               ),
             ),
@@ -649,13 +654,30 @@ class _MediaPageState extends CommonPageState<MinePage>
   // 说明：仅桌面端生效，移动端走 _buildMobileList（原实现）。
   // ===========================================================
 
-  /// 快捷入口就地展开区高度（4px 栅格 420）：展开的是真实页面组件，
-  /// 需要给定高度（页面内部普遍是 Column/Expanded + 滚动视图）才能布局。
-  /// 第三批实测（960x640 / 1100x700 / 1325x800 / 1920x1080 / 2560x1440）：
-  /// 960x640 下正文可视高仅约 405（客户端 601 − 上方用户卡片等约 176），
-  /// 预览区本身已顶到视口底、由整页滚动承载，是本值的下限；宽窗下预览区
-  /// 完整按 420 呈现。**故本批不下调也不上调**（见 REPORT 阶段一②）。
-  static const double _previewHeight = 420;
+  /// 快捷入口就地展开区的**最小**高度（4px 栅格 420）：展开的是真实页面组件，
+  /// 需要给定高度（页面内部普遍是 Column/Expanded + 滚动视图）才能布局；
+  /// 小窗口下用它兜底，避免视频区被压得过小。
+  /// 实际高度 = 页面正文可用高度 − [_previewTopReserve]（见 [build] 的
+  /// LayoutBuilder）⇒ 普通/最大化窗口都会用满剩余垂直空间，不再固定 420
+  /// （DPI 清理移除应用内 1.25 缩放后，固定值只占窗口约一半，底部出现大片空白）。
+  static const double _previewMinHeight = 420;
+
+  /// 预览区**之外**的固定高度合计（预览上方各块 + 列表上/下内边距）。
+  /// 每一项都取自对应组件自身的固定尺寸，与窗口大小无关（不做窗口级估算）：
+  ///   [_desktopTopGap] 20（列表顶部内边距）
+  /// + 用户卡片 100（DesktopCard 内边距 WinUi.pad 16×2 + 卡片内容 68：
+  ///     昵称行 ≈23 + gap8 + 硬币/经验行 ≈21 + gap12 + 经验条 4）
+  /// + WinUi.gap24 24（卡片 → 「快捷入口」分组）
+  /// + 分组标题行 ≈22 + DesktopTokens.gap8 8
+  /// + 快捷入口选项卡 44（WinUi.gap8×2 + 文字行 ≈22 + 指示器 4+2）
+  /// + WinUi.gap16 16（选项卡 → 预览标题行）
+  /// + 预览标题行 36（DesktopTopBar.searchHeight）+ WinUi.gap8 + 1px 分隔线
+  ///   + WinUi.gap12 = 57
+  /// + 列表底部内边距 WinUi.padPage 24
+  /// = 315
+  /// 若上方内容因异常字号/换行变得更高，整页照常可滚动，不会溢出或裁切；
+  /// 用户卡片走紧凑变体（窄窗）时同理。
+  static const double _previewTopReserve = 315;
 
   /// 选项卡选中指示线粗细（Fluent Tab 固定 2px，不属于 4px 间距栅格）
   static const double _tabIndicatorWidth = 2;
@@ -666,8 +688,12 @@ class _MediaPageState extends CommonPageState<MinePage>
   /// `mineEntries`），主体不再为它留位，统一按 20 起排。
   static const double _desktopTopGap = 20;
 
-  Widget _buildDesktopList(ThemeData theme) {
+  Widget _buildDesktopList(ThemeData theme, double viewportHeight) {
     final double sidePad = _sidePad(context);
+    // 预览区高度：页面正文实际可用高度（LayoutBuilder 的约束）− 预览区之外的
+    // 固定高度；下限 [_previewMinHeight] 保证小窗口下视频区不会过小。
+    final double previewHeight = (viewportHeight - _previewTopReserve)
+        .clamp(_previewMinHeight, double.infinity);
     return ListView(
       padding: EdgeInsets.only(
         left: sidePad + WinUi.padPage,
@@ -705,7 +731,7 @@ class _MediaPageState extends CommonPageState<MinePage>
                   //  desktopContentBackHandler，鼠标侧键在本页不会产生「返回上一层」）
                   if (previewEntry != null) ...[
                     const SizedBox(height: WinUi.gap16),
-                    _winuiShortcutPreview(theme, previewEntry),
+                    _winuiShortcutPreview(theme, previewEntry, previewHeight),
                   ],
                 ],
               );
@@ -833,13 +859,19 @@ class _MediaPageState extends CommonPageState<MinePage>
   /// 不再套外框 / 卡片（原先的 DesktopCard 圆角、描边、底色、阴影全部去掉），
   /// 预览内容直接融入「我的」页主体；层级为
   /// 「一级标题行（左标题 + 右搜索框）→ 1px 分隔线 → [_ShortcutPreview](
-  /// SizedBox([_previewHeight], 真实页面)）」—— 定高组件只套一层必要的
-  /// SizedBox（420 定高保留），展开动画的承载者仍是这个 SizedBox，与改动前一致。
+  /// SizedBox([previewHeight], 真实页面)）」—— 定高组件只套一层必要的
+  /// SizedBox，展开动画的承载者仍是这个 SizedBox，与改动前一致。
+  /// [previewHeight] 由 [build] 的 LayoutBuilder 依据**页面正文实际可用高度**
+  /// 算出（下限 [_previewMinHeight]）：窗口越高预览区越高，用满剩余垂直空间。
   /// 左右边距沿用本页 ListView 的自然边距（`sidePad + WinUi.padPage`，
   /// 与「快捷入口」分组标题同一左缘），不居中、不受外框限制。
-  /// 页面内部普遍是 Column/Expanded + 滚动视图，故必须有 420 边界才能布局；
+  /// 页面内部普遍是 Column/Expanded + 滚动视图，故必须有这份有限高度才能布局；
   /// 展开区内的滚动由页面自身承担，不产生嵌套整页滚动。
-  Widget _winuiShortcutPreview(ThemeData theme, DesktopNavEntry entry) {
+  Widget _winuiShortcutPreview(
+    ThemeData theme,
+    DesktopNavEntry entry,
+    double previewHeight,
+  ) {
     final request = _previewSearchRequest;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -855,7 +887,7 @@ class _MediaPageState extends CommonPageState<MinePage>
         _ShortcutPreview(
           route: entry.route,
           child: SizedBox(
-            height: _previewHeight,
+            height: previewHeight,
             child: _winuiShortcutPage(
               entry.route,
               // 只把「发给本预览项」的请求传下去：切换入口后不会串用旧关键词

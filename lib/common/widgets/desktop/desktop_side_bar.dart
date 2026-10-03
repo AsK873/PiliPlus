@@ -8,6 +8,20 @@
 //   - 2026-10-04：导航行的构建抽出为公开的 [DesktopNavTile]（本文件内 private 的 _tile
 //     改为直接转发它），侧栏与「我的」页快捷入口共用同一实现 → 鼠标手势/悬停/按压/
 //     圆角/cursor/Tooltip 天然一致；侧栏本体的外观与行为逐像素不变。
+//   - 2026-10-04：Windows 100% 缩放下文字/图标偏小，侧栏文字与图标整体等比放大：
+//     主文字 14→15.5、分组头 12→13、账号区 14/12→15.5/13、导航图标 20→22、
+//     账号图标 20→22；图标 +2 由 tilePad.vertical 5→4 相抵，行节距仍为 32
+//     （守 960x640 上限，侧栏整体布局不变）；宽度 216、tileRadius 8 未变。
+//   - 2026-10-04：侧栏入口精简为「主导航 / 内容功能 / 私信 / 底部两项」+ 个人区，
+//     不显示分组标题、层级只由组间距表达；移除侧栏内的「无痕模式 / 切换账号 /
+//     主题 / 评论记录」四个入口（这些功能本身未删除，仍由设置页、移动端顶栏等原有
+//     入口提供，`/myReply` 等路由保留）。两档固定尺寸：
+//     普通窗口 行高 32 / 图标 22 / 文字 15.5 / 组内 0 / 组间 20；
+//     最大化窗口 行高 38 / 图标 25 / 文字 17 / 组内 2 / 组间 22 —— 只放大菜单项
+//     本身，不靠加大项目间距撑高度；剩余高度作为「弹性剩余空间」只留在「私信」
+//     与底部两项之间，底部两项（深色/浅色模式切换、设置）同段同间距，
+//     设置与个人区固定 5px，个人区始终位于最底部。
+//     点击逻辑 / 路由 / 侧栏宽度 216 / 圆角 / 移动端均未改动。
 //   - 底部：账号入口（未登录=登录）
 // 行为全部复用现有 MainController.setIndex / Get.toNamed / 未读角标逻辑，
 // 不含任何业务/数据改动；移动/平板分支不受影响（桌面端只要 PlatformUtils.isDesktop
@@ -37,13 +51,13 @@ import 'package:PiliPlus/models/common/theme/theme_type.dart';
 import 'package:PiliPlus/pages/login/controller.dart';
 import 'package:PiliPlus/pages/main/controller.dart';
 import 'package:PiliPlus/pages/mine/controller.dart';
-import 'package:PiliPlus/utils/extension/get_ext.dart';
 import 'package:PiliPlus/utils/storage.dart';
 import 'package:PiliPlus/utils/storage_key.dart';
 import 'package:PiliPlus/utils/theme_utils.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:window_manager/window_manager.dart';
 
 /// 侧栏度量（uiScale = 1.00 下的正式尺寸）。
 /// 注意：本组数值**不全是 4px 栅格成员**（含 6 / 5 / 10 / 1 等），
@@ -63,35 +77,44 @@ abstract final class _Dimens {
 
   /// 主入口 / 快捷入口列表
   static const double navPadV = 6;
+
+  /// 组间距：侧栏不显示分组标题，层级只由间距表达（普通窗口 20 / 最大化 22）
+  static const double groupGap = 20;
+  /// 分组分隔线块的固定高度：上下内边距各 6 + 1px 线（参与弹性空间计算）
+  static const double sectionDividerHeight = 13;
+  /// 分隔线 / 分组头的上下内边距（沿用原有取值）
   static const double shortcutHeaderGap = 6;
+
+  /// 导航行外边距（单边值）；行高 = [tileMarginV]×2 + [tilePadV]×2 + [icon]
+  static const double tileMarginV = 1;
   static const EdgeInsets tileMargin = EdgeInsets.symmetric(
     horizontal: pad,
-    vertical: 1,
+    vertical: tileMarginV,
   );
-  static const EdgeInsets tilePad = EdgeInsets.symmetric(
-    horizontal: 8,
-    vertical: 5,
-  );
+
+  /// 导航行内边距（单边值；普通窗口档 8 / 4，最大化档见 [_ItemMetrics.maximized]）
+  static const double tilePadH = 8;
+  static const double tilePadV = 4;
+
   /// 导航行（药丸）圆角（8）：与桌面小控件档（列表行 / 按钮 / 输入控件）一致，
-  /// 第三批由 6 收敛而来；侧栏自身的间距/tilePad 不是 4px 栅格成员（见下方说明）。
+  /// 第三批由 6 收敛而来；侧栏自身的间距/内边距不是 4px 栅格成员。
   static const double tileRadius = 8;
 
-  /// 行节距 = tileMargin.vertical 1 + tilePad.vertical 5 + icon 20 +
-  /// tilePad.vertical 5 + tileMargin.vertical 1 = 32。
-  /// 32 是 960x640（客户区 601）下的硬上限：tilePad 不能再加，
-  /// 节距 ≥34 会把列表底部的「设置」挤出可视区。
-  static const double icon = 20;
+  /// 普通窗口档行高 = tileMarginV 1×2 + tilePadV 4×2 + icon 22 = 32；
+  /// 最大化档（行高 38 / 图标 25 / 文字 17）见 [_ItemMetrics.maximized] ——
+  /// 两档都只放大菜单项本身，不靠加大项目间距撑高度。
+  static const double icon = 22;
   static const double iconGap = 10;
-  static const double labelFont = 14;
-  static const double headerFont = 12;
+  static const double labelFont = 15.5;
 
-  /// 底部账号区
-  static const EdgeInsets accountPad = EdgeInsets.fromLTRB(10, 8, 10, 10);
+  /// 底部账号区（个人区）。top 由 8 收为 4：导航列表底部不加内边距，
+  /// 与个人区上方的 1px 分隔线合计 = 设置与「我的主页」之间 5px。
+  static const EdgeInsets accountPad = EdgeInsets.fromLTRB(10, 4, 10, 10);
   static const double avatar = 30;
   static const double accountGap = 8;
-  static const double accountFont = 14;
-  static const double accountSubFont = 12;
-  static const double accountIcon = 20;
+  static const double accountFont = 15.5;
+  static const double accountSubFont = 13;
+  static const double accountIcon = 22;
 }
 
 /// 桌面导航实体（与主壳数据同源，仅 UI 组装）。
@@ -109,7 +132,9 @@ class DesktopNavEntry {
 /// 由侧栏原有的 private `_tile` 原样抽出，度量取自本文件的 [_Dimens]：
 /// `Padding(8,1)` → `Material`（选中底色 secondaryContainer@0.55 / 否则透明）
 /// → `InkWell`（圆角 8 = [_Dimens.tileRadius]，自带悬停提亮、按压 highlight 与默认水波纹）
-/// → `Padding(8,5)` → `[图标 20] — 10 — [文字 14]`。
+/// → `Padding(8,4)` → `[图标 22] — 10 — [文字 15.5]`（度量由 [_NavItemStyle] 给出：
+/// 普通窗口 = [_ItemMetrics.compact]，最大化 = [_ItemMetrics.maximized]，
+/// 只放大图标 / 文字 / item 内部尺寸，行与行之间不加空隙）。
 /// 未显式设置 cursor，沿用 InkWell/InkResponse 在 onTap 非空时的
 /// 手型指针（SystemMouseCursors.click）——与侧栏改动前完全一致。
 ///
@@ -147,18 +172,27 @@ class DesktopNavTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // 菜单项度量：普通窗口 = 紧凑档（行高 32 / 图标 22 / 文字 15.5），
+    // 最大化 = 放大档（行高 38 / 图标 25 / 文字 17）；两档都只放大 item 本身，
+    // 行与行之间不加空隙 ⇒ 排列密度一致、每项仍是紧凑的视觉单元。
+    final metrics = _NavItemStyle.of(context);
+    final radius = BorderRadius.circular(metrics.radius);
+    final tilePad = EdgeInsets.symmetric(
+      horizontal: metrics.padH,
+      vertical: metrics.padV,
+    );
     final Widget tile = Padding(
       padding: _Dimens.tileMargin,
       child: Material(
         color: selected
             ? colorScheme.secondaryContainer.withValues(alpha: 0.55)
             : Colors.transparent,
-        borderRadius: BorderRadius.circular(_Dimens.tileRadius),
+        borderRadius: radius,
         child: InkWell(
-          borderRadius: BorderRadius.circular(_Dimens.tileRadius),
+          borderRadius: radius,
           onTap: onTap,
           child: Padding(
-            padding: _Dimens.tilePad,
+            padding: tilePad,
             child: Row(
               children: [
                 IconTheme(
@@ -166,18 +200,18 @@ class DesktopNavTile extends StatelessWidget {
                     color: selected
                         ? colorScheme.onSecondaryContainer
                         : colorScheme.onSurfaceVariant,
-                    size: _Dimens.icon,
+                    size: metrics.icon,
                   ),
                   child: leading,
                 ),
-                const SizedBox(width: _Dimens.iconGap),
+                SizedBox(width: metrics.iconGap),
                 Expanded(
                   child: Text(
                     label,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                      fontSize: _Dimens.labelFont,
+                      fontSize: metrics.font,
                       fontWeight:
                           selected ? FontWeight.w600 : FontWeight.w400,
                       color: selected
@@ -187,7 +221,7 @@ class DesktopNavTile extends StatelessWidget {
                   ),
                 ),
                 if (trailing != null) ...[
-                  const SizedBox(width: _Dimens.iconGap),
+                  SizedBox(width: metrics.iconGap),
                   trailing!,
                 ],
               ],
@@ -219,20 +253,12 @@ class DesktopSideBar extends StatelessWidget {
   /// 返回 false / 未提供时，回退为原有 `Get.toNamed(entry.route)` 行为。
   final bool Function(DesktopNavEntry entry)? onSelectShortcut;
 
-  /// 「我的」页那组入口（无痕模式 / 切换账号 / 主题切换）与「我的」页共用同一个
-  /// [MineController]（`Get.putOrFind` 单例）：侧栏直接读写它，不复制一份实现。
-  /// GetX 的 `putOrFind` 由 [GetExt] 提供，本文件已 import `get_ext.dart`。
-  /// 桌面端侧栏一定在「我的」页之前构建，首次访问即创建该控制器，
-  /// 与「我的」页自己 `Get.putOrFind` 得到的是同一个实例。
-  /// 写成 getter（不缓存到字段）：本控件是 const 构造的 StatelessWidget，
-  /// 不能持有非 const 的 late 字段。
-  MineController get _mineController => Get.putOrFind(MineController.new);
-
   static const double width = _Dimens.width;
 
   @override
   Widget build(BuildContext context) {
-    // 依赖 Theme：主题模式切换后本侧栏随之重建（图标/提示同步更新）
+    // 依赖 Theme：深浅色切换（[_themeToggleItem]）后本侧栏随之重建，
+    // 图标/文字/悬停提示与当前模式保持同步。
     final isDark = Theme.of(context).brightness == Brightness.dark;
     return SizedBox(
       width: width,
@@ -250,9 +276,21 @@ class DesktopSideBar extends StatelessWidget {
           // ⇒ 药丸宽 = 侧栏宽 − 16（216 − 16 = 200），左右对称。
           // 作用域 = 本 Expanded（侧栏里唯一的滚动视口），其它页面不受影响。
           Expanded(
-            child: ScrollConfiguration(
-              behavior: const OverlayScrollbarBehavior(),
-              child: _primaryNav(context, isDark),
+            // 导航视口高度（Expanded 内即已定界）：用它把「弹性剩余空间」
+            // 精确留在「私信」与「深色/浅色模式切换」之间，使末两项
+            // （深色/浅色模式切换、设置）贴近侧栏底部（约束驱动，不写死像素）。
+            child: LayoutBuilder(
+              builder: (context, constraints) => _MaximizeAware(
+                builder: (context, maximized) => ScrollConfiguration(
+                  behavior: const OverlayScrollbarBehavior(),
+                  child: _primaryNav(
+                    context: context,
+                    isDark: isDark,
+                    viewportHeight: constraints.maxHeight,
+                    maximized: maximized,
+                  ),
+                ),
+              ),
             ),
           ),
           const Divider(height: 1),
@@ -292,111 +330,152 @@ class DesktopSideBar extends StatelessWidget {
     );
   }
 
-  Widget _primaryNav(BuildContext context, bool isDark) {
+  /// 侧栏入口按「主导航 / 内容功能（历史记录…订阅、私信）/ 分隔线＋我的页功能入口
+  /// （评论记录、进入无痕模式、切换账号）/ 底部两项」四段排列，
+  /// **不显示分组标题**，层级只由组间距表达；个人区（我的主页 / 查看资料与空间）
+  /// 始终在最底部。底部两项依次为「深色/浅色模式切换」「设置」——两者同属一段，
+  /// 间距就是普通项目间距（[_ItemMetrics.intraGap]：普通 0 / 最大化 2），
+  /// 不额外拉大间距。
+  ///
+  /// 普通窗口 = [_ItemMetrics.compact]（行高 32 / 图标 22 / 文字 15.5 / 组内 0 / 组间 20）；
+  /// 最大化窗口 = [_ItemMetrics.maximized]（行高 38 / 图标 25 / 文字 17 / 组内 2 / 组间 22）。
+  /// 两档**都只放大菜单项本身**：剩余高度不摊到菜单项之间，只作为「弹性剩余空间」
+  /// 留在「私信」与底部两项之间 ⇒ 底部两项贴近侧栏底部、不出现项目之间的空隙。
+  Widget _primaryNav({
+    required BuildContext context,
+    required bool isDark,
+    required double viewportHeight,
+    required bool maximized,
+  }) {
     return Obx(() {
       final selected = mainController.selectedIndex.value;
       // 桌面内容页（如历史记录）展开时，选中态归内容页入口，主 Tab 不显示选中
       final hasContentPage = mainController.desktopContentRoute.value != null;
+
+      // ① 主导航（每行的 icon / label / 点击 / 选中逻辑与改动前逐字一致）
+      final mainRows = <Widget>[
+        for (var i = 0; i < mainController.navigationBars.length; i++)
+          _navItem(
+            icon: mainController.navigationBars[i].icon,
+            selectedIcon: mainController.navigationBars[i].selectIcon,
+            label: mainController.navigationBars[i].label,
+            selected: !hasContentPage && i == selected,
+            showDynamicBadge:
+                mainController.navigationBars[i] == NavigationBarType.dynamics,
+            onTap: () => onSelect(i),
+          ),
+      ];
+      // ② 内容功能（沿用 _shortcutItem → openShortcut 的点击逻辑）
+      //    私信与订阅同组：直接使用 shortcuts 源顺序（…订阅、私信），
+      //    两者之间只有同组项目间距，不再有分隔/组间间距。
+      final contentRows = <Widget>[
+        for (final entry in shortcuts) _shortcutItem(entry),
+      ];
+      // ③ 分隔线之下的「我的」页功能入口：评论记录 / 进入无痕模式 / 切换账号
+      //    （图标、文字、点击行为均沿用项目原有实现）
+      final mineRows = <Widget>[
+        for (final entry in mineEntries) _entryItem(entry),
+        Obx(
+          () => _tile(
+            selected: false,
+            onTap: MineController.onChangeAnonymity,
+            leading: Icon(
+              MineController.anonymity.value
+                  ? MdiIcons.incognito
+                  : MdiIcons.incognitoOff,
+            ),
+            label: '${MineController.anonymity.value ? '退出' : '进入'}无痕模式',
+          ),
+        ),
+        _tile(
+          selected: false,
+          onTap: () => LoginPageController.switchAccountDialog(context),
+          leading: const Icon(Icons.switch_account_outlined),
+          label: '切换账号',
+        ),
+      ];
+      // ④ 底部两项：深色/浅色模式切换（紧贴设置上方，同段同间距）+ 设置
+      final systemRows = <Widget>[
+        _themeToggleItem(isDark),
+        _shortcutItem(_setting),
+      ];
+
+      final metrics = _navMetrics(
+        viewportHeight: viewportHeight,
+        maximized: maximized,
+        groupSizes: [
+          mainRows.length,
+          contentRows.length,
+          mineRows.length,
+          systemRows.length,
+        ],
+      );
+
       // 覆盖式滚动条：见 build() 里 ScrollConfiguration(OverlayScrollbarBehavior)
       // 的说明 —— 本列表不得让全局 10px 滚动条车道缩窄行宽。
-      return ListView(
-        padding: const EdgeInsets.symmetric(vertical: _Dimens.navPadV),
-        children: [
-          for (var i = 0; i < mainController.navigationBars.length; i++)
-            _navItem(
-              icon: mainController.navigationBars[i].icon,
-              selectedIcon: mainController.navigationBars[i].selectIcon,
-              label: mainController.navigationBars[i].label,
-              selected: !hasContentPage && i == selected,
-              showDynamicBadge: mainController.navigationBars[i] ==
-                  NavigationBarType.dynamics,
-              onTap: () => onSelect(i),
-            ),
-          const SizedBox(height: _Dimens.shortcutHeaderGap),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12),
-            child: Text(
-              '快捷入口',
-              style: TextStyle(
-                fontSize: _Dimens.headerFont,
-                letterSpacing: 0.5,
+      // 底部不留内边距：设置与个人区之间的间距在 build() 侧统一为 5px。
+      // [_NavItemStyle] 只作用于本列表内的行，个人区 / 品牌区不受影响。
+      return _NavItemStyle(
+        metrics: metrics.metrics,
+        child: ListView(
+          padding: const EdgeInsets.only(top: _Dimens.navPadV),
+          children: [
+            ..._withIntraGap(mainRows, metrics.metrics.intraGap),
+            SizedBox(height: metrics.metrics.groupGap),
+            ..._withIntraGap(contentRows, metrics.metrics.intraGap),
+            // 分隔线：区分「订阅 / 私信」所在的内容功能组与其下的「我的」页功能入口
+            const Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 12,
+                vertical: _Dimens.shortcutHeaderGap,
               ),
+              child: Divider(height: 1),
             ),
-          ),
-          for (final entry in shortcuts) _shortcutItem(entry),
-          // 分隔线：把「快捷入口」整组与下面的「我的」页设置/功能入口区分开
-          const Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 12,
-              vertical: _Dimens.shortcutHeaderGap,
-            ),
-            child: Divider(height: 1),
-          ),
-          // 「我的」页顶部那排设置/功能入口（整组，仅位置搬移、功能与交互不变）
-          for (final entry in mineEntries) _entryItem(entry),
-          Obx(
-            () => _tile(
-              selected: false,
-              onTap: MineController.onChangeAnonymity,
-              leading: Icon(
-                MineController.anonymity.value
-                    ? MdiIcons.incognito
-                    : MdiIcons.incognitoOff,
-              ),
-              label: '${MineController.anonymity.value ? '退出' : '进入'}无痕模式',
-            ),
-          ),
-          _tile(
-            selected: false,
-            onTap: () => LoginPageController.switchAccountDialog(context),
-            leading: const Icon(Icons.switch_account_outlined),
-            label: '切换账号',
-          ),
-          // 桌面端主题切换：循环**不含「跟随系统」**（该选项只在设置页「主题模式」
-          // 里保留，见 setting/models/style_settings.dart）；浅色 ⇄ 深色。
-          // 当前为 system 时按实际生效的明暗（isDark）解析目标与图标，
-          // 保证入口不会把用户带回 system。移动端沿用 MineController.onChangeTheme。
-          Obx(() {
-            final next = _mineController.nextThemeTypeDesktop(isDark: isDark);
-            return _tile(
-              selected: false,
-              onTap: () =>
-                  _mineController.onChangeThemeDesktop(isDark: isDark),
-              leading: _mineController.themeIconDesktop(isDark: isDark),
-              label: '${next.label}主题',
-              tooltip: '切换至${next.label}主题',
-            );
-          }),
-          // 分隔线：把「我的」页入口整组与下面的「深色模式切换 + 设置」区分开
-          const Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 12,
-              vertical: _Dimens.shortcutHeaderGap,
-            ),
-            child: Divider(height: 1),
-          ),
-          // 深色模式快捷切换（图标 / 文字 / 悬停提示均指向「将要切换到的模式」）
-          _themeToggleItem(isDark),
-          _shortcutItem(_setting),
-        ],
+            ..._withIntraGap(mineRows, metrics.metrics.intraGap),
+            // 弹性剩余空间：吸收「切换账号」与底部两项之间的余量（不摊到菜单项之间）
+            SizedBox(height: metrics.elastic),
+            ..._withIntraGap(systemRows, metrics.metrics.intraGap),
+          ],
+        ),
       );
     });
   }
 
-  /// 「我的」页顶部那排设置/功能入口中**静态**的一项（另三项「无痕模式」
-  /// 「切换账号」「主题切换」随状态 / 需要 BuildContext，在 [_primaryNav] 里
-  /// 就地构建）。
+  /// 同组内相邻两项之间插入固定间距（普通窗口 0、最大化 2）：
+  /// 只表达「同组项目间距」，不用于撑满高度。
+  static List<Widget> _withIntraGap(List<Widget> rows, double gap) => gap <= 0
+      ? rows
+      : [
+          for (var i = 0; i < rows.length; i++) ...[
+            if (i > 0) SizedBox(height: gap),
+            rows[i],
+          ],
+        ];
+
+  /// 菜单项度量 + 弹性剩余空间。
   ///
-  /// 仅位置搬移：label / 图标 / 点击逻辑（`Get.toNamed`）与搬到侧栏之前逐字一致。
-  /// 「设置」不在其中：侧栏原本就有 [_setting]（排在深色模式切换之后），
-  /// 不再重复一份。
-  static final List<DesktopNavEntry> mineEntries = [
-    const DesktopNavEntry(
-      '评论记录',
-      '/myReply',
-      icon: Icons.message_outlined,
-    ),
-  ];
+  /// 两档度量都是固定值（不随窗口高度无级缩放）：普通窗口 [_ItemMetrics.compact]、
+  /// 最大化 [_ItemMetrics.maximized]。[elastic] = 视口高度 −（行高合计 + 组内间距 +
+  /// 组间距 + 列表顶部内边距），只留在「私信」与「设置」之间；内容放不下时为 0
+  /// （列表照常可滚动）。
+  static _NavMetrics _navMetrics({
+    required double viewportHeight,
+    required bool maximized,
+    required List<int> groupSizes,
+  }) {
+    final metrics = maximized ? _ItemMetrics.maximized : _ItemMetrics.compact;
+    final rows = groupSizes.fold(0, (sum, n) => sum + n);
+    // 同组内相邻项之间的间距：每组 n 项有 n−1 处
+    final intraGaps =
+        groupSizes.fold(0, (sum, n) => sum + (n > 1 ? n - 1 : 0));
+    final used = _Dimens.navPadV +
+        rows * metrics.rowHeight +
+        intraGaps * metrics.intraGap +
+        2 * metrics.groupGap + // 主导航↔内容功能 的固定组间距（底部由弹性空间分隔）
+        _Dimens.sectionDividerHeight; // 分隔线块（私信 → 评论记录 之间）
+    final elastic = viewportHeight - used;
+    return _NavMetrics(metrics: metrics, elastic: elastic > 0 ? elastic : 0);
+  }
 
   /// 快捷入口（单一数据源：侧栏与「我的」页共用同一份 label / route / icon）
   static final List<DesktopNavEntry> shortcuts = [
@@ -406,6 +485,16 @@ class DesktopSideBar extends StatelessWidget {
     const DesktopNavEntry('订阅', '/subscription', icon: Icons.subscriptions_outlined),
     const DesktopNavEntry('私信', '/whisper', icon: Icons.chat_bubble_outline),
   ];
+
+  /// 分隔线之下的「我的」页功能入口（静态项）：评论记录。
+  /// 点击逻辑沿用项目原有实现（`Get.toNamed(entry.route)`）。
+  static final List<DesktopNavEntry> mineEntries = [
+    const DesktopNavEntry('评论记录', '/myReply', icon: Icons.message_outlined),
+  ];
+
+  /// 内容功能组（侧栏分组）= [shortcuts] 全量（历史记录 / 稍后再看 / 我的收藏 /
+  /// 订阅 / 私信）；私信与订阅同组、紧接其下。只做侧栏呈现层的分组，
+  /// [shortcuts] 本身（「我的」页快捷入口共用）未做任何改动。
 
   /// 快捷入口共用的点击逻辑（侧栏与「我的」页同一套）：
   /// 先交给宿主在桌面主内容区就地显示（返回 true 表示已处理，不走路由）；
@@ -421,14 +510,8 @@ class DesktopSideBar extends StatelessWidget {
     return false;
   }
 
-  /// 设置（固定排在深色模式切换之后）
-  static const DesktopNavEntry _setting = DesktopNavEntry(
-    '设置',
-    '/setting',
-    icon: Icons.settings_outlined,
-  );
-
-  /// 深色模式快捷切换：浅色模式显示月亮（→深色），深色模式显示太阳（→浅色）
+  /// 深色模式快捷切换：浅色模式显示月亮（→深色），深色模式显示太阳（→浅色）。
+  /// 与「设置」同属底部一段、紧贴其上方，间距即普通项目间距（不额外拉开）。
   Widget _themeToggleItem(bool isDark) {
     return _tile(
       selected: false,
@@ -449,6 +532,24 @@ class DesktopSideBar extends StatelessWidget {
     } catch (_) {}
     GStorage.setting.put(SettingBoxKey.themeMode, next.index);
     Get.changeThemeMode(ThemeUtils.themeMode = next.toThemeMode);
+  }
+
+  /// 设置：底部两项中的最后一项（点击逻辑仍走快捷入口那套 → `/setting`）
+  static const DesktopNavEntry _setting = DesktopNavEntry(
+    '设置',
+    '/setting',
+    icon: Icons.settings_outlined,
+  );
+
+  /// 「我的」页功能入口的静态行（见 [mineEntries]）：点击逻辑沿用原有实现
+  /// （`Get.toNamed(entry.route)`，不走快捷入口的 openShortcut）。
+  Widget _entryItem(DesktopNavEntry entry) {
+    return _tile(
+      selected: false,
+      onTap: () => Get.toNamed(entry.route),
+      leading: Icon(entry.icon ?? Icons.chevron_right),
+      label: entry.label,
+    );
   }
 
   Widget _navItem({
@@ -491,20 +592,8 @@ class DesktopSideBar extends StatelessWidget {
     );
   }
 
-  /// 「我的」页设置/功能入口的静态行（见 [mineEntries]）：点击逻辑就是
-  /// 搬到侧栏之前「我的」页上的那一句 `Get.toNamed(entry.route)`，
-  /// 不走快捷入口的 `openShortcut`（那些 route 本就不在桌面内容页 switch 里）。
-  Widget _entryItem(DesktopNavEntry entry) {
-    return _tile(
-      selected: false,
-      onTap: () => Get.toNamed(entry.route),
-      leading: Icon(entry.icon ?? Icons.chevron_right),
-      label: entry.label,
-    );
-  }
-
   /// 行构建统一走 [DesktopNavTile]（抽取前这里是该控件的实现本体，
-  /// 抽取后仅为转发，4 个调用点与外观/行为均不变）。
+  /// 抽取后仅为转发，调用点与外观/行为均不变）。
   Widget _tile({
     required bool selected,
     required VoidCallback onTap,
@@ -630,4 +719,161 @@ class DesktopSideBar extends StatelessWidget {
       );
     });
   }
+}
+
+/// 菜单项度量（普通窗口 / 最大化窗口两档固定值，不随窗口高度无级缩放）。
+///
+/// 行高 = [tileMargin] 的上下外边距 + [padV]×2 + [icon]：
+/// 普通窗口 = (1+1) + 4+4 + 22 = 32；最大化 = (1+1) + 5.5+5.5 + 25 = 38。
+class _ItemMetrics {
+  const _ItemMetrics({
+    required this.icon,
+    required this.font,
+    required this.padH,
+    required this.padV,
+    required this.radius,
+    required this.iconGap,
+    required this.intraGap,
+    required this.groupGap,
+  });
+
+  /// 图标尺寸
+  final double icon;
+
+  /// 文字字号
+  final double font;
+
+  /// item 内部左右 padding（单边值）
+  final double padH;
+
+  /// item 内部上下 padding（单边值）
+  final double padV;
+
+  /// 选中背景（药丸）圆角
+  final double radius;
+
+  /// 图标与文字之间的间距
+  final double iconGap;
+
+  /// 同组内相邻两项之间的间距
+  final double intraGap;
+
+  /// 组间距
+  final double groupGap;
+
+  /// 行高（派生值，便于核对：普通 32 / 最大化 38）
+  double get rowHeight => _Dimens.tileMarginV * 2 + padV * 2 + icon;
+
+  /// 普通窗口：紧凑基准（行高 32 / 图标 22 / 文字 15.5 / 组内 0 / 组间 20）
+  static const compact = _ItemMetrics(
+    icon: _Dimens.icon,
+    font: _Dimens.labelFont,
+    padH: _Dimens.tilePadH,
+    padV: _Dimens.tilePadV,
+    radius: _Dimens.tileRadius,
+    iconGap: _Dimens.iconGap,
+    intraGap: 0,
+    groupGap: _Dimens.groupGap,
+  );
+
+  /// 最大化窗口：只放大「图标 + 文字 + item 本身」，间距密度基本不变
+  /// （行高 38 / 图标 25 / 文字 17 / 组内 2 / 组间 22）
+  static const maximized = _ItemMetrics(
+    icon: 25,
+    font: 17,
+    padH: 9,
+    padV: 5.5,
+    radius: 9,
+    iconGap: 11,
+    intraGap: 2,
+    groupGap: 22,
+  );
+}
+
+/// 菜单项度量的作用域（仅本文件）：导航列表内的行读取它；
+/// 个人区（我的主页 / 查看资料与空间）与品牌区不在其中 ⇒ 不受影响。
+class _NavItemStyle extends InheritedWidget {
+  const _NavItemStyle({required this.metrics, required super.child});
+
+  final _ItemMetrics metrics;
+
+  static _ItemMetrics of(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<_NavItemStyle>()?.metrics ??
+      _ItemMetrics.compact;
+
+  @override
+  bool updateShouldNotify(_NavItemStyle oldWidget) =>
+      oldWidget.metrics != metrics;
+}
+
+/// 菜单项度量 + 弹性剩余空间（只留在「私信」与「设置」之间，不摊到菜单项之间）。
+class _NavMetrics {
+  const _NavMetrics({required this.metrics, required this.elastic});
+
+  final _ItemMetrics metrics;
+
+  /// 剩余高度（普通窗口与最大化都只在中间留出；内容放不下时为 0）
+  final double elastic;
+}
+
+/// 最大化状态桥接（仅本文件使用）。
+///
+/// [DesktopSideBar] 本体保持 const / Stateless，这里用一个小 Stateful 桥接
+/// `window_manager` 的最大化事件：只有最大化状态真正变化时才重建导航区。
+/// 初值取持久化的 [SettingBoxKey.isWindowMaximized]（与 `main.dart` 启动时
+/// 恢复最大化同源），故启动首帧即按正确布局渲染；随后用 `isMaximized()`
+/// 校准一次，并靠 [onWindowMaximize] / [onWindowUnmaximize] 保持同步。
+/// 仅桌面端会构建本侧栏，移动端不受影响。
+class _MaximizeAware extends StatefulWidget {
+  const _MaximizeAware({required this.builder});
+
+  /// 最大化状态 → 导航区（true = 启用纵向均匀延伸）
+  final Widget Function(BuildContext context, bool maximized) builder;
+
+  @override
+  State<_MaximizeAware> createState() => _MaximizeAwareState();
+}
+
+class _MaximizeAwareState extends State<_MaximizeAware> with WindowListener {
+  /// 持久化值：与 main.dart 启动时 `if (Pref.isWindowMaximized) maximize()` 同源，
+  /// 避免首帧先按窗口模式渲染、再跳到最大化布局。
+  bool _maximized = GStorage.setting.get(
+    SettingBoxKey.isWindowMaximized,
+    defaultValue: false,
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    windowManager.addListener(this);
+    // 校准一次：上次异常退出时持久化值可能已过期。
+    windowManager.isMaximized().then((value) {
+      if (mounted && value != _maximized) {
+        setState(() => _maximized = value);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    windowManager.removeListener(this);
+    super.dispose();
+  }
+
+  @override
+  void onWindowMaximize() {
+    if (mounted && !_maximized) {
+      setState(() => _maximized = true);
+    }
+  }
+
+  @override
+  void onWindowUnmaximize() {
+    if (mounted && _maximized) {
+      setState(() => _maximized = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) => widget.builder(context, _maximized);
 }
